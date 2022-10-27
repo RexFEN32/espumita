@@ -15,6 +15,7 @@ use App\Models\TempItem;
 use App\Models\vinternal_orders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\percentages;
 
 class InternalOrderController extends Controller
 {
@@ -198,6 +199,14 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
+            $percentage = new percentages();
+            $percentage->order_id = $TempInternalOrders->id ;
+            $percentage->factures = 0.4;
+            $percentage->finances = 0.2;
+            $percentage->bluprints = 0.2;
+            $percentage->shipment = 0.1;
+            $percentage->final = 0.1;
+            $percentage->save();
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
@@ -317,7 +326,8 @@ class InternalOrderController extends Controller
         $Subtotal2 = $InternalOrders->subtotal;
         
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-
+        $percentage = percentages::where('order_id', '=', $id)->get()->first();
+        $factura= $percentage->facture;
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -329,6 +339,8 @@ class InternalOrderController extends Controller
             'Authorizations',
             'Subtotal',
             'Subtotal2',
+            'factura',
+            'percentage',
         ));
 
     }

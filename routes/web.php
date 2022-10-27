@@ -25,5 +25,6 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
     Route::post('internal_orders/shipments', [InternalOrderController::class, 'shipment'])->name('internal_orders.shipment');
     Route::get('payment/{id}', [InternalOrderController::class, 'payment'])->name('internal_orders.payment');
+    Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     
 });

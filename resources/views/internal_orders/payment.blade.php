@@ -48,6 +48,7 @@
       
     </tr>
   </tbody>
+  
 </table>
                     <br><br>
                     <table class="table table-striped">
@@ -64,7 +65,7 @@
   <tbody>
     <tr>
       <td class="table-active">Factura y finanzas</td>
-      <td >40%</td>
+      <td ><input type="text" value="{{$percentage->factures * 100}}" style="width: 20%;" > %</td>
       <td>{{$Subtotal * 0.4 }}</td>
       <td>{{$Subtotal * 0.4 * 0.16 }}</td>
       <td>{{$Subtotal * 0.4 * 1.16 }}</td>
@@ -72,7 +73,7 @@
     </tr>
     <tr>
       <td >Planos de Ingeniería</td>
-      <td >20%</td>
+      <td ><input type="text" value="{{$percentage->bluprints * 100}}" style="width: 20%;" > %</td>
       <td>{{$Subtotal * 0.2 }}</td>
       <td>{{$Subtotal * 0.2 * 0.16 }}</td>
       <td>{{$Subtotal * 0.2 * 1.16 }}</td>
@@ -80,7 +81,7 @@
     </tr>
     <tr>
     <td scope="row">Compra total de materiales</td>
-      <td >20%</td>
+      <td ><input type="text" value="{{$percentage->finances * 100}}" style="width: 20%;" > %</td>
       <td>{{$Subtotal * 0.2 }}</td>
       <td>{{$Subtotal * 0.2 * 0.16 }}</td>
       <td>{{$Subtotal * 0.2 * 1.16 }}</td>
@@ -88,7 +89,7 @@
     </tr>
     <tr>
     <td scope="row">Equipos listos para Embarque</td>
-      <td >10%</td>
+      <td ><input type="text" value="{{$percentage->shipment * 100}}" style="width: 20%;" > %</td>
       <td>{{$Subtotal * 0.1 }}</td>
       <td>{{$Subtotal * 0.1 * 0.16 }}</td>
       <td>{{$Subtotal * 0.1 * 1.16 }}</td>
@@ -96,7 +97,7 @@
     </tr>
     <tr>
     <td scope="row">Entrega Final a Satisfaccion</td>
-      <td >10%</td>
+      <td ><input type="text" value="{{$percentage->factures * 100}}" style="width: 20%;" > %</td>
       <td>{{$Subtotal * 0.1 }}</td>
       <td>{{$Subtotal * 0.1 * 0.16 }}</td>
       <td>{{$Subtotal * 0.1 * 1.16 }}</td>
@@ -121,14 +122,7 @@
       <td>$0.00</td>
       <td></td>
     </tr>
-    <tr>
-    <td> </td>
-      <td > <button class="btn btn-dark"> <p>Editar porcentaje</p></button></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    
   </tbody>
 </table>
                 </div>
