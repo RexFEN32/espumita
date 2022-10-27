@@ -201,11 +201,11 @@ class InternalOrderController extends Controller
             $InternalOrders->save();
             $percentage = new percentages();
             $percentage->order_id = $TempInternalOrders->id ;
-            $percentage->factures = 0.4;
-            $percentage->finances = 0.2;
-            $percentage->bluprints = 0.2;
-            $percentage->shipment = 0.1;
-            $percentage->final = 0.1;
+            $percentage->factures = 40;
+            $percentage->finances = 20;
+            $percentage->bluprints = 20;
+            $percentage->shipment = 10;
+            $percentage->final = 10;
             $percentage->save();
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
@@ -324,7 +324,6 @@ class InternalOrderController extends Controller
 
         $Subtotal = $InternalOrders->subtotal;
         $Subtotal2 = $InternalOrders->subtotal;
-        
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
         $percentage = percentages::where('order_id', '=', $id)->get()->first();
         $factura= $percentage->facture;

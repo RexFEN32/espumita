@@ -65,71 +65,111 @@
   <tbody>
     <tr>
       <td class="table-active">Factura y finanzas</td>
-      <td ><input type="text" value="{{$percentage->factures * 100}}" style="width: 20%;" > %</td>
-      <td>{{$Subtotal * 0.4 }}</td>
-      <td>{{$Subtotal * 0.4 * 0.16 }}</td>
-      <td>{{$Subtotal * 0.4 * 1.16 }}</td>
+      <td ><input type="text" value="{{$percentage->factures }}" style="width: 20%;" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures}}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 1.16 }}</td>
       <td>0.0%</td>
     </tr>
     <tr>
       <td >Planos de Ingeniería</td>
-      <td ><input type="text" value="{{$percentage->bluprints * 100}}" style="width: 20%;" > %</td>
-      <td>{{$Subtotal * 0.2 }}</td>
-      <td>{{$Subtotal * 0.2 * 0.16 }}</td>
-      <td>{{$Subtotal * 0.2 * 1.16 }}</td>
+      <td ><input type="text" value="{{$percentage->bluprints }}" style="width: 20%;" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 1.16 }}</td>
       <td>60.0%</td>
     </tr>
     <tr>
     <td scope="row">Compra total de materiales</td>
-      <td ><input type="text" value="{{$percentage->finances * 100}}" style="width: 20%;" > %</td>
-      <td>{{$Subtotal * 0.2 }}</td>
-      <td>{{$Subtotal * 0.2 * 0.16 }}</td>
-      <td>{{$Subtotal * 0.2 * 1.16 }}</td>
+      <td ><input type="text" value="{{$percentage->finances }}" style="width: 20%;" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances}}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 1.16 }}</td>
       <td>80.0%</td>
     </tr>
     <tr>
     <td scope="row">Equipos listos para Embarque</td>
-      <td ><input type="text" value="{{$percentage->shipment * 100}}" style="width: 20%;" > %</td>
-      <td>{{$Subtotal * 0.1 }}</td>
-      <td>{{$Subtotal * 0.1 * 0.16 }}</td>
-      <td>{{$Subtotal * 0.1 * 1.16 }}</td>
+      <td ><input type="text" value="{{$percentage->shipment }}" style="width: 20%;" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 1.16 }}</td>
       <td>90.0%</td>
     </tr>
     <tr>
     <td scope="row">Entrega Final a Satisfaccion</td>
-      <td ><input type="text" value="{{$percentage->factures * 100}}" style="width: 20%;" > %</td>
-      <td>{{$Subtotal * 0.1 }}</td>
-      <td>{{$Subtotal * 0.1 * 0.16 }}</td>
-      <td>{{$Subtotal * 0.1 * 1.16 }}</td>
+      <td ><input type="text" value="{{$percentage->final }}" style="width: 20%;" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 1.16 }}</td>
       <td>100.0%</td>
     </tr>
     <tr>
     <td ></td>
-    <th scope="row">TOTAL </th>
+    <th scope="row">TOTAL: </th>
       
-      <td>{{ $Subtotal}}</td>
-      <td>{{ $Subtotal*0.16}}</td>
-      <td>{{ $Subtotal*1.16}}</td>
+      <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
+      <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
+      <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
     <td ></td>
-    <th scope="row">Validacion </th>
+    <th scope="row">Validacion: </th>
       
       <td>$0.00</td>
       <td>$0.00</td>
       <td>$0.00</td>
       <td></td>
     </tr>
+    <td > </td>
+      
+      <td><button class="btn btn-dark">
+                <i class="fa-solid fa-repeat fa-2x" ></i>
+                         &nbsp; &nbsp;
+                <p>Actualizar Porcentajes</p></button></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     
+   
   </tbody>
 </table>
                 </div>
-                <button class="btn btn-dark">
+                <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa-solid fa-calendar fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Calendarizar Pagos</p></button></td>
+                <div class="collapse" id="collapseExample">
+                <div class="column">
+                  <br><br><br>
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Primer Pago</h5>
+        <br>
+        <input type="date" id="birthday" name="birthday">
+        &nbsp; &nbsp; {{$Coins -> symbol}} <input type="number" min="1" step="100"  style="width: 20%;">
+        <br>
+        <div style="padding: 8px;"><h1>Status: <span class="badge badge-info">Por Cobrar</span></h1></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Segundo Pago</h5>
+        <br>
+        <input type="date" id="birthday" name="birthday">
+        &nbsp; &nbsp; {{$Coins -> symbol}} <input type="number" min="1" step="100"  style="width: 20%;">
+        <br>
+        <div style="padding: 8px;"><h1>Status: <span class="badge badge-info">Por Cobrar</span></h1></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
              </div>
         </div>
 </div>
