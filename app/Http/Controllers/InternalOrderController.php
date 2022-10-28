@@ -337,13 +337,49 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-            'Subtotal2',
-            'factura',
             'percentage',
+            'id',
         ));
 
     }
+    
+    
+    public function pay_conditions(Request $request)
+    {
+        $CompanyProfiles = CompanyProfile::first();
+        $InternalOrders = InternalOrder::find($request->order_id);
+        $percentage = percentages::where('order_id', '=', $request->order_id)->get()->first();
+        $percentage->factures = $request->factures;
+        $percentage->bluprints = $request->bluprints;
+        $percentage->finances = $request->finances;
+        $percentage->shipment = $request->shipment;
+        $percentage->final = $request->final;
+        $percentage->save();
+         
+        $Customers = Customer::find($InternalOrders->customer_id);
+        $Sellers = Seller::find($InternalOrders->seller_id);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
+        $Coins = Coin::find($InternalOrders->coin_id);
+        $Items = Item::where('internal_order_id', $request->order_id)->get();
 
+        $Subtotal = $InternalOrders->subtotal;
+        $Subtotal2 = $InternalOrders->subtotal;
+        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+        return view('internal_orders.payment', compact(
+            'CompanyProfiles',
+            'InternalOrders',
+            'Customers',
+            'Sellers',
+            'CustomerShippingAddresses',
+            'Coins',
+            'Items',
+            'Authorizations',
+            'Subtotal',
+            'percentage',
+        ));
+        
+
+    }
     public function edit($id)
     {
         //
