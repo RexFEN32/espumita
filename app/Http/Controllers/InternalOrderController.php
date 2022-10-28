@@ -348,23 +348,29 @@ class InternalOrderController extends Controller
     {
         $CompanyProfiles = CompanyProfile::first();
         $InternalOrders = InternalOrder::find($request->order_id);
+        $Customers = Customer::find($InternalOrders->customer_id);
+        $Sellers = Seller::find($InternalOrders->seller_id);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
+        $Coins = Coin::find($InternalOrders->coin_id);
+        $Items = Item::where('internal_order_id', $request->order_id)->get();
+        $actualized='NO';
+        $Subtotal = $InternalOrders->subtotal;
+        $Subtotal2 = $InternalOrders->subtotal;
+        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+
         $percentage = percentages::where('order_id', '=', $request->order_id)->get()->first();
+        
+        $suma= $request->factures + $request->bluprints + $request->finances + $request->shipment +$request->final;
+        if($suma == 100){
         $percentage->factures = $request->factures;
         $percentage->bluprints = $request->bluprints;
         $percentage->finances = $request->finances;
         $percentage->shipment = $request->shipment;
         $percentage->final = $request->final;
         $percentage->save();
-         
-        $Customers = Customer::find($InternalOrders->customer_id);
-        $Sellers = Seller::find($InternalOrders->seller_id);
-        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
-        $Coins = Coin::find($InternalOrders->coin_id);
-        $Items = Item::where('internal_order_id', $request->order_id)->get();
+        $actualized='SI';
+        }
 
-        $Subtotal = $InternalOrders->subtotal;
-        $Subtotal2 = $InternalOrders->subtotal;
-        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -376,6 +382,7 @@ class InternalOrderController extends Controller
             'Authorizations',
             'Subtotal',
             'percentage',
+            'actualized',
         ));
         
 
