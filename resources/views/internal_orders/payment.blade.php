@@ -60,17 +60,17 @@
   <thead class="thead">
     <tr>
       <th scope="col">Entregable</th>
-      <th scope="col">% negociado</th>
+      <th > % Negociado</th>
       <th scope="col">Monto sin IVA</th>
       <th scope="col">IVA</th>
       <th scope="col">TOTAL</th>
-      <th scope="col">Avances requeridos </th>
+      <th scope="col">Avances <br> requeridos </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="table-active">Factura y finanzas</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->factures }}" style="width: 20%;" name="factures" > %</td>
+      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->factures }}" style="width: 25%;" name="factures" > %</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures}}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 0.16 }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 1.16 }}</td>
@@ -78,7 +78,7 @@
     </tr>
     <tr>
       <td >Planos de Ingeniería</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->bluprints }}" style="width: 20%;" name="bluprints"> %</td>
+      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->bluprints }}" style="width: 25%;" name="bluprints"> %</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 0.16 }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 1.16 }}</td>
@@ -86,7 +86,7 @@
     </tr>
     <tr>
     <td scope="row">Compra total de materiales</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->finances }}" style="width: 20%;" name="finances"> %</td>
+      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->finances }}" style="width: 25%;" name="finances"> %</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances}}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 0.16 }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 1.16 }}</td>
@@ -94,15 +94,15 @@
     </tr>
     <tr>
     <td scope="row">Equipos listos para Embarque</td>
-      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->shipment }}" style="width: 20%;" name="shipment"> %</td>
+      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->shipment }}" style="width: 25%;" name="shipment"> %</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 0.16 }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 1.16 }}</td>
-      <td>{{$percentage->factures + $percentage->bluprints + $percentage->finances + $percentage->final}} %</td>
+      <td>{{$percentage->factures + $percentage->bluprints + $percentage->finances + $percentage->shipment}} %</td>
     </tr>
     <tr>
     <td scope="row">Entrega Final a Satisfaccion</td>
-      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->final }}" style="width: 20%;" name="final"> %</td>
+      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->final }}" style="width: 25%;" name="final"> %</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 0.16 }}</td>
       <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 1.16 }}</td>
