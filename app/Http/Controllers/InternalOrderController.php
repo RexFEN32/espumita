@@ -15,7 +15,7 @@ use App\Models\TempItem;
 use App\Models\vinternal_orders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\percentages;
+use App\Models\payments;
 
 class InternalOrderController extends Controller
 {
@@ -199,8 +199,8 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
-            #aqui se tienen que crear los pagos asociados
             
+
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
             foreach($TempItems as $row){
@@ -314,11 +314,12 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
+
         $Subtotal = $InternalOrders->subtotal;
         $Subtotal2 = $InternalOrders->subtotal;
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-       
-        $actualized = " ";
+        $percentage = percentages::where('order_id', '=', $id)->get()->first();
+        $actualized = "";
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -329,9 +330,9 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-        
+            'percentage',
             'id',
-            'actualized'
+            'actualized',
         ));
 
     }
@@ -341,25 +342,30 @@ class InternalOrderController extends Controller
     {
         $CompanyProfiles = CompanyProfile::first();
         $InternalOrders = InternalOrder::find($request->order_id);
-        $Customers = Customer::find($InternalOrders->customer_id);
-        $Sellers = Seller::find($InternalOrders->seller_id);
-        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
-        $Coins = Coin::find($InternalOrders->coin_id);
+        $Customers = Customer::find($request->customerID);
+        $Sellers = Seller::find($request->sellerID);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($request->customerAdressID);
+        $Coins = Coin::find($request->coinID);
         $Items = Item::where('internal_order_id', $request->order_id)->get();
-        $actualized='NO';
-        $Subtotal = $InternalOrders->subtotal;
-        $Subtotal2 = $InternalOrders->subtotal;
+        $actualized='';
+        $Subtotal = $request->subtotal;
+        $concepto1 = $request->concepto1;
+        $nRows = $request->rowcount;
+        #for($i=1; $i <= $nRows; $i++) {}
+            
+            $this_payment= new payments();
+            $this_payment->order_id = 1;
+            $this_payment->concept = $request->concepto1;
+            $ultimo = $request->concepto1;
+            $this_payment->percentage = 10;
+            $this_payment->amount = 200;
+            $this_payment->date = "1998-12-12";
+            $this_payment->save();
+        
+
+
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-
-        
-        
-        $suma= $request->factures + $request->bluprints + $request->finances + $request->shipment +$request->final;
-        #if($suma == 100){
-        #$percentage->save();
-        #$actualized='SI';
-        #}
-
-        return view('internal_orders.payment', compact(
+        return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
             'InternalOrders',
             'Customers',
@@ -369,7 +375,10 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
+            'concepto1',
             'actualized',
+            'nRows',
+            'ultimo',
         ));
         
 

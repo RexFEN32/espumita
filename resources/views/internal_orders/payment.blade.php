@@ -4,10 +4,12 @@
 
 @section('content_header')
     <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CONDICIONES DE PAGO</h1>
+    
 @stop
 
 @section('content')
 <div class="container-flex m-1 bg-gray-300 shadow-lg rounded-lg">
+  moneda: {{$InternalOrders->coin_id}}
         <div class="row p-3 m-2 rounded-lg shadow-xl bg-white">
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
@@ -52,98 +54,58 @@
 </table>
                     <br><br>
 
-<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">>
+<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">
 @csrf
-<x-jet-input type="hidden" name="order_id" value="1"/>
-<x-jet-input type="hidden" name="colnumber" id="colnumber" value=0S/>
-
-<table class="table table-striped" name ="tabla1" id="tabla1">
+<x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>
+<x-jet-input type="hidden" name="customerID"   value="{{$InternalOrders->customer_id}}" />
+<x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
+<x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
+<x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
+<x-jet-input type="hidden" name="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="" value=0/>
+<table class="table table-striped" name="tabla1" id="tabla1">
   <thead class="thead">
     <tr>
       <th scope="col">Entregable</th>
-      <th > % Negociado</th>
-      <th scope="col">Monto sin IVA</th>
-      <th scope="col">IVA</th>
-      <th scope="col">TOTAL</th>
-      <th scope="col">Avances <br> requeridos </th>
+      <th scope="col">% negociado</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Notas</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="table-active">Factura y finanzas</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="2" style="width: 25%;" name="factures" > %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * 5}}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * 4 * 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * 4 * 1.16 }}</td>
-      <td>10 %</td>
-    </tr>
-    </tr>
-    <tr>
-    <td ></td>
+    <tr >
     <th scope="row">TOTAL: </th>
       
       <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
       <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
       <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
-      <td></td>
-      <td></td>
+      
     </tr>
     
     <tr>
     <td > </td>
-      
-      <td><button type="submit" class="btn btn-dark" >
-                <i class="fa-solid fa-repeat fa-2x" ></i>
-                         &nbsp; &nbsp;
-                <p>Actualizar Porcentajes</p></button></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-   
-  </tbody>
+    </tbody>
 </table>
-<button class="btn btn-dark" onclick="myCreateFunction()">Create row</button>
-<button class="btn btn-dark" onclick="myDeleteFunction()">Delete row</button>
+
+
+      <td><button type="button" onclick="myFunction()"  class="btn btn-dark" >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      &nbsp; &nbsp;
+      <p>Agregar Concepto</p></button></td>
+      
+  
+    <br>
+    <br><br>
+    <button  type="submit" class="btn btn-dark" >
+                <i class="fa-solid fa-save fa-2x" ></i>
+                         &nbsp; &nbsp;
+                <p>Guardar Pagos</p></button>
+ 
+
                 </div>
                 </form>
-                <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <i class="fa-solid fa-calendar fa-2x" ></i>
-                         &nbsp; &nbsp;
-                <p>Calendarizar Pagos</p></button></td>
-                <div class="collapse" id="collapseExample">
-                <div class="column">
-                  <br><br><br>
-
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Primer Pago</h5>
-        <br>
-        <input type="date" id="birthday" name="birthday">
-        &nbsp; &nbsp; {{$Coins -> symbol}} <input type="number" min="1" step="100"  style="width: 20%;">
-        <br>
-        <div style="padding: 8px;"><h1>Status: <span class="badge badge-info">Por Cobrar</span></h1></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Segundo Pago</h5>
-        <br>
-        <input type="date" id="birthday" name="birthday">
-        &nbsp; &nbsp; {{$Coins -> symbol}} <input type="number" min="1" step="100"  style="width: 20%;">
-        <br>
-        <div style="padding: 8px;"><h1>Status: <span class="badge badge-info">Por Cobrar</span></h1></div>
-      </div>
-    </div>
-  </div>
-  
-</div>
-</div>
-             </div>
-        </div>
+                
+                
 </div>
 
 @stop
@@ -163,21 +125,32 @@
 @endif
 
 
-<script>
-function myCreateFunction() {
-  var colnumber= document.getElementById("colnumber").value;
 
+<script>
+function myFunction() {
+  var count= document.getElementById("rowcount").value;
+  count ++;
   var table = document.getElementById("tabla1");
-  var row = table.insertRow(0);
+  var row = table.insertRow(count);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
-  cell1.innerHTML = "NEW CELL1";
-  cell2.innerHTML = "NEW CELL2";
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  cell1.innerHTML ="  <input type='text' id='lname'  name='concepto"+count+"'>";
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje"+count+"' > %";
+  cell3.innerHTML = "<input type='date' name='fecha"+count+"'>";
+  cell4.innerHTML = "<input type='text' style='width: 50%;' name='factures' > %";
+  cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
+  document.getElementById("rowcount").value = count;
+  console.log(count);
 }
-
-function myDeleteFunction() {
-  document.getElementById("tabla1").deleteRow(0);
-}
+$("table").on("click", "#deleteRow", function (event) {
+        $(this).closest("tr").remove();
+        var count= document.getElementById("rowcount").value;
+        count = count -0.5;
+        document.getElementById("rowcount").value = count;
+        console.log(count);
+    });
 </script>
-
 @stop
