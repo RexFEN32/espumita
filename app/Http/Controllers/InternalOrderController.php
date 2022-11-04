@@ -199,15 +199,8 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
-            $percentage = new percentages();
-            $percentage->order_id = $TempInternalOrders->id ;
-            $percentage->factures = 40;
-            $percentage->finances = 20;
-            $percentage->bluprints = 20;
-            $percentage->shipment = 10;
-            $percentage->final = 10;
-            $percentage->save();
-
+            #aqui se tienen que crear los pagos asociados
+            
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
             foreach($TempItems as $row){
@@ -321,11 +314,10 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
-
         $Subtotal = $InternalOrders->subtotal;
         $Subtotal2 = $InternalOrders->subtotal;
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-        $percentage = percentages::where('order_id', '=', $id)->get()->first();
+       
         $actualized = " ";
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
@@ -337,7 +329,7 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-            'percentage',
+        
             'id',
             'actualized'
         ));
@@ -359,18 +351,13 @@ class InternalOrderController extends Controller
         $Subtotal2 = $InternalOrders->subtotal;
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
 
-        $percentage = percentages::where('order_id', '=', $request->order_id)->get()->first();
+        
         
         $suma= $request->factures + $request->bluprints + $request->finances + $request->shipment +$request->final;
-        if($suma == 100){
-        $percentage->factures = $request->factures;
-        $percentage->bluprints = $request->bluprints;
-        $percentage->finances = $request->finances;
-        $percentage->shipment = $request->shipment;
-        $percentage->final = $request->final;
-        $percentage->save();
-        $actualized='SI';
-        }
+        #if($suma == 100){
+        #$percentage->save();
+        #$actualized='SI';
+        #}
 
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
@@ -382,7 +369,6 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-            'percentage',
             'actualized',
         ));
         

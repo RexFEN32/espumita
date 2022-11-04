@@ -54,9 +54,10 @@
 
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">>
 @csrf
-<x-jet-input type="hidden" name="order_id" value="{{ $percentage->order_id }}"/>
+<x-jet-input type="hidden" name="order_id" value="1"/>
+<x-jet-input type="hidden" name="colnumber" id="colnumber" value=0S/>
 
-                    <table class="table table-striped">
+<table class="table table-striped" name ="tabla1" id="tabla1">
   <thead class="thead">
     <tr>
       <th scope="col">Entregable</th>
@@ -70,43 +71,12 @@
   <tbody>
     <tr>
       <td class="table-active">Factura y finanzas</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->factures }}" style="width: 25%;" name="factures" > %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures}}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->factures* 1.16 }}</td>
-      <td>{{$percentage->factures}} %</td>
+      <td ><input type="number" min="0" max="100" step="5"  value="2" style="width: 25%;" name="factures" > %</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * 5}}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * 4 * 0.16 }}</td>
+      <td> {{$Coins -> symbol}} {{$Subtotal * 4 * 1.16 }}</td>
+      <td>10 %</td>
     </tr>
-    <tr>
-      <td >Planos de Ingeniería</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->bluprints }}" style="width: 25%;" name="bluprints"> %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->bluprints * 1.16 }}</td>
-      <td>{{$percentage->factures + $percentage->bluprints }} %</td>
-    </tr>
-    <tr>
-    <td scope="row">Compra total de materiales</td>
-      <td ><input type="number" min="0" max="100" step="5"  value="{{$percentage->finances }}" style="width: 25%;" name="finances"> %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances}}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->finances * 1.16 }}</td>
-      <td>{{$percentage->factures + $percentage->bluprints + $percentage->finances}} %</td>
-    </tr>
-    <tr>
-    <td scope="row">Equipos listos para Embarque</td>
-      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->shipment }}" style="width: 25%;" name="shipment"> %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->shipment * 1.16 }}</td>
-      <td>{{$percentage->factures + $percentage->bluprints + $percentage->finances + $percentage->shipment}} %</td>
-    </tr>
-    <tr>
-    <td scope="row">Entrega Final a Satisfaccion</td>
-      <td ><input type="number" min="0" max="100" step="5" value="{{$percentage->final }}" style="width: 25%;" name="final"> %</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 0.16 }}</td>
-      <td> {{$Coins -> symbol}} {{$Subtotal * $percentage->final * 1.16 }}</td>
-      <td>100.0%</td>
     </tr>
     <tr>
     <td ></td>
@@ -133,6 +103,8 @@
    
   </tbody>
 </table>
+<button class="btn btn-dark" onclick="myCreateFunction()">Create row</button>
+<button class="btn btn-dark" onclick="myDeleteFunction()">Delete row</button>
                 </div>
                 </form>
                 <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -189,5 +161,23 @@
 @if ($actualized == 'NO')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_incorrect.js') }}"></script>
 @endif
+
+
+<script>
+function myCreateFunction() {
+  var colnumber= document.getElementById("colnumber").value;
+
+  var table = document.getElementById("tabla1");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = "NEW CELL1";
+  cell2.innerHTML = "NEW CELL2";
+}
+
+function myDeleteFunction() {
+  document.getElementById("tabla1").deleteRow(0);
+}
+</script>
 
 @stop
