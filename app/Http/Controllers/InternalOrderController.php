@@ -316,10 +316,10 @@ class InternalOrderController extends Controller
         $Items = Item::where('internal_order_id', $id)->get();
 
         $Subtotal = $InternalOrders->subtotal;
-        $Subtotal2 = $InternalOrders->subtotal;
+        
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-        $percentage = percentages::where('order_id', '=', $id)->get()->first();
-        $actualized = "";
+        
+        $actualized = " ";
         return view('internal_orders.payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -330,7 +330,6 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-            'percentage',
             'id',
             'actualized',
         ));
@@ -349,22 +348,26 @@ class InternalOrderController extends Controller
         $Items = Item::where('internal_order_id', $request->order_id)->get();
         $actualized='';
         $Subtotal = $request->subtotal;
-        $concepto1 = $request->concepto1;
-        $nRows = $request->rowcount;
-        #for($i=1; $i <= $nRows; $i++) {}
-            
-            $this_payment= new payments();
-            $this_payment->order_id = 1;
-            $this_payment->concept = $request->concepto1;
-            $ultimo = $request->concepto1;
-            $this_payment->percentage = 10;
-            $this_payment->amount = 200;
-            $this_payment->date = "1998-12-12";
-            $this_payment->save();
         
-
-
+        $porcentaje1=$request->porcentaje1;
+        $nota1=$request->nota1;
+        $date1=$request->date1;
+        $nRows = $request->rowcount;
+        for($i=1; $i <= $nRows; $i++) {
+             
+            $this_payment= new payments();
+            $this_payment->order_id = $request->order_id;
+            $this_payment->concept = $request->get('concepto')[$i];
+            $this_payment->percentage = $request->get('porcentaje')[$i];
+            $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.116;
+            $this_payment->date = $request->get('date')[$i];
+            $this_payment->nota = $request->get('nota')[$i];
+            $this_payment->save();
+        }
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+
+        #ahora hay que traer de la base de datos lo que se acaba de guardar
+        $payments = payments::where('order_id', $request->order_id)->get();
         return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -375,10 +378,9 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
-            'concepto1',
             'actualized',
             'nRows',
-            'ultimo',
+            'payments'
         ));
         
 

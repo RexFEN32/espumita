@@ -54,7 +54,7 @@
 </table>
                     <br><br>
 
-<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>
 <x-jet-input type="hidden" name="customerID"   value="{{$InternalOrders->customer_id}}" />
@@ -62,6 +62,7 @@
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
 <x-jet-input type="hidden" name="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
 <x-jet-input type="hidden" name="" value=0/>
 <table class="table table-striped" name="tabla1" id="tabla1">
   <thead class="thead">
@@ -96,7 +97,7 @@
   
     <br>
     <br><br>
-    <button  type="submit" class="btn btn-dark" >
+    <button  type="button" class="btn btn-dark"  onclick="guardar()">
                 <i class="fa-solid fa-save fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Guardar Pagos</p></button>
@@ -137,10 +138,10 @@ function myFunction() {
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
-  cell1.innerHTML ="  <input type='text' id='lname'  name='concepto"+count+"'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje"+count+"' > %";
-  cell3.innerHTML = "<input type='date' name='fecha"+count+"'>";
-  cell4.innerHTML = "<input type='text' style='width: 50%;' name='factures' > %";
+  cell1.innerHTML ="  <input type='text' id='lname'  name='concepto["+count+"]'>";
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id=p"+count+"> %";
+  cell3.innerHTML = "<input type='date' name='date["+count+"]'>";
+  cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
   cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   document.getElementById("rowcount").value = count;
   console.log(count);
@@ -152,5 +153,22 @@ $("table").on("click", "#deleteRow", function (event) {
         document.getElementById("rowcount").value = count;
         console.log(count);
     });
+
+
+    function guardar() {
+      var total=0;
+      var myForm = document.forms.form1;
+      var myControls = myForm.elements['porcentaje'];
+      for (var i = 0; i < myControls.length; i++) {
+      var aControl = myControls[i];
+      console.log(aControl)
+        }
+
+     //hint: hay que buscar el array percentage por id unu
+
+      //document.getElementById("form1").submit();
+
+
+    }
 </script>
 @stop

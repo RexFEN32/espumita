@@ -52,11 +52,10 @@
 </table>
                     <br><br>
 
-<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">>
+<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">
 @csrf
 <x-jet-input type="hidden" name="order_id" value=""/>
 
-{{$nRows}} <br> {{$ultimo}}
                     <table class="table table-striped">
   <thead class="thead">
     <tr>
@@ -65,26 +64,29 @@
       <th scope="col">Monto sin IVA</th>
       <th scope="col">IVA</th>
       <th scope="col">TOTAL</th>
-      <th scope="col">Avances <br> requeridos </th>
+      <th scope="col">Notas </th>
 
     </tr>
   </thead>
   <tbody>
-    <tr>
-        <td>{{$concepto1}}</td>
-
-
-
+  @foreach ($payments as $row)
+                            <tr class="text-center">
+                                <td>  {{ $row->concept }}</td>
+                                <td>{{ $row->percentage }} %</td>
+                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.1}}</td>
+                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.1 * 0.16}}</td>
+                                <td>{{$Coins -> symbol}} {{ $row->amount }}</td>
+                                <td>{{ $row->nota }}</td>
+                                
+                            </tr>
+                            @endforeach
+                            <tr >
+                            <td> </td>
+    <th scope="row">TOTAL: </th>
       
-    </tr>
-      
-      <td><button type="submit" class="btn btn-dark" >
-                <i class="fa-solid fa-repeat fa-2x" ></i>
-                         &nbsp; &nbsp;
-                <p>Actualizar Porcentajes</p></button></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
+      <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
+      <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
     </tr>
    
   </tbody>
@@ -94,7 +96,7 @@
                 <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa-solid fa-calendar fa-2x" ></i>
                          &nbsp; &nbsp;
-                <p>Calendarizar Pagos</p></button></td>
+                <p>Re-Calendarizar Pagos</p></button></td>
                 <div class="collapse" id="collapseExample">
                 <div class="column">
                   <br><br><br>

@@ -15,7 +15,18 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        //
+        $accounts = payments::where('status', 'por cobrar')->get();
+        return view('accounting.cuentas_cobrar', compact(
+            'accounts',
+        ));
+    }
+     
+    public function cuentas_cobrar()
+    {
+        $accounts = payments::where('status', 'por cobrar')->get();
+        return view('accounting.cuentas_cobrar', compact(
+            'accounts',
+        ));
     }
 
     /**

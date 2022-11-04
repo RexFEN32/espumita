@@ -336,8 +336,8 @@ return [
         [
             'text' => 'CUENTAS POR COBRAR',
             'icon' => 'fa-solid fa-money-check fa-fw',
-            'url' => '',
-            //'route'  => 'dashboard',
+            'url' => 'cuentas_cobrar',
+            'route'  => 'cuentas_cobrar',
             'can' => 'VER CUENTAS X COBRAR',
         ],
         [
