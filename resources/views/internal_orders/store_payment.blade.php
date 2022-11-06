@@ -84,15 +84,16 @@
                             <td> </td>
     <th scope="row">TOTAL: </th>
       
-      <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
-      <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
-      <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
+      <td style="background-color:#A6ADBC">{{$Coins -> symbol}} {{ $Subtotal}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
     </tr>
    
   </tbody>
 </table>
                 </div>
                 </form>
+                <br><br>
                 <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="fa-solid fa-calendar fa-2x" ></i>
                          &nbsp; &nbsp;

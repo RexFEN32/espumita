@@ -138,9 +138,9 @@ function myFunction() {
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
-  cell1.innerHTML ="  <input type='text' id='lname'  name='concepto["+count+"]'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id=p"+count+"> %";
-  cell3.innerHTML = "<input type='date' name='date["+count+"]'>";
+  cell1.innerHTML ="  <input type='text' name='concepto["+count+"]'  id='c"+count+"'>";
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='p"+count+"'> %";
+  cell3.innerHTML = "<input type='date' name='date["+count+"]' id='d"+count+"'>";
   cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
   cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   document.getElementById("rowcount").value = count;
@@ -156,17 +156,35 @@ $("table").on("click", "#deleteRow", function (event) {
 
 
     function guardar() {
-      var total=0;
+      var total=parseInt(0);
+      var count= document.getElementById("rowcount").value;
       var myForm = document.forms.form1;
       var myControls = myForm.elements['porcentaje'];
-      for (var i = 0; i < myControls.length; i++) {
-      var aControl = myControls[i];
-      console.log(aControl)
-        }
-
-     //hint: hay que buscar el array percentage por id unu
-
-      //document.getElementById("form1").submit();
+      
+      for (var i = 1; i <= count; i++) {
+      var p=document.getElementById("p"+i).value;
+      var c=document.getElementById("c"+i).value;
+      var d=document.getElementById("d"+i);
+      console.log(c)
+      //var campo = $('#id_del_input').val();
+      total=total+parseInt(p);
+      if (c=="") {
+        console.log("concepto vacio")
+        alert("Concepto sin nombre");
+        console.log("concepto vacio")
+      }
+      console.log(d)
+      if (!d.value) {
+        console.log("Fecha vacia");
+        alert("Fecha Vacía");
+      }
+      }
+      console.log(total);
+      if (total != 100) {
+      alert("Los porcentajes no suman 100%");
+      
+         }else
+      document.getElementById("form1").submit();
 
 
     }

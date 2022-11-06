@@ -353,6 +353,7 @@ class InternalOrderController extends Controller
         $nota1=$request->nota1;
         $date1=$request->date1;
         $nRows = $request->rowcount;
+        $payments = payments::where('order_id', $request->order_id)->delete();
         for($i=1; $i <= $nRows; $i++) {
              
             $this_payment= new payments();
