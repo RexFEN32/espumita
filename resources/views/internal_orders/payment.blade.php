@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="container-flex m-1 bg-gray-300 shadow-lg rounded-lg">
-  moneda: {{$InternalOrders->coin_id}}
+
         <div class="row p-3 m-2 rounded-lg shadow-xl bg-white">
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
@@ -46,7 +46,7 @@
   <tbody>
     <tr>
       <th scope="row">Moneda</th>
-      <td>MN</td>
+      <td>{{$Coins->code}}</td>
       
     </tr>
   </tbody>
@@ -80,9 +80,7 @@
       <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
       <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
       <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
-      
     </tr>
-    
     <tr>
     <td > </td>
     </tbody>

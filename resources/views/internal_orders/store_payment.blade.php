@@ -8,6 +8,7 @@
 
 @section('content')
 <div class="container-flex m-1 bg-gray-300 shadow-lg rounded-lg">
+  {{$pago1}}
         <div class="row p-3 m-2 rounded-lg shadow-xl bg-white">
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
@@ -44,7 +45,7 @@
   <tbody>
     <tr>
       <th scope="row">Moneda</th>
-      <td>MN</td>
+      <td>{{$Coins->code}}</td>
       
     </tr>
   </tbody>
@@ -64,19 +65,31 @@
       <th scope="col">Monto sin IVA</th>
       <th scope="col">IVA</th>
       <th scope="col">TOTAL</th>
-      <th scope="col">Notas </th>
+      <th scope="col">Promesa de Pago </th>
+      <th scope="col"># Dias </th>
+      <th scope="col"># Semanas </th>
 
     </tr>
   </thead>
   <tbody>
   @foreach ($payments as $row)
+
+
+  @php
+{{$datetime1 = new DateTime($row->date);
+  $datetime2 = new DateTime("2022-1-1");
+  $dias = $datetime1->diff($datetime2)->format('%a');}}
+@endphp
                             <tr class="text-center">
                                 <td>  {{ $row->concept }}</td>
                                 <td>{{ $row->percentage }} %</td>
-                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.1}}</td>
+                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.01}}</td>
                                 <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.1 * 0.16}}</td>
                                 <td>{{$Coins -> symbol}} {{ $row->amount }}</td>
-                                <td>{{ $row->nota }}</td>
+                                <td>{{ $row->date }}</td>
+                                <td>{{$dias}}</td>
+                                <td>{{(int)($dias / 7)}}</td>
+                      
                                 
                             </tr>
                             @endforeach

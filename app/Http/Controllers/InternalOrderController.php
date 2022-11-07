@@ -302,7 +302,7 @@ class InternalOrderController extends Controller
             'id',
         ));
     }
-
+//recibe el id de la orden
     public function payment($id)
     {
         
@@ -369,6 +369,8 @@ class InternalOrderController extends Controller
 
         #ahora hay que traer de la base de datos lo que se acaba de guardar
         $payments = payments::where('order_id', $request->order_id)->get();
+
+        $pago1 = $payments->first()->date;
         return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -381,7 +383,8 @@ class InternalOrderController extends Controller
             'Subtotal',
             'actualized',
             'nRows',
-            'payments'
+            'payments',
+            'pago1',
         ));
         
 
