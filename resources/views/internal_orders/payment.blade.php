@@ -39,7 +39,7 @@
   <thead>
     <tr>
       <th scope="col">RESUMEN DEL PEDIDO INTERNO (P.I.) NUMERO</th>
-      <td >2990</td>
+      <td ></td>
       
     </tr>
   </thead>
@@ -53,7 +53,7 @@
   
 </table>
                     <br><br>
-
+<h1>Ingrese los porcentajes de avance</h1>
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>

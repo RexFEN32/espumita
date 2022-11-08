@@ -20,7 +20,7 @@
   <thead class="thead">
     <tr>
       <th scope="col">Cliente</th>
-      <th > Orden</th>
+      <th > Pedido</th>
       <th scope="col">concepto</th>
       <th scope="col">Cantidad</th>
       <th scope="col">Fechade pago</th>
@@ -33,14 +33,37 @@
   <tbody>
   @foreach ($accounts as $row)
                             <tr class="text-center">
+                            @php
+{{$order = DB::table('payments')
+    ->join('internal_orders', 'payments.order_id', '=', 'internal_orders.id')
+    ->where('internal_orders.id', $row->order_id)
+    ->first();
+    $coin = DB::table('internal_orders')
+    ->join('coins', 'coins.id', '=', 'internal_orders.coin_id')
+    ->where('internal_orders.id', $row->order_id)
+    ->first();
+    $fecha = new DateTime($row->date);
+    $hoy = new DateTime("2022-11-7");
+  }}
+@endphp
                                 <td> <p>Cliente de prueba 01</p></td>
-                                <td> {{ $row->order_id}}</td>
+                                <td> {{ $order->invoice}}</td>
                                 <td> {{ $row->concept }}</td>
-                                <td>{{ $row->amount }}</td>
+                                <td> {{ $coin->symbol }}{{ $row->amount }}</td>
                                 <td>{{ $row->date}} </td>
                                
                                 <td>{{ $row->nota }}</td>
-                                <td><span class="badge badge-info">{{ $row->status }}</span></td>
+                                <td>
+
+                                @if($fecha < now())
+                                  <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
+                                                 
+                                  @else
+                                    <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
+                                         
+                                  @endif
+                                 
+                               </td>
                                 
                             </tr>
                             @endforeach

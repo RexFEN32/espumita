@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container-flex m-1 bg-gray-300 shadow-lg rounded-lg">
-  {{$pago1}}
+
         <div class="row p-3 m-2 rounded-lg shadow-xl bg-white">
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
@@ -53,6 +53,23 @@
 </table>
                     <br><br>
 
+<table>
+  <tbody>
+    <tr>
+     <td scope="col">Cliente:</td>
+     <td>Cliente de prueba 01</td>
+    </tr>
+    <tr>
+     <td scope="col">Saldo deudor     (-):</td>
+     <td> {{$Coins -> symbol}} {{$Subtotal}}</td>
+    </tr>
+    <tr>
+     <td scope="col">Abonos Recibidos (+):</td>
+     <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">
 @csrf
 <x-jet-input type="hidden" name="order_id" value=""/>
@@ -84,7 +101,7 @@
                                 <td>  {{ $row->concept }}</td>
                                 <td>{{ $row->percentage }} %</td>
                                 <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.01}}</td>
-                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.1 * 0.16}}</td>
+                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.116 }}</td>
                                 <td>{{$Coins -> symbol}} {{ $row->amount }}</td>
                                 <td>{{ $row->date }}</td>
                                 <td>{{$dias}}</td>
