@@ -56,11 +56,13 @@
                                 <td>
 
                                 @if($fecha < now())
+                                <a href="{{route('payments.pay_actualize',$row->id)}}">
                                   <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
-                                                 
+                                  </a>  
                                   @else
+                                  <a href="{{route('payments.pay_actualize',$row->id)}}">
                                     <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
-                                         
+                                     </a>     
                                   @endif
                                  
                                </td>

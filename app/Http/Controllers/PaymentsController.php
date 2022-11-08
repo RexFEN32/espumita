@@ -21,11 +21,12 @@ class PaymentsController extends Controller
         ));
     }
      
-    public function cuentas_cobrar()
+    public function pay_actualize($id)
     {
-        $accounts = payments::where('status', 'por cobrar')->get();
-        return view('accounting.cuentas_cobrar', compact(
-            'accounts',
+        //$accounts = payments::where('status', 'por cobrar')->get();
+        $pay = payments::find($id);
+        return view('accounting.pay_actualize', compact(
+            'pay',
         ));
     }
 

@@ -53,7 +53,8 @@
   
 </table>
                     <br><br>
-<h1>Ingrese los porcentajes de avance</h1>
+<p style ="font-size:250%;">Ingrese los porcentajes de avance</p>
+<br><br>
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>
@@ -77,25 +78,25 @@
     <tr >
     <th scope="row">TOTAL: </th>
       
-      <td>{{$Coins -> symbol}} {{ $Subtotal}}</td>
-      <td> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
-      <td> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
+      <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}}</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}</td>
     </tr>
-    <tr>
-    <td > </td>
+    
     </tbody>
 </table>
 
 
-      <td><button type="button" onclick="myFunction()"  class="btn btn-dark" >
-      <i class="fa fa-plus" aria-hidden="true"></i>
+      <td> <span><button type="button" onclick="myFunction()"  class="btn btn-blue mb-2"> </span>
+      <i class="fa fa-plus" ></i>
       &nbsp; &nbsp;
       <p>Agregar Concepto</p></button></td>
       
   
     <br>
     <br><br>
-    <button  type="button" class="btn btn-dark"  onclick="guardar()">
+
+    <button   type="button" class="btn btn-green mb-2"  onclick="guardar()">
                 <i class="fa-solid fa-save fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Guardar Pagos</p></button>

@@ -38,7 +38,7 @@
   <thead>
     <tr>
       <th scope="col">RESUMEN DEL PEDIDO INTERNO (P.I.) NUMERO</th>
-      <td >2990</td>
+      <td >{{$InternalOrders->invoice}}</td>
       
     </tr>
   </thead>
@@ -101,7 +101,7 @@
                                 <td>  {{ $row->concept }}</td>
                                 <td>{{ $row->percentage }} %</td>
                                 <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.01}}</td>
-                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.116 }}</td>
+                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal *0.0016 }}</td>
                                 <td>{{$Coins -> symbol}} {{ $row->amount }}</td>
                                 <td>{{ $row->date }}</td>
                                 <td>{{$dias}}</td>
@@ -114,23 +114,16 @@
                             <td> </td>
     <th scope="row">TOTAL: </th>
       
-      <td style="background-color:#A6ADBC">{{$Coins -> symbol}} {{ $Subtotal}}</td>
+      <td style="background-color:#A6ADBC">{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
       <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
       <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
     </tr>
    
   </tbody>
 </table>
-                </div>
+                
                 </form>
-                <br><br>
-                <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <i class="fa-solid fa-calendar fa-2x" ></i>
-                         &nbsp; &nbsp;
-                <p>Re-Calendarizar Pagos</p></button></td>
-                <div class="collapse" id="collapseExample">
-                <div class="column">
-                  <br><br><br>
+                
 
   
 </div>

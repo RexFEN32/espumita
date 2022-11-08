@@ -360,7 +360,7 @@ class InternalOrderController extends Controller
             $this_payment->order_id = $request->order_id;
             $this_payment->concept = $request->get('concepto')[$i];
             $this_payment->percentage = $request->get('porcentaje')[$i];
-            $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.116;
+            $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
             $this_payment->date = $request->get('date')[$i];
             $this_payment->nota = $request->get('nota')[$i];
             $this_payment->save();
