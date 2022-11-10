@@ -64,9 +64,14 @@
                          &nbsp; &nbsp;
                 <p>Marcar como Pagado</p></button>
                 @else
+
                 <h1>Pago completado</h1>
+
               <br>
-              <span class="badge bg-info"></span>
+              {{$pay->id}}
+             <a href="{{ asset('41.pdf') }}">Open the pdf!</a>
+             <button type="button"><span class="badge badge-pill badge-danger" style="font-size : 20px"> Invalidar pago</span></button>
+              
                 @endif
                                 
                 </form>

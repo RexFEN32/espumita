@@ -347,6 +347,13 @@ return [
             //'route'  => 'dashboard',
             'can' => 'VER APLICACIONES DE PAGO',
         ],
+        [
+            'text' => 'CUENTAS PAGADAS',
+            'icon' => 'fa-solid fa-money-check fa-fw',
+            
+            'route'  => 'payed_accounts',
+            'can' => 'VER APLICACIONES DE PAGO',
+        ],
     ],
 
     /*

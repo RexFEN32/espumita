@@ -6,6 +6,7 @@ use App\Models\payments;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 use Illuminate\Http\Request;
+use SplFileInfo;
 class PaymentsController extends Controller
 {
     /**
@@ -21,6 +22,14 @@ class PaymentsController extends Controller
         ));
     }
      
+    public function payed_accounts()
+    {
+        $accounts = payments::where('status', 'pagado')->get();
+        return view('accounting.cuentas_pagadas', compact(
+            'accounts',
+        ));
+    }
+    
     public function pay_actualize($id)
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
@@ -39,9 +48,11 @@ class PaymentsController extends Controller
         $pay = payments::find($id);
         $pay->status ="pagado";
         $pay->save();
-        //$nombre = strval($pay->id) . "comp";
+        #$nombre = strval($pay->id) . "comp";
+        #$info = new SplFileInfo('foo.txt');
+        
         $nombre = $comp->getClientOriginalName();
-        $nombre_con_id= strval($pay->id).$nombre;
+        $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('local')->put($nombre_con_id,  \File::get($comp));
         return view('accounting.pay_actualize', compact(
             'pay',
