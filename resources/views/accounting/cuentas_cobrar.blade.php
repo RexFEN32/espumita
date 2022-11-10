@@ -14,9 +14,9 @@
                 
 
                
+                <div class="col-sm-12 table-responsive">
 
-
-                <table class="table table-striped">
+                <table class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
     <tr>
       <th scope="col">Cliente</th>
@@ -73,6 +73,7 @@
   </tbody>
 </table>
             </div>
+            </div>
         </div>
     </div>
 </div>
@@ -85,6 +86,6 @@
 
 @section('js')
 
-
+<script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablecatalogopayments.js') }}"></script>
 
 @stop

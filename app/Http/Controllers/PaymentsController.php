@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\payments;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
-
+use Illuminate\Http\Request;
 class PaymentsController extends Controller
 {
     /**
@@ -28,6 +28,26 @@ class PaymentsController extends Controller
         return view('accounting.pay_actualize', compact(
             'pay',
         ));
+    }
+
+
+    public function pay_apply(Request $request)
+    {
+        
+        $id=$request->pay_id;
+        $comp = $request->comprobante;
+        $pay = payments::find($id);
+        $pay->status ="pagado";
+        $pay->save();
+        //$nombre = strval($pay->id) . "comp";
+        $nombre = $comp->getClientOriginalName();
+        $nombre_con_id= strval($pay->id).$nombre;
+        \Storage::disk('local')->put($nombre_con_id,  \File::get($comp));
+        return view('accounting.pay_actualize', compact(
+            'pay',
+        ));
+
+
     }
 
     /**

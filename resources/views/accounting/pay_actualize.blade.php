@@ -16,6 +16,9 @@
                             <td rowspan="4">
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
+                            <td>
+                                <h1 style="font-size : 30px;">Aplicacion del pago {{$pay->id}}</h1>
+                            </td>
                         </tr>
                         <tr>
                             
@@ -34,23 +37,43 @@
                         <td style="background-color:#A6ADBC"> Cantidad del pago</td>
                         <td> $ {{number_format($pay -> amount)}}</td>
                     </tr>
+                    <tr>
+                        <td>Concepto</td>
+                        <td>{{ $pay ->concept }}</td>
+                    </tr>
                 </tbody>
             </table>
             </div>
             <div>
-                El cliente ya realizó el pago?
+            <form action="{{ route('accounting.pay_apply')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <x-jet-input type="hidden" name="pay_id" value="{{$pay->id}}"/>
+                
+                @if($pay -> status == 'por cobrar')
+                 
+                 <h1>Pago pendiente</h1>
+                 El cliente ya realizó el pago?
                 <br>
                 Ingresa su comprobante
                 <br>
                 <br>
                 <br>
-                <input type="file">
-            </div>
-         <br><br>
-            <button   type="button" class="btn btn-green mb-2"  onclick="guardar()">
+                <input type="file" name="comprobante">
+                <button   type="submit" class="btn btn-green mb-2"  onclick="guardar()">
                 <i class="fa-solid fa-usd fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Marcar como Pagado</p></button>
+                @else
+                <h1>Pago completado</h1>
+              <br>
+              <span class="badge bg-info"></span>
+                @endif
+                                
+                </form>
+                
+            </div>
+         <br><br>
+            
 
             </div>
         </div>
