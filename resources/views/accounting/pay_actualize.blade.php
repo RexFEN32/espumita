@@ -17,7 +17,7 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">Aplicacion del pago {{$pay->id}}</h1>
+                                <h1 style="font-size : 30px;">Aplicacion del pago NO. {{$pay->id}}</h1>
                             </td>
                         </tr>
                         <tr>
@@ -32,6 +32,10 @@
                     <tr>
                         <td style="background-color:#A6ADBC"> Cliente</td>
                         <td>Cliente de Prueba 01</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#A6ADBC"> Pedido </td>
+                        <td>{{$order->invoice}}</td>
                     </tr>
                     <tr>
                         <td style="background-color:#A6ADBC"> Cantidad del pago</td>

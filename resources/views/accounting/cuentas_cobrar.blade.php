@@ -15,7 +15,7 @@
 
                
                 <div class="col-sm-12 table-responsive">
-
+         {{$total}}
                 <table class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
     <tr>

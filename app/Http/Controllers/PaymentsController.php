@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\InternalOrder;
 use App\Models\payments;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 use Illuminate\Http\Request;
 use SplFileInfo;
+use DB;
 class PaymentsController extends Controller
 {
     /**
@@ -17,8 +18,10 @@ class PaymentsController extends Controller
     public function index()
     {
         $accounts = payments::where('status', 'por cobrar')->get();
+        $total = payments::where('status', 'por cobrar')->get()->sum('amount');
         return view('accounting.cuentas_cobrar', compact(
             'accounts',
+            'total',
         ));
     }
      
@@ -34,8 +37,12 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
+        
+        $order = InternalOrder::find($pay->order_id);
+  
         return view('accounting.pay_actualize', compact(
             'pay',
+            'order'
         ));
     }
 
