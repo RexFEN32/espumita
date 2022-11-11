@@ -59,6 +59,13 @@
                                         </form>
                                         @endcan
                                     </div>
+                                    <div class="col-6 text-center w-10">
+                                        @can('VER PEDIDOS')
+                                        
+                                            <i class="fa-solid fa-money btn btn-green w-9 h-9"></i></span>
+                                        
+                                        @endcan
+                                    </div>
                                 </div>
                             </td>
                         </tr>

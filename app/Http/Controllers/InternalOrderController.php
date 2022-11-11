@@ -336,7 +336,7 @@ class InternalOrderController extends Controller
 
     }
     
-    
+    //cambiar a que en ves de request traireciba solo el id
     public function pay_conditions(Request $request)
     {
         $CompanyProfiles = CompanyProfile::first();
@@ -369,7 +369,7 @@ class InternalOrderController extends Controller
 
         #ahora hay que traer de la base de datos lo que se acaba de guardar
         $payments = payments::where('order_id', $request->order_id)->get();
-
+        $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get()->count();
         $pago1 = $payments->first()->date;
         return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
@@ -385,6 +385,7 @@ class InternalOrderController extends Controller
             'nRows',
             'payments',
             'pago1',
+            'abonos',
         ));
         
 

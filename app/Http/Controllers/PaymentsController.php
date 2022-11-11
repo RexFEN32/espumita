@@ -28,8 +28,10 @@ class PaymentsController extends Controller
     public function payed_accounts()
     {
         $accounts = payments::where('status', 'pagado')->get();
+        $total = $accounts->sum('amount');
         return view('accounting.cuentas_pagadas', compact(
             'accounts',
+            'total',
         ));
     }
     

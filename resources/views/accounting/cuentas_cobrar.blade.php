@@ -13,9 +13,10 @@
                 <div class="col-sm-12 text-center font-bold text-sm">
                 
 
-               
+                <div class="float-left"><h1><span class="badge badge-danger"> $ {{$total}} <br> por cobrar <br> </span></h1>
+               </div>
                 <div class="col-sm-12 table-responsive">
-         {{$total}}
+                  
                 <table class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
     <tr>
@@ -26,7 +27,6 @@
       <th scope="col">Fechade pago</th>
       <th scope="col">Notas</th>
       <th scope="col">Estado</th>
-      
 
     </tr>
   </thead>

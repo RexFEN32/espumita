@@ -12,7 +12,8 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
                 
-
+                <div class="float-left"><h1><span class="badge badge-success"> $ {{$total}} <br> Recaudados <br> </span></h1>
+               </div>
                
                 <div class="col-sm-12 table-responsive">
 

@@ -59,13 +59,13 @@
      <td scope="col">Cliente:</td>
      <td>Cliente de prueba 01</td>
     </tr>
-    <tr>
+    <tr  style="background-color:#ff9999" >
      <td scope="col">Saldo deudor     (-):</td>
      <td> {{$Coins -> symbol}} {{$Subtotal}}</td>
     </tr>
-    <tr>
+    <tr style="background-color: #4dff88">
      <td scope="col">Abonos Recibidos (+):</td>
-     <td>0</td>
+     <td>{{$abonos}}</td>
     </tr>
   </tbody>
 </table>
