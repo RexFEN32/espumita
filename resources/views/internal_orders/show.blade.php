@@ -164,21 +164,48 @@
                     &nbsp;
                 </div>
                 <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
-                    @foreach ($Authorizations as $item)
+                     @foreach ($requiredSignatures as $firma)
+                     @if ($loop->first) @continue @endif
+
+                     @php
+{{$auth = DB::table('authorizations')
+    ->join('signatures', 'authorizations.id', '=', 'signatures.auth_id')
+    ->where('authorizations.id', $firma->auth_id)
+    ->first();
+    $puesto=" ";
+    if($firma->auth_id = 2)
+        $puesto = "gerente de ventas";
+    
+
+  }}
+@endphp
+
                         <ul>
                             <li>
                                 <div class="row">
+
+
+                                    @if($firma->status == 0)
+                                    <form action="{{ route('internal_orders.firmar') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <x-jet-input type="hidden" name="signature_id" value="{{$firma->id}}"/>
                                     <div class="col">
-                                        <span class="text-xs uppercase">Firma: {{$item->job}}</span><br>
+                                        <span class="text-xs uppercase">Firma: {{$auth->job}}</span><br>
                                     </div>
+
                                     <div class="row">
                                         <div class="col">
-                                            <x-jet-input type="password" name="key_code" class="w-flex text-xs"/>
+                                            <x-jet-input type="password" name="key" class="w-flex text-xs"/>
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-green">Firmar</button>
                                         </div>
                                     </div>
+                                    </form>
+                                    @else
+
+                                    <span>Autorizado por  {{$auth->job}} </span>
+                                    @endif
                                 </div>
                             </li>
                         </ul>
@@ -188,16 +215,20 @@
                     Autorizaciones
                 </div>
             </div>
-                
-                    
-                        <a href="{{route('internal_orders.payment',$InternalOrders->id)}}">
-                        <button   class="btn btn-green mb-2">
+            <br> <br>
+            @if($InternalOrders->status == 'autorizado')
+            <button   class="btn btn-green">
+            <a href="{{route('internal_orders.payment',$InternalOrders->id)}}">
+
                          <i class="fa-solid fa-credit-card fa-2x" ></i>
-                         &nbsp; &nbsp; Pagos</button></a>
-                    
-                
+                         &nbsp; &nbsp; Pagos </a></button>
+                    @endif
+       
+  
         </div>
     </div>
+    
+            
 @stop
 
 @section('css')

@@ -16,6 +16,8 @@ use App\Models\vinternal_orders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\payments;
+use App\Models\signatures;
+use Illuminate\Support\Facades\Hash;
 
 class InternalOrderController extends Controller
 {
@@ -174,7 +176,8 @@ class InternalOrderController extends Controller
         $TempInternalOrders->observations = $request->observations;
         $TempInternalOrders->status = 'CAPTURADO';
         $TempInternalOrders->save();
-
+        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+        
         $InternalOrders = InternalOrder::orderBy('id', 'DESC')->first();
         if($InternalOrders){
             $InternalOrders->invoice;
@@ -200,6 +203,17 @@ class InternalOrderController extends Controller
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
             
+            foreach($Authorizations as $auth){
+                $c=$auth->clearance_level;
+                if($c<$request->subtotal)//entonces requiere esa firma
+                {
+                   $requiredSignature=new signatures();
+                   $requiredSignature->order_id = $InternalOrders->id;
+                   $requiredSignature->auth_id = $auth->id;
+                   $requiredSignature->save();
+                }
+
+            }
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
@@ -247,6 +261,17 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
+            foreach($Authorizations as $auth){
+                $c=$auth->clearance_level;
+                if($c<$request->subtotal)//entonces requiere esa firma
+                {
+                   $requiredSignature=new signatures();
+                   $requiredSignature->order_id = $InternalOrders->id;
+                   $requiredSignature->auth_id = $auth->id;
+                   $requiredSignature->save();
+                }
+
+            }
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
@@ -279,13 +304,14 @@ class InternalOrderController extends Controller
     public function show($id)
     {
         $CompanyProfiles = CompanyProfile::first();
+        $comp=$CompanyProfiles->id;
         $InternalOrders = InternalOrder::find($id);
         $Customers = Customer::find($InternalOrders->customer_id);
         $Sellers = Seller::find($InternalOrders->seller_id);
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
-
+        $requiredSignatures = signatures::where('order_id',$id)->get();
         $Subtotal = $InternalOrders->subtotal;
 
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
@@ -300,7 +326,33 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'id',
+            'requiredSignatures',
         ));
+    }
+
+    public function firmar(Request $request){
+    $signature = signatures::find($request->signature_id);
+    $internal_order = InternalOrder::find($signature->order_id);
+    $auth = Authorization::find($signature->auth_id);
+    $stored_key = $auth ->key_code;
+    $key_code =  $request->key;
+    $isPasswordCorrect = Hash::check($key_code, $stored_key);
+    if($isPasswordCorrect){
+        $signature->status = 1;
+        $signature->save();
+    }
+    $required_signatures = signatures::where('order_id',$internal_order->id)->get();
+    $areAllSigns=1;
+    foreach($required_signatures as $r){
+        if($r->status == 0){
+            $areAllSigns=0;
+        }
+    }
+    $internal_order->status = 'autorizado';
+    $internal_order->save();
+//hay que retornar el id de la orden, no del pago
+        return $this->show($internal_order->id);
+        //return view('internal_orders.test',compact('signature','internal_order','key_code','isPasswordCorrect','stored_key'));
     }
 //recibe el id de la orden
     public function payment($id)
