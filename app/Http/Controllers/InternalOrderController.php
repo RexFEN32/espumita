@@ -408,7 +408,7 @@ class InternalOrderController extends Controller
         $payments = payments::where('order_id', $request->order_id)->delete();
         for($i=1; $i <= $nRows; $i++) {
              
-            $this_payment= new payments();
+            $this_payment= new payments(); 
             $this_payment->order_id = $request->order_id;
             $this_payment->concept = $request->get('concepto')[$i];
             $this_payment->percentage = $request->get('porcentaje')[$i];
@@ -439,8 +439,20 @@ class InternalOrderController extends Controller
             'pago1',
             'abonos',
         ));
-        
+    }
 
+    public function pagos($id){
+    
+
+        $InternalOrders = InternalOrder::find($id);
+        $payments = payments::where('order_id', $request->order_id);
+        $npagos = $payments->count();
+        if($npagos > 0){// si no hay pagos, crear pagos
+
+            return $this->payment($internal_order->id);
+        }
+    // si hay pagos mostrar el iva uwu
+    //mostrar saldo del cliente en la parte de clientes
     }
     public function edit($id)
     {
