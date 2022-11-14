@@ -57,14 +57,15 @@ class PaymentsController extends Controller
         $pay = payments::find($id);
         $pay->status ="pagado";
         $pay->save();
+        $order = InternalOrder::find($pay->order_id);
         #$nombre = strval($pay->id) . "comp";
         #$info = new SplFileInfo('foo.txt');
-        
         $nombre = $comp->getClientOriginalName();
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('local')->put($nombre_con_id,  \File::get($comp));
         return view('accounting.pay_actualize', compact(
             'pay',
+            'order',
         ));
 
 

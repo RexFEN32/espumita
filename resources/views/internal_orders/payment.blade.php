@@ -139,7 +139,7 @@ function myFunction() {
   var cell5 = row.insertCell(4);
   cell1.innerHTML ="  <input type='text' name='concepto["+count+"]'  id='c"+count+"'>";
   cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='p"+count+"'> %";
-  cell3.innerHTML = "<input type='date' name='date["+count+"]' id='d"+count+"'>";
+  cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='d"+count+"'>";
   cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
   cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   document.getElementById("rowcount").value = count;

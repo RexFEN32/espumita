@@ -400,10 +400,6 @@ class InternalOrderController extends Controller
         $Items = Item::where('internal_order_id', $request->order_id)->get();
         $actualized='';
         $Subtotal = $request->subtotal;
-        
-        $porcentaje1=$request->porcentaje1;
-        $nota1=$request->nota1;
-        $date1=$request->date1;
         $nRows = $request->rowcount;
         $payments = payments::where('order_id', $request->order_id)->delete();
         for($i=1; $i <= $nRows; $i++) {
@@ -421,8 +417,8 @@ class InternalOrderController extends Controller
 
         #ahora hay que traer de la base de datos lo que se acaba de guardar
         $payments = payments::where('order_id', $request->order_id)->get();
-        $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get()->count();
-        $pago1 = $payments->first()->date;
+        $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get();
+        
         return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
             'InternalOrders',
@@ -436,20 +432,46 @@ class InternalOrderController extends Controller
             'actualized',
             'nRows',
             'payments',
-            'pago1',
             'abonos',
         ));
     }
 
-    public function pagos($id){
-    
-
-        $InternalOrders = InternalOrder::find($id);
-        $payments = payments::where('order_id', $request->order_id);
+    public function pagos(Request $request){
+        $id = $request->order_id;
+        //$InternalOrders = InternalOrder::find($id);
+        $payments = payments::where('order_id', $id)->get();
         $npagos = $payments->count();
-        if($npagos > 0){// si no hay pagos, crear pagos
 
-            return $this->payment($internal_order->id);
+
+        if($npagos > 0){// si no hay pagos, crear pagos
+            $CompanyProfiles = CompanyProfile::first();
+        $InternalOrders = InternalOrder::find($id);
+        $Customers = Customer::find($InternalOrders->customer_id);
+        $Sellers = Seller::find(1);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customerAdress_id);
+        $Coins = Coin::find($InternalOrders->coin_id);
+        $Items = Item::where('internal_order_id', $id)->get();
+        $actualized='';
+        $Subtotal = $InternalOrders->subtotal;
+        $abonos = payments ::where('status','pagado')->where('order_id', $id)->get();
+            return view('internal_orders.store_payment', compact(
+                'CompanyProfiles',
+                'InternalOrders',
+                'Customers',
+                'Sellers',
+                'CustomerShippingAddresses',
+                'Coins',
+                'Items',
+                
+                'Subtotal',
+                'actualized',
+                'payments',
+                'abonos',
+            ));
+            
+        }else{
+            return $this->payment($id);
+
         }
     // si hay pagos mostrar el iva uwu
     //mostrar saldo del cliente en la parte de clientes

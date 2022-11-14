@@ -61,11 +61,11 @@
     </tr>
     <tr  style="background-color:#ff9999" >
      <td scope="col">Saldo deudor     (-):</td>
-     <td> {{$Coins -> symbol}} {{$Subtotal}}</td>
+     <td> {{$Coins -> symbol}} {{number_format( $Subtotal * 1.16 - $abonos->sum('amount'))}}</td>
     </tr>
     <tr style="background-color: #4dff88">
      <td scope="col">Abonos Recibidos (+):</td>
-     <td>{{$abonos}}</td>
+     <td>{{$abonos->count()}}</td>
     </tr>
   </tbody>
 </table>
