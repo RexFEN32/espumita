@@ -7,6 +7,7 @@ use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 use Illuminate\Http\Request;
 use SplFileInfo;
+use Illuminate\Support\Facades\Storage;
 use DB;
 class PaymentsController extends Controller
 {
@@ -19,9 +20,11 @@ class PaymentsController extends Controller
     {
         $accounts = payments::where('status', 'por cobrar')->get();
         $total = payments::where('status', 'por cobrar')->get()->sum('amount');
+        $url = " ";
         return view('accounting.cuentas_cobrar', compact(
             'accounts',
             'total',
+            'url'
         ));
     }
      
@@ -29,9 +32,11 @@ class PaymentsController extends Controller
     {
         $accounts = payments::where('status', 'pagado')->get();
         $total = $accounts->sum('amount');
+        
         return view('accounting.cuentas_pagadas', compact(
             'accounts',
             'total',
+            
         ));
     }
     
@@ -41,10 +46,12 @@ class PaymentsController extends Controller
         $pay = payments::find($id);
         
         $order = InternalOrder::find($pay->order_id);
+        $url = "";
   
         return view('accounting.pay_actualize', compact(
             'pay',
-            'order'
+            'order',
+            'url'
         ));
     }
 
@@ -63,9 +70,11 @@ class PaymentsController extends Controller
         $nombre = $comp->getClientOriginalName();
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('local')->put($nombre_con_id,  \File::get($comp));
+        $url = Storage::url('69.pdf');
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
+            'url',
         ));
 
 

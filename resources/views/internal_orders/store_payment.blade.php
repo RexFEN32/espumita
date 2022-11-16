@@ -59,9 +59,9 @@
      <td scope="col">Cliente:</td>
      <td>Cliente de prueba 01</td>
     </tr>
-    <tr  style="background-color:#ff9999" >
+    <tr   >
      <td scope="col">Saldo deudor     (-):</td>
-     <td> {{$Coins -> symbol}} {{number_format( $Subtotal * 1.16 - $abonos->sum('amount'))}}</td>
+     <td style="color:#ff0000"> {{$Coins -> symbol}} {{number_format( $Subtotal * 1.16 - $abonos->sum('amount'))}}</td>
     </tr>
     <tr style="background-color: #4dff88">
      <td scope="col">Abonos Recibidos (+):</td>
@@ -100,9 +100,9 @@
                             <tr class="text-center">
                                 <td>  {{ $row->concept }}</td>
                                 <td>{{ $row->percentage }} %</td>
-                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal * 0.01}}</td>
-                                <td>{{$Coins -> symbol}} {{ $row->percentage * $Subtotal *0.0016 }}</td>
-                                <td>{{$Coins -> symbol}} {{ $row->amount }}</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->percentage * $Subtotal * 0.01)}}</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->percentage * $Subtotal *0.0016) }}</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->amount )}}</td>
                                 <td>{{ $row->date }}</td>
                                 <td>{{$dias}}</td>
                                 <td>{{(int)($dias / 7)}}</td>
@@ -115,8 +115,8 @@
     <th scope="row">TOTAL: </th>
       
       <td style="background-color:#A6ADBC">{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
-      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*0.16}}</td>
-      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ $Subtotal*1.16}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ number_format($Subtotal*0.16)}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ number_format($Subtotal*1.16)}}</td>
     </tr>
    
   </tbody>

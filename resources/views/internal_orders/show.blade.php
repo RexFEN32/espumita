@@ -220,9 +220,10 @@
             <button   class="btn btn-green">
             <a href="{{route('internal_orders.payment',$InternalOrders->id)}}">
 
-                         <i class="fa-solid fa-credit-card fa-2x" ></i>
-                         &nbsp; &nbsp; Pagos </a></button>
+                         <i class="fa-solid fa-percent fa-2x" ></i>
+                         &nbsp; &nbsp; Porcentaje de Avances </a></button>
                     @endif
+                    <input type="button" name="imprimir" value="Imprimir" onclick="window.print();">   
        
   
         </div>

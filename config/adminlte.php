@@ -340,13 +340,7 @@ return [
             'route'  => 'cuentas_cobrar',
             'can' => 'VER CUENTAS X COBRAR',
         ],
-        [
-            'text' => 'APLICACIÓN DE PAGO',
-            'icon' => 'fa-solid fa-money-check fa-fw',
-            'url' => '',
-            //'route'  => 'dashboard',
-            'can' => 'VER APLICACIONES DE PAGO',
-        ],
+        
         [
             'text' => 'CUENTAS PAGADAS',
             'icon' => 'fa-solid fa-money-check fa-fw',

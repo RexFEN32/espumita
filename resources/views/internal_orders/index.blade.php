@@ -60,12 +60,12 @@
                                         @endcan
                                     </div>
                                     <div class="col-6 text-center w-10">
-                                        
+                                        {{$row->id}}
                                         <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">
                                             @csrf
                                             <x-jet-input type="hidden" name="order_id" value="{{ $row->id}}"/>
                                             <button type="submit" class="btn btn-green h-9 w-9">
-                                                <i class="fa-solid fa-usd items-center"></i>
+                                                <i class="fa-solid fa-percent items-center"></i>
                                             </button>
                                         </form>
                                        

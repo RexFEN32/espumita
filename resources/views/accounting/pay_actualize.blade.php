@@ -62,8 +62,8 @@
                 <br>
                 <br>
                 <br>
-                <input type="file" name="comprobante">
-                <button   type="submit" class="btn btn-green mb-2"  onclick="guardar()">
+                <input type="file" name="comprobante" id="comp" onchange="mostrar()">
+                <button   type="submit" class="btn btn-green mb-2" id="btn"  onclick="guardar()" style="display: none">
                 <i class="fa-solid fa-usd fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Marcar como Pagado</p></button>
@@ -72,9 +72,15 @@
                 <h1>Pago completado</h1>
 
               <br>
-              {{$pay->id}}
-             <a href="{{ asset('41.pdf') }}">Open the pdf!</a>
-             <button type="button"><span class="badge badge-pill badge-danger" style="font-size : 20px"> Invalidar pago</span></button>
+              
+             <a href="{{ asset('41.pdf') }}">
+             <button type="button" class="btn btn-info">
+              <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante 
+             </button></a>
+             <a href="{{ $url }}">!</a>
+             <br><br><br><br><br>
+             <p>Hubó algun problema con la validación del pago o fue revocadó?</p>
+             <button type="button" ><span class="badge badge-pill badge-danger" style="font-size : 20px"> Invalidar pago</span></button>
               
                 @endif
                                 
@@ -82,8 +88,7 @@
                 
             </div>
          <br><br>
-            
-
+         
             </div>
         </div>
     </div>
@@ -92,11 +97,21 @@
 @stop
 
 @section('css')
+
     
 @stop
 
+
 @section('js')
+<script>
+const inFile = document.getElementById("comp");
 
+inFile.addEventListener("change", mostrar);
 
+function mostrar(){
+    document.getElementById("btn").style.display="flex";
+}
 
+   
+</script>
 @stop
