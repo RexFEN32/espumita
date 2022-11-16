@@ -223,7 +223,7 @@
                          <i class="fa-solid fa-percent fa-2x" ></i>
                          &nbsp; &nbsp; Porcentaje de Avances </a></button>
                     @endif
-                    <input type="button" name="imprimir" value="Imprimir" onclick="window.print();">   
+                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();">   
        
   
         </div>

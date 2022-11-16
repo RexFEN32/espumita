@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\InternalOrder;
 use App\Models\payments;
+use App\Models\Customer;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 use Illuminate\Http\Request;
@@ -18,13 +19,19 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $accounts = payments::where('status', 'por cobrar')->get();
+        //$accounts = payments::where('status', 'por cobrar')->get();
         $total = payments::where('status', 'por cobrar')->get()->sum('amount');
         $url = " ";
+        $accounts = DB::table('payments')
+            ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+            ->select('payments.*','internal_orders.customer_id')
+            ->get();
+        $Customers = Customer::all();
         return view('accounting.cuentas_cobrar', compact(
             'accounts',
             'total',
-            'url'
+            'url',
+            'Customers'
         ));
     }
      
