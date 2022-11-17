@@ -29,7 +29,8 @@ class PaymentsController extends Controller
         $Customers = Customer::all();
         $Orders = DB::table('internal_orders')
         ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
-        ->select('internal_orders.*','customers.customer')
+        ->join('coins', 'internal_orders.coin_id','=','coins.id')
+        ->select('internal_orders.*','customers.customer','coins.symbol')
         ->get();
         return view('accounting.cuentas_cobrar', compact(
             'accounts',

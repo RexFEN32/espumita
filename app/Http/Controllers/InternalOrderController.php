@@ -352,7 +352,8 @@ class InternalOrderController extends Controller
             $areAllSigns=0;
         }
     }
-    $internal_order->status = 'autorizado';
+    if($areAllSigns ==1){
+    $internal_order->status = 'autorizado';}
     $internal_order->save();
 //hay que retornar el id de la orden, no del pago
         return $this->show($internal_order->id);

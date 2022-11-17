@@ -31,7 +31,50 @@
     <i class="fa-solid fa-user fa-2x" ></i>
              &nbsp; &nbsp;
     <p>{{$row->customer}}</p></button></td>
+
+    @php
+{{
+  $pagos = $accounts->where('customer_id',$row->id);
+  $pendientes = $pagos->where('status','por cobrar');
+  $pagados = $pagos ->where('status','pagado');
+  $total_pedidos=$Orders->where('customer_id',$row->id)->count();
+}}
+@endphp
+
     <div class="collapse" id="collapseExample{{$row->id}}">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+            Total de Pedidos
+            </td>
+            <td>
+            Abonos pagados
+            </td>
+            <td>
+            Porcentaje completado
+            </td>
+            <td>
+            Saldo deudor
+            </td>
+          </tr>
+          <tr>
+            <td>
+             {{$total_pedidos}}
+            </td>
+            <td>
+            {{$pagados->count() }} / {{ $pagos->count()}}
+            </td>
+            <td>
+              {{$pagados->sum('percentage')}} %
+            </td>
+            <td style="color : red ">
+            {{$row->symbol}} {{number_format($pendientes ->sum('amount'))}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     <div class="column">
       <br>
         <table>
@@ -45,6 +88,7 @@
                <th scope="col">Notas</th>
                <th scope="col">Estado</th>
                </tr>
+               
             </thead>
 
             <tbody>
@@ -104,10 +148,50 @@
              &nbsp; &nbsp;
     <p>{{$row->invoice}}</p></button></td>
     <div class="collapse" id="collapseExample{{$row->id}}">
+
+@php
+{{
+  $pagos = $accounts->where('order_id',$row->id);
+  $pendientes = $pagos->where('status','por cobrar');
+  $pagados = $pagos ->where('status','pagado');
+}}
+@endphp
+    <table>
+        <tbody>
+          <tr>
+            <td>
+              Monto total del pedido
+            </td>
+            <td>
+              Abonos pagados
+            </td>
+            <td>
+              Porcentaje completado
+            </td>
+            <td>
+              Saldo deudor
+            </td>
+          </tr>
+          <tr>
+            <td>
+             {{$row->symbol}} {{number_format($row->subtotal*1.16)}}
+            </td>
+            <td>
+            {{$pagados->count() }} / {{ $pagos->count()}}
+            </td>
+            <td>
+              {{$pagados->sum('percentage')}} %
+            </td>
+            <td style="color : red ">
+            {{$row->symbol}} {{number_format($pendientes ->sum('amount'))}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     <div class="column">
       <br>
         <table>
-        <table class="table tablepayments table-striped text-xs font-medium">
+        <table class="table-striped text-xs font-medium">
             <thead class="thead">
                <tr>
                <th > Cliente</th>
@@ -131,7 +215,7 @@
                    {{$pago->concept}}
                     </td>
                     <td>
-                   {{$pago->amount}}
+                   {{$row->symbol}}{{number_format($pago->amount)}}
                     </td>
                     <td>
                    {{$pago->date}}
@@ -143,7 +227,11 @@
                       @php {{
                       $fecha = new DateTime($row->date);
                     }}@endphp
-                    @if($fecha < now())
+                    @if($pago->status == 'pagado')
+                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                        <button class="button"> <span class="badge badge-success">Pagado</span> </button>
+                        </a> 
+                    @elseif($fecha < now())
                        <a href="{{route('payments.pay_actualize',$pago->id)}}">
                         <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
                         </a>  
