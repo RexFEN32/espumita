@@ -18,9 +18,9 @@
                 <br><br>
                 <div class="container" style ="padding: 15px">
                 <div class="btn-group" role="group"  aria-label="Basic example">
-  <button type="button" class="btn btn-black mb-2" onclick="Clientes()">Clientes</button>
-  <button type="button" class="btn btn-black mb-2" onclick="Ordenes()">Ordenes</button>
-  <button type="button"class="btn btn-black mb-2"  onclick="Fechas()">Fecha</button>
+  <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
+  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Ordenes</button>
+  <button type="button"class="btn btn-blue mb-2"  onclick="Fechas()">Fecha</button>
 </div></div>
 <br> <br>
 <div id = "ClientView">  
@@ -33,12 +33,62 @@
     <p>{{$row->customer}}</p></button></td>
     <div class="collapse" id="collapseExample{{$row->id}}">
     <div class="column">
-    @foreach ($accounts as $pago)
       <br>
+        <table>
+        <table class="table tablepayments table-striped text-xs font-medium">
+            <thead class="thead">
+               <tr>
+               <th > Pedido</th>
+               <th scope="col">concepto</th>
+               <th scope="col">Cantidad</th>
+               <th scope="col">Fechade pago</th>
+               <th scope="col">Notas</th>
+               <th scope="col">Estado</th>
+               </tr>
+            </thead>
+
+            <tbody>
+    @foreach ($accounts as $pago)
         @if($pago->customer_id == $row->id)
-        {{$pago->concept}}
-        @endif
+                <tr>
+
+                   <td>
+                   {{$pago->invoice}}
+                    </td>
+                    <td>
+                   {{$pago->concept}}
+                    </td>
+                    <td>
+                   {{$pago->amount}}
+                    </td>
+                    <td>
+                   {{$pago->date}}
+                    </td>
+                    <td>
+                   {{$pago->nota}}
+                    </td>
+                    <td>
+                      @php {{
+                      $fecha = new DateTime($row->date);
+                    }}@endphp
+                    @if($fecha < now())
+                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                        <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
+                        </a>  
+                    @else
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
+                      </a>     
+                    @endif
+                                
+                    </td>
+                </tr>
+
+                @endif
       @endforeach
+            </tbody>
+        </table>
+        
     </div>
   </div>
   <br>
@@ -46,10 +96,86 @@
 </div>
 
 </div>
-<div id = "OrderView">  Vista por Ordenes</div>
+<div id = "OrderView">  
+@foreach ($Orders as $row)
+<br>
+<button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fa-solid fa-file fa-2x" ></i>
+             &nbsp; &nbsp;
+    <p>{{$row->invoice}}</p></button></td>
+    <div class="collapse" id="collapseExample{{$row->id}}">
+    <div class="column">
+      <br>
+        <table>
+        <table class="table tablepayments table-striped text-xs font-medium">
+            <thead class="thead">
+               <tr>
+               <th > Cliente</th>
+               <th scope="col">concepto</th>
+               <th scope="col">Cantidad</th>
+               <th scope="col">Fechade pago</th>
+               <th scope="col">Notas</th>
+               <th scope="col">Estado</th>
+               </tr>
+            </thead>
+
+            <tbody>
+    @foreach ($accounts as $pago)
+        @if($pago->order_id == $row->id)
+                <tr>
+
+                   <td>
+                   {{$row->customer}}
+                    </td>
+                    <td>
+                   {{$pago->concept}}
+                    </td>
+                    <td>
+                   {{$pago->amount}}
+                    </td>
+                    <td>
+                   {{$pago->date}}
+                    </td>
+                    <td>
+                   {{$pago->nota}}
+                    </td>
+                    <td>
+                      @php {{
+                      $fecha = new DateTime($row->date);
+                    }}@endphp
+                    @if($fecha < now())
+                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                        <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
+                        </a>  
+                    @else
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
+                      </a>     
+                    @endif
+                                
+                    </td>
+                </tr>
+
+                @endif
+      @endforeach
+            </tbody>
+        </table>
+        
+    </div>
+  </div>
+  <br>
+@endforeach
+
+</div>
+
 <br><br><br><br>
-<div id = "DateView">  Vista por Fechas
-                <div class="col-sm-12 table-responsive">
+<div id = "DateView">  
+  <div style ="flex-direction: row">  
+    <p>Fehca Inicial</p>  <input type="date" style="width : 20%">&nbsp;&nbsp;&nbsp;
+    <h1>Fehca Final</h1>  <input type="date" style="width : 20%">&nbsp;&nbsp;&nbsp;
+  </div>
+  <br>
+        <div class="col-sm-12 table-responsive">
                   
                 <table class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
