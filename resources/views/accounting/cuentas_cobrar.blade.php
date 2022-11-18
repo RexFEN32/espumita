@@ -24,11 +24,12 @@
 </div></div>
 <br> <br>
 <div id = "ClientView">  
-<div class ="col justify-content-start"> </div>
+<div class ="justify-content-rigth"> </div>
 @foreach ($Customers as $row)
 <br>
+<span class="float-left">
 <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fa-solid fa-user fa-2x" ></i>
+    <i class="fa-solid fa-user fa-2x" ></i></span>
              &nbsp; &nbsp;
     <p>{{$row->customer}}</p></button></td>
 
@@ -42,7 +43,7 @@
 @endphp
 
     <div class="collapse" id="collapseExample{{$row->id}}">
-      <table>
+      <table >
         <tbody>
           <tr>
             <td>
@@ -77,12 +78,12 @@
 
     <div class="column">
       <br>
-        <table>
-        <table class="table tablepayments table-striped text-xs font-medium">
+        
+        <table class="table-striped text-xs font-medium" >
             <thead class="thead">
-               <tr>
+               <tr style = "font-size : 14px ; padding : 15px">
                <th > Pedido</th>
-               <th scope="col">concepto</th>
+               <th scope="col">concepto <br></th>
                <th scope="col">Cantidad</th>
                <th scope="col">Fechade pago</th>
                <th scope="col">Notas</th>
@@ -91,19 +92,20 @@
                
             </thead>
 
-            <tbody>
+            <tbody >
     @foreach ($accounts as $pago)
         @if($pago->customer_id == $row->id)
-                <tr>
+                <tr style = "font-size : 14px; margin : 15px" >
 
                    <td>
                    {{$pago->invoice}}
+                   <br>
                     </td>
                     <td>
                    {{$pago->concept}}
                     </td>
                     <td>
-                   {{$pago->amount}}
+                    {{$row->symbol}}{{number_format($pago->amount)}}
                     </td>
                     <td>
                    {{$pago->date}}
@@ -193,7 +195,7 @@
         <table>
         <table class="table-striped text-xs font-medium">
             <thead class="thead">
-               <tr>
+               <tr style = "font-size : 14px; margin : 15px">
                <th > Cliente</th>
                <th scope="col">concepto</th>
                <th scope="col">Cantidad</th>
@@ -206,7 +208,7 @@
             <tbody>
     @foreach ($accounts as $pago)
         @if($pago->order_id == $row->id)
-                <tr>
+                <tr  style = "font-size : 14px; margin : 15px">
 
                    <td>
                    {{$row->customer}}

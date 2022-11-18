@@ -59,8 +59,8 @@
                                         </form>
                                         @endcan
                                     </div>
+                                    @if($row->status == 'autorizado')
                                     <div class="col-6 text-center w-10">
-                                        {{$row->id}}
                                         <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">
                                             @csrf
                                             <x-jet-input type="hidden" name="order_id" value="{{ $row->id}}"/>
@@ -70,6 +70,7 @@
                                         </form>
                                        
                                     </div>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

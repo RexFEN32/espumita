@@ -78,7 +78,7 @@ class TempItemController extends Controller
             $TempItems->family = $request->family;
             $TempItems->code = $request->code;
             $TempItems->description = $request->description;
-            $TempItems->unit_price = $request->unit_price;
+            $TempItems->unit_price =(float) $request->unit_price;
             $TempItems->import = $Import;
             $TempItems->save();
         }

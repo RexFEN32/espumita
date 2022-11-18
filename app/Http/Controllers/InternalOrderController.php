@@ -347,12 +347,13 @@ class InternalOrderController extends Controller
     }
     $required_signatures = signatures::where('order_id',$internal_order->id)->get();
     $areAllSigns=1;
+    $nSigns=$required_signatures->count();
     foreach($required_signatures as $r){
-        if($r->status == 0){
-            $areAllSigns=0;
+        if($r->status == 1){
+            $areAllSigns+=1;
         }
     }
-    if($areAllSigns ==1){
+    if($areAllSigns ==$nSigns){
     $internal_order->status = 'autorizado';}
     $internal_order->save();
 //hay que retornar el id de la orden, no del pago

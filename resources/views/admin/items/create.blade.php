@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Precio Unitario" />
-                                <x-jet-input type="number" step="0.01" name="unit_price" class="w-full text-xs" value="{{old('unit_price')}}"/>
+                                <x-jet-input type="number" step="0.01" name="unit_price" id="input-price" class="form-control just-number price-format-input" class="w-full text-xs" value="{{old('unit_price')}}"/>
                                 <x-jet-input-error for='unit_price' />
                             </div>
                         </div>
@@ -84,5 +84,32 @@
 @stop
 
 @section('js')
+<script>
+$(document).on("keypress", ".just-number", function (e) {
+  let charCode = (e.which) ? e.which : e.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+});
+$(document).on('keyup', '.price-format-input', function (e) {
+  let val = this.value;
+  val = val.replace(/,/g, "");
+  if (val.length > 3) {
+    let noCommas = Math.ceil(val.length / 3) - 1;
+    let remain = val.length - (noCommas * 3);
+    let newVal = [];
+    for (let i = 0; i < noCommas; i++) {
+      newVal.unshift(val.substr(val.length - (i * 3) - 3, 3));
+    }
+    newVal.unshift(val.substr(0, remain));
+    this.value = newVal;
+  }
+  else {
+    this.value = val;
+  }
+});
 
+$(document).ready(function(){
+  $('#input-price').focus();
+})</script>
 @stop

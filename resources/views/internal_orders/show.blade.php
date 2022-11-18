@@ -204,7 +204,8 @@
                                     </form>
                                     @else
 
-                                    <span>Autorizado por  {{$auth->job}} </span>
+                                    <span style="font-size: 17px"> <i class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$auth->job}} </span>
+                                    <br><br><br><br>
                                     @endif
                                 </div>
                             </li>
@@ -215,16 +216,24 @@
                     Autorizaciones
                 </div>
             </div>
-            <br> <br>
+            <br> <br> 
             @if($InternalOrders->status == 'autorizado')
-            <button   class="btn btn-green">
-            <a href="{{route('internal_orders.payment',$InternalOrders->id)}}">
+            <br><br><br><br><br><div>
 
-                         <i class="fa-solid fa-percent fa-2x" ></i>
-                         &nbsp; &nbsp; Porcentaje de Avances </a></button>
-                    @endif
-                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();">   
-       
+                         
+                                        <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">
+                                            @csrf                               
+                                            <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id }}"/>
+                                            <button type="submit" class="btn btn-green">
+                                                <i class="fa-solid fa-percent items-center fa-2x"></i> Porcentaje de Avances
+                                            </button>
+                                        </form>
+                    @endif</div>
+                    <br><br><br>
+                    
+                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                      
+                    
   
         </div>
     </div>
