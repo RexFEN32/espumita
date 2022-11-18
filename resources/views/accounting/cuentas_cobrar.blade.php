@@ -28,7 +28,7 @@
 @foreach ($Customers as $row)
 <br>
 <span class="float-left">
-<button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
+<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
     <i class="fa-solid fa-user fa-2x" ></i></span>
              &nbsp; &nbsp;
     <p>{{$row->customer}}</p></button></td>
@@ -47,16 +47,16 @@
         <tbody>
           <tr>
             <td>
-            Total de Pedidos
+            Total de Pedidos &nbsp;
             </td>
             <td>
-            Abonos pagados
+            Abonos pagados&nbsp;
             </td>
             <td>
-            Porcentaje completado
+            Porcentaje completado&nbsp;
             </td>
             <td>
-            Saldo deudor
+            Saldo deudor&nbsp;
             </td>
           </tr>
           <tr>
@@ -114,10 +114,14 @@
                    {{$pago->nota}}
                     </td>
                     <td>
-                      @php {{
+                    @php {{
                       $fecha = new DateTime($row->date);
                     }}@endphp
-                    @if($fecha < now())
+                    @if($pago->status == 'pagado')
+                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                        <button class="button"> <span class="badge badge-success">Pagado</span> </button>
+                        </a> 
+                    @elseif($fecha < now())
                        <a href="{{route('payments.pay_actualize',$pago->id)}}">
                         <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
                         </a>  
@@ -125,8 +129,7 @@
                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
                       <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
                       </a>     
-                    @endif
-                                
+                    @endif           
                     </td>
                 </tr>
 
@@ -145,7 +148,7 @@
 <div id = "OrderView">  
 @foreach ($Orders as $row)
 <br>
-<button class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
+<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
     <i class="fa-solid fa-file fa-2x" ></i>
              &nbsp; &nbsp;
     <p>{{$row->invoice}}</p></button></td>
@@ -285,7 +288,9 @@
                             @php
 {{$order = DB::table('payments')
     ->join('internal_orders', 'payments.order_id', '=', 'internal_orders.id')
-    ->where('internal_orders.id', $row->order_id)
+    ->join('customers','customers.id','=','internal_orders.customer_id')
+    ->select('payments.*','customers.customer','internal_orders.invoice')
+    ->where('payments.order_id', $row->order_id)
     ->first();
     $coin = DB::table('internal_orders')
     ->join('coins', 'coins.id', '=', 'internal_orders.coin_id')
@@ -295,10 +300,10 @@
     $hoy = new DateTime("2022-11-7");
   }}
 @endphp
-                                <td> <p>Cliente de prueba 01</p></td>
+                                <td> <p>{{$order->customer}}</p></td>
                                 <td> {{ $order->invoice}}</td>
                                 <td> {{ $row->concept }}</td>
-                                <td> {{ $coin->symbol }}{{ $row->amount }}</td>
+                                <td> {{ $coin->symbol }}{{ number_format($row->amount) }}</td>
                                 <td>{{ $row->date}} </td>
                                
                                 <td>{{ $row->nota }}</td>
