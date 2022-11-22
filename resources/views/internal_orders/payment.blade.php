@@ -99,7 +99,7 @@
     <button   type="button" class="btn btn-green mb-2"  onclick="guardar()">
                 <i class="fa-solid fa-save fa-2x" ></i>
                          &nbsp; &nbsp;
-                <p>Guardar Pagos</p></button>
+                <p>Guardar Porcentaje de Avance</p></button>
  
 
                 </div>

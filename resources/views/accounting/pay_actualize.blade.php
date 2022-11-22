@@ -70,13 +70,9 @@
                 @else
 
                 <h1>Pago completado</h1>
-
               <br>
-              {{$url}}
-             <a href="{{ $url}}">
-             <button type="button" class="btn btn-blue">
-              <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante 
-             </button></a>
+             <button type="button" onclick = "openPDF()"  class="btn btn-blue" > 
+             <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
              
              <br><br><br>
 
@@ -114,6 +110,9 @@ function mostrar(){
     document.getElementById("btn").style.display="flex";
 }
 
+function openPDF(){
+window.open("{{ asset('storage/'.$pay->id.'.pdf') }}");
+}
    
 </script>
 @stop

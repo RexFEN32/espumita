@@ -43,6 +43,28 @@ class TempItemController extends Controller
         ));
     }
 
+    public function edit_item($id)
+    {
+        $TempInternalOrders = $id;
+        $TempItems = TempItem::find($id);
+
+        if($TempItems){
+            $Item = $TempItems->item + 1;
+        }else{
+            $Item = 1;
+        }
+
+        $Units = Unit::all();
+        $Families = Family::all();
+
+        return view('admin.items.create', compact(
+            'TempInternalOrders',
+            'Item',
+            'Units',
+            'Families',
+        ));
+    }
+
     public function store(Request $request)
     {
         

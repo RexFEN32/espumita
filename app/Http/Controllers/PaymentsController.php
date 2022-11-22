@@ -58,7 +58,7 @@ class PaymentsController extends Controller
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
         $order = InternalOrder::find($pay->order_id);
-        $url =  "'public/".$pay->id.".pdf'";
+        $url =  "'/".$pay->id.".pdf'";
   
         return view('accounting.pay_actualize', compact(
             'pay',
@@ -96,7 +96,7 @@ class PaymentsController extends Controller
         $nombre = $comp->getClientOriginalName();
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));
-        $url = "'public/".$nombre_con_id."'";
+        $url = "'/".$nombre_con_id."'";
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
