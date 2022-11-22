@@ -57,9 +57,8 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
-        
         $order = InternalOrder::find($pay->order_id);
-        $url = "";
+        $url =  "'public/".$pay->id.".pdf'";
   
         return view('accounting.pay_actualize', compact(
             'pay',
@@ -67,11 +66,25 @@ class PaymentsController extends Controller
             'url'
         ));
     }
-
+    
+    public function pay_cancel($id)
+    {
+        //$accounts = payments::where('status', 'por cobrar')->get();
+        $pay = payments::find($id);
+        $order = DB::table('Internal_orders')
+            ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->where('internal_orders.id','=',$pay->order_id)
+            ->select('internal_orders.*','customers.customer')
+            ->first();
+        //$order = $InternalOrders::find($pay->order_id);
+        return view('accounting.pay_cancel', compact(
+            'pay',
+            'order',
+        ));
+    }
 
     public function pay_apply(Request $request)
-    {
-        
+    {   
         $id=$request->pay_id;
         $comp = $request->comprobante;
         $pay = payments::find($id);
@@ -82,17 +95,23 @@ class PaymentsController extends Controller
         #$info = new SplFileInfo('foo.txt');
         $nombre = $comp->getClientOriginalName();
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
-        \Storage::disk('local')->put($nombre_con_id,  \File::get($comp));
-        $url = Storage::url('69.pdf');
+        \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));
+        $url = "'public/".$nombre_con_id."'";
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
             'url',
         ));
-
-
     }
 
+    public function invalidar(Request $request)
+    {   
+        $id=$request->pay_id;
+        $pay = payments::find($id);
+        $pay->status ="por cobrar";
+        $pay->save();
+        return $this->index();
+    }
     /**
      * Show the form for creating a new resource.
      *

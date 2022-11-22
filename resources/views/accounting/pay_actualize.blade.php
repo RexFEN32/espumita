@@ -72,16 +72,18 @@
                 <h1>Pago completado</h1>
 
               <br>
-              
-             <a href="{{ asset('41.pdf') }}">
-             <button type="button" class="btn btn-info">
+              {{$url}}
+             <a href="{{ $url}}">
+             <button type="button" class="btn btn-blue">
               <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante 
              </button></a>
-             <a href="{{ $url }}">!</a>
-             <br><br><br><br><br>
+             
+             <br><br><br>
+
              <p>Hubó algun problema con la validación del pago o fue revocadó?</p>
+             <a href="{{route('pay_cancel',$pay->id)}}">
              <button type="button" ><span class="badge badge-pill badge-danger" style="font-size : 20px"> Invalidar pago</span></button>
-              
+              </a>
                 @endif
                                 
                 </form>

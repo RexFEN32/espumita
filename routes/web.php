@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('temp_items', TempItemController::class);
     Route::resource('cuentas_cobrar', PaymentsController::class);
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
+    Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
     Route::post('internal_orders/firmar', [InternalOrderController::class, 'firmar'])->name('internal_orders.firmar');
@@ -31,6 +32,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('internal_orders/pay_conditions', [InternalOrderController::class, 'pay_conditions'])->name('internal_orders.pay_conditions');
     Route::post('internal_orders/pagos', [InternalOrderController::class, 'pagos'])->name('internal_orders.pagos');
     Route::post('accounting/pay_apply', [PaymentsController::class, 'pay_apply'])->name('accounting.pay_apply');
+    Route::post('payments/invalidar', [PaymentsController::class, 'invalidar'])->name('accounting.invalidar');
     Route::get('payment/{id}', [InternalOrderController::class, 'payment'])->name('internal_orders.payment');
     Route::get('pay/{id}', [PaymentsController::class, 'pay_actualize'])->name('payments.pay_actualize');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
