@@ -45,19 +45,12 @@ class TempItemController extends Controller
 
     public function edit_item($id)
     {
-        $TempInternalOrders = $id;
-        $TempItems = TempItem::find($id);
 
-        if($TempItems){
-            $Item = $TempItems->item + 1;
-        }else{
-            $Item = 1;
-        }
-
+        $Item = TempItem::find($id);
         $Units = Unit::all();
         $Families = Family::all();
-
-        return view('admin.items.create', compact(
+        $TempInternalOrders = $Item->temp_internal_order_id;
+        return view('admin.items.edit', compact(
             'TempInternalOrders',
             'Item',
             'Units',
@@ -91,7 +84,10 @@ class TempItemController extends Controller
         $Import = $request->amount * $request->unit_price;
 
         $TempItems = TempItem::where('item', $request->item)->first();
-        if(!$TempItems){
+        if($TempItems){
+            $TempItems->delete();
+        }
+        
             $TempItems = new TempItem();
             $TempItems->temp_internal_order_id = $request->temp_internal_order_id;
             $TempItems->item = $request->item;
@@ -103,7 +99,7 @@ class TempItemController extends Controller
             $TempItems->unit_price =(float) $request->unit_price;
             $TempItems->import = $Import;
             $TempItems->save();
-        }
+        
         
         $TempInternalOrders = TempInternalOrder::where('id', $request->temp_internal_order_id)->first();
         $Customers = Customer::where('id', $TempInternalOrders->customer_id)->first();

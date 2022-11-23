@@ -54,7 +54,9 @@
                                                     <td>{{ $row->description }}</td>
                                                     <td class="text-right">$ {{ number_format($row->unit_price, 2) }}</td>
                                                     <td class="text-right">$ {{ number_format($row->import, 2) }}</td>
-                                                    <td><button type = "button" class="btn btn-green mb-2"> <i class="fas fa-edit"></i> </button></td>
+                                                    <td><a href="{{ route('tempitems.edit_item', $row->id) }} " class="btn btn-green">
+                                                        <button type = "button" class="btn btn-green "> <i class="fas fa-edit"></i> </button>
+                                                   </a></td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
