@@ -284,6 +284,8 @@
   </thead>
   <tbody>
   @foreach ($accounts as $row)
+  
+@if($row->status=="por cobrar")
                             <tr class="text-center">
                             @php
 {{$order = DB::table('payments')
@@ -322,6 +324,7 @@
                                </td>
                                 
                             </tr>
+@endif
                             @endforeach
   
   </tbody>
