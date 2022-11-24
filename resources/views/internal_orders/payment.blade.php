@@ -39,7 +39,7 @@
   <thead>
     <tr>
       <th scope="col">RESUMEN DEL PEDIDO INTERNO (P.I.) NUMERO</th>
-      <td ></td>
+      <td >{{$InternalOrders->invoice}}</td>
       
     </tr>
   </thead>

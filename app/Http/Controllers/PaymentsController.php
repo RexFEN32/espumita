@@ -57,7 +57,12 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
-        $order = InternalOrder::find($pay->order_id);
+        $order = DB::table('Internal_orders')
+            ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->where('internal_orders.id','=',$pay->order_id)
+            ->select('internal_orders.*','customers.customer')
+            ->first();
+        
         $url =  "'/".$pay->id.".pdf'";
   
         return view('accounting.pay_actualize', compact(

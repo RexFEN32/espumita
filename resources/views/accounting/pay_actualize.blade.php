@@ -33,7 +33,7 @@
                 <tbody>
                     <tr>
                         <td style="background-color:#A6ADBC"> Cliente: </td>
-                        <td>Cliente de Prueba 01</td>
+                        <td>{{$order->customer}}</td>
                     </tr>
                     <tr>
                         <td style="background-color:#A6ADBC"> Pedido: </td>

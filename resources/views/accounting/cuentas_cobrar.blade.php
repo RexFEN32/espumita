@@ -117,15 +117,13 @@
                     @php {{
                       $fecha = new DateTime($row->date);
                     }}@endphp
+
                     @if($pago->status == 'pagado')
                     <a href="{{route('payments.pay_actualize',$pago->id)}}">
                         <button class="button"> <span class="badge badge-success">Pagado</span> </button>
                         </a> 
-                    @elseif($fecha < now())
-                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
-                        </a>  
-                    @else
+                      
+                      @else
                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
                       <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
                       </a>     
@@ -232,14 +230,12 @@
                       @php {{
                       $fecha = new DateTime($row->date);
                     }}@endphp
+
                     @if($pago->status == 'pagado')
                     <a href="{{route('payments.pay_actualize',$pago->id)}}">
                         <button class="button"> <span class="badge badge-success">Pagado</span> </button>
                         </a> 
-                    @elseif($fecha < now())
-                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button"> <span class="badge badge-danger">Atrasado</span> </button>
-                        </a>  
+
                     @else
                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
                       <button class="button"> <span class="badge badge-info">por cobrar</span> </button>

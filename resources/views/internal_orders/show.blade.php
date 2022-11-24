@@ -74,13 +74,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Fecha de Entrega del Equipo: {{ date('d-m-Y', strtotime($InternalOrders->date_delivery))}}
+                                Fecha de Entrega del Equipo: <br>{{ date('d-m-Y', strtotime($InternalOrders->date_delivery))}}
                             </td>
                             <td>
-                                Fecha de Entrega Instalación: {{ date('d-m-Y', strtotime($InternalOrders->instalation_date))}}
+                                Fecha de Entrega Instalación: <br> {{ date('d-m-Y', strtotime($InternalOrders->instalation_date))}}
                             </td>
                             <td>
-                                Condiciones de Pago: {{ $InternalOrders->payment_conditions}}
+                                Condiciones de Pago: <br> {{ $InternalOrders->payment_conditions}}
                             </td>
                         </tr>
                     </table>

@@ -57,7 +57,7 @@
   <tbody>
     <tr>
      <td scope="col">Cliente:</td>
-     <td>Cliente de prueba 01</td>
+     <td>{{$Customers->customer}}</td>
     </tr>
     <tr   >
      <td scope="col">Saldo deudor     (-):</td>
@@ -123,7 +123,9 @@
 </table>
                 
                 </form>
-                
+            
+                <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                          
 
   
 </div>
