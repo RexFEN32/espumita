@@ -342,7 +342,7 @@ return [
         ],
         
         [
-            'text' => 'CUENTAS PAGADAS',
+            'text' => 'CUENTAS COBRADAS',
             'icon' => 'fa-solid fa-money-check fa-fw',
             
             'route'  => 'payed_accounts',

@@ -130,8 +130,17 @@
                     @endif           
                     </td>
                 </tr>
+@if($fecha < now())
+atrasado?
+@endif
+
+@if($fecha >= now())
+en tiempo
+@endif
 
                 @endif
+
+                
       @endforeach
             </tbody>
         </table>
