@@ -124,9 +124,9 @@
                 
                 </form>
             
-                <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
-                          
-
+                <input  class="btn btn-gray" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                
+                <button  class="btn btn-green" type="button" name="editar" ><i class="fas fa-edit"></i> &nbsp; Editar</button>
   
 </div>
 

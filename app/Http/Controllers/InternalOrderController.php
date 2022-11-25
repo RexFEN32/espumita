@@ -242,7 +242,8 @@ class InternalOrderController extends Controller
 
             TempInternalOrder::destroy($TempInternalOrders->id);
 
-            return redirect()->route('internal_orders.index')->with('create_reg', 'ok');
+            //return redirect()->route('internal_orders.index')->with('create_reg', 'ok');
+            return $this->payment($InternalOrders->id);
 
         }else{
 
@@ -297,10 +298,12 @@ class InternalOrderController extends Controller
             foreach($TempItems as $rs){
                 TempItem::destroy($rs->id);
             }
-
+            
             TempInternalOrder::destroy($TempInternalOrders->id);
-
-            return redirect()->route('internal_orders.index')->with('create_reg', 'ok');
+            // return pay_contitions con internal order id
+            // $InternalOrders->id
+            //return redirect()->route('internal_orders.index')->with('create_reg', 'ok');
+            return $this->payment($InternalOrders->id);
 
         }        
     }

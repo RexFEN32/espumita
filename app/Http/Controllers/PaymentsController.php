@@ -24,6 +24,7 @@ class PaymentsController extends Controller
         $url = " ";
         $accounts = DB::table('payments')
             ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+            ->where('internal_orders.status','=','autorizado')
             ->select('payments.*','internal_orders.customer_id','internal_orders.invoice')
             ->get();
         $Customers = Customer::all();
