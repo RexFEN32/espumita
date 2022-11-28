@@ -396,6 +396,46 @@ class InternalOrderController extends Controller
         ));
 
     }
+
+    public function payment_edit($id)
+    {
+        
+        $CompanyProfiles = CompanyProfile::first();
+        $InternalOrders = InternalOrder::find($id);
+        $payments = payments::where('order_id', $id)->get();
+        $pagados = $payments->where('status','pagado');
+        $no_pagados =$payments->where('status','por cobrar');
+        $pe=$no_pagados->sum('percentage');
+        $Customers = Customer::find($InternalOrders->customer_id);
+        $Sellers = Seller::find($InternalOrders->seller_id);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
+        $Coins = Coin::find($InternalOrders->coin_id);
+        $Items = Item::where('internal_order_id', $id)->get();
+
+        $Subtotal = $InternalOrders->subtotal;
+        
+        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+        
+        $actualized = " ";
+        return view('internal_orders.edit_pay', compact(
+            'CompanyProfiles',
+            'InternalOrders',
+            'Customers',
+            'Sellers',
+            'CustomerShippingAddresses',
+            'Coins',
+            'Items',
+            'Authorizations',
+            'Subtotal',
+            'id',
+            'actualized',
+            'payments',
+            'pagados',
+            'no_pagados',
+            'pe'
+        ));
+
+    }
     
     //cambiar a que en ves de request traireciba solo el id
     public function pay_conditions(Request $request)

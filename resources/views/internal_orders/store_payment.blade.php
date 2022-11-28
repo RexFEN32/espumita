@@ -126,7 +126,15 @@
             
                 <input  class="btn btn-gray" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
                 
-                <button  class="btn btn-green" type="button" name="editar" ><i class="fas fa-edit"></i> &nbsp; Editar</button>
+                <form action="{{ route('internal_orders.payment_edit', $InternalOrders->id) }}" method="POST">
+                                            @csrf                               
+                                            <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id }}"/>
+                                            <button  class="btn btn-green" type="submit" name="editar" >
+                                                <i class="fas fa-edit"></i> &nbsp; Editar
+                                            </button>
+                                        </form>
+
+                
   
 </div>
 

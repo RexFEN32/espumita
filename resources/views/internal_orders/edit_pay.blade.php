@@ -75,20 +75,33 @@
     </tr>
   </thead>
   <tbody>
-    <tr >
+  @foreach($pagados as $row)
+     <tr>
+        <td> {{$row->concept}}</td>
+        <td> {{$row->percentage}}</td>
+        <td> {{$row->date}}</td>
+        <td> {{$row->nota}}</td>
+
+     </tr>
+     @endforeach
+     
+    
+     @foreach($no_pagados as $row)
+     <tr>
+        <td> <input type='text' name='concepto' value = "{{$row->concept}}"></td>
+        <td> <input type='number' min='0' max='100' step='5'  style='width: 50%;' name='porcentaje["+count+"]' value = "{{$row->percentage}}"></td>
+        <td> <input type='date'  required class='w-full text-xs' name='d' value = "{{$row->date}}"></td>
+        <td> <input type='text' style='width: 50%;' value = "{{$row->nota}}"></td>
+
+     </tr>
+     @endforeach
+     <tr >
     <th scope="row">TOTAL: </th>
       
       <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
       <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}}</td>
       <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}</td>
     </tr>
-     @foreach ($pago as row)
-     <tr>
-        <td> <input type='text' name='concepto' value = "{{$pagos->concept}}"></td>
-
-
-     </tr>
-     @endforeach
     </tbody>
 </table>
 
