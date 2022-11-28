@@ -406,6 +406,8 @@ class InternalOrderController extends Controller
         $pagados = $payments->where('status','pagado');
         $no_pagados =$payments->where('status','por cobrar');
         $pe=$no_pagados->sum('percentage');
+        $npagos=$payments->count();
+        $npagados=$pagados->count();
         $Customers = Customer::find($InternalOrders->customer_id);
         $Sellers = Seller::find($InternalOrders->seller_id);
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
@@ -415,7 +417,7 @@ class InternalOrderController extends Controller
         $Subtotal = $InternalOrders->subtotal;
         
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-        
+        $aux_count=0;
         $actualized = " ";
         return view('internal_orders.edit_pay', compact(
             'CompanyProfiles',
@@ -432,7 +434,10 @@ class InternalOrderController extends Controller
             'payments',
             'pagados',
             'no_pagados',
-            'pe'
+            'pe',
+            'npagos',
+            'npagados',
+            'aux_count'
         ));
 
     }
@@ -456,6 +461,56 @@ class InternalOrderController extends Controller
             $this_payment= new payments(); 
             $this_payment->order_id = $request->order_id;
             $this_payment->concept = $request->get('concepto')[$i];
+            $this_payment->percentage = $request->get('porcentaje')[$i];
+            $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
+            $this_payment->date = $request->get('date')[$i];
+            $this_payment->nota = $request->get('nota')[$i];
+            $this_payment->save();
+        }
+        $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
+
+        #ahora hay que traer de la base de datos lo que se acaba de guardar
+        $payments = payments::where('order_id', $request->order_id)->get();
+        $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get();
+        
+        return view('internal_orders.store_payment', compact(
+            'CompanyProfiles',
+            'InternalOrders',
+            'Customers',
+            'Sellers',
+            'CustomerShippingAddresses',
+            'Coins',
+            'Items',
+            'Authorizations',
+            'Subtotal',
+            'actualized',
+            'nRows',
+            'payments',
+            'abonos',
+        ));
+    }
+
+    public function pay_redefine(Request $request)
+    {
+        $CompanyProfiles = CompanyProfile::first();
+        $InternalOrders = InternalOrder::find($request->order_id);
+        $Customers = Customer::find($request->customerID);
+        $Sellers = Seller::find($request->sellerID);
+        $CustomerShippingAddresses = CustomerShippingAddress::find($request->customerAdressID);
+        $Coins = Coin::find($request->coinID);
+        $Items = Item::where('internal_order_id', $request->order_id)->get();
+        $correcto='';
+        $Subtotal = $request->subtotal;
+        $nRows = $request->rowcount;
+        $actualized='';
+        $old_payments = payments::where('order_id', $request->order_id)
+        ->where('status','por cobrar')
+        ->delete();
+        for($i=0; $i < $nRows; $i++) {
+             
+            $this_payment= new payments(); 
+            $this_payment->order_id = $request->order_id;
+            $this_payment->concept = $request->get('CONCEPTO')[$i];
             $this_payment->percentage = $request->get('porcentaje')[$i];
             $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
             $this_payment->date = $request->get('date')[$i];

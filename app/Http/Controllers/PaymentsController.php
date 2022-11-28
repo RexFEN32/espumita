@@ -61,6 +61,7 @@ class PaymentsController extends Controller
         $order = DB::table('Internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)
+            ->where('internal_orders.status','=','autorizado')
             ->select('internal_orders.*','customers.customer')
             ->first();
         
@@ -96,7 +97,11 @@ class PaymentsController extends Controller
         $pay = payments::find($id);
         $pay->status ="pagado";
         $pay->save();
-        $order = InternalOrder::find($pay->order_id);
+        $order = DB::table('Internal_orders')
+            ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->where('internal_orders.id','=',$pay->order_id)
+            ->select('internal_orders.*','customers.customer')
+            ->first();
         #$nombre = strval($pay->id) . "comp";
         #$info = new SplFileInfo('foo.txt');
         $nombre = $comp->getClientOriginalName();

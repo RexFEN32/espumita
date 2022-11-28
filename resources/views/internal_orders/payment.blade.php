@@ -142,6 +142,7 @@ function myFunction() {
   cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='d"+count+"'>";
   cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
   cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
+  
   document.getElementById("rowcount").value = count;
   console.log(count);
 }
@@ -161,6 +162,7 @@ $("table").on("click", "#deleteRow", function (event) {
       var myControls = myForm.elements['porcentaje'];
       
       for (var i = 1; i <= count; i++) {
+      console.log(i);
       var p=document.getElementById("p"+i).value;
       var c=document.getElementById("c"+i).value;
       var d=document.getElementById("d"+i);

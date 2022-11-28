@@ -51,20 +51,21 @@
     </tr>
   </tbody>
   
-</table>
+</table>{{$npagos-$npagados}}
                     <br><br>
+                    {{$pe}}
 <p style ="font-size:250%;">Ingrese los porcentajes de avance</p>
 <br><br>
-<form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
+<form action="{{ route('internal_orders.pay_redefine')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
-<x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>
+<x-jet-input type="hidden" name="pe"  id="pe" value="{{$pe}}"/>
+<x-jet-input type="hidden" name="rowcount"  id="rowcount" value="{{$npagos-$npagados}}"/>
 <x-jet-input type="hidden" name="customerID"   value="{{$InternalOrders->customer_id}}" />
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
 <x-jet-input type="hidden" name="subtotal" value="{{$InternalOrders->subtotal}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
-<x-jet-input type="hidden" name="" value=0/>
 <table class="table table-striped" name="tabla1" id="tabla1">
   <thead class="thead">
     <tr>
@@ -78,29 +79,34 @@
   @foreach($pagados as $row)
      <tr>
         <td> {{$row->concept}}</td>
-        <td> {{$row->percentage}}</td>
+        <td> % {{$row->percentage}}</td>
         <td> {{$row->date}}</td>
         <td> {{$row->nota}}</td>
-
      </tr>
      @endforeach
      
-    
+
+
      @foreach($no_pagados as $row)
      <tr>
-        <td> <input type='text' name='concepto' value = "{{$row->concept}}"></td>
-        <td> <input type='number' min='0' max='100' step='5'  style='width: 50%;' name='porcentaje["+count+"]' value = "{{$row->percentage}}"></td>
-        <td> <input type='date'  required class='w-full text-xs' name='d' value = "{{$row->date}}"></td>
-        <td> <input type='text' style='width: 50%;' value = "{{$row->nota}}"></td>
-
+        <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
+        <td> <input type='number' min='0' max='100' step='5'  style='width: 50%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}"></td>
+        <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}" value = "{{$row->date}}" id="{{'D'.$aux_count}}"></td>
+        <td> <input type='text' style='width: 50%;' value = "{{$row->nota}}" name="{{'nota['.$aux_count.']'}}"></td>
+        <td><button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button></td>
+        <td>{{'c'.$aux_count}}</td>
      </tr>
+     @php
+$aux_count=$aux_count+1;
+@endphp
+
      @endforeach
      <tr >
     <th scope="row">TOTAL: </th>
       
-      <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}</td>
+      <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}} <br> (subtotal)</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}} <br> (iva)</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}<br> (total)</td>
     </tr>
     </tbody>
 </table>
@@ -148,7 +154,7 @@
 <script>
 function myFunction() {
   var count= document.getElementById("rowcount").value;
-  count ++;
+  console.log(count);
   var table = document.getElementById("tabla1");
   var row = table.insertRow(count);
   var cell1 = row.insertCell(0);
@@ -156,16 +162,18 @@ function myFunction() {
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
-  cell1.innerHTML = " <input type='text' name='concepto["+count+"]'  id='c"+count+"'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='p"+count+"'> %";
-  cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='d"+count+"'>";
+  cell1.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
+  cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
   cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
   cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
+  count ++;
   document.getElementById("rowcount").value = count;
   console.log(count);
 }
 $("table").on("click", "#deleteRow", function (event) {
         $(this).closest("tr").remove();
+        console.log(count);
         var count= document.getElementById("rowcount").value;
         count = count -0.5;
         document.getElementById("rowcount").value = count;
@@ -174,17 +182,24 @@ $("table").on("click", "#deleteRow", function (event) {
 
 
     function guardar() {
+      
       var total=parseInt(0);
+      
       var count= document.getElementById("rowcount").value;
       var myForm = document.forms.form1;
       var myControls = myForm.elements['porcentaje'];
-      
-      for (var i = 1; i <= count; i++) {
-      var p=document.getElementById("p"+i).value;
-      var c=document.getElementById("c"+i).value;
-      var d=document.getElementById("d"+i);
+      console.log(count);
+      var pe=document.getElementById("pe").value;
+      console.log(pe);
+      for (var i = 0; i < count; i++) {
+        console.log(i);
+      var p=document.getElementById("P"+i).value;
+      console.log(p);
+      var c=document.getElementById("C"+i).value;
       console.log(c)
-      //var campo = $('#id_del_input').val();
+      var d=document.getElementById("D"+i);
+      console.log(d)
+      var campo = $('#id_del_input').val();
       total=total+parseInt(p);
       if (c=="") {
         console.log("concepto vacio")
@@ -198,7 +213,7 @@ $("table").on("click", "#deleteRow", function (event) {
       }
       }
       console.log(total);
-      if (total != 100) {
+      if (total != pe) {
       alert("Los porcentajes no suman 100%");
       
          }else

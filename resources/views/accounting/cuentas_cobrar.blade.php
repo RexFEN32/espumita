@@ -115,7 +115,7 @@
                     </td>
                     <td>
                     @php {{
-                      $fecha = new DateTime($row->date);
+                      $fecha = new DateTime($pago->date);
                     }}@endphp
 
                     @if($pago->status == 'pagado')
@@ -124,15 +124,21 @@
                         </a> 
                       
                       @else
+                      @if( now() > $fecha)
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button"> <span class="badge badge-danger">atrasado</span> </button>
+                      </a>  
+                    @else
                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
                       <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
-                      </a>     
+                      </a>
+                      @endif     
                     @endif           
                     </td>
+                    
+                   
                 </tr>
-@if($fecha < now())
-atrasado?
-@endif
+
 
 @if($fecha >= now())
 en tiempo
@@ -236,20 +242,26 @@ en tiempo
                    {{$pago->nota}}
                     </td>
                     <td>
-                      @php {{
-                      $fecha = new DateTime($row->date);
+                    @php {{
+                      $fecha = new DateTime($pago->date);
                     }}@endphp
 
                     @if($pago->status == 'pagado')
                     <a href="{{route('payments.pay_actualize',$pago->id)}}">
                         <button class="button"> <span class="badge badge-success">Pagado</span> </button>
                         </a> 
-
+                      
+                      @else
+                      @if( now() > $fecha)
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button"> <span class="badge badge-danger">atrasado</span> </button>
+                      </a>  
                     @else
                       <a href="{{route('payments.pay_actualize',$pago->id)}}">
                       <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
-                      </a>     
-                    @endif
+                      </a>
+                      @endif     
+                    @endif          
                                 
                     </td>
                 </tr>
