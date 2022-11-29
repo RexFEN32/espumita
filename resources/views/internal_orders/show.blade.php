@@ -234,7 +234,7 @@
                     @endif
                     <br><br><br>
                 </div>
-                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();"> 
                       
                     
   
@@ -245,7 +245,13 @@
 @stop
 
 @section('css')
-    
+<style>
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
+</style>
 @stop
 
 @section('js')

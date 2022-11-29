@@ -124,8 +124,14 @@
                 
                 </form>
             
-                <input  class="btn btn-gray" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                               
+                                    
+
                 
+  <div class="row">
+    <div class ="col"><input  class="btn btn-gray" type="button" name="imprimir" value="Imprimir" onclick="window.print();"> 
+                </div>
+    <div class ="col">
                 <form action="{{ route('internal_orders.payment_edit', $InternalOrders->id) }}" method="POST">
                                             @csrf                               
                                             <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id }}"/>
@@ -133,9 +139,13 @@
                                                 <i class="fas fa-edit"></i> &nbsp; Editar
                                             </button>
                                         </form>
-
-                
-  
+                                        </div>
+    <div class ="col">@can('VER PEDIDOS')
+                                        <a href="{{ route('internal_orders.show', $InternalOrders->id)}}">
+                                            <i class="fa-solid fa-key btn btn-blue ">Autorizar</i></span>
+                                        </a>
+                                        @endcan</div>
+  </div>
 </div>
 
 @stop
