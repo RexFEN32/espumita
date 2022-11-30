@@ -19,7 +19,7 @@
                 <div class="container" style ="padding: 15px">
                 <div class="btn-group" role="group"  aria-label="Basic example">
   <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
-  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Ordenes</button>
+  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Pedido</button>
   <button type="button"class="btn btn-blue mb-2"  onclick="Fechas()">Fecha</button>
 </div></div>
 <br> <br>
