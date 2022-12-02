@@ -12,6 +12,7 @@
             <h5 class="card-title p-2">
                 <i class="fa-solid fa-edit"></i>&nbsp; Editar Datos del Cliente:
             </h5>
+            
         </div>
         <form action="{{ route('customers.update', $Customers->id)}}" method="POST" enctype="multipart/form-data">
         @method('PUT')
@@ -24,6 +25,10 @@
                         <div class="card-header">
                             <h1 class="h5 text-center fw">Datos Generales</h1>
                         </div>
+                        <div class="card-body">
+                            
+                                <x-jet-label value="Clave del cliente: 0{{$Customers->id}}" />
+                             </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <x-jet-label value="* Razón Social" />
@@ -110,7 +115,7 @@
             <h5 class="card-title p-2">
                 <i class="fa-solid fa-edit"></i>&nbsp; Agregar Contactos:
             </h5>
-        </div>
+        </div>{{$nc}}
         <div class="row rounded-b-lg rounded-t-none mb-4 shadow-xl bg-gray-300">
             <div class="col-xs-12 col-sm-9 p-3 table-responsive bg-white">
                 <table class="table tablemembers table-responsive table-striped">
@@ -125,23 +130,22 @@
                     <tbody>
                         @foreach ($Contacts as $row)
                             <tr>
-                                <td>{{$row->contact}}</td>
-                                <td>{{$row->telephone}}</td>
-                                <td>{{$row->email}}</td>
-                                <td>{{$row->campus}}</td>
+                                <td>{{$row->customer_contact_name}}</td>
+                                <td>{{$row->customer_contact_mobile}}</td>
+                                <td>{{$row->customer_contact_email}}</td>
+                                <td>{{$row->customer_contact_city}}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="col-xs-12 col-sm-3 p-3 text-center items-center inline-flex bg-white">
-                {{-- <a href="{{ route('miembros.principal', $Customers->id)}}" class="btn btn-green">
-                    <i class="fa-solid fa-edit"></i>&nbsp; Miembros
-                </a> --}}
-                <a href="" class="btn btn-green">
-                    <i class="fa-solid fa-edit"></i>&nbsp; Contactos
-                </a>
-            </div>
+                
+            <br>
+            <form action="{{ route('customers.contacto') }}" method="POST">
+                                            @csrf                               
+                                            <x-jet-input type="hidden" name="customer_id" value="{{$Customers->id }}"/>
+                                            <button  type="submit" class="btn btn-green mb-2">
+                                            <i class="fa-solid fa fa-user-plus"></i>&nbsp; Añadir <br> contacto</button>
+                                        </form>
         </div>
     </div>
 @stop

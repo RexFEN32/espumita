@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\CustomerContact;
 
 class CustomerContactController extends Controller
 {
@@ -12,9 +13,13 @@ class CustomerContactController extends Controller
         //
     }
 
-    public function create()
+    public function crear_contacto($id)
     {
-        //
+        $Contacts = CustomerContact::where('customer_id', $id);
+        $parametro=2;
+        return view('admin.customer_contacts.create', compact(
+        'Contacts',
+        'parametro'));
     }
 
     public function store(Request $request)
