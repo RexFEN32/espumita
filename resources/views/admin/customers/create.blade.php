@@ -29,6 +29,16 @@
                                 <x-jet-input-error for='customer' />
                             </div>
                             <div class="form-group">
+                                <x-jet-label value="* Nombre Júridico" />
+                                <x-jet-input type="text" name="legal_name" class="w-full text-xs " value="{{old('customer')}}"/>
+                                <x-jet-input-error for='legal_name' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="* Nombre Corto" />
+                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{old('customer')}}"/>
+                                <x-jet-input-error for='alias' />
+                            </div>
+                            <div class="form-group">
                                 <x-jet-label value="* RFC" />
                                 <x-jet-input type="text" name="customer_rfc" class="w-full text-xs " value="{{old('customer_rfc')}}"/>
                                 <x-jet-input-error for='customer_rfc' />

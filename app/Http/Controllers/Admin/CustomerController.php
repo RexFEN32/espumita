@@ -27,6 +27,8 @@ class CustomerController extends Controller
     {
         $rules = [
             'customer' => 'required',
+            'legal_name' => 'required',
+            'alias' => 'required',
             'customer_rfc' => 'required|max:13',
             'customer_state' => 'required',
             'customer_city' => 'required',
@@ -40,6 +42,8 @@ class CustomerController extends Controller
 
         $messages = [
             'customer.required' => 'Escriba el Nombre del Cliente',
+            'legal_name.required' => 'Escriba el Nombre Júridico del Cliente',
+            'alias.required' => 'Escriba el Nombre Corto del Cliente',
             'customer_rfc.required' => 'Capture el RFC del Cliente',
             'customer_rfc.max' => 'Sólo puede capturar un máximo de 13 caractéres',
             'customer_state.required' => 'Capture el Estado donde se ubica el Cliente',
@@ -59,6 +63,8 @@ class CustomerController extends Controller
 
         $Customers = new Customer();
         $Customers->customer = $request->customer;
+        $Customers->legal_name = $request->legal_name;
+        $Customers->alias = $request->alias;
         $Customers->customer_rfc = $request->customer_rfc;
         $Customers->customer_state = $request->customer_state;
         $Customers->customer_city = $request->customer_city;

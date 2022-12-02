@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Zones;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -24,9 +25,11 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-
+        $zones = Zones::pluck('zone', 'id')->all();
+       
         return view('admin.users.create', compact(
             'roles',
+            'zones',
         ));
     }
 

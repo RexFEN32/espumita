@@ -52,41 +52,41 @@
                                     <div class="form-group">
                                         <x-jet-label value="* Condiciones de Pago" />
                                         <select class="form-capture  w-full text-xs uppercase" required name="payment_conditions">
-                                            <option value="1 PAGO">1 PAGO</option>
-                                            <option value="2 PAGOS">2 PAGOS</option>
-                                            <option value="3 PAGOS">3 PAGOS</option>
-                                            <option value="4 PAGOS">4 PAGOS</option>
-                                            <option value="5 PAGOS">5 PAGOS</option>
-                                            <option value="6 PAGOS">6 PAGOS</option>
-                                            <option value="7 PAGOS">7 PAGOS</option>
-                                            <option value="8 PAGOS">8 PAGOS</option>
-                                            <option value="9 PAGOS">9 PAGOS</option>
-                                            <option value="10 PAGOS">10 PAGOS</option>
-                                            <option value="11 PAGOS">11 PAGOS</option>
-                                            <option value="12 PAGOS">12 PAGOS</option>
-                                            <option value="13 PAGOS">13 PAGOS</option>
-                                            <option value="14 PAGOS">14 PAGOS</option>
-                                            <option value="15 PAGOS">15 PAGOS</option>
-                                            <option value="16 PAGOS">16 PAGOS</option>
-                                            <option value="17 PAGOS">17 PAGOS</option>
-                                            <option value="18 PAGOS">18 PAGOS</option>
-                                            <option value="19 PAGOS">19 PAGOS</option>
-                                            <option value="20 PAGOS">20 PAGOS</option>
-                                            <option value="21 PAGOS">21 PAGOS</option>
-                                            <option value="22 PAGOS">22 PAGOS</option>
-                                            <option value="23 PAGOS">23 PAGOS</option>
-                                            <option value="24 PAGOS">24 PAGOS</option>
-                                            <option value="25 PAGOS">25 PAGOS</option>
-                                            <option value="26 PAGOS">26 PAGOS</option>
-                                            <option value="27 PAGOS">27 PAGOS</option>
-                                            <option value="28 PAGOS">28 PAGOS</option>
-                                            <option value="29 PAGOS">29 PAGOS</option>
-                                            <option value="30 PAGOS">30 PAGOS</option>
-                                            <option value="31 PAGOS">31 PAGOS</option>
-                                            <option value="32 PAGOS">32 PAGOS</option>
-                                            <option value="33 PAGOS">33 PAGOS</option>
-                                            <option value="34 PAGOS">34 PAGOS</option>
-                                            <option value="35 PAGOS">35 PAGOS</option>
+                                            <option value="1">1 PAGO</option>
+                                            <option value="2">2 PAGOS</option>
+                                            <option value="3">3 PAGOS</option>
+                                            <option value="4">4 PAGOS</option>
+                                            <option value="5">5 PAGOS</option>
+                                            <option value="6">6 PAGOS</option>
+                                            <option value="7">7 PAGOS</option>
+                                            <option value="8">8 PAGOS</option>
+                                            <option value="9">9 PAGOS</option>
+                                            <option value="10">10 PAGOS</option>
+                                            <option value="11">11 PAGOS</option>
+                                            <option value="12">12 PAGOS</option>
+                                            <option value="13">13 PAGOS</option>
+                                            <option value="14">14 PAGOS</option>
+                                            <option value="15">15 PAGOS</option>
+                                            <option value="16">16 PAGOS</option>
+                                            <option value="17">17 PAGOS</option>
+                                            <option value="18">18 PAGOS</option>
+                                            <option value="19">19 PAGOS</option>
+                                            <option value="20">20 PAGOS</option>
+                                            <option value="21">21 PAGOS</option>
+                                            <option value="22">22 PAGOS</option>
+                                            <option value="23">23 PAGOS</option>
+                                            <option value="24">24 PAGOS</option>
+                                            <option value="25">25 PAGOS</option>
+                                            <option value="26">26 PAGOS</option>
+                                            <option value="27">27 PAGOS</option>
+                                            <option value="28">28 PAGOS</option>
+                                            <option value="29">29 PAGOS</option>
+                                            <option value="30">30 PAGOS</option>
+                                            <option value="31">31 PAGOS</option>
+                                            <option value="32">32 PAGOS</option>
+                                            <option value="33">33 PAGOS</option>
+                                            <option value="34">34 PAGOS</option>
+                                            <option value="35">35 PAGOS</option>
                                         </select>
                                         <x-jet-input-error for='payment_conditions' />
                                     </div>
@@ -102,6 +102,11 @@
                                                 <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
                                             @endforeach
                                         </select>
+                                        <x-jet-input-error for='seller_id' />
+                                    </div>
+                                    <div class="form-group">
+                                        <x-jet-label value="* Comision del Vendedor" />
+                                        <input type="number" name="comision" size="4"> %
                                         <x-jet-input-error for='seller_id' />
                                     </div>
                                 </div>

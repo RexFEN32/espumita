@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -17,13 +18,17 @@ class SellerController extends Controller
 
     public function create()
     {
-        return view('admin.sellers.create');
+        $usuarios = User::all();
+        return view('admin.sellers.create',compact('usuarios'));
     }
 
     public function store(Request $request)
     {
         $rules = [
             'seller_name' => 'required',
+            'gv' => 'required',
+            'ga' => 'required',
+            'gc' => 'required',
             'seller_mobile' => 'required|numeric|digits:10',
             'seller_office_phone' => 'required|numeric|digits:10',
             'seller_email' => 'required|email|unique:sellers,seller_email',
@@ -31,6 +36,9 @@ class SellerController extends Controller
 
         $messages = [
             'seller_name.required' => 'Captura el Nombre del Vendedor',
+            'gv.required' => 'Selecciona un Gerente de Ventas',
+            'ga.required' => 'Selecciona un Gerente Administrativo',
+            'gc.required' => 'Selecciona un Gerente Comercial',
             'seller_mobile.required' => 'Captura el Número Celular del Vendedor',
             'seller_mobile.numeric' => 'El número celular debe ser númerico',
             'seller_mobile.digits' => 'Captura el número celular a 10 dígitos',
@@ -57,6 +65,9 @@ class SellerController extends Controller
         $Sellers->seller_city = $request->seller_city;
         $Sellers->seller_state = $request->seller_state;
         $Sellers->seller_zip_code = $request->seller_zip_code;
+        $Sellers->gv = $request->gv;
+        $Sellers->gc = $request->gc;
+        $Sellers->ga = $request->ga;
         $Sellers->save();
 
         return redirect()->route('sellers.index')->with('create_reg', 'ok');

@@ -48,6 +48,31 @@
                                 <x-jet-input type="text" name="seller_office_phone_ext" class="w-full text-xs " value="{{old('seller_office_phone_ext')}}"/>
                                 <x-jet-input-error for='seller_office_phone_ext' />
                             </div>
+                            <div class="form-group">
+                                <x-jet-label value="Gerente Ventas" />
+                                <select class="form-select" aria-label="Default select example" name ="gv"> 
+                                        @foreach( $usuarios as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="Gerente Administrativo" />
+                                <select class="form-select" aria-label="Default select example" name ="ga">                               
+                                        @foreach( $usuarios as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="Gerente Comercial" />
+                                <select class="form-select" aria-label="Default select example" name ="gc">                               
+                                        @foreach( $usuarios as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
