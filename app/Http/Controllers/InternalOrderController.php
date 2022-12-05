@@ -16,6 +16,7 @@ use App\Models\vinternal_orders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\payments;
+use App\Models\historical_payments;
 use App\Models\signatures;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,6 +29,7 @@ class InternalOrderController extends Controller
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->join('sellers', 'internal_orders.seller_id','=','sellers.id')
             ->select('internal_orders.*','customers.customer', 'sellers.seller_name')
+            ->orderBy('internal_orders.invoice', 'DESC')
             ->get();
         return view('internal_orders.index', compact('InternalOrders'));
     }
@@ -62,6 +64,7 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::where('customer_id', $Customers->id)->get();
         $Coins = Coin::all();
         $Sellers = Seller::all();
+        $hoy = now();
         
         return view('internal_orders.capture_order', compact(
             'TempInternalOrders',
@@ -69,6 +72,7 @@ class InternalOrderController extends Controller
             'CustomerShippingAddresses',
             'Coins',
             'Sellers',
+            'hoy',
         ));
     }
 
@@ -82,6 +86,7 @@ class InternalOrderController extends Controller
             'coin_id' => 'required',
             'payment_conditions'=> 'required',
             'seller_id' => 'required',
+            'comision' => 'required',
         ];
 
         $messages = [
@@ -92,6 +97,7 @@ class InternalOrderController extends Controller
             'coin_id.required' => 'El tipo de Moneda es necesario',
             'payment_conditions.required' => 'Las condiciones de pago son necesarios',
             'seller_id.required' => 'Elija un vendedor',
+            'comision.required' => 'Determine una comision para el vendedor',
         ];
 
         $request->validate($rules, $messages);
@@ -100,8 +106,10 @@ class InternalOrderController extends Controller
         $TempInternalOrders->seller_id = $request->seller_id;
         $TempInternalOrders->date_delivery = $request->date_delivery;
         $TempInternalOrders->instalation_date = $request->instalation_date;
+        $TempInternalOrders->reg_date = $request->reg_date;        
         $TempInternalOrders->coin_id = $request->coin_id;
         $TempInternalOrders->payment_conditions = $request->payment_conditions;
+        $TempInternalOrders->comision=$request->comision;
         $TempInternalOrders->save();
 
         $Customers = Customer::where('id', $request->customer_id)->first();
@@ -193,8 +201,10 @@ class InternalOrderController extends Controller
             $InternalOrders->date = $TempInternalOrders->date;
             $InternalOrders->customer_id = $TempInternalOrders->customer_id;
             $InternalOrders->seller_id = $TempInternalOrders->seller_id;
+            $InternalOrders->comision = $TempInternalOrders->comision;
             $InternalOrders->date_delivery = $TempInternalOrders->date_delivery;
             $InternalOrders->instalation_date = $TempInternalOrders->instalation_date;
+            $InternalOrders->reg_date = $TempInternalOrders->reg_date;
             $InternalOrders->shipment = $TempInternalOrders->shipment;
             $InternalOrders->customer_shipping_address_id = $TempInternalOrders->customer_shipping_address_id;
             $InternalOrders->coin_id = $TempInternalOrders->coin_id;
@@ -233,6 +243,7 @@ class InternalOrderController extends Controller
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
                 $Items->save();
+                
             }
             
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
@@ -253,8 +264,10 @@ class InternalOrderController extends Controller
             $InternalOrders->date = $TempInternalOrders->date;
             $InternalOrders->customer_id = $TempInternalOrders->customer_id;
             $InternalOrders->seller_id = $TempInternalOrders->seller_id;
+            $InternalOrders->comision = $TempInternalOrders->comision;
             $InternalOrders->date_delivery = $TempInternalOrders->date_delivery;
             $InternalOrders->instalation_date = $TempInternalOrders->instalation_date;
+            $InternalOrders->reg_date = $TempInternalOrders->reg_date;
             $InternalOrders->shipment = $TempInternalOrders->shipment;
             $InternalOrders->customer_shipping_address_id = $TempInternalOrders->customer_shipping_address_id;
             $InternalOrders->coin_id = $TempInternalOrders->coin_id;
@@ -375,9 +388,9 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
-
+        $aux_count=0;
         $Subtotal = $InternalOrders->subtotal;
-        
+        $npagos=(int)$InternalOrders->payment_conditions;
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
         
         $actualized = " ";
@@ -393,6 +406,8 @@ class InternalOrderController extends Controller
             'Subtotal',
             'id',
             'actualized',
+            'aux_count',
+            'npagos',
         ));
 
     }
@@ -413,7 +428,7 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
-
+        $numpagos=(int)$InternalOrders->payment_conditions;
         $Subtotal = $InternalOrders->subtotal;
         
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
@@ -437,7 +452,8 @@ class InternalOrderController extends Controller
             'pe',
             'npagos',
             'npagados',
-            'aux_count'
+            'aux_count',
+            'numpagos'
         ));
 
     }
@@ -456,38 +472,37 @@ class InternalOrderController extends Controller
         $Subtotal = $request->subtotal;
         $nRows = $request->rowcount;
         $payments = payments::where('order_id', $request->order_id)->delete();
-        for($i=1; $i <= $nRows; $i++) {
+        for($i=1; $i < $nRows+1; $i++) {
              
             $this_payment= new payments(); 
+            $hpayment= new historical_payments(); 
             $this_payment->order_id = $request->order_id;
             $this_payment->concept = $request->get('concepto')[$i];
             $this_payment->percentage = $request->get('porcentaje')[$i];
             $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
             $this_payment->date = $request->get('date')[$i];
-            $this_payment->nota = $request->get('nota')[$i];
+            //$this_payment->nota = $request->get('nota')[$i];
             $this_payment->save();
+            
+            $hpayment->order_id = $request->order_id;
+            $hpayment->concept = $request->get('concepto')[$i];
+            $hpayment->percentage = $request->get('porcentaje')[$i];
+            $hpayment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
+            $hpayment->date = $request->get('date')[$i];
+            //$hpayment->nota = $request->get('nota')[$i];
+            $hpayment->save();
         }
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
 
         #ahora hay que traer de la base de datos lo que se acaba de guardar
         $payments = payments::where('order_id', $request->order_id)->get();
         $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get();
-        
-        return view('internal_orders.store_payment', compact(
-            'CompanyProfiles',
-            'InternalOrders',
-            'Customers',
-            'Sellers',
-            'CustomerShippingAddresses',
-            'Coins',
-            'Items',
-            'Authorizations',
-            'Subtotal',
-            'actualized',
-            'nRows',
-            'payments',
-            'abonos',
-        ));
+        $hpayments = historical_payments::where('order_id', $request->order_id)->get();
+        //return view('internal_orders.store_payment', compact(
+            //'CompanyProfiles','InternalOrders','Customers','Sellers','CustomerShippingAddresses','Coins',
+            //'Items','Authorizations','Subtotal','actualized','nRows','payments',
+            //'hpayments','abonos',));
+            return $this->show($InternalOrders->id);
     }
 
     public function pay_redefine(Request $request)
@@ -499,14 +514,14 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($request->customerAdressID);
         $Coins = Coin::find($request->coinID);
         $Items = Item::where('internal_order_id', $request->order_id)->get();
-        $correcto='';
+        $correcto=''; 
         $Subtotal = $request->subtotal;
         $nRows = $request->rowcount;
         $actualized='';
         $old_payments = payments::where('order_id', $request->order_id)
         ->where('status','por cobrar')
         ->delete();
-        for($i=0; $i < $nRows; $i++) {
+        for($i=1; $i < $nRows; $i++) {
              
             $this_payment= new payments(); 
             $this_payment->order_id = $request->order_id;
@@ -514,14 +529,16 @@ class InternalOrderController extends Controller
             $this_payment->percentage = $request->get('porcentaje')[$i];
             $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
             $this_payment->date = $request->get('date')[$i];
-            $this_payment->nota = $request->get('nota')[$i];
+          //$this_payment->nota = $request->get('nota')[$i];
             $this_payment->save();
         }
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
 
         #ahora hay que traer de la base de datos lo que se acaba de guardar
         $payments = payments::where('order_id', $request->order_id)->get();
+        $hpayments = historical_payments::where('order_id', $request->order_id)->get();
         $abonos = payments ::where('status','pagado')->where('order_id', $request->order_id)->get();
+        
         
         return view('internal_orders.store_payment', compact(
             'CompanyProfiles',
@@ -536,6 +553,7 @@ class InternalOrderController extends Controller
             'actualized',
             'nRows',
             'payments',
+            'hpayments',
             'abonos',
         ));
     }
@@ -544,6 +562,7 @@ class InternalOrderController extends Controller
         $id = $request->order_id;
         //$InternalOrders = InternalOrder::find($id);
         $payments = payments::where('order_id', $id)->get();
+        $hpayments = historical_payments::where('order_id', $id)->get();
         $npagos = $payments->count();
 
 
@@ -570,6 +589,7 @@ class InternalOrderController extends Controller
                 'Subtotal',
                 'actualized',
                 'payments',
+                'hpayments',
                 'abonos',
             ));
             

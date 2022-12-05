@@ -220,14 +220,14 @@
             @if($InternalOrders->status == 'autorizado')
             <br><br><br><br><br>
                         <br><div>PEDIDO 100% AUTORIZADO</div><br>
-                         
+                                         <!--
                                         <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">
                                             @csrf                               
                                             <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id }}"/>
                                             <button type="submit" class="btn btn-green">
                                                 <i class="fa-solid fa-percent items-center fa-2x"></i> &nbsp; Porcentaje de Avances
                                             </button>
-                                        </form>
+                                        </form>-->
 
                     @else 
                     <div>FALTAN AUTORIZACIONES</div>

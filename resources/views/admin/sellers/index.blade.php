@@ -18,22 +18,18 @@
             </div>
             <div class="w-100">&nbsp;</div>
             <div class="col-sm-12 table-responsive">
-                <table class="table tablesellers table-striped text-xs font-medium">
+                <table class="table  table-striped text-xs font-medium">
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Móviil</th>
-                            <th>Tel. Of.</th>
-                            <th>Ext.</th>
+                            
+                            
                             <th>Email</th>
                             <th>Estado</th>
                             <th>Municipio</th>
-                            <th>Colonia</th>
-                            <th>Calle</th>
-                            <th>Exterior</th>
-                            <th>Interior</th>
-                            <th>CP</th>
+                           
                             <th></th>
                         </tr>
                     </thead>
@@ -43,16 +39,9 @@
                             <td>{{$row->id}}</td>
                             <td>{{$row->seller_name}}</td>
                             <td>{{$row->seller_mobile}}</td>
-                            <td>{{$row->seller_office_phone}}</td>
-                            <td>{{$row->seller_office_phone_ext}}</td>
                             <td>{{$row->seller_email}}</td>
                             <td>{{$row->seller_state}}</td>
                             <td>{{$row->seller_city}}</td>
-                            <td>{{$row->seller_suburb}}</td>
-                            <td>{{$row->seller_street}}</td>
-                            <td>{{$row->seller_outdoor}}</td>
-                            <td>{{$row->seller_intdoor}}</td>
-                            <td>{{$row->seller_zip_code}}</td>
                             <td class="w-10">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">

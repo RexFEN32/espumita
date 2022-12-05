@@ -70,6 +70,62 @@
   </tbody>
 </table>
 
+
+<br><br>
+<h1 ><span class="badge badge-secondary" style="font-size : 19px; align-self: start;">Derechos Adquiridos PI: {{$InternalOrders->invoice}} <br>Convenio Inicial </span></h1>
+
+
+<table class="table table-striped">
+  <thead class="thead">
+    <tr>
+      <th scope="col">Entregable</th>
+      <th > % Negociado</th>
+      <th scope="col">Monto sin IVA</th>
+      <th scope="col">IVA</th>
+      <th scope="col">TOTAL</th>
+      <th scope="col">Promesa de Pago </th>
+      <th scope="col"># Dias </th>
+      <th scope="col"># Semanas </th>
+
+    </tr>
+  </thead>
+  <tbody>
+  @foreach ($hpayments as $row)
+
+
+  @php
+{{$datetime1 = new DateTime($row->date);
+  $datetime2 = new DateTime("2022-1-1");
+  $dias = $datetime1->diff($datetime2)->format('%a');}}
+@endphp
+                            <tr class="text-center">
+                                <td>  {{ $row->concept }}</td>
+                                <td>{{ $row->percentage }} %</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->percentage * $Subtotal * 0.01)}}</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->percentage * $Subtotal *0.0016) }}</td>
+                                <td>{{$Coins -> symbol}} {{number_format( $row->amount )}}</td>
+                                <td>{{ $row->date }}</td>
+                                <td>{{$dias}}</td>
+                                <td>{{(int)($dias / 7)}}</td>
+                      
+                                
+                            </tr>
+                            @endforeach
+                            <tr >
+                            <td> </td>
+    <th scope="row">TOTAL: </th>
+      
+      <td style="background-color:#A6ADBC">{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ number_format($Subtotal*0.16)}}</td>
+      <td style="background-color:#A6ADBC"> {{$Coins -> symbol}} {{ number_format($Subtotal*1.16)}}</td>
+    </tr>
+   
+  </tbody>
+</table>
+<br><br>
+
+
+<h1 ><span class="badge badge-secondary" style="font-size : 19px; align-self: start;">Derechos adquiridos PI: {{$InternalOrders->invoice}}  <br>Modificado </span></h1>
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data">
 @csrf
 <x-jet-input type="hidden" name="order_id" value=""/>
@@ -142,7 +198,7 @@
                                         </div>
     <div class ="col">@can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $InternalOrders->id)}}">
-                                            <i class="fa-solid fa-key btn btn-blue ">Autorizar</i></span>
+                                            <i class="fa-solid fa-eye btn btn-blue ">Ver Detalles</i></span>
                                         </a>
                                         @endcan</div>
   </div>

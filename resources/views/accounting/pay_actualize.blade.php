@@ -59,22 +59,109 @@
                 
                 @if($pay -> status == 'por cobrar')
                  
-                 <h1>Pago pendiente</h1>
-                 El cliente ya realizó el pago?
+                 <h1>Datos de la factura:</h1>
+
+                <div class="row">
+                    <div class="col ">
+                        <div class="form-group">
+                            <x-jet-label value="* Numero de Factura" />
+                            <x-jet-input type="number" name="nfactura"  value="{{old('customer_street')}}"/>         
+                        </div>
+                        <div class="col">
+                        <div class="form-group">
+                            <x-jet-label value="Numero de comprobante" />
+                            <x-jet-input type="number" name="ncomp"  value="{{old('customer_street')}}"/>         
+                        </div>
+                        
+                        <div class="form-group">
+                            <x-jet-label value="Moneda" />
+                            <x-jet-input type="text" name="moneda" value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                        
+                         </div>
+                         <div class="form-group">
+                            <x-jet-label value="Fecha" />
+                            <x-jet-input type="date" name="fecha_factura" value="{{old('customer_street')}}"/>         
+                        
+                         </div><div class="form-group">
+                            <x-jet-label value="* Importe total (IVA incluido)" />
+                            <x-jet-input type="text" name="importe_total" value="{{old('customer_street')}}"/>         
+                        
+                         </div><div class="form-group">
+                            <x-jet-label value="* Porcentaje parcial" />
+                            <x-jet-input type="text" name="porcentaje_parcial" value="{{old('customer_street')}}"/>         
+                        
+                         </div><div class="form-group">
+                            <x-jet-label value="* Tipo de cambio" />
+                            <x-jet-input type="text" name="tipo_cambio" value="{{old('customer_street')}}"/>         
+                        
+                         </div><div class="form-group">
+                            <x-jet-label value="* Importe Acumulado" />
+                            <x-jet-input type="text" name="importe_acumulado" value="{{old('customer_street')}}"/>         
+                        
+                         </div><div class="form-group">
+                            <x-jet-label value="* Porcentaje de pago acumulado" />
+                            <x-jet-input type="number" name="porcentaje_acumulado" value="{{old('customer_street')}}"/>%         
+                        
+                         </div>
+                    
+                         <br>
                 <br>
+
+
                 Ingresa su comprobante
                 <br>
-                <br>
-                <br>
                 <input type="file" name="comprobante" id="comp" onchange="mostrar()">
+                <br><br>
+                <div class="form-group" id="pass"  style="display: none">
+                            
+                            <x-jet-label value="* Firma de quien captura:  " />
+                            <x-jet-input type="password" name="customer_street" value="{{old('customer_street')}}"/>         
+                         </div>
+                         <br>
                 <button   type="submit" class="btn btn-green mb-2" id="btn"  onclick="guardar()" style="display: none">
                 <i class="fa-solid fa-usd fa-2x" ></i>
+                
                          &nbsp; &nbsp;
                 <p>Marcar como Pagado</p></button>
-                @else
+                
+                     
 
+                </div>
+                         
+                </form>
+                @else
+               
                 <h1 style ="color : green; font-size: 30px" >Pago completado</h1>
               <br>
+              <br>
+              <table>
+                <tr>
+                    <th>Numero <br> de factura</th> 
+                    <th>Numero de <br> comprobante</th>
+                     <th>Moneda</th>
+                    <th>Fecha</th>
+                    <th>Importe <br>(IVA incluido)</th>
+                    <th>% del Pago <br> Parcial</th>
+                    <th>Tipo de <br> Cambio</th>
+                    <th>Importe <br> acumulado</th>
+                    <th>% de Pago Acumulado</th>
+
+                </tr>
+                <tbody>
+                    <tr>
+                        <td> {{$pay->nfactura}}</td>
+                        <td>{{$pay->ncomp}}</td>
+                        <td>{{$pay->moneda}}</td>
+                        <td>{{$pay->fecha_factura}}</td>
+                        <td>{{number_format($pay->importe_total)}}</td>
+                        <td>{{$pay->porcentaje_parcial}}</td>
+                        <td>{{$pay->tipo_cambio}}</td>
+                        <td> {{ number_format($pay->importe_acumulado)}}</td>
+                        <td>{{$pay->porcentaje_acumulado}}</td>
+                    </tr>
+                </tbody>
+              </table>
+              <br><br><br>
              <button type="button" onclick = "openPDF()"  class="btn btn-blue" > 
              <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
              
@@ -85,8 +172,7 @@
              <button type="button" ><span class="badge badge-pill badge-danger" style="font-size : 20px"> Invalidar pago</span></button>
               </a></div>
                 @endif
-                                
-                </form>
+                       
                 
             </div>
          <br><br>
@@ -112,6 +198,7 @@ inFile.addEventListener("change", mostrar);
 
 function mostrar(){
     document.getElementById("btn").style.display="flex";
+    document.getElementById("pass").style.display="flex";
 }
 
 function openPDF(){

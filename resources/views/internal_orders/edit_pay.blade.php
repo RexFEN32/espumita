@@ -51,9 +51,9 @@
     </tr>
   </tbody>
   
-</table>{{$npagos-$npagados}}
+</table>
                     <br><br>
-                    {{$pe}}
+                    
 <p style ="font-size:250%;">Ingrese los porcentajes de avance</p>
 <br><br>
 <form action="{{ route('internal_orders.pay_redefine')}}" method="POST" enctype="multipart/form-data" id="form1">
@@ -64,25 +64,34 @@
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
-<x-jet-input type="hidden" name="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="subtotal" id="subtotal" value="{{$InternalOrders->subtotal}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
+
+
 <table class="table table-striped" name="tabla1" id="tabla1">
   <thead class="thead">
     <tr>
       <th scope="col">Entregable</th>
       <th scope="col">% negociado</th>
+      <th scope="col">Cantidad</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Notas</th>
+      <th scope="col">Concepto</th>
     </tr>
   </thead>
   <tbody>
+  @php
+      $aux_count=$npagados+1;
+      @endphp
   @foreach($pagados as $row)
      <tr>
-        <td> {{$row->concept}}</td>
+        <td> PAGO {{$aux_count}}</td>
         <td> % {{$row->percentage}}</td>
         <td> {{$row->date}}</td>
         <td> {{$row->nota}}</td>
      </tr>
+     @php
+      $aux_count=$aux_count+1;
+      @endphp
      @endforeach
      
 
@@ -90,12 +99,13 @@
      @foreach($no_pagados as $row)
      <tr>
         <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
-        <td> <input type='number' min='0' max='100' step='5'  style='width: 50%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}"></td>
+        <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}">%</td>
+        <td>{{$Coins -> symbol}} <span id="{{'R'.$aux_count}}" ></span> </td>
         <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}" value = "{{$row->date}}" id="{{'D'.$aux_count}}"></td>
         <td> <input type='text' style='width: 50%;' value = "{{$row->nota}}" name="{{'nota['.$aux_count.']'}}"></td>
         <td><button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button></td>
-        <td>{{'c'.$aux_count}}</td>
-     </tr>
+        <td>{{$aux_count}}</td>
+      </tr>
      @php
 $aux_count=$aux_count+1;
 @endphp
@@ -110,7 +120,7 @@ $aux_count=$aux_count+1;
     </tr>
     </tbody>
 </table>
-
+     
 
       <td> <span><button type="button" onclick="myFunction()"  class="btn btn-blue mb-2"> </span>
       <i class="fa fa-plus" ></i>
@@ -129,8 +139,9 @@ $aux_count=$aux_count+1;
 
                 </div>
                 </form>
-                
-                
+                <span id="result" ></span>
+                <input type="text" id="input"> 
+
 </div>
 
 @stop
@@ -148,12 +159,33 @@ $aux_count=$aux_count+1;
 @if ($actualized == 'NO')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_incorrect.js') }}"></script>
 @endif
+<script>
+  P0.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R0.innerHTML =parseInt( parseInt(P0.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
 
+<script>
+  P1.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R1.innerHTML =parseInt( parseInt(P1.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
 
+<script>
+  P2.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R2.innerHTML =parseInt( parseInt(P2.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
 
 <script>
 function myFunction() {
-  var count= document.getElementById("rowcount").value;
+  var count= parseInt(document.getElementById("rowcount").value)+1;
   console.log(count);
   var table = document.getElementById("tabla1");
   var row = table.insertRow(count);
@@ -162,11 +194,13 @@ function myFunction() {
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
   cell1.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
-  cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
-  cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
-  cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value="+count+" style='width: 70%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
+  cell3.innerHTML = "<span  id='R"+count+"'></span>";
+  cell4.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
+  cell5.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
+  cell6.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   count ++;
   document.getElementById("rowcount").value = count;
   console.log(count);
@@ -191,7 +225,7 @@ $("table").on("click", "#deleteRow", function (event) {
       console.log(count);
       var pe=document.getElementById("pe").value;
       console.log(pe);
-      for (var i = 0; i < count; i++) {
+      for (var i = 1; i < count; i++) {
         console.log(i);
       var p=document.getElementById("P"+i).value;
       console.log(p);
@@ -212,6 +246,7 @@ $("table").on("click", "#deleteRow", function (event) {
         alert("Fecha Vacía");
       }
       }
+      console.log(total);
       console.log(total);
       if (total != pe) {
       alert("Los porcentajes no suman 100%");

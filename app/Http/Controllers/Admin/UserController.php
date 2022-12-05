@@ -76,13 +76,15 @@ class UserController extends Controller
         $user_id = $id;
 
         $roles = Role::pluck('name', 'name')->all();
-
+        $Zonas = Zones::all();
+       
         $usuarioRole = $usuario->roles->pluck('name', 'name')->all();
 
         return view('admin.users.show', compact(
             'usuario',
             'roles',
             'usuarioRole',
+            'Zonas'
         ));
     }
 

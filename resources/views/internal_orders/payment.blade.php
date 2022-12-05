@@ -57,12 +57,12 @@
 <br><br>
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
-<x-jet-input type="hidden" name="rowcount"  id="rowcount" value=0/>
+<x-jet-input type="hidden" name="rowcount"  id="rowcount" value={{$npagos}}/>
 <x-jet-input type="hidden" name="customerID"   value="{{$InternalOrders->customer_id}}" />
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
-<x-jet-input type="hidden" name="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="subtotal" id="subtotal" value="{{$InternalOrders->subtotal}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
 <x-jet-input type="hidden" name="" value=0/>
 <table class="table table-striped" name="tabla1" id="tabla1">
@@ -70,11 +70,38 @@
     <tr>
       <th scope="col">Entregable</th>
       <th scope="col">% negociado</th>
+      <th scope="col">cantidad</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Notas</th>
+      <th scope="col">Concepto</th>
     </tr>
   </thead>
   <tbody>
+   
+   @for ($i = 1; $i <= $npagos; $i++)
+    
+   @php
+      $aux_count=$aux_count+1;
+      @endphp
+    
+    <tr>
+        <td>{{'PAGO '.$aux_count}}</td>
+        <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}"  id="{{'P'.$aux_count}}">%</td>
+        <td> {{$Coins -> symbol}}<span id="{{'R'.$aux_count}}" ></span> </td>
+        @if($i==1)
+        @php
+    $fecha = new DateTime($InternalOrders->reg_date);
+    @endphp
+    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value="{{$fecha->format('Y-m-d');}}"></td>
+        
+    @else
+    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value=""></td>
+         @endif
+        <td> <input type='text' style='width: 50%;'  name="{{'concepto['.$aux_count.']'}}" id="{{'C'.$aux_count}}"onkeyup="javascript:this.value=this.value.toUpperCase();"></td>
+        
+     </tr>
+      
+
+      @endfor
     <tr >
     <th scope="row">TOTAL: </th>
       
@@ -86,11 +113,11 @@
     </tbody>
 </table>
 
-
+<!--
       <td> <span><button type="button" onclick="myFunction()"  class="btn btn-blue mb-2"> </span>
       <i class="fa fa-plus" ></i>
       &nbsp; &nbsp;
-      <p>Agregar Concepto</p></button></td>
+      <p>Agregar Concepto</p></button></td>-->
       
   
     <br>
@@ -124,48 +151,58 @@
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_incorrect.js') }}"></script>
 @endif
 
-
+<script>
+  P5.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R5.innerHTML =parseInt( parseInt(P5.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
 
 <script>
-function myFunction() {
-  var count= document.getElementById("rowcount").value;
-  count ++;
-  var table = document.getElementById("tabla1");
-  var row = table.insertRow(count);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-  cell1.innerHTML ="  <input type='text' name='concepto["+count+"]'  id='c"+count+"'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value=5 style='width: 50%;' name='porcentaje["+count+"]' id='p"+count+"'> %";
-  cell3.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='d"+count+"'>";
-  cell4.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
-  cell5.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
-  
-  document.getElementById("rowcount").value = count;
-  console.log(count);
-}
-$("table").on("click", "#deleteRow", function (event) {
-        $(this).closest("tr").remove();
-        var count= document.getElementById("rowcount").value;
-        count = count -0.5;
-        document.getElementById("rowcount").value = count;
-        console.log(count);
-    });
+  P1.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R1.innerHTML =parseInt( parseInt(P1.value)*total*0.01).toLocaleString('en-US');
+  };
+</script>
 
+<script>
+  P3.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R3.innerHTML =parseInt( parseInt(P3.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
+<script>
+  P4.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R4.innerHTML =parseInt( parseInt(P4.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
+<script>
+  P2.oninput = function() {
+    total = parseInt(document.getElementById('subtotal').value)*1.16;
+    console.log(total)
+    R2.innerHTML =parseInt( parseInt(P2.value)*total*0.01+1).toLocaleString('en-US');
+  };
+</script>
 
+<script>
     function guardar() {
       var total=parseInt(0);
-      var count= document.getElementById("rowcount").value;
+      console.log("todo bien");
+      var count= parseInt("{{$npagos}}")
       var myForm = document.forms.form1;
       var myControls = myForm.elements['porcentaje'];
       
       for (var i = 1; i <= count; i++) {
       console.log(i);
-      var p=document.getElementById("p"+i).value;
-      var c=document.getElementById("c"+i).value;
-      var d=document.getElementById("d"+i);
+      var p=document.getElementById("P"+i).value;
+      console.log("todo bien");
+      var c=document.getElementById("C"+i).value;
+      var d=document.getElementById("D"+i);
       console.log(c)
       //var campo = $('#id_del_input').val();
       total=total+parseInt(p);

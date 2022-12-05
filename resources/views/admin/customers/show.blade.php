@@ -121,6 +121,7 @@
                 <table class="table tablemembers table-responsive table-striped">
                     <thead>
                         <tr>
+                            <th>Clave</th>
                             <th>Nombre</th>
                             <th>Teléfono</th>
                             <th>Email</th>
@@ -130,6 +131,7 @@
                     <tbody>
                         @foreach ($Contacts as $row)
                             <tr>
+                                <td>{{$row->id}}</td>
                                 <td>{{$row->customer_contact_name}}</td>
                                 <td>{{$row->customer_contact_mobile}}</td>
                                 <td>{{$row->customer_contact_email}}</td>

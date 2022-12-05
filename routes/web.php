@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('payment/edit/{id}', [InternalOrderController::class, 'payment_edit'])->name('internal_orders.payment_edit');
     Route::get('pay/{id}', [PaymentsController::class, 'pay_actualize'])->name('payments.pay_actualize');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
-    Route::get('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');
+    Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');
     Route::post('customer/guardar_contacto', [CustomerController::class, 'store_contact'])->name('customers.store_contact');
 
     Route::get('/foo', function () {

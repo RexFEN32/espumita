@@ -18,22 +18,19 @@
             </div>
             <div class="w-100">&nbsp;</div>
             <div class="col-sm-12 table-responsive">
-                <table class="table tablecustomers table-striped text-xs font-medium">
+                
+            <table class="table  table-striped text-xs font-medium">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Razón Socail</th>
+                            
+                            <th>Clave</th>
+                            <th>Razón Social</th>
                             <th>RFC</th>
                             <th>Estado</th>
                             <th>Municipio</th>
-                            <th>Colonia</th>
-                            <th>Calle</th>
-                            <th>Exterior</th>
-                            <th>Interior</th>
-                            <th>CP</th>
                             <th>Email</th>
                             <th>Teléfono</th>
-                            <th></th>
+                            <th>-&nbsp;&nbsp;&nbsp; </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,11 +41,6 @@
                             <td>{{$row->customer_rfc}}</td>
                             <td>{{$row->customer_state}}</td>
                             <td>{{$row->customer_city}}</td>
-                            <td>{{$row->customer_suburb}}</td>
-                            <td>{{$row->customer_street}}</td>
-                            <td>{{$row->customer_outdoor}}</td>
-                            <td>{{$row->customer_intdoor}}</td>
-                            <td>{{$row->customer_zip_code}}</td>
                             <td>{{$row->customer_email}}</td>
                             <td>{{$row->customer_telephone}}</td>
                             <td class="w-5">

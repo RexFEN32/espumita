@@ -96,6 +96,17 @@ class PaymentsController extends Controller
         $comp = $request->comprobante;
         $pay = payments::find($id);
         $pay->status ="pagado";
+        $pay->nfactura=$request->nfactura;
+        $pay->ncomp=$request->ncomp;
+        $pay->fecha_factura=$request->fecha_factura;
+        $pay->importe_total=$request->importe_total;
+        $pay->moneda=$request->moneda;
+        $pay->tipo_cambio=$request->tipo_cambio;
+        $pay->porcentaje_parcial=$request->porcentaje_parcial;
+        $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
+        $pay->importe_acumulado=$request->importe_acumulado;
+        
+
         $pay->save();
         $order = DB::table('Internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')

@@ -23,9 +23,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                            
+                                     
+                                     <div class="col-sm-3 col-xs-12">   
+                                     <div class="form-group">
+                                        <x-jet-label value="* Fecha de Emisión " />
+                                        <x-jet-input type="date" name="reg_date" required class="w-full text-xs" value="{{ $hoy->format('Y-m-d') }}"/>
+                                        
+                                    </div>
+                                    </div>
                                 <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
-                                        <x-jet-label value="* Entrega del Pedido" />
+                                        <x-jet-label value="* Entrega de Equipo" />
                                         <x-jet-input type="date" name="date_delivery" required class="w-full text-xs" value="{{ old('date_delivery') }}"/>
                                         <x-jet-input-error for='date_delivery' />
                                     </div>
@@ -37,6 +46,7 @@
                                         <x-jet-input-error for='instalation_date' />
                                     </div>
                                 </div>
+                                
                                 <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="* Tipo de Moneda" />
@@ -106,7 +116,7 @@
                                     </div>
                                     <div class="form-group">
                                         <x-jet-label value="* Comision del Vendedor" />
-                                        <input type="number" name="comision" size="4"> %
+                                        <input type="number" name="comision" style='width: 10%;'> %
                                         <x-jet-input-error for='seller_id' />
                                     </div>
                                 </div>
