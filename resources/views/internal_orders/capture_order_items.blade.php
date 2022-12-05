@@ -70,7 +70,7 @@
                             <div class="row p-3">
                                 <div class="col-sm-12 text-right">
                                     <div class="form-group">
-                                        <span class="text-right font-bold text-xl">Subtotal: $ {{number_format($Subtotal,2)}}</span>
+                                        <span class="text-right font-bold text-lg">Subtotal: $ {{number_format($Subtotal,2)}}</span>
                                         <x-jet-input type="hidden" name="subtotal" class="w-flex text-xs" value="{{ $Subtotal }}"/>
                                     </div>
                                 </div>

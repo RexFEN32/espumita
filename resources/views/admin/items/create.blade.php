@@ -49,12 +49,12 @@
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Clave" />
-                                <x-jet-input type="text" name="code" class="w-full text-xs" value="{{old('code')}}"/>
+                                <x-jet-input type="text" name="code" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='code' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Descripción" />
-                                <textarea rows="4" name="description" class="w-full text-xs inputjet"></textarea>
+                                <textarea rows="4" name="description" class="w-full text-xs inputjet" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
                                 <x-jet-input-error for='description' />
                             </div>
                             <div class="form-group">

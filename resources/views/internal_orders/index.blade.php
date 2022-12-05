@@ -48,7 +48,9 @@
                                         </a>
                                         @endcan
                                     </div>
+                                    @if($row->status == 'CAPTURADO')
                                     <div class="col-6 text-center w-10">
+                                        
                                         @can('BORRAR PEDIDOS')
                                         <form class="DeleteReg" action="{{ route('internal_orders.destroy', $row->id) }}" method="POST">
                                             @csrf
@@ -58,7 +60,8 @@
                                             </button>
                                         </form>
                                         @endcan
-                                    </div>
+                                        
+                                    </div>@endif
                                     @if($row->status == 'autorizado')
                                     <div class="col-6 text-center w-10">
                                         <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">

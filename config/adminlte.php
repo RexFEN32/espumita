@@ -348,8 +348,9 @@ return [
             'route'  => 'payed_accounts',
             'can' => 'VER APLICACIONES DE PAGO',
         ],
+        
         [
-            'text' => 'Reportes',
+            'text' => 'REPORTES',
             'icon' => 'fa-solid fa fa-file fa-fw',
             
             'route'  => 'payed_accounts',

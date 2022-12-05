@@ -121,7 +121,7 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                        <span class="text-right font-bold text-xl">Subtotal: $ {{number_format($InternalOrders->subtotal,2)}}</span>
+                        <span class="text-right font-bold text-lg">Subtotal: $ {{number_format($InternalOrders->subtotal,2)}}</span>
                     </div>
                 </div>
                 <div class="col-sm-12 text-right">

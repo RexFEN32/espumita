@@ -25,17 +25,17 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <x-jet-label value="* Nombre o Razón Social" />
-                                <x-jet-input type="text" name="customer" class="w-full text-xs " value="{{old('customer')}}"/>
+                                <x-jet-input type="text" name="customer" class="w-full text-xs " value="{{old('customer')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Nombre Júridico" />
-                                <x-jet-input type="text" name="legal_name" class="w-full text-xs " value="{{old('customer')}}"/>
+                                <x-jet-input type="text" name="legal_name" class="w-full text-xs " value="{{old('customer')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='legal_name' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Nombre Corto" />
-                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{old('customer')}}"/>
+                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{old('customer')}}"/ onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 <x-jet-input-error for='alias' />
                             </div>
                             <div class="form-group">
@@ -64,27 +64,27 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <x-jet-label value="* Estado" />
-                                <x-jet-input type="text" name="customer_state" class="w-full text-xs " value="{{old('customer_state')}}"/>
+                                <x-jet-input type="text" name="customer_state" class="w-full text-xs " value="{{old('customer_state')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer_state' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Ciudad" />
-                                <x-jet-input type="text" name="customer_city" class="w-full text-xs " value="{{old('customer_city')}}"/>
+                                <x-jet-input type="text" name="customer_city" class="w-full text-xs " value="{{old('customer_city')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer_city' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Colonia" />
-                                <x-jet-input type="text" name="customer_suburb" class="w-full text-xs " value="{{old('customer_suburb')}}"/>
+                                <x-jet-input type="text" name="customer_suburb" class="w-full text-xs " value="{{old('customer_suburb')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer_suburb' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Calle" />
-                                <x-jet-input type="text" name="customer_street" class="w-full text-xs " value="{{old('customer_street')}}"/>
+                                <x-jet-input type="text" name="customer_street" class="w-full text-xs " value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer_street' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Número Exterior" />
-                                <x-jet-input type="text" name="customer_outdoor" class="w-full text-xs " value="{{old('customer_outdoor')}}"/>
+                                <x-jet-input type="text" name="customer_outdoor" class="w-full text-xs " value="{{old('customer_outdoor')}}" />
                                 <x-jet-input-error for='customer_outdoor' />
                             </div>
                             <div class="form-group">

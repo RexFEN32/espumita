@@ -98,13 +98,13 @@
 
      @foreach($no_pagados as $row)
      <tr>
-        <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
+        <td>PAGO {{$aux_count}}</td>
         <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}">%</td>
         <td>{{$Coins -> symbol}} <span id="{{'R'.$aux_count}}" ></span> </td>
         <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}" value = "{{$row->date}}" id="{{'D'.$aux_count}}"></td>
-        <td> <input type='text' style='width: 50%;' value = "{{$row->nota}}" name="{{'nota['.$aux_count.']'}}"></td>
+        
+        <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
         <td><button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button></td>
-        <td>{{$aux_count}}</td>
       </tr>
      @php
 $aux_count=$aux_count+1;
@@ -195,11 +195,11 @@ function myFunction() {
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
   var cell6 = row.insertCell(5);
-  cell1.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
+  cell5.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
   cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value="+count+" style='width: 70%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
   cell3.innerHTML = "<span  id='R"+count+"'></span>";
   cell4.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
-  cell5.innerHTML = "<input type='text' style='width: 50%;' name='nota["+count+"]'>";
+  cell1.innerHTML = "<input type='text' style='width: 50%;' value='PAGO "+count+"'>";
   cell6.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   count ++;
   document.getElementById("rowcount").value = count;
