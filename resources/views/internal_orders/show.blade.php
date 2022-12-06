@@ -121,7 +121,7 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                        <span class="text-right font-bold text-lg">Subtotal: $ {{number_format($InternalOrders->subtotal,2)}}</span>
+                        <span class="text-right font-bold text-md">Subtotal: $ {{number_format($InternalOrders->subtotal,2)}}</span>
                     </div>
                 </div>
                 <div class="col-sm-12 text-right">
@@ -165,20 +165,7 @@
                 </div>
                 <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
                      @foreach ($requiredSignatures as $firma)
-                     @if ($loop->first) @continue @endif
-
-                     @php
-{{$auth = DB::table('authorizations')
-    ->join('signatures', 'authorizations.id', '=', 'signatures.auth_id')
-    ->where('authorizations.id', $firma->auth_id)
-    ->first();
-    $puesto=" ";
-    if($firma->auth_id = 2)
-        $puesto = "gerente de ventas";
-    
-
-  }}
-@endphp
+       
 
                         <ul>
                             <li>
@@ -190,7 +177,7 @@
                                     @csrf
                                     <x-jet-input type="hidden" name="signature_id" value="{{$firma->id}}"/>
                                     <div class="col">
-                                        <span class="text-xs uppercase">Firma: {{$auth->job}}</span><br>
+                                        <span class="text-xs uppercase">Firma: {{$firma->job}}</span><br>
                                     </div>
 
                                     <div class="row">
@@ -204,7 +191,7 @@
                                     </form>
                                     @else
 
-                                    <span style="font-size: 17px"> <i style="color : green"  class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$auth->job}} </span>
+                                    <span style="font-size: 17px"> <i style="color : green"  class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$firma->job}} </span>
                                     <br><br><br><br>
                                     @endif
                                 </div>

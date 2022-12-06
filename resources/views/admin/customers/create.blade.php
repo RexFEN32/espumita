@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Nombre Corto" />
-                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{old('customer')}}"/ onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{old('customer')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='alias' />
                             </div>
                             <div class="form-group">

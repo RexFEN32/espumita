@@ -217,17 +217,35 @@ class InternalOrderController extends Controller
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
             
-            foreach($Authorizations as $auth){
-                $c=$auth->clearance_level;
-                if($c<$request->subtotal)//entonces requiere esa firma
-                {
-                   $requiredSignature=new signatures();
-                   $requiredSignature->order_id = $InternalOrders->id;
-                   $requiredSignature->auth_id = $auth->id;
-                   $requiredSignature->save();
-                }
-
-            }
+            //foreach($Authorizations as $auth){
+                //$c=$auth->clearance_level;
+              //  if($c<$request->subtotal)//entonces requiere esa firma
+               // {$requiredSignature=new signatures();  $requiredSignature->order_id = $InternalOrders->id;
+                 //  $requiredSignature->auth_id = $auth->id;$requiredSignature->save();}
+                 $Signature=new signatures();
+                 $Signature->order_id = $InternalOrders->id;
+                 $Signature->auth_id = 2;
+                 $Signature->save();
+                 if($InternalOrders->subtotal >= 500000){
+                         $Signature=new signatures();
+                         //$Signature->order_id = $InternalOrders->id;
+                         //$Signature->auth_id = 5;
+                         //$Signature->save(); 
+                         $Signature->order_id = $InternalOrders->id;
+                         $Signature->auth_id = 3;
+                         $Signature->save(); 
+                         $Signature=new signatures();
+                         $Signature->order_id = $InternalOrders->id;
+                         $Signature->auth_id = 4;
+                         $Signature->save(); 
+                      }
+                 if($InternalOrders->subtotal >= 5000000){
+                         $Signature=new signatures();
+                         $Signature->order_id = $InternalOrders->id;
+                         $Signature->auth_id = 6;
+                         $Signature->save(); 
+                      }
+     
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
@@ -279,17 +297,29 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
-            foreach($Authorizations as $auth){
-                $c=$auth->clearance_level;
-                if($c<$request->subtotal)//entonces requiere esa firma
-                {
-                   $requiredSignature=new signatures();
-                   $requiredSignature->order_id = $InternalOrders->id;
-                   $requiredSignature->auth_id = $auth->id;
-                   $requiredSignature->save();
-                }
-
-            }
+            $Signature=new signatures();
+            $Signature->order_id = $InternalOrders->id;
+            $Signature->auth_id = 2;
+            $Signature->save();
+            if($InternalOrders->subtotal >= 500000){
+                    $Signature=new signatures();
+                    //$Signature->order_id = $InternalOrders->id;
+                    //$Signature->auth_id = 5;
+                    //$Signature->save(); 
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 3;
+                    $Signature->save(); 
+                    $Signature=new signatures();
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 4;
+                    $Signature->save(); 
+                 }
+            if($InternalOrders->subtotal >= 5000000){
+                    $Signature=new signatures();
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 6;
+                    $Signature->save(); 
+                 }
 
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
@@ -331,11 +361,15 @@ class InternalOrderController extends Controller
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
         $Items = Item::where('internal_order_id', $id)->get();
-        $requiredSignatures = signatures::where('order_id',$id)->get();
+        $requiredSignatures = DB::table('authorizations')
+        ->join('signatures', 'authorizations.id', '=', 'signatures.auth_id')
+        ->where('signatures.order_id', $id)
+        ->select('signatures.*','authorizations.job')
+        ->get();
         $Subtotal = $InternalOrders->subtotal;
 
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-
+        
         return view('internal_orders.show', compact(
             'CompanyProfiles',
             'InternalOrders',

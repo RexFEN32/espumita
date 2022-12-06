@@ -119,6 +119,16 @@
                                         <input type="number" name="comision" style='width: 10%;'> %
                                         <x-jet-input-error for='seller_id' />
                                     </div>
+                                    <div class="form-group">
+                                        <x-jet-label value=" % Dgi" />
+                                        <input type="number" name="dgi" style='width: 10%;'> %
+                                        <x-jet-input-error for='seller_id' />
+                                    </div>
+                                    <div class="form-group">
+                                        <x-jet-label value="Otro" />
+                                        <input type="number" name="otro" style='width: 10%;'> %
+                                        <x-jet-input-error for='seller_id' />
+                                    </div>
                                 </div>
                             </div>
                             <div class="w-100"></div>
