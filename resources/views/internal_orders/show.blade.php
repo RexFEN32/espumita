@@ -222,7 +222,11 @@
                     <br><br><br>
                 </div>
                     <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();"> 
-                      
+                    <a href="{{ route('internal_orders.edit_order', $InternalOrders->id) }} " class="btn btn-green">
+                     <button type = "button" class="btn btn-green "> <i class="fas fa-edit"></i> </button>
+                                    </a></td>
+                                    
+                                    <button class="btn btn-green">Editar</button>
                     
   
         </div>

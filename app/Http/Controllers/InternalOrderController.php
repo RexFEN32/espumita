@@ -351,6 +351,29 @@ class InternalOrderController extends Controller
         }        
     }
 
+    public function edit_order($id){
+        $CompanyProfiles = CompanyProfile::first();
+        //$comp=$CompanyProfiles->id;
+        $InternalOrders = InternalOrder::find($id);
+        
+        $Customers = Customer::all();
+        $Sellers = Seller::all();
+        $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
+        $Coins = Coin::all();
+        $Items = Item::where('internal_order_id', $id)->get();
+        $hoy=now();
+        return view('internal_orders.edit_order', compact(
+                'CompanyProfiles',
+                'InternalOrders',
+                'Customers',
+                'Sellers',
+                'CustomerShippingAddresses',
+                'Coins',
+                'Items',
+                'hoy',
+        ));
+}
+
     public function show($id)
     {
         $CompanyProfiles = CompanyProfile::first();

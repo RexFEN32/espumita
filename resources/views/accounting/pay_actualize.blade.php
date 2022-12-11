@@ -73,7 +73,7 @@
                             <x-jet-input type="number" name="ncomp"  value="{{old('customer_street')}}"/>         
                         </div>
                         
-                        <div class="form-group">
+                       <!-- <div class="form-group">
                             <x-jet-label value="Moneda" />
                             <x-jet-input type="text" name="moneda" value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         
@@ -90,11 +90,8 @@
                             <x-jet-label value="* Porcentaje parcial" />
                             <x-jet-input type="text" name="porcentaje_parcial" value="{{old('customer_street')}}"/>         
                         
-                         </div><div class="form-group">
-                            <x-jet-label value="* Tipo de cambio" />
-                            <x-jet-input type="text" name="tipo_cambio" value="{{old('customer_street')}}"/>         
-                        
-                         </div><div class="form-group">
+                         </div>
+                         <div class="form-group">
                             <x-jet-label value="* Importe Acumulado" />
                             <x-jet-input type="text" name="importe_acumulado" value="{{old('customer_street')}}"/>         
                         
@@ -102,7 +99,7 @@
                             <x-jet-label value="* Porcentaje de pago acumulado" />
                             <x-jet-input type="number" name="porcentaje_acumulado" value="{{old('customer_street')}}"/>%         
                         
-                         </div>
+                         </div>-->
                     
                          <br>
                 <br>
@@ -164,6 +161,8 @@
               <br><br><br>
              <button type="button" onclick = "openPDF()"  class="btn btn-blue" > 
              <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
+             <button type="button" onclick = "openXLSX()"  class="btn btn-blue" > 
+             <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver Reporte  </button>
              
              <br><br><br> <br>
              <div class="col" style="background-color : #d9d9d9 ; width : 220px ; align-self: center; ">  
@@ -204,6 +203,8 @@ function mostrar(){
 function openPDF(){
 window.open("{{ asset('storage/'.$pay->id.'.pdf') }}");
 }
-   
+function openXLSX(){
+window.open("{{ asset('storage/report/test-'.$order->id.'.xlsx') }}");
+}   
 </script>
 @stop
