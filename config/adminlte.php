@@ -353,7 +353,7 @@ return [
             'text' => 'REPORTES',
             'icon' => 'fa-solid fa fa-file fa-fw',
             
-            'route'  => 'payed_accounts',
+            'route'  => 'reportes',
             'can' => 'VER APLICACIONES DE PAGO',
         ],
     ],

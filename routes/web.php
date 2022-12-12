@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('temp_items', TempItemController::class);
     Route::resource('cuentas_cobrar', PaymentsController::class);
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
+    Route::get('reportes', [PaymentsController::class, 'reportes'])->name('reportes');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
@@ -41,6 +42,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('payment/{id}', [InternalOrderController::class, 'payment'])->name('internal_orders.payment');
     Route::post('payment/edit/{id}', [InternalOrderController::class, 'payment_edit'])->name('internal_orders.payment_edit');
     Route::get('pay/{id}', [PaymentsController::class, 'pay_actualize'])->name('payments.pay_actualize');
+    Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');
     Route::post('customer/guardar_contacto', [CustomerController::class, 'store_contact'])->name('customers.store_contact');

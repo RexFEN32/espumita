@@ -56,7 +56,29 @@ class PaymentsController extends Controller
             
         ));
     }
-    
+    public function reportes()
+    {
+        $InternalOrders = InternalOrder::All();
+        
+        
+        return view('accounting.reportes', compact(
+            'InternalOrders',
+            
+
+        ));
+    }
+    public function contraportada($id)
+    {
+        $process = new Process(['python','C:/report.py',$id]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $data = $process->getOutput();
+        return response()->download(public_path('storage/report/test-'.$id.'.xlsx'));
+        
+            
+    }
     public function pay_actualize($id)
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
@@ -123,7 +145,7 @@ class PaymentsController extends Controller
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));
         $url = "'/".$nombre_con_id."'";
-        $process = new Process(['python','C:/report.py',$id]);
+        $process = new Process(['python','C:/report.py',$order->id]);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
