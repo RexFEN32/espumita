@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class InternalOrder extends Model
 {
-    protected $table = 'internal_orders';
+    public $table = 'internal_orders';
     use HasFactory;
 }
