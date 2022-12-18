@@ -12,6 +12,11 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-sm">
                 
+                <div class="btn-group" role="group"  aria-label="Basic example">
+  <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
+  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Pedido</button>
+  <button type="button"class="btn btn-blue mb-2"  onclick="Fechas()">Fecha</button>
+</div>
                
                 <div class="col-sm-12 table-responsive">
 

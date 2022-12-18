@@ -350,13 +350,27 @@ return [
         ],
         
         [
-            'text' => 'REPORTES',
-            'icon' => 'fa-solid fa fa-file fa-fw',
-            
-            'route'  => 'reportes',
-            'can' => 'VER APLICACIONES DE PAGO',
+            'header' => '===============',
+            //'can' => 'Reportes',
         ],
-    ],
+        [
+            'text' => 'REPORTES',
+            'icon' => 'fa-solid fa-list fa-fw',
+            'submenu' => [
+                [
+                    'text' => ' CONTRAPORTADA',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'reportes.contraportada',
+                    //'can'  => 'VER ROLES',
+                ],
+                [
+                    'text' => ' CUENTAS POR CORBRAR (machote?)',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+        ],
+    ],],
 
     /*
     |--------------------------------------------------------------------------

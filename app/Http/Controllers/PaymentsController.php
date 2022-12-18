@@ -77,7 +77,17 @@ class PaymentsController extends Controller
         $data = $process->getOutput();
         return response()->download(public_path('storage/report/test-'.$id.'.xlsx'));
         
-            
+    }
+    public function cuentas_cobrar()
+    {
+        $process = new Process(['python','C:/report8.py']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $data = $process->getOutput();
+        return response()->download(public_path('storage/report/cuentas-por cobrar.xlsx'));
+        
     }
     public function pay_actualize($id)
     {
