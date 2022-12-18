@@ -83,7 +83,7 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
-        $order = DB::table('Internal_orders')
+        $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)
             ->where('internal_orders.status','=','autorizado')
@@ -103,7 +103,7 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
-        $order = DB::table('Internal_orders')
+        $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)
             ->select('internal_orders.*','customers.customer')
@@ -134,7 +134,7 @@ class PaymentsController extends Controller
         
 
         $pay->save();
-        $order = DB::table('Internal_orders')
+        $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)
             ->select('internal_orders.*','customers.customer')
