@@ -25,8 +25,8 @@ class InternalOrderController extends Controller
     public function index()
     {
         //$InternalOrders = vinternal_orders::all();
-        $InternalOrders = DB::table('Internal_orders')
-            ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        $InternalOrders = DB::table('customers')
+            ->join('Internal_orders', 'internal_orders.customer_id', '=', 'customers.id')
             ->join('sellers', 'internal_orders.seller_id','=','sellers.id')
             ->select('internal_orders.*','customers.customer', 'sellers.seller_name')
             ->orderBy('internal_orders.invoice', 'DESC')
