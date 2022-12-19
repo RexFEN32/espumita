@@ -155,15 +155,7 @@ class PaymentsController extends Controller
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));
         $url = "'/".$nombre_con_id."'";
-        $process = new Process(['python','C:/report.py',$order->id]);
-        $process->run();
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-    
-        $data = $process->getOutput();
-    
-       // dd($data);
+        
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
