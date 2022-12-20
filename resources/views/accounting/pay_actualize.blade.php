@@ -65,7 +65,7 @@
                     <div class="col ">
                         <div class="form-group">
                             <x-jet-label value="* Numero de Factura" />
-                            <x-jet-input type="number" name="nfactura"  value="{{old('customer_street')}}"/>         
+                            <x-jet-input type="text" name="nfactura"  value="{{old('customer_street')}}"/>         
                         </div>
                         <div class="col">
                         <div class="form-group">
@@ -73,11 +73,11 @@
                             <x-jet-input type="text" name="ncomp"  value="{{old('customer_street')}}"/>         
                         </div>
                         
-                       <!-- <div class="form-group">
-                            <x-jet-label value="Moneda" />
-                            <x-jet-input type="text" name="moneda" value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                        <div class="form-group">
+                            <x-jet-label value="tipo_cambio" />
+                            <x-jet-input type="number" name="tipo_cambio"  onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         
-                         </div>
+                        <!-- </div>
                          <div class="form-group">
                             <x-jet-label value="Fecha" />
                             <x-jet-input type="date" name="fecha_factura" value="{{old('customer_street')}}"/>         

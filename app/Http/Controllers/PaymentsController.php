@@ -137,7 +137,7 @@ class PaymentsController extends Controller
         //$pay->fecha_factura=$request->fecha_factura;
         //$pay->importe_total=$request->importe_total;
         //$pay->moneda=$request->moneda;
-        //$pay->tipo_cambio=$request->tipo_cambio;
+        $pay->tipo_cambio=$request->tipo_cambio;
         //$pay->porcentaje_parcial=$request->porcentaje_parcial;
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
