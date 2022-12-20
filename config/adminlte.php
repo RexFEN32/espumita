@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin/administrador',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -364,7 +364,37 @@ return [
                     //'can'  => 'VER ROLES',
                 ],
                 [
-                    'text' => ' CUENTAS POR CORBRAR (machote?)',
+                    'text' => ' CUENTAS POR CORBRAR',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' CONSECUTIVO DE PEDIDOS INTERNOS',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' FACTURA RESUMIDA',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' COMPROBANTE DE INGRESOS VENTAS',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' COMPROBANTE DE INGRESOS VENDEDOR',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'users.index',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' PEDIDOS INTERNOS',
                     'icon' => 'fa-solid fa-file fa-fw',
                     'route'  => 'users.index',
                     'can'  => 'VER USUARIOS',
