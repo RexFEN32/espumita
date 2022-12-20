@@ -350,7 +350,7 @@ return [
         ],
         
         [
-            'text' => 'INTERFAZ COI',
+            'text' => 'INTERFASE ASPEL COI',
             'icon' => 'fa-solid fa-money-check fa-fw',
             
             'route'  => 'payed_accounts',
