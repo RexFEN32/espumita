@@ -70,7 +70,7 @@
                         <div class="col">
                         <div class="form-group">
                             <x-jet-label value="Numero de comprobante" />
-                            <x-jet-input type="number" name="ncomp"  value="{{old('customer_street')}}"/>         
+                            <x-jet-input type="text" name="ncomp"  value="{{old('customer_street')}}"/>         
                         </div>
                         
                        <!-- <div class="form-group">
@@ -161,8 +161,6 @@
               <br><br><br>
              <button type="button" onclick = "openPDF()"  class="btn btn-blue" > 
              <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
-             <button type="button" onclick = "openXLSX()"  class="btn btn-blue" > 
-             <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver Reporte  </button>
              
              <br><br><br> <br>
              <div class="col" style="background-color : #d9d9d9 ; width : 220px ; align-self: center; ">  
