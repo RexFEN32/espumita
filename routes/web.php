@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('payment/edit/{id}', [InternalOrderController::class, 'payment_edit'])->name('internal_orders.payment_edit');
     Route::get('pay/{id}', [PaymentsController::class, 'pay_actualize'])->name('payments.pay_actualize');
     Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
+    Route::get('contraportadaPDF/{id}', [PaymentsController::class, 'contraportadaPDF'])->name('payments.contraportadaPDF');
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');

@@ -58,9 +58,11 @@ class PaymentsController extends Controller
     }
     public function reportes()
     {
-        $InternalOrders = InternalOrder::All();
-        
-        
+        $InternalOrders =  DB::table('internal_orders')
+        ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        ->join('coins', 'internal_orders.coin_id','=','coins.id')
+        ->select('internal_orders.*','customers.customer','coins.symbol')
+        ->get();
         return view('accounting.reportes', compact(
             'InternalOrders',
             
@@ -76,7 +78,16 @@ class PaymentsController extends Controller
         }
         $data = $process->getOutput();
         return response()->download(public_path('storage/report/test-'.$id.'.xlsx'));
-        
+    }
+    public function contraportadaPDF($id)
+    {
+        $process = new Process(['python','C:/reportPDF.py',$id]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $data = $process->getOutput();
+        return response()->download(public_path('storage/report/test-'.$id.'.pdf'));
     }
     public function cuentas_cobrar()
     {

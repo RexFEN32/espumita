@@ -350,6 +350,13 @@ return [
         ],
         
         [
+            'text' => 'INTERFAZ COI',
+            'icon' => 'fa-solid fa-money-check fa-fw',
+            
+            'route'  => 'payed_accounts',
+            'can' => 'VER APLICACIONES DE PAGO',
+        ],
+        [
             'header' => '===============',
             //'can' => 'Reportes',
         ],

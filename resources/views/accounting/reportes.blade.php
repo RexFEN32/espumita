@@ -10,7 +10,7 @@
 <div class="container-flex m-1 bg-gray-300 shadow-lg rounded-lg">
         <div class="row p-3 m-2 rounded-lg shadow-xl bg-white">
             <div class="row p-4">
-                <div class="col-sm-12 text-center font-bold text-sm">
+                <div class="col-sm-12 text-center font-bold text-lg">
                 
                 <div class="btn-group" role="group"  aria-label="Basic example">
   <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
@@ -27,7 +27,7 @@
       <th > Pedido</th>
       <th scope="col">Cantidad</th>
       <th scope="col">---</th>
-      
+      <th scope="col">---</th>
 
     </tr>
   </thead>
@@ -35,15 +35,21 @@
   @foreach ($InternalOrders as $row)
                             <tr class="text-center">
                             
-                                <td> <p>Cliente de prueba 01</p></td>
+                                <td> <p>{{ $row->customer }}</p></td>
                                 
                                 <td> {{ $row->invoice }}</td>
                                 
-                                <td>{{ $row->total}} </td>
+                                <td>{{$row->symbol}} {{ number_format($row->total)}} </td>
                                
                                 <td>
                                 <a href="{{route('payments.contraportada',$row->id)}}">
-                                  <button class="button"> <span class="badge badge-success">Contraportada</span> </button>
+                                  <button class="button"> <span class="badge badge-success">Excel &nbsp; <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i></span> </button>
+                                  </a>  
+                               </td>
+                               
+                               <td>
+                                <a href="{{route('payments.contraportadaPDF',$row->id)}}">
+                                  <button class="button"> <span class="badge badge-danger">PDF &nbsp;<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
                                 
