@@ -52,6 +52,12 @@
                                   <button class="button"> <span class="badge badge-danger">PDF &nbsp;<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
+                               
+                               <td>
+                                <a href="{{route('payments.factura_resumida',$row->id)}}">
+                                  <button class="button"> <span class="badge badge-danger">factura! del poder infinito &nbsp;<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></span> </button>
+                                  </a>  
+                               </td>
                                 
                             </tr>
                             @endforeach

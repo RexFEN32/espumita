@@ -42,8 +42,11 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('payment/{id}', [InternalOrderController::class, 'payment'])->name('internal_orders.payment');
     Route::post('payment/edit/{id}', [InternalOrderController::class, 'payment_edit'])->name('internal_orders.payment_edit');
     Route::get('pay/{id}', [PaymentsController::class, 'pay_actualize'])->name('payments.pay_actualize');
+    //metodos para reportes... 8 reportes son, bueno 7, tecnicamente son 11
     Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
     Route::get('contraportadaPDF/{id}', [PaymentsController::class, 'contraportadaPDF'])->name('payments.contraportadaPDF');
+    Route::get('factura_resumida/{id}', [PaymentsController::class, 'factura_resumida'])->name('payments.factura_resumida');
+
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');
