@@ -179,6 +179,8 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
+        $orden= InternalOrder::find($pay->order_id);
+        $cliente = Customer::find($orden->customer_id);
         $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)
@@ -191,7 +193,8 @@ class PaymentsController extends Controller
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
-            'url'
+            'url',
+            'cliente'
         ));
     }
     
@@ -262,6 +265,7 @@ class PaymentsController extends Controller
             'pay',
             'order',
             'url',
+            'cliente'
         ));
     }
 

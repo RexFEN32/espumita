@@ -17,7 +17,7 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  @if($pay -> ncomp == NULL) por asignar @else NO. {{$pay->ncomp}} @endif
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  @if($cliente -> ncomp == NULL) por asignar @else NO. {{$cliente->ncomp}} @endif
                  </h1>
                             </td>
                         </tr>
@@ -68,7 +68,7 @@
                             <x-jet-label value="* Numero de Factura" />
                             <x-jet-input type="text" name="nfactura"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
-                        @if($pay -> ncomp == NULL)
+                        @if($cliente -> ncomp == NULL)
                         <div class="col">
                         <div class="form-group">
                             <x-jet-label value="Numero de comprobante" />
