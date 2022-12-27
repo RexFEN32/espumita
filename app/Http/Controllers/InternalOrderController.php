@@ -419,13 +419,14 @@ class InternalOrderController extends Controller
         $signature->save();
     }
     $required_signatures = signatures::where('order_id',$internal_order->id)->get();
-    $areAllSigns=1;
+    #$areAllSigns=0;
     $nSigns=$required_signatures->count();
-    foreach($required_signatures as $r){
-        if($r->status == 1){
-            $areAllSigns+=1;
-        }
-    }
+    $areAllSigns=$required_signatures->where('status',1)->count();
+    #foreach($required_signatures as $r){
+    #    if($r->status == 1){
+    #        $areAllSigns+=1;)
+    #    }
+    #}
     if($areAllSigns ==$nSigns){
     $internal_order->status = 'autorizado';}
     $internal_order->save();
