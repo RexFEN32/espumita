@@ -23,16 +23,11 @@ print(order_id)
 orden = pd.read_sql("select * from internal_orders where id="+str(order_id),cnx)
 cliente = pd.read_sql("select * from customers where id = "+str(orden["customer_id"].values[0]),cnx)
 moneda = pd.read_sql("select * from coins where id="+str(orden["coin_id"].values[0]),cnx)
-
-items = pd.read_sql("select * from items where id="+str(order_id),cnx)
 writer = pd.ExcelWriter("storage/report/factura_resumida"+str(id)+".xlsx", engine='xlsxwriter')
 
 df=thisAllPays[["date","order_id","created_at","updated_at","nfactura",
-"ncomp","date","date","date","moneda","moneda","tipo_cambio","amount","moneda","capturista","moneda","moneda","status"]]
+"ncomp","date","date","date","moneda","tipo_cambio","amount","capturista","date","date","status"]]
 df.to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=2, header=False, index=False)
-thisAllPays["concept"].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=10, header=False, index=False)
-thisAllPays["ncomp"].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=6, header=False, index=False)
-#thisAllPays["status"].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=6, header=False, index=False)
 
 workbook = writer.book
 ##FORMATOS PARA EL TITULO---------------------------------------
@@ -110,9 +105,8 @@ worksheet.write(3, 20, orden["invoice"].values[0], azul_g)
 worksheet.merge_range('G2:N2', 'FACTURA RESUMIDA ', azul_g)
 worksheet.merge_range('G3:N3', 'CUENTAS POR COBRAR DE PEDIDOS INTERNOS', azul_g)
 
-worksheet.set_column(2, 2, 20)
-worksheet.set_column(10, 10, 20)
-worksheet.set_column(15, 15, 20)
+
+
 #Dataframe yellow headers bitch xd
 worksheet.merge_range('B6:B7', 'NOH', header_format)
 worksheet.merge_range('C6:C7', 'FECHA D-M-A', header_format)
@@ -125,7 +119,7 @@ worksheet.merge_range('I6:I7', 'NOMBRE CORTO CLIENTE', header_format)
 worksheet.merge_range('J6:J7', 'CATEGORIA EQUIPO', header_format)
 worksheet.merge_range('K6:K7', 'DESCRIPCION BREVE', header_format)
 worksheet.merge_range('L6:L7', 'UBI / SUC / TIENDA PROYECTO', header_format)
-worksheet.merge_range('M6:M7', 'TIPO DE MONEDA', header_format)
+worksheet.merge_range('M6:M7', 'TIPO DE MOBEDA', header_format)
 worksheet.merge_range('N6:N7', 'TIPO DE CAMBIO', header_format)
 
 
@@ -147,34 +141,21 @@ for i in range(0,len(df)):
 
 for i in range(0,len(df)):
      worksheet.write(7+i, 4, i+1,tabla_normal)
-     worksheet.write(7+i, 12, moneda["code"].values[0],tabla_normal)
-     worksheet.write(7+i, 11, cliente["customer_suburb"].values[0],tabla_normal)
-     worksheet.write(7+i, 9, items["family"].values[0],tabla_normal)
-total_mn=0
-pagados=thisAllPays.loc[thisAllPays["status"]=="pagado"]
-for i in range(0,len(pagados)):
-         equivalente= pagados["amount"].values[i]*float(pagados["tipo_cambio"].values[i])
-         total_mn=total_mn+equivalente
-         worksheet.write(7+i, 15,equivalente,tabla_normal)
-
 
 for i in range(0,len(df)):
      worksheet.write(7+i, 5, len(df),tabla_normal)
-     worksheet.write(7+i, 7, cliente["id"].values[0],tabla_normal)
-     worksheet.write(7+i, 8, cliente["alias"].values[0],tabla_normal)
+     worksheet.write(7+i, 8, cliente["id"].values[0],tabla_normal)
+     worksheet.write(7+i, 9, cliente["alias"].values[0],tabla_normal)
+     
 
 #barra inferior de totales
 trow=8+len(df)
 worksheet.write(20, 20, len(df),header_format)
 worksheet.merge_range(trow,12,trow,13 ,'Total sin iva', header_format)
 worksheet.write(trow, 14, df["amount"].sum(),header_format_green)
-worksheet.write(trow, 15, total_mn,header_format)
+worksheet.write(trow, 15, df["amount"].sum(),header_format)
      
 workbook.close()
 
-import excel2img
-excel2img.export_img('storage/report/factura_resumida'+str(order_id)+'.xlsx','storage/report/factura_resumida'+str(order_id)+'.png')
-from PIL import Image
-image_1 = Image.open('storage/report/factura_resumida'+str(order_id)+'.png')
-im_1 = image_1.convert('RGB')
-im_1.save('storage/report/factura_resumida'+str(order_id)+'.pdf')
+
+

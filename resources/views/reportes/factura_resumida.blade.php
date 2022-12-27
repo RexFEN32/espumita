@@ -3,7 +3,7 @@
 @section('title', 'Reportes')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-file"></i>&nbsp; REPORTES</h1>
+    <h1 class="font-bold"><i class="fa-solid fa-file"></i>&nbsp; FACTURA RESUMIDA</h1>
 @stop
 
 @section('content')
@@ -12,11 +12,7 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-lg">
                 
-                <div class="btn-group" role="group"  aria-label="Basic example">
-  <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
-  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Pedido</button>
-  <button type="button"class="btn btn-blue mb-2"  onclick="Fechas()">Fecha</button>
-</div>
+      
                
                 <div class="col-sm-12 table-responsive">
 
@@ -42,18 +38,18 @@
                                 <td>{{$row->symbol}} {{ number_format($row->total)}} </td>
                                
                                 <td>
-                                <a href="{{route('payments.reporte',[$row->id,'contraportada'])}}">
+                                <a href="{{route('payments.reporte',[$row->id,'factura_resumida',0])}}">
                                   <button class="button"> <span class="badge badge-success">Excel &nbsp; <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
                                
                                <td>
-                                <a href="{{route('payments.contraportadaPDF',$row->id)}}">
+                                <a href="{{route('payments.reporte',[$row->id,'factura_resumida',1])}}">
                                   <button class="button"> <span class="badge badge-danger">PDF &nbsp;<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
                                
-                               
+                                
                             </tr>
                             @endforeach
   

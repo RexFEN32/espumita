@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use DB;
 use Symfony\Component\Process\Process; 
 use Symfony\Component\Process\Exception\ProcessFailedException; 
-
+use Illuminate\Support\Facades\Auth;
 class PaymentsController extends Controller
 {
     /**
@@ -69,6 +69,23 @@ class PaymentsController extends Controller
 
         ));
     }
+    public function reporte($id,$report,$pdf)
+    {
+        $caminoalpoder=public_path();
+        $process = new Process(['python',$caminoalpoder.'/'.$report.'.py',$id]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $data = $process->getOutput();
+        if($pdf==0){
+            return response()->download(public_path('storage/report/'.$report.$id.'.xlsx'));
+        }else{
+            return response()->download(public_path('storage/report/'.$report.$id.'.pdf'));
+
+        }
+    }
+
     public function contraportada($id)
     {
         $process = new Process(['python','C:/report.py',$id]);
@@ -89,7 +106,17 @@ class PaymentsController extends Controller
         $data = $process->getOutput();
         return response()->download(public_path('storage/report/test-'.$id.'.pdf'));
     }
-    public function factura_resumida($id)
+    public function factura_resumida()
+    {$InternalOrders =  DB::table('internal_orders')
+        ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        ->join('coins', 'internal_orders.coin_id','=','coins.id')
+        ->select('internal_orders.*','customers.customer','coins.symbol')
+        ->get();
+        return view('reportes.factura_resumida', compact(
+            'InternalOrders',  
+        ));
+    }
+    public function factura_resumidaPDF($id)
     {
         $caminoalpoder=public_path();
         $process = new Process(['python',$caminoalpoder.'/factura_resumida.py',$id]);
@@ -98,8 +125,48 @@ class PaymentsController extends Controller
             throw new ProcessFailedException($process);
         }
         $data = $process->getOutput();
-        return response()->download(public_path('storage/report/test-'.$id.'.xlsx'));
+        return response()->download(public_path('storage/report/factura_resumidaPDF'.$id.'.xlsx'));
     }
+
+    public function rep_cuentas_cobrar()
+    {
+        return view('reportes.rep_cuentas_cobrar');}
+
+    public function consecutivo_pedido()
+    {
+        return view('reportes.consecutivo_pedido');}
+
+    public function consecutivo_factura()
+        {
+            return view('reportes.consecutivo_factura');}
+    public function consecutivo_comprobante()
+        {
+            return view('reportes.consecutivo_comprobante');}
+        
+    public function comprobante_ingresoS()
+        {
+            $InternalOrders =  DB::table('internal_orders')
+        ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        ->join('coins', 'internal_orders.coin_id','=','coins.id')
+        ->select('internal_orders.*','customers.customer','coins.symbol')
+        ->get();
+        return view('reportes.comprobante_ingresos', compact(
+            'InternalOrders',  
+        ));}
+    
+
+    public function consecutivo_pedidoPDF($id)
+    {
+        $caminoalpoder=public_path();
+        $process = new Process(['python',$caminoalpoder.'/factura_resumida.py',$id]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $data = $process->getOutput();
+        return response()->download(public_path('storage/report/factura_resumidaPDF'.$id.'.xlsx'));
+    }
+    
     public function cuentas_cobrar()
     {
         $process = new Process(['python','C:/report8.py']);
@@ -163,7 +230,7 @@ class PaymentsController extends Controller
         //$pay->porcentaje_parcial=$request->porcentaje_parcial;
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
-        
+        $pay->capturista=Auth::user()->name;
 
         $pay->save();
         $order = DB::table('internal_orders')

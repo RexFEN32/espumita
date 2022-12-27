@@ -110,8 +110,8 @@
                                 <td>{{ $row->family }}</td>
                                 <td>{{ $row->code }}</td>
                                 <td>{{ $row->description }}</td>
-                                <td class="text-right">$ {{ number_format($row->unit_price, 2) }}</td>
-                                <td class="text-right">$ {{ number_format($row->import, 2) }}</td>
+                                <td class="text-right">${{number_format($row->unit_price, 2) }}</td>
+                                <td class="text-right">${{number_format($row->import, 2) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -124,14 +124,45 @@
                         <span class="text-right font-bold text-md">Subtotal: $ {{number_format($InternalOrders->subtotal,2)}}</span>
                     </div>
                 </div>
+                
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                        {{--  <span class="text-right font-semibold text-sm">IVA: $ {{number_format($InternalOrders->iva,2)}}</span>  --}}
+                      <span class="text-right font-semibold text-sm">Descuento: $ 0.0</span>  
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 text-right">
+                    <div class="form-group">
+                      <span class="text-right font-semibold text-sm">Desc. Fin: $ 0.0</span>  
                     </div>
                 </div>
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                        {{--  <span class="text-right font-bold text-xl">Total: $ {{number_format($InternalOrders->total,2)}}</span>  --}}
+                      <span class="text-right font-semibold text-sm">I.E.P.S: $ 0.0</span>  
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 text-right">
+                    <div class="form-group">
+                      <span class="text-right font-semibold text-sm">RET ISR: $ 0.0</span>  
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 text-right">
+                    <div class="form-group">
+                      <span class="text-right font-semibold text-sm">RET IVA: $ 0.0</span>  
+                    </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <div class="form-group">
+                      <span class="text-right font-semibold text-sm">IVA: $ {{number_format($InternalOrders->iva,2)}}</span>  
+                    </div>
+                </div>
+                
+                
+                <div class="col-sm-12 text-right">
+                    <div class="form-group">
+                      <span class="text-right font-bold text-xl">Total: $ {{number_format($InternalOrders->total,2)}}</span>  
                     </div>
                 </div>
             </div>
@@ -222,11 +253,10 @@
                     <br><br><br>
                 </div>
                     <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();"> 
-                    <a href="{{ route('internal_orders.edit_order', $InternalOrders->id) }} " class="btn btn-green">
-                     <button type = "button" class="btn btn-green "> <i class="fas fa-edit"></i> </button>
+                    <a href="{{ route('internal_orders.edit_order', $InternalOrders->id) }} " class="btn btn-green btn-sm">
+                     <button type = "button" class="btn btn-green "> <i class="fas fa-edit"> &nbsp; Editar</i> </button>
                                     </a></td>
                                     
-                                    <button class="btn btn-green">Editar</button>
                     
   
         </div>

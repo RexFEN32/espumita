@@ -27,6 +27,13 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('cuentas_cobrar', PaymentsController::class);
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
     Route::get('reportes/contraportada', [PaymentsController::class, 'reportes'])->name('reportes.contraportada');
+    Route::get('reportes/factura_resumida', [PaymentsController::class, 'factura_resumida'])->name('reportes.factura_resumida');
+    
+    Route::get('reportes/consecutivo_factura', [PaymentsController::class, 'consecutivo_factura'])->name('reportes.consecutivo_factura');
+    Route::get('reportes/comprobante_ingresos', [PaymentsController::class, 'comprobante_ingresos'])->name('reportes.comprobante_ingresos');
+    Route::get('reportes/consecutivo_comprobante', [PaymentsController::class, 'consecutivo_comprobante'])->name('reportes.consecutivo_comprobante');
+    Route::get('reportes/cuentas_cobrar', [PaymentsController::class, 'rep_cuentas_cobrar'])->name('reportes.cuentas_cobrar');
+
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
@@ -46,6 +53,11 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
     Route::get('contraportadaPDF/{id}', [PaymentsController::class, 'contraportadaPDF'])->name('payments.contraportadaPDF');
     Route::get('factura_resumida/{id}', [PaymentsController::class, 'factura_resumida'])->name('payments.factura_resumida');
+    Route::get('consecutivo_pedido', [PaymentsController::class, 'consecutivo_pedido'])->name('payments.consecutivo_pedido');
+    Route::get('reporte/{id}/{report}/{pdf}', [PaymentsController::class, 'reporte'])->name('payments.reporte');
+    
+
+
 
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');

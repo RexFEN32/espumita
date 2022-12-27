@@ -373,39 +373,40 @@ return [
                 [
                     'text' => ' CUENTAS POR CORBRAR',
                     'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
+                    'route'  => 'reportes.cuentas_cobrar',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' CONSECUTIVO DE PEDIDOS INTERNOS',
                     'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
+                    'route'  => 'payments.consecutivo_pedido',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' FACTURA RESUMIDA',
                     'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
+                    'route'  => 'reportes.factura_resumida',
+                    'can'  => 'VER USUARIOS',
+                ],
+                [
+                    'text' => ' CONSECUTIVO DE FACTURAS',
+                    'icon' => 'fa-solid fa-file fa-fw',
+                    'route'  => 'reportes.consecutivo_factura',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' COMPROBANTE DE INGRESOS VENTAS',
                     'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
+                    'route'  => 'reportes.comprobante_ingresos',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
-                    'text' => ' COMPROBANTE DE INGRESOS VENDEDOR',
+                    'text' => ' CONSECUTIVO DE COMPROBANTES DE INGRESOS',
                     'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
+                    'route'  => 'reportes.consecutivo_comprobante',
                     'can'  => 'VER USUARIOS',
                 ],
-                [
-                    'text' => ' PEDIDOS INTERNOS',
-                    'icon' => 'fa-solid fa-file fa-fw',
-                    'route'  => 'users.index',
-                    'can'  => 'VER USUARIOS',
-                ],
+                
         ],
     ],],
 
