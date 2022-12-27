@@ -216,6 +216,13 @@ class PaymentsController extends Controller
         $id=$request->pay_id;
         $comp = $request->comprobante;
         $pay = payments::find($id);
+        $orden= InternalOrder::find($pay->order_id);
+        $cliente = Customer::find($orden->customer_id);
+        if($cliente->ncom == NULL){
+        $cliente->ncomp=$request->ncomp;
+        $cliente->save();
+        }
+        
         $pay->status ="pagado";
         $pay->nfactura=$request->nfactura;
         //$pay->ncomp=$request->ncomp;
@@ -234,7 +241,7 @@ class PaymentsController extends Controller
         if($pay->ncomp == NULL){
             $estosPagos= payments::where('order_id','=',$pay->order_id)->get();
             foreach($estosPagos as $estePago){
-                $estePago->ncomp = $request->ncomp;
+                $estePago->ncomp = $cliente->ncomp;
                 $estePago->save();
             }
         }
