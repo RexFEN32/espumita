@@ -145,13 +145,10 @@ class PaymentsController extends Controller
         
     public function comprobante_ingresoS()
         {
-            $InternalOrders =  DB::table('internal_orders')
-        ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
-        ->join('coins', 'internal_orders.coin_id','=','coins.id')
-        ->select('internal_orders.*','customers.customer','coins.symbol')
-        ->get();
+            $clientes =  Customer::all();
+        
         return view('reportes.comprobante_ingresos', compact(
-            'InternalOrders',  
+            'clientes',  
         ));}
     
 
@@ -221,7 +218,9 @@ class PaymentsController extends Controller
         $pay = payments::find($id);
         $pay->status ="pagado";
         $pay->nfactura=$request->nfactura;
-        $pay->ncomp=$request->ncomp;
+        //$pay->ncomp=$request->ncomp;
+        
+        $pay->banco=$request->banco;
         $pay->fecha_factura = now()->format('Y-m-d');
         //$pay->fecha_factura=$request->fecha_factura;
         //$pay->importe_total=$request->importe_total;
@@ -231,8 +230,15 @@ class PaymentsController extends Controller
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
         $pay->capturista=Auth::user()->name;
-
         $pay->save();
+        if($pay->ncomp == NULL){
+            $estosPagos= payments::where('order_id','=',$pay->order_id)->get();
+            foreach($estosPagos as $estePago){
+                $estePago->ncomp = $request->ncomp;
+                $estePago->save();
+            }
+        }
+
         $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
             ->where('internal_orders.id','=',$pay->order_id)

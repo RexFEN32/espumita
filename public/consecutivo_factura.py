@@ -298,7 +298,6 @@ worksheet.merge_range('N6:N7', 'TIPO DE CAMBIO', header_format)
 worksheet.merge_range('O6:P6', 'IMPORTE TOTAL SIN IVA', header_format)
 worksheet.write(6, 14, "DLLS", header_format)
 worksheet.write(6, 15, "M.N.(Equivalente)", header_format)
-
 worksheet.merge_range('Q6:Q7', 'CAPTURO', header_format)
 worksheet.merge_range('R6:R7', 'REVISO', header_format)
 worksheet.merge_range('S6:S7', 'AUTORIZO', header_format)
@@ -317,7 +316,6 @@ worksheet.merge_range('K6:K7', 'DESCRIPCION BREVE', header_format)
 worksheet.merge_range('L6:L7', 'UBI / SUC / TIENDA PROYECTO', header_format)
 worksheet.merge_range('M6:M7', 'TIPO DE MOBEDA', header_format)
 worksheet.merge_range('N6:N7', 'TIPO DE CAMBIO', header_format)
-
 
 worksheet.merge_range('O6:P6', 'IMPORTE TOTAL SIN IVA', header_format)
 worksheet.write(6, 14, "DLLS", header_format)

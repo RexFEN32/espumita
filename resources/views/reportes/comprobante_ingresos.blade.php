@@ -28,23 +28,20 @@
     </tr>
   </thead>
   <tbody>
-  @foreach ($InternalOrders as $row)
+  @foreach ($clientes as $row)
                             <tr class="text-center">
                             
                                 <td> <p>{{ $row->customer }}</p></td>
                                 
-                                <td> {{ $row->invoice }}</td>
-                                
-                                <td>{{$row->symbol}} {{ number_format($row->total)}} </td>
                                
                                 <td>
-                                <a href="{{route('payments.reporte',[$row->id,'contraportada',0])}}">
+                                <a href="{{route('payments.reporte',[$row->id,'comprobante_ingresos',0])}}">
                                   <button class="button"> <span class="badge badge-success">Excel &nbsp; <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
                                
                                <td>
-                                <a href="{{route('payments.reporte',[$row->id,'contraportada',1])}}">
+                                <a href="{{route('payments.reporte',[$row->id,'comprobante_ingresos',1])}}">
                                   <button class="button"> <span class="badge badge-danger">PDF &nbsp;<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>

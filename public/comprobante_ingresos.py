@@ -14,20 +14,14 @@ cnx = mysql.connector.connect(user='tyrsa',
                               database='u458219132_tyrsawesadmin',
                               use_pure=False)
 
-query = ('SELECT * from payments')
+query = ('SELECT p.date, p.banco, p.nfactura, i.invoice, c.customer, coins.code, p.tipo_cambio, p.amount, p.ncomp, p.capturista FROM customers as c inner join internal_orders as i on i.customer_id = c.id inner join payments as p on p.order_id=i.id inner join coins on coins.id = i.coin_id WHERE c.id = '+str(id)+" and p.status= 'pagado';")
 pagos=pd.read_sql(query,cnx)
-#order_id=pagos.loc[(pagos["id"]==int(id),"order_id") ].values[0]
-order_id=int(id)
-thisAllPays=pagos.loc[(pagos["order_id"]==order_id) ]
-print(order_id)
-orden = pd.read_sql("select * from internal_orders where id="+str(order_id),cnx)
-cliente = pd.read_sql("select * from customers where id = "+str(orden["customer_id"].values[0]),cnx)
-moneda = pd.read_sql("select * from coins where id="+str(orden["coin_id"].values[0]),cnx)
-writer = pd.ExcelWriter("storage/report/factura_resumida"+str(id)+".xlsx", engine='xlsxwriter')
 
-df=thisAllPays[["date","order_id","created_at","updated_at","nfactura",
-"ncomp","date","date","date","moneda","tipo_cambio","amount","capturista","date","date","status"]]
-df.to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=2, header=False, index=False)
+writer = pd.ExcelWriter("storage/report/comprobante_ingresos"+str(id)+".xlsx", engine='xlsxwriter')
+pagos[["date","banco"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=2, header=False, index=False)
+pagos[["nfactura","invoice","customer"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=4, header=False, index=False)
+pagos[["code","tipo_cambio","amount"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=8, header=False, index=False)
+pagos["capturista"].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=12, header=False, index=False)
 
 workbook = writer.book
 ##FORMATOS PARA EL TITULO---------------------------------------
@@ -97,69 +91,61 @@ tabla_normal = workbook.add_format({
     'valign': 'vcenter',
     'font_color': 'black',
     'font_size':12})
-    
-thisAllPays=pagos.loc[pagos["order_id"]==order_id ]
+tabla_celeste = workbook.add_format({
+    'border': 1,
+    'align': 'center',
+    'valign': 'vcenter',
+    'fg_color': '#8CC5FF',
+    'font_size':12})
+        
 worksheet = writer.sheets['Sheet1']
-worksheet.write(3, 20, orden["invoice"].values[0], azul_g)
+worksheet.write(3, 20, pagos["ncomp"].values[0], azul_g)
+
 # Encabezado.
-worksheet.merge_range('G2:N2', 'FACTURA RESUMIDA ', azul_g)
-worksheet.merge_range('G3:N3', 'CUENTAS POR COBRAR DE PEDIDOS INTERNOS', azul_g)
+worksheet.merge_range('G2:N2', 'COMPROBANTE DE INGRESOS NO. '+str(pagos["ncomp"].values[0]), azul_g)
+worksheet.merge_range('G3:N3', 'CUENTAS COBRADAS DE PEDIDOS INTERNOS', azul_g)
 
 
+worksheet.set_column(2, 2, 20)
+worksheet.set_column(11, 11, 20)
 
 #Dataframe yellow headers bitch xd
-worksheet.merge_range('B6:B7', 'NOH', header_format)
+worksheet.merge_range('B6:B7', 'PDA', header_format)
 worksheet.merge_range('C6:C7', 'FECHA D-M-A', header_format)
-worksheet.merge_range('D6:D7', 'P.I. NO.', header_format)
-worksheet.merge_range('E6:E7', 'NUMERO DE PAGO', header_format)
-worksheet.merge_range('F6:F7', 'NUMERO TOTAL DE PAGOS', header_format)
-worksheet.merge_range('G6:G7', 'FACTURA FOLIO NO.', header_format)
-worksheet.merge_range('H6:H7', 'CLIENTE NO', header_format)
-worksheet.merge_range('I6:I7', 'NOMBRE CORTO CLIENTE', header_format)
-worksheet.merge_range('J6:J7', 'CATEGORIA EQUIPO', header_format)
-worksheet.merge_range('K6:K7', 'DESCRIPCION BREVE', header_format)
-worksheet.merge_range('L6:L7', 'UBI / SUC / TIENDA PROYECTO', header_format)
-worksheet.merge_range('M6:M7', 'TIPO DE MONEDA', header_format)
-worksheet.merge_range('N6:N7', 'TIPO DE CAMBIO', header_format)
+worksheet.merge_range('D6:D7', 'BANCO', header_format)
+worksheet.merge_range('E6:E7', 'FACTURA NO.', header_format)
+worksheet.merge_range('F6:F7', 'PI No.', header_format)
+worksheet.merge_range('G6:H7', 'CLIENTE', header_format)
+worksheet.merge_range('I6:I7', 'MONEDA', header_format)
+worksheet.merge_range('J6:J7', 'TC', header_format)
 
+worksheet.merge_range('K6:L6', 'IMPORTE TOTAL ', header_format)
+worksheet.write('K7', 'DLLS', header_format)
+worksheet.write('L7', 'M.N.', header_format)
 
-worksheet.merge_range('O6:P6', 'IMPORTE TOTAL SIN IVA', header_format)
-worksheet.write(6, 14, "DLLS", header_format_green)
-worksheet.write(6, 15, "M.N.(Equivalente)", header_format)
+worksheet.merge_range('M6:M7', 'CAPTURO', header_format)
+worksheet.merge_range('N6:N7', 'REVISO', header_format)
+worksheet.merge_range('O6:O7', 'AUTORIZO', header_format)
+#CELDAS
+total_mn=0
+for i in range(0,len(pagos)):
+         equivalente= pagos["amount"].values[i]*float(pagos["tipo_cambio"].values[i])
+         total_mn=total_mn+equivalente
+         worksheet.write(7+i, 11,equivalente,tabla_normal)
+         worksheet.write(7+i, 1, i+1,tabla_celeste)
 
-worksheet.merge_range('Q6:Q7', 'CAPTURO', header_format)
-worksheet.merge_range('R6:R7', 'REVISO', header_format)
-worksheet.merge_range('S6:S7', 'AUTORIZO', header_format)
-worksheet.merge_range('T6:T7', 'STATUS', header_format)
-
-##columnas y tablas como tal pues
-for i in range(0,len(df)):
-     worksheet.write(7+i, 1, i+1,azulito)
-
-for i in range(0,len(df)):
-     worksheet.write(7+i, 3, orden["invoice"].values[0],tabla_normal)
-
-for i in range(0,len(df)):
-     worksheet.write(7+i, 4, i+1,tabla_normal)
-
-for i in range(0,len(df)):
-     worksheet.write(7+i, 5, len(df),tabla_normal)
-     worksheet.write(7+i, 8, cliente["id"].values[0],tabla_normal)
-     worksheet.write(7+i, 9, cliente["alias"].values[0],tabla_normal)
+trow=7+len(pagos)
+worksheet.merge_range(trow,8,trow,9 ,'Total sin iva', header_format)
+worksheet.write(trow, 10, pagos["amount"].sum(),header_format_green)
+worksheet.write(trow, 11, total_mn,header_format)
      
+worksheet.conditional_format(xlsxwriter.utility.xl_range(7, 2, 6+len(pagos), 14), {'type': 'no_errors', 'format': tabla_normal})
 
-#barra inferior de totales
-trow=8+len(df)
-worksheet.write(20, 20, len(df),header_format)
-worksheet.merge_range(trow,12,trow,13 ,'Total sin iva', header_format)
-worksheet.write(trow, 14, df["amount"].sum(),header_format_green)
-worksheet.write(trow, 15, df["amount"].sum(),header_format)
-     
 workbook.close()
 
 import excel2img
 
-excel2img.export_img('storage/report/comprobante_ingresos'+str(id)+'.xlsx','storage/report/consecutivo_pedido'+str(id)+'.png')
+excel2img.export_img('storage/report/comprobante_ingresos'+str(id)+'.xlsx','storage/report/comprobante_ingresos'+str(id)+'.png')
 from PIL import Image
 image_1 = Image.open('storage/report/comprobante_ingresos'+str(id)+'.png',)
 im_1 = image_1.convert('RGB')
