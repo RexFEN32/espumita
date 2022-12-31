@@ -77,7 +77,7 @@
            </div>
                    <div class="form-group">
                             <x-jet-label value="* Numero de Factura {{$pago->id}}" />
-                            <x-jet-input type="hidden" name="pagos[]" value="{{$pago}}"/>
+                            <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
                             <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
                     
