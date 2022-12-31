@@ -129,7 +129,7 @@
 
                     @if($pago->status == 'pagado')
                     <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button"> <span class="badge badge-success">Pagado</span> </button>
+                        <button class="button" type="button"> <span class="badge badge-success">Pagado</span> </button>
                         </a> 
                       
                       @else

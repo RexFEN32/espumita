@@ -203,18 +203,21 @@ class PaymentsController extends Controller
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($request -> pago[0]);
-        $orden= InternalOrder::find($pay->order_id);
+        $pays=payments::find($request->pago);
         $npagos=count($request->pago);
         $orden= InternalOrder::find($pay->order_id);
         $cliente = Customer::find($orden->customer_id);
         $url =  "'/".$pay->id.".pdf'";
         $pagos = $request->pago;
+        $ordenes= InternalOrder::where('customer_id',$cliente->id)->get();
         return view('accounting.multi_pay_actualize', compact(
             'pay',
             'npagos',
             'url',
             'cliente',
-            'pagos'
+            'pagos',
+            'pays',
+            'ordenes'
         ));
     }
     public function pay_amount_actualize($id)
@@ -315,7 +318,7 @@ class PaymentsController extends Controller
         
         $pay->tipo_cambio=$request->tipo_cambio;
         $pay->capturista=Auth::user()->name;
-        $pay->ncomp = $pay->id;
+        $pay->ncomp = $request->pagos[0];
         $pay->save();
        
 
