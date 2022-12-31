@@ -30,6 +30,7 @@ class PaymentsController extends Controller
             ->where('internal_orders.status','=','autorizado')
             ->select('payments.*','internal_orders.customer_id','internal_orders.invoice')
             ->get();
+        $multipagos = payments::whereNull('order_id')->get();
         $Customers = Customer::all();
         $Orders = DB::table('internal_orders')
         ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
@@ -41,7 +42,8 @@ class PaymentsController extends Controller
             'total',
             'url',
             'Customers',
-            'Orders'
+            'Orders',
+            'multipagos',
         ));
     }
      
@@ -197,7 +199,45 @@ class PaymentsController extends Controller
             'cliente'
         ));
     }
-    
+    public function multi_pay_actualize(Request $request)
+    {
+        //$accounts = payments::where('status', 'por cobrar')->get();
+        $pay = payments::find($request -> pago[0]);
+        $orden= InternalOrder::find($pay->order_id);
+        $npagos=count($request->pago);
+        $orden= InternalOrder::find($pay->order_id);
+        $cliente = Customer::find($orden->customer_id);
+        $url =  "'/".$pay->id.".pdf'";
+        $pagos = $request->pago;
+        return view('accounting.multi_pay_actualize', compact(
+            'pay',
+            'npagos',
+            'url',
+            'cliente',
+            'pagos'
+        ));
+    }
+    public function pay_amount_actualize($id)
+    {
+        $cliente = Customer::find($id);
+        //$accounts = payments::where('status', 'por cobrar')->get();
+        
+        $pay = new payments;
+        $cliente = Customer::find($id);
+        $url =  "'/".$pay->id.".pdf'";
+        $pay->customer_id=$cliente->id;
+        $pay->order_id=NULL;
+        $pay->concept="cantidad fija";
+        $pay->status="por cobrar";
+        $pay->percentage=0;
+        $pay->amount=0;
+        $pay->date = now()->format('Y-m-d');
+        $pay->save();
+        return view('accounting.pay_amount_actualize', compact(
+            'pay',
+            'cliente'
+        ));
+    }
     public function pay_cancel($id)
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
@@ -220,11 +260,7 @@ class PaymentsController extends Controller
         $comp = $request->comprobante;
         $pay = payments::find($id);
         $orden= InternalOrder::find($pay->order_id);
-        $cliente = Customer::find($orden->customer_id);
-        if($cliente->ncom == NULL){
-        $cliente->ncomp=$request->ncomp;
-        $cliente->save();
-        }
+        
         
         $pay->status ="pagado";
         $pay->nfactura=$request->nfactura;
@@ -240,14 +276,9 @@ class PaymentsController extends Controller
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
         $pay->capturista=Auth::user()->name;
+        $pay->ncomp = $pay->id;
         $pay->save();
-        if($pay->ncomp == NULL){
-            $estosPagos= payments::where('order_id','=',$pay->order_id)->get();
-            foreach($estosPagos as $estePago){
-                $estePago->ncomp = $cliente->ncomp;
-                $estePago->save();
-            }
-        }
+       
 
         $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
@@ -265,10 +296,108 @@ class PaymentsController extends Controller
             'pay',
             'order',
             'url',
-            'cliente'
         ));
     }
+    public function multi_pay_apply(Request $request)
+    {   
 
+        for($i=0; $i < count($request->pagos); $i++){
+        $id=$request->pagos[$i];
+        $comp = $request->comprobante;
+        $pay = payments::find($id);
+        $orden= InternalOrder::find($pay->order_id);
+        $pay->status ="pagado";
+        $pay->nfactura=$request->nfactura[$i];
+        //$pay->ncomp=$request->ncomp;
+        
+        $pay->banco=$request->banco;
+        $pay->fecha_factura = now()->format('Y-m-d');
+        
+        $pay->tipo_cambio=$request->tipo_cambio;
+        $pay->capturista=Auth::user()->name;
+        $pay->ncomp = $pay->id;
+        $pay->save();
+       
+
+        $order = DB::table('internal_orders')
+            ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->where('internal_orders.id','=',$pay->order_id)
+            ->select('internal_orders.*','customers.customer')
+            ->first();
+        #$nombre = strval($pay->id) . "comp";
+        #$info = new SplFileInfo('foo.txt');
+        $nombre = $comp->getClientOriginalName();
+        $nombre_con_id= strval($pay->id).substr($nombre,-4);
+        \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));}
+        $url = "'/".$nombre_con_id."'";
+        
+        return $this->index();
+    }
+    public function pay_amount_apply(Request $request)
+    {   
+        
+        $comp = $request->comprobante;
+        $pay = payments::find($request->pay_id);
+        $cliente = Customer::find($request->customer_id);
+        $url =  "'/".$pay->id.".pdf'";
+        $pay->customer_id=$cliente->id;
+        $pay->order_id=NULL;
+        $pay->concept="cantidad fija";
+        $pay->percentage=0;
+        $pay->amount=$request->amount;
+        $pay->date = now()->format('Y-m-d');
+        $pay->status ="pagado";
+        $pay->nfactura=$request->nfactura;
+        //$pay->ncomp=$request->ncomp;
+        $pay->banco=$request->banco;
+        $pay->fecha_factura = now()->format('Y-m-d');        
+        
+
+        //$pay->fecha_factura=$request->fecha_factura;
+        //$pay->importe_total=$request->importe_total;
+        //$pay->moneda=$request->moneda;
+        $pay->tipo_cambio=$request->tipo_cambio;
+        //$pay->porcentaje_parcial=$request->porcentaje_parcial;
+       // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
+        //$pay->importe_acumulado=$request->importe_acumulado;
+        $pay->capturista=Auth::user()->name;
+        $pay->ncomp = $pay->id;
+        $pay->save();
+
+        $noPagados=DB::table('payments')
+        ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->where('payments.status','por cobrar')
+        ->where('customers.id',$cliente->id)
+        ->select('payments.*','customers.id')
+        ;
+        $multi_no_pagados= payments::where('customer_id',$cliente->id)->where('status','por cobrar');
+        
+        $saldoDeudor = $noPagados->sum('amount')+$multi_no_pagados->sum('amount');
+        
+        $noPagados->delete();
+        $multi_no_pagados->delete();
+        $restante=new payments();
+        
+        $restante->customer_id=$cliente->id;
+        $restante->order_id=NULL;
+        $restante->concept="restante";
+        $restante->status="por cobrar";
+        $restante->percentage=0;
+        $restante->amount=$saldoDeudor-$pay->amount;
+        $restante->date = now()->format('Y-m-d');
+        $restante->save();
+        $nombre = $comp->getClientOriginalName();
+        $nombre_con_id= strval($pay->id).substr($nombre,-4);
+        \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));
+        $url = "'/".$nombre_con_id."'";
+        
+        return view('accounting.pay_amount_actualize', compact(
+            'pay',
+            'url',
+            'cliente',
+        ));
+    }
     public function invalidar(Request $request)
     {   
         $id=$request->pay_id;

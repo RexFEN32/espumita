@@ -17,12 +17,12 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$pay->id}}
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$pay->id}} 
                  </h1>
                             </td>
                         </tr>
                         <tr>
-                        Aplicacion de pago 
+                        Aplicacion del pago NO. {{$pay->id}}
                         </tr>
                         
 </table>
@@ -33,12 +33,12 @@
             <table class="table table-striped table-sm" style="width : 500px; align-self : center; display:flex">
                 <tbody>
                     <tr>
-                        <td style="background-color:#A6ADBC"> Cliente: </td>
-                        <td>{{$order->customer}}</td>
+                        <td style="background-color:#A6ADBC"> Cliente:{{$cliente->customer}} </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td style="background-color:#A6ADBC"> Pedido: </td>
-                        <td>{{$order->invoice}}</td>
+                        <td</td>
                     </tr>
                     <tr>
                         <td style="background-color:#A6ADBC"> Cantidad del pago: </td>
@@ -54,7 +54,7 @@
             <div class ="col"></div>
            </div>
             <div>
-            <form action="{{ route('accounting.pay_apply')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('accounting.multi_pay_apply')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <x-jet-input type="hidden" name="pay_id" value="{{$pay->id}}"/>
                 
@@ -64,11 +64,18 @@
 
                 <div class="row">
                     <div class="col ">
-                        <div class="form-group">
-                            <x-jet-label value="* Numero de Factura" />
-                            <x-jet-input type="text" name="nfactura"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                    
+                    @foreach($pagos as $pago)
+                   <div class="form-group">
+                            <x-jet-label value="* Numero de Factura {{$pago}}" />
+                            <x-jet-input type="hidden" name="pagos[]" value="{{$pago}}"/>
+                            <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
-                        
+                    
+    @endforeach
+             
+ 
+
                         <div class="form-group">
                             <x-jet-label value="tipo_cambio" />
                             <x-jet-input type="number" min="0" name="tipo_cambio" value=1  /> 
@@ -77,33 +84,9 @@
                             <x-jet-label value="* BANCO" />
                             <x-jet-input type="text" name="banco"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
-                        <!-- </div>
-                         <div class="form-group">
-                            <x-jet-label value="Fecha" />
-                            <x-jet-input type="date" name="fecha_factura" value="{{old('customer_street')}}"/>         
-                        
-                         </div><div class="form-group">
-                            <x-jet-label value="* Importe total (IVA incluido)" />
-                            <x-jet-input type="text" name="importe_total" value="{{old('customer_street')}}"/>         
-                        
-                         </div><div class="form-group">
-                            <x-jet-label value="* Porcentaje parcial" />
-                            <x-jet-input type="text" name="porcentaje_parcial" value="{{old('customer_street')}}"/>         
-                        
-                         </div>
-                         <div class="form-group">
-                            <x-jet-label value="* Importe Acumulado" />
-                            <x-jet-input type="text" name="importe_acumulado" value="{{old('customer_street')}}"/>         
-                        
-                         </div><div class="form-group">
-                            <x-jet-label value="* Porcentaje de pago acumulado" />
-                            <x-jet-input type="number" name="porcentaje_acumulado" value="{{old('customer_street')}}"/>%         
-                        
-                         </div>-->
                     
                          <br>
                 <br>
-
 
                 Ingresa su comprobante
                 <br>
@@ -201,8 +184,5 @@ function mostrar(){
 function openPDF(){
 window.open("{{ asset('storage/'.$pay->id.'.pdf') }}");
 }
-function openXLSX(){
-window.open("{{ asset('storage/report/test-'.$order->id.'.xlsx') }}");
-}   
 </script>
 @stop

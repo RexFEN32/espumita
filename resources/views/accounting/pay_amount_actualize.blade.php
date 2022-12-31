@@ -17,12 +17,12 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$pay->id}}
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS   NO.
                  </h1>
                             </td>
                         </tr>
                         <tr>
-                        Aplicacion de pago 
+                        Aplicacion del pago NO. {{$pay->id}}
                         </tr>
                         
 </table>
@@ -34,19 +34,16 @@
                 <tbody>
                     <tr>
                         <td style="background-color:#A6ADBC"> Cliente: </td>
-                        <td>{{$order->customer}}</td>
+                        <td>{{$cliente->customer}}</td>
                     </tr>
-                    <tr>
-                        <td style="background-color:#A6ADBC"> Pedido: </td>
-                        <td>{{$order->invoice}}</td>
-                    </tr>
+                    
                     <tr>
                         <td style="background-color:#A6ADBC"> Cantidad del pago: </td>
                         <td> $ {{number_format($pay -> amount)}}</td>
                     </tr>
                     <tr>
                         <td  style="background-color:#A6ADBC">Concepto: </td>
-                        <td>{{ $pay ->concept }}</td>
+                        <td>Cantidad Fija</td>
                     </tr>
                 </tbody>
             </table>
@@ -54,9 +51,10 @@
             <div class ="col"></div>
            </div>
             <div>
-            <form action="{{ route('accounting.pay_apply')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('accounting.pay_amount_apply')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <x-jet-input type="hidden" name="pay_id" value="{{$pay->id}}"/>
+                <x-jet-input type="hidden" name="customer_id" value="{{$cliente->id}}"/>
                 
                 @if($pay -> status == 'por cobrar')
                  
@@ -68,7 +66,10 @@
                             <x-jet-label value="* Numero de Factura" />
                             <x-jet-input type="text" name="nfactura"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
-                        
+                        <div class="form-group">
+                            <x-jet-label value="Cantidad a pagar" />
+                            $ <x-jet-input type="number" min="0" name="amount" value=100  /> 
+                         </div>
                         <div class="form-group">
                             <x-jet-label value="tipo_cambio" />
                             <x-jet-input type="number" min="0" name="tipo_cambio" value=1  /> 
@@ -201,8 +202,5 @@ function mostrar(){
 function openPDF(){
 window.open("{{ asset('storage/'.$pay->id.'.pdf') }}");
 }
-function openXLSX(){
-window.open("{{ asset('storage/report/test-'.$order->id.'.xlsx') }}");
-}   
 </script>
 @stop

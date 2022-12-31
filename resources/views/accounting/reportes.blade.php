@@ -42,7 +42,7 @@
                                 <td>{{$row->symbol}} {{ number_format($row->total)}} </td>
                                
                                 <td>
-                                <a href="{{route('payments.reporte',[$row->id,'contraportada'])}}">
+                                <a href="{{route('payments.reporte',[$row->id,'contraportada',0])}}">
                                   <button class="button"> <span class="badge badge-success">Excel &nbsp; <i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i></span> </button>
                                   </a>  
                                </td>
