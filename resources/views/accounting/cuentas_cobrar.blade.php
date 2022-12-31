@@ -26,14 +26,8 @@
 <div id = "ClientView">  
 <div class ="justify-content-rigth"> </div>
 @foreach ($Customers as $row)
-<br>
-<span class="float-left">
-<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fa-solid fa-user fa-2x" ></i></span>
-             &nbsp; &nbsp;
-    <p>{{$row->customer}}</p></button></td>
 
-    @php
+@php
 {{
   $pagos = $accounts->where('customer_id',$row->id);
   $pendientes = $pagos->where('status','por cobrar');
@@ -44,6 +38,14 @@
   $total_pedidos=$Orders->where('customer_id',$row->id)->count();
 }}
 @endphp
+
+@if($pagos->count() > 0 )
+<br>
+<span class="float-left">
+<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fa-solid fa-user fa-2x" ></i></span>
+             &nbsp; &nbsp;
+    <p>{{$row->customer}}</p></button></td>
 
     <div class="collapse" id="collapseExample{{$row->id}}">
       <table >
@@ -239,6 +241,7 @@ en tiempo
     </form>
   </div>
   <br>
+  @endif
 @endforeach
 
 </div>
