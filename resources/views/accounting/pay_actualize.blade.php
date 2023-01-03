@@ -17,7 +17,7 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$pay->id}}
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$lastComp +1}}
                  </h1>
                             </td>
                         </tr>
@@ -66,7 +66,7 @@
                     <div class="col ">
                         <div class="form-group">
                             <x-jet-label value="* Numero de Factura" />
-                            <x-jet-input type="text" name="nfactura"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                            <x-jet-input type="text" name="nfactura"  value="{{old('nfactura')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
                         
                         <div class="form-group">
@@ -149,11 +149,11 @@
                         <td> {{$pay->nfactura}}</td>
                         <td>{{$pay->ncomp}}</td>
                         <td>{{$pay->moneda}}</td>
-                        <td>{{$pay->fecha_factura}}</td>
-                        <td>{{number_format($pay->importe_total)}}</td>
-                        <td>{{$pay->porcentaje_parcial}}</td>
+                        <td>{{$pay->date}}</td>
+                        <td>{{number_format($pay->amount)}}</td>
+                        <td>{{$pay->percentage}}</td>
                         <td>{{$pay->tipo_cambio}}</td>
-                        <td> {{ number_format($pay->importe_acumulado)}}</td>
+                        <td></td>
                         <td>{{$pay->porcentaje_acumulado}}</td>
                     </tr>
                 </tbody>

@@ -154,6 +154,7 @@ class PaymentsController extends Controller
             ->whereNotNull('payments.ncomp')
             ->distinct('payments.ncomp')
             ->orderBy('customers.customer')
+            ->orderBy('payments.ncomp')
             ->get();
         
         return view('reportes.comprobante_ingresos', compact(
@@ -186,6 +187,9 @@ class PaymentsController extends Controller
     }
     public function pay_actualize($id)
     {
+        $lastComp = DB::table('payments')->whereNotNull('ncomp')
+        ->orderBy('ncomp','DESC')->first()->ncomp;
+    
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
         $orden= InternalOrder::find($pay->order_id);
@@ -203,11 +207,15 @@ class PaymentsController extends Controller
             'pay',
             'order',
             'url',
-            'cliente'
+            'cliente',
+            'lastComp'
         ));
     }
     public function multi_pay_actualize(Request $request)
     {
+        $lastComp = DB::table('payments')->whereNotNull('ncomp')
+        ->orderBy('ncomp','DESC')->first()->ncomp;
+    
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($request -> pago[0]);
         $pays=payments::find($request->pago);
@@ -226,6 +234,7 @@ class PaymentsController extends Controller
             'pagos',
             'pays',
             'ordenes',
+            'lastComp',
         ));
     }
     public function pay_amount_actualize($id)
@@ -287,7 +296,10 @@ class PaymentsController extends Controller
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
         $pay->capturista=Auth::user()->name;
-        $pay->ncomp = $pay->id;
+        $lastComp = DB::table('payments')->whereNotNull('ncomp')
+        ->orderBy('ncomp','DESC')->first()->ncomp;
+    
+        $pay->ncomp = $lastComp + 1;
         $pay->save();
        
 
@@ -307,11 +319,15 @@ class PaymentsController extends Controller
             'pay',
             'order',
             'url',
+            'lastComp'
         ));
     }
     public function multi_pay_apply(Request $request)
     {   
-
+        
+        $lastComp = DB::table('payments')->whereNotNull('ncomp')
+        ->orderBy('ncomp','DESC')->first()->ncomp;
+    
         for($i=0; $i < count($request->pagos); $i++){
         $id=$request->pagos[$i];
         $comp = $request->comprobante;
@@ -319,14 +335,11 @@ class PaymentsController extends Controller
         $orden= InternalOrder::find($pay->order_id);
         $pay->status ="pagado";
         $pay->nfactura=$request->nfactura[$i];
-        //$pay->ncomp=$request->ncomp;
-        
         $pay->banco=$request->banco;
         $pay->fecha_factura = now()->format('Y-m-d');
-        
         $pay->tipo_cambio=$request->tipo_cambio;
         $pay->capturista=Auth::user()->name;
-        $pay->ncomp = $request->pagos[0];
+        $pay->ncomp = $lastComp + 1;
         if($request->otra ==1){
             
             $original=$pay->amount;
@@ -432,6 +445,8 @@ class PaymentsController extends Controller
         $id=$request->pay_id;
         $pay = payments::find($id);
         $pay->status ="por cobrar";
+        $pay->ncomp=NULL;
+        $pay->nfactura=NULL;
         $pay->save();
         return $this->index();
     }

@@ -17,11 +17,11 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$pay->id}}</h1>
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$lastComp +1}}</h1>
                             </td>
                         </tr>
                         <tr>
-                            <td>Aplicacion del cobro NO. {{$pay->id}}</td>
+                            <td>Aplicacion del cobro NO. {{$lastComp +1}}</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -85,7 +85,7 @@
             <div class ="col"></div>
            </div>
                    <div class="form-group">
-                        <x-jet-label value="* Numero de Factura {{$pago->id}}" />
+                        <x-jet-label value="* Numero de Factura " />
                         <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
                         <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                     </div>
