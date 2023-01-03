@@ -10,7 +10,7 @@ ncomp=str(sys.argv[1])
 cnx = mysql.connector.connect(user='tyrsa',
                               password='1234',
                               host='localhost',
-                              port='8111',
+                              port='3306',
                               database='u458219132_tyrsawesadmin',
                               use_pure=False)
 
