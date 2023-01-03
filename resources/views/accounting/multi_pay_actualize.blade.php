@@ -30,11 +30,19 @@
                         <h1 style="font-size : 30px;"> $ {{number_format($pays->sum('amount'))}}</h1>
                         </td>
                         <td></td>
-                        </tr> </table>
-                        <br><br>
-        
-           
-            <form action="{{ route('accounting.multi_pay_apply')}}" method="POST" enctype="multipart/form-data">
+                        </tr>
+                     </table>
+                        
+                
+                        <br><br><br>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="programado();">
+  <label class="btn btn-outline-primary" for="btnradio1">Cobro <br> Programado</label>
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="otra();">
+  <label class="btn btn-outline-primary" for="btnradio3">Cobrar otra <br> cantidad</label>
+</div>
+                        <br><br><br>
+            <form action="{{ route('accounting.multi_pay_apply')}}" method="POST" enctype="multipart/form-data" id="form1" class="formaxd">
                 @csrf
                 <x-jet-input type="hidden" name="pay_id" value="{{$pay->id}}"/>
                 
@@ -45,6 +53,7 @@
                 <div class="row">
                     <div class="col ">
                     
+                    <x-jet-input type="hidden" name="otra" id="otra" value="0"/>
                     @foreach($pays as $pago)
                     
            <div class ="row">  
@@ -76,14 +85,19 @@
             <div class ="col"></div>
            </div>
                    <div class="form-group">
-                            <x-jet-label value="* Numero de Factura {{$pago->id}}" />
-                            <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
-                            <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
-                        </div>
+                        <x-jet-label value="* Numero de Factura {{$pago->id}}" />
+                        <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
+                        <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                    </div>
+                    <div class="divCant"> 
+                 <div class="form-group" >
+                      <x-jet-label value="Cantidad a pagar" />
+                    $ <x-jet-input type="number" min="0" name="amount[]" /> 
+                         </div></div>
                     
     @endforeach
              
- 
+                   
 
                         <div class="form-group">
                             <x-jet-label value="tipo_cambio" />
@@ -180,10 +194,23 @@
 
 
 @section('js')
+
+<script>
+    $(".formaxd").on("submit", function(){
+        var o = document.getElementById('otra');
+        if(o.value==1){
+        return confirm("Estas apunto de pagar una cantidad distinta a la programada, ¿Es correcta?");}
+    });
+</script>
+
 <script>
 const inFile = document.getElementById("comp");
-
+const collection = document.getElementsByClassName("divCant");
+for (let i = 0; i < collection.length; i++) {
+  collection[i].style.display = "none";
+}
 inFile.addEventListener("change", mostrar);
+
 
 function mostrar(){
     document.getElementById("btn").style.display="flex";
@@ -193,5 +220,28 @@ function mostrar(){
 function openPDF(){
 window.open("{{ asset('storage/'.$pay->id.'.pdf') }}");
 }
+
+function programado(myRadio) {
+    var coll = document.getElementsByClassName("divCant");
+for (let i = 0; i < coll.length; i++) {
+  coll[i].style.display = "none";
+}
+
+var o = document.getElementById('otra');
+o.value=0;
+console.log(o.value);
+}
+function otra(myRadio) {
+
+var coll = document.getElementsByClassName("divCant");
+for (let i = 0; i < coll.length; i++) {
+  coll[i].style.display = "block";
+}
+var o = document.getElementById('otra');
+o.value=1;
+console.log(o.value);
+    }
+
+
 </script>
 @stop

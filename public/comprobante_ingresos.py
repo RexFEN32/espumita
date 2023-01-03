@@ -5,7 +5,7 @@ import xlsxwriter
 import pandas as pd
 import sys
 import mysql.connector
-id=str(sys.argv[1])
+ncomp=str(sys.argv[1])
 # initialize list of lists
 cnx = mysql.connector.connect(user='tyrsa',
                               password='1234',
@@ -14,10 +14,10 @@ cnx = mysql.connector.connect(user='tyrsa',
                               database='u458219132_tyrsawesadmin',
                               use_pure=False)
 
-query = ('SELECT p.date, p.banco, p.nfactura, i.invoice, c.customer, coins.code, p.tipo_cambio, p.amount, p.ncomp, p.capturista FROM customers as c inner join internal_orders as i on i.customer_id = c.id inner join payments as p on p.order_id=i.id inner join coins on coins.id = i.coin_id WHERE c.id = '+str(id)+" and p.status= 'pagado';")
+query = ('SELECT p.date, p.banco, p.nfactura, i.invoice, c.customer, coins.code, p.tipo_cambio, p.amount, p.ncomp, p.capturista FROM customers as c inner join internal_orders as i on i.customer_id = c.id inner join payments as p on p.order_id=i.id inner join coins on coins.id = i.coin_id WHERE p.ncomp = '+str(ncomp)+" and p.status= 'pagado';")
 pagos=pd.read_sql(query,cnx)
 
-writer = pd.ExcelWriter("storage/report/comprobante_ingresos"+str(id)+".xlsx", engine='xlsxwriter')
+writer = pd.ExcelWriter("storage/report/comprobante_ingresos"+str(ncomp)+".xlsx", engine='xlsxwriter')
 pagos[["date","banco"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=2, header=False, index=False)
 pagos[["nfactura","invoice","customer"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=4, header=False, index=False)
 pagos[["code","tipo_cambio","amount"]].to_excel(writer, sheet_name='Sheet1', startrow=7,startcol=8, header=False, index=False)
@@ -145,11 +145,11 @@ workbook.close()
 
 import excel2img
 
-excel2img.export_img('storage/report/comprobante_ingresos'+str(id)+'.xlsx','storage/report/comprobante_ingresos'+str(id)+'.png')
+excel2img.export_img('storage/report/comprobante_ingresos'+str(ncomp)+'.xlsx','storage/report/comprobante_ingresos'+str(ncomp)+'.png')
 from PIL import Image
-image_1 = Image.open('storage/report/comprobante_ingresos'+str(id)+'.png',)
+image_1 = Image.open('storage/report/comprobante_ingresos'+str(ncomp)+'.png',)
 im_1 = image_1.convert('RGB')
-im_1.save('storage/report/comprobante_ingresos'+str(id)+'.pdf')
+im_1.save('storage/report/comprobante_ingresos'+str(ncomp)+'.pdf')
 
 
 

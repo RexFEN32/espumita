@@ -169,74 +169,9 @@ en tiempo
         </table>
         <br><br>
 
-PAGOS POR CANTIDAD
-<br>
-
-  <table>
-        @foreach($multipagos as $pago)
-        @if($pago->customer_id == $row->id)
-                <tr style = "font-size : 14px; margin : 15px" >
-
-                   <td>
-                   {{$pago->invoice}}
-                   <br>
-                    </td>
-                    <td>
-                   {{$pago->concept}}
-                    </td>
-                    <td>
-                    {{$row->symbol}}{{number_format($pago->amount)}}
-                    </td>
-                    <td>
-                   {{$pago->date}}
-                    </td>
-                    <td>
-                   {{$pago->nota}}
-                    </td>
-                    <td>
-                    @php {{
-                      $fecha = new DateTime($pago->date);
-                    }}@endphp
-
-                    @if($pago->status == 'pagado')
-                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button"> <span class="badge badge-success">Pagado</span> </button>
-                        </a> 
-                      
-                      @else
-                      @if( now() > $fecha)
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button" type="button"> <span class="badge badge-danger">atrasado</span> </button>
-                      </a>  
-                    @else
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button" type="button"> <span class="badge badge-info">por cobrar</span> </button>
-                      </a>
-                      @endif     
-                    @endif           
-                    </td>
-
-                    <td>
-                    <br>
-                    </td>
-                    
-                </tr>
-
-
-@if($fecha >= now())
-en tiempo
-@endif
-
-                @endif
-              
-        @endforeach
-        </table>
         <br>
         <button type="submit" class="btn btn-blue">PAGAR SELECCIONADOS</button>
         
-        <a href="{{route('payments.pay_amount_actualize',$row->id)}}">
-        <button type="button" class="btn btn-blue">PAGAR CANTIDAD</button>
-        </a>
     </div>
     </form>
   </div>

@@ -147,10 +147,17 @@ class PaymentsController extends Controller
         
     public function comprobante_ingresoS()
         {
-            $clientes =  Customer::all();
+            $comprobantes =  DB::table('payments')
+            ->join('internal_orders','internal_orders.id','payments.order_id')
+            ->join('customers','customers.id','internal_orders.customer_id')
+            ->select('payments.ncomp','customers.customer')
+            ->whereNotNull('payments.ncomp')
+            ->distinct('payments.ncomp')
+            ->orderBy('customers.customer')
+            ->get();
         
         return view('reportes.comprobante_ingresos', compact(
-            'clientes',  
+            'comprobantes',  
         ));}
     
 
@@ -210,6 +217,7 @@ class PaymentsController extends Controller
         $url =  "'/".$pay->id.".pdf'";
         $pagos = $request->pago;
         $ordenes= InternalOrder::where('customer_id',$cliente->id)->get();
+        $incorrecto='NO';
         return view('accounting.multi_pay_actualize', compact(
             'pay',
             'npagos',
@@ -217,7 +225,7 @@ class PaymentsController extends Controller
             'cliente',
             'pagos',
             'pays',
-            'ordenes'
+            'ordenes',
         ));
     }
     public function pay_amount_actualize($id)
@@ -319,6 +327,24 @@ class PaymentsController extends Controller
         $pay->tipo_cambio=$request->tipo_cambio;
         $pay->capturista=Auth::user()->name;
         $pay->ncomp = $request->pagos[0];
+        if($request->otra ==1){
+            
+            $original=$pay->amount;
+            if($request->amount[$i]>$original) {
+                return $this->index();
+            }  
+
+            $pay->amount=$request->amount[$i];
+            $restante=new payments();
+            $restante->date =$pay->date;
+            $restante->order_id =$pay->order_id;
+            $restante->concept =$pay->concept.'(restante)';
+            $restante->date =$pay->date;
+            $restante->amount =$original - $request->amount[$i];
+            $restante->status='por cobrar';
+            $restante->percentage=($pay->percentage * ($original - $request->amount[$i]))/$original;
+            $restante->save();
+        }
         $pay->save();
        
 
