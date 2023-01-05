@@ -3,7 +3,7 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
+    <h1 class="font-bold"> <i class="fa-solid fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
 @stop
 
 @section('content')
@@ -15,6 +15,8 @@
                         <tr>
                             <td rowspan="4">
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
+                               <img src="{{asset('vendor/logo.png')}}" alt="TYRSA">
+                        
                             </td>
                         </tr>
                         <tr>
@@ -34,6 +36,7 @@
                     </table>
                 </div>
             </div>
+            <i class="fas fa-yin-yang"></i>
             <div class="row p-4">
                 <div class="col-sm-9 col-xs-12 font-bold text-sm">
                     <table>
