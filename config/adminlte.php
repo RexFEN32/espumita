@@ -335,7 +335,7 @@ return [
         ],
         [
             'text' => 'CUENTAS POR COBRAR',
-            'icon' => 'fa-solid fa-money-check fa-fw',
+            'icon' => 'fas fa-money-check fa-fw',
             'url' => 'cuentas_cobrar',
             'route'  => 'cuentas_cobrar',
             'can' => 'VER CUENTAS X COBRAR',
@@ -343,7 +343,7 @@ return [
         
         [
             'text' => 'CUENTAS COBRADAS',
-            'icon' => 'fa-solid fa-money-check fa-fw',
+            'icon' => 'fas fa-money-check fa-fw',
             
             'route'  => 'payed_accounts',
             'can' => 'VER APLICACIONES DE PAGO',
