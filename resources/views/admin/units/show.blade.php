@@ -3,14 +3,14 @@
 @section('title', 'EDITAR UNIDADES')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-ruler"></i>&nbsp; Unidad de Medida</h1>
+    <h1 class="font-bold"><i class="fas fa-ruler"></i>&nbsp; Unidad de Medida</h1>
 @stop
 
 @section('content')
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fa-solid fa-edit"></i>&nbsp; Editar Unidad de Medida:
+                <i class="fas fa-edit"></i>&nbsp; Editar Unidad de Medida:
             </h5>
         </div>
         <form action="{{ route('units.update', $Units->id)}}" method="POST" enctype="multipart/form-data">
@@ -33,10 +33,10 @@
             </div>
             <div class="col-12 text-right p-2 shadow-lg gap-2">
                 <a href="{{ route('units.index')}}" class="btn btn-green mb-2">
-                    <i class="fa-solid fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
+                    <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
                 </a>
                 <button type="submit" class="btn btn-red mb-2">
-                    <i class="fa-solid fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
+                    <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
                 </button>
             </div>
         </div>

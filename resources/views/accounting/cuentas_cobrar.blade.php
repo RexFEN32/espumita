@@ -3,7 +3,7 @@
 @section('title', 'Cuentas por Cobrar')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
 @stop
 
 @section('content')
@@ -43,7 +43,7 @@
 <br>
 <span class="float-left">
 <button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fa-solid fa-user fa-2x" ></i></span>
+    <i class="fas fa-user fa-2x" ></i></span>
              &nbsp; &nbsp;
     <p>{{$row->customer}}</p></button></td>
 
@@ -186,7 +186,7 @@ en tiempo
 @foreach ($Orders as $row)
 <br>
 <button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fa-solid fa-file fa-2x" ></i>
+    <i class="fas fa-file fa-2x" ></i>
              &nbsp; &nbsp;
     <p>{{$row->invoice}}</p></button></td>
     <div class="collapse" id="collapseExample{{$row->id}}">

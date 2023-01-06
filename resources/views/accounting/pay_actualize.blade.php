@@ -3,7 +3,7 @@
 @section('title', 'Cuentas por Cobrar')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
 @stop
 
 @section('content')
@@ -116,7 +116,7 @@
                          </div>
                          <br>
                 <button   type="submit" class="btn btn-green mb-2" id="btn"  onclick="guardar()" style="display: none">
-                <i class="fa-solid fa-usd fa-2x" ></i>
+                <i class="fas fa-usd fa-2x" ></i>
                 
                          &nbsp; &nbsp;
                 <p>Marcar como Pagado</p></button>
@@ -160,7 +160,7 @@
               </table>
               <br><br><br>
              <button type="button" onclick = "openPDF()"  class="btn btn-blue" > 
-             <i class="fa-solid fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
+             <i class="fas fa-eye fa-2x"></i> &nbsp; Ver comprobante  </button>
              
              <br><br><br> <br>
              <div class="col" style="background-color : #d9d9d9 ; width : 220px ; align-self: center; ">  

@@ -3,7 +3,7 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
+    <h1 class="font-bold"><i class="fas fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="col-sm-12 text-right">
                 @can('CREAR PEDIDOS')
                 <a href="{{ route('internal_orders.create')}}" class="btn btn-green">
-                    <i class="fa-solid fa-plus-circle"></i>&nbsp; Nuevo
+                    <i class="fas fa-plus-circle"></i>&nbsp; Nuevo
                 </a>
                 @endcan
             </div>
@@ -44,7 +44,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $row->id)}}">
-                                            <i class="fa-solid fa-eye btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-eye btn btn-blue w-9 h-9"></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -56,7 +56,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fa-solid fa-trash items-center"></i>
+                                                <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>
                                         @endcan
@@ -68,7 +68,7 @@
                                             @csrf
                                             <x-jet-input type="hidden" name="order_id" value="{{ $row->id}}"/>
                                             <button type="submit" class="btn btn-green h-9 w-9">
-                                                <i class="fa-solid fa-percent items-center"></i>
+                                                <i class="fas fa-percent items-center"></i>
                                             </button>
                                         </form>
                                        

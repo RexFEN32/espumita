@@ -3,14 +3,14 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-clipboard-check"></i>&nbsp; Pedido Interno</h1>
+    <h1 class="font-bold"><i class="fas fa-clipboard-check"></i>&nbsp; Pedido Interno</h1>
 @stop
 
 @section('content')
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fa-solid fa-plus-circle"></i>&nbsp; Agregar Pedido Interno:
+                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Pedido Interno:
             </h5>
         </div>
         <form action="{{ route('internal_orders.store')}}" method="POST" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-12 text-right p-3">
                                         <a href="{{ route('tempitems.create_item', $TempInternalOrders->id) }} " class="btn btn-green">
-                                            <i class="fa-solid fa-plus-circle"></i>&nbsp; Agregar Partida
+                                            <i class="fas fa-plus-circle"></i>&nbsp; Agregar Partida
                                         </a>
                                     </div>
                                     <div class="col-sm-12 table-responsive">
@@ -102,10 +102,10 @@
             </div>
             <div class="col-12 text-right p-2 gap-2">
                 {{--  <a href="{{ route('internal_orders.index')}}" class="btn btn-black mb-2">
-                    <i class="fa-solid fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
+                    <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
                 </a>  --}}
                 <button type="submit" class="btn btn-green mb-2">
-                    <i class="fa-solid fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
+                    <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
                 </button>
             </div>
         </div>

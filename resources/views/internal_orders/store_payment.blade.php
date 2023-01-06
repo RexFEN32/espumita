@@ -3,7 +3,7 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CONDICIONES DE PAGO</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CONDICIONES DE PAGO</h1>
 @stop
 
 @section('content')
@@ -198,7 +198,7 @@
                                         </div>
     <div class ="col">@can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $InternalOrders->id)}}">
-                                            <i class="fa-solid fa-eye btn btn-blue ">Ver Detalles</i></span>
+                                            <i class="fas fa-eye btn btn-blue ">Ver Detalles</i></span>
                                         </a>
                                         @endcan</div>
   </div>

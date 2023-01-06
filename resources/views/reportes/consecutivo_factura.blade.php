@@ -3,7 +3,7 @@
 @section('title', 'Reportes')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-file"></i>&nbsp; CONSECUTIVO FACTURAS</h1>
+    <h1 class="font-bold"><i class="fas fa-file"></i>&nbsp; CONSECUTIVO FACTURAS</h1>
 @stop
 
 @section('content')

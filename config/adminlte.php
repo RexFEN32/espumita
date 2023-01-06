@@ -168,7 +168,7 @@ return [
     */
 
     'right_sidebar' => false,
-    'right_sidebar_icon' => 'fa-solid s fa-co',
+    'right_sidebar_icon' => 'fas s fa-co',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
@@ -242,71 +242,71 @@ return [
         ],
         [
             'text' => 'CATÁLOGOS',
-            'icon' => 'fa-solid fa-list fa-fw',
+            'icon' => 'fas fa-list fa-fw',
             'submenu' => [
                 [
                     'text' => ' ROLES',
-                    'icon' => 'fa-solid fa-user-lock fa-fw',
+                    'icon' => 'fas fa-user-lock fa-fw',
                     'route'  => 'roles.index',
                     'can'  => 'VER ROLES',
                 ],
                 [
                     'text' => ' USUARIOS',
-                    'icon' => 'fa-solid fa-users fa-fw',
+                    'icon' => 'fas fa-users fa-fw',
                     'route'  => 'users.index',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' EMPRESA',
-                    'icon' => 'fa-solid fa-industry fa-fw',
+                    'icon' => 'fas fa-industry fa-fw',
                     'route'  => 'company_profiles.index',
                     'can'  => 'VER EMPRESAS',
                 ],
                 [
                     'text' => ' CONFIGURACIÓN',
-                    'icon' => 'fa-solid fa-cogs fa-fw',
+                    'icon' => 'fas fa-cogs fa-fw',
                     'route'  => 'settings.index',
                     'can'  => 'VER CONFIGURACIONES',
                 ],
                 [
                     'text' => ' MONEDAS',
-                    'icon' => 'fa-solid fa-money-bill-1 fa-fw',
+                    'icon' => 'fas fa-money-bill-1 fa-fw',
                     'route'  => 'coins.index',
                     'can'  => 'VER MONEDAS',
                 ],
                 [
                     'text' => 'CLIENTES',
-                    'icon' => 'fa-solid fa-users-cog fa-fw',
+                    'icon' => 'fas fa-users-cog fa-fw',
                     'route'  => 'customers.index',
                     'can'  => 'VER CLIENTES',
                 ],
                 [
                     'text' => 'UNIDADES DE MEDIDA',
-                    'icon' => 'fa-solid fa-ruler fa-fw',
+                    'icon' => 'fas fa-ruler fa-fw',
                     'route'  => 'units.index',
                     'can'  => 'VER UNIDADES',
                 ],
                 [
                     'text' => 'FAMILIAS',
-                    'icon' => 'fa-solid fa-people-roof fa-fw',
+                    'icon' => 'fas fa-people-roof fa-fw',
                     'route'  => 'families.index',
                     'can'  => 'VER FAMILIAS',
                 ],
                 [
                     'text' => 'NIVEL AUTORIZACIÓN',
-                    'icon' => 'fa-solid fa-fingerprint fa-fw',
+                    'icon' => 'fas fa-fingerprint fa-fw',
                     'route'  => 'authorizations.index',
                     'can'  => 'VER AUTORIZACIONES',
                 ],
                 // [
                 //     'text' => 'CONTACTOS',
-                //     'icon' => 'fa-solid fa-user-tie fa-fw',
+                //     'icon' => 'fas fa-user-tie fa-fw',
                 //     'route'  => 'customer_contacts.index',
                 //     'can'  => 'VER CONTACTOS',
                 // ],
                 [
                     'text' => 'VENDEDORES',
-                    'icon' => 'fa-solid fa-user-tag fa-fw',
+                    'icon' => 'fas fa-user-tag fa-fw',
                     'route'  => 'sellers.index',
                     'can'  => 'VER VENDEDORES',
                 ],
@@ -322,7 +322,7 @@ return [
         ],
         [
             'text' => 'PEDIDO INTERNO',
-            'icon' => 'fa-solid fa-clipboard-check fa-fw',
+            'icon' => 'fas fa-clipboard-check fa-fw',
             'route'  => 'internal_orders.index',
             'can'  => 'VER PEDIDOS',
         ],
@@ -351,7 +351,7 @@ return [
         
         [
             'text' => 'INTERFASE ASPEL COI',
-            'icon' => 'fa-solid fa-money-check fa-fw',
+            'icon' => 'fas fa-money-check fa-fw',
             
             'route'  => 'payed_accounts',
             'can' => 'VER APLICACIONES DE PAGO',
@@ -362,47 +362,47 @@ return [
         ],
         [
             'text' => 'REPORTES',
-            'icon' => 'fa-solid fa-list fa-fw',
+            'icon' => 'fas fa-list fa-fw',
             'submenu' => [
                 [
                     'text' => ' CONTRAPORTADA',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.contraportada',
                     //'can'  => 'VER ROLES',
                 ],
                 [
                     'text' => ' CUENTAS POR CORBRAR',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.cuentas_cobrar',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' CONSECUTIVO DE PEDIDOS INTERNOS',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'payments.consecutivo_pedido',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' FACTURA RESUMIDA',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.factura_resumida',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' CONSECUTIVO DE FACTURAS',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.consecutivo_factura',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' COMPROBANTE DE INGRESOS VENTAS',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.comprobante_ingresos',
                     'can'  => 'VER USUARIOS',
                 ],
                 [
                     'text' => ' CONSECUTIVO DE COMPROBANTES DE INGRESOS',
-                    'icon' => 'fa-solid fa-file fa-fw',
+                    'icon' => 'fas fa-file fa-fw',
                     'route'  => 'reportes.consecutivo_comprobante',
                     'can'  => 'VER USUARIOS',
                 ],

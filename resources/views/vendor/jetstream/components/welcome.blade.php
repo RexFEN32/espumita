@@ -15,7 +15,7 @@
 <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-1">
     {{-- Título intercambiable del layout --}}
     <div class="p-6 flex items-center">
-        <i class="fa-solid fa-calculator fa-xl text-gray-400"></i>
+        <i class="fas fa-calculator fa-xl text-gray-400"></i>
         <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="">Órdenes</a></div>
     </div>
 

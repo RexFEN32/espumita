@@ -3,14 +3,14 @@
 @section('title', 'EDITAR PERFIL DE COMPAÑÍA')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-industry"></i>&nbsp; Perfil</h1>
+    <h1 class="font-bold"><i class="fas fa-industry"></i>&nbsp; Perfil</h1>
 @stop
 
 @section('content')
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fa-solid fa-edit"></i>&nbsp; Editar Perfil de Compañía:
+                <i class="fas fa-edit"></i>&nbsp; Editar Perfil de Compañía:
             </h5>
         </div>
         <form action="{{ route('company_profiles.update', $CompanyProfiles->id)}}" method="POST" enctype="multipart/form-data">
@@ -123,10 +123,10 @@
             <div class="row">
                 <div class="col-sm-12 text-right p-4">
                     <a href="{{ route('company_profiles.index')}}" class="btn btn-blue mb-2">
-                        <i class="fa-solid fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
+                        <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
                     </a>
                     <button type="submit" class="btn btn-green mb-2">
-                        <i class="fa-solid fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
+                        <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
                     </button>
                 </div>
             </div>

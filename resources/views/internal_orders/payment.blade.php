@@ -3,7 +3,7 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CONDICIONES DE PAGO</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CONDICIONES DE PAGO</h1>
     
 @stop
 
@@ -124,7 +124,7 @@
     <br><br>
 
     <button   type="button" class="btn btn-green mb-2"  onclick="guardar()">
-                <i class="fa-solid fa-save fa-2x" ></i>
+                <i class="fas fa-save fa-2x" ></i>
                          &nbsp; &nbsp;
                 <p>Guardar Porcentaje de Avance</p></button>
  

@@ -3,7 +3,7 @@
 @section('title', 'Cuentas por Cobrar')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
 @stop
 
 @section('content')
@@ -32,7 +32,7 @@
             <div style="color : red; size : 20px; width : bolder">
             Estas a punto de cancelar el pago con id {{$pay->id}} asociado al concepto {{$pay->concept}}
             de la orden {{$order->invoice}} del cliente {{$order->customer}}, es nescesaria una autorizacion.
-            <i class="fa-solid fa-exclamation-triangle fa-2xl" ></i>
+            <i class="fas fa-exclamation-triangle fa-2xl" ></i>
             </div>
             
                 </div>

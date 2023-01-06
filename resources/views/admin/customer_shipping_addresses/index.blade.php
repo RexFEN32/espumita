@@ -3,7 +3,7 @@
 @section('title', 'DIRECCIONES')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-money-bill-1"></i>&nbsp; DIRECCIONES</h1>
+    <h1 class="font-bold"><i class="fas fa-money-bill-1"></i>&nbsp; DIRECCIONES</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="col-sm-12 text-right">
                 @can('CREAR DIRECCIONES')
                 <a href="{{ route('customers_shipping_address.create')}}" class="btn btn-green">
-                    <i class="fa-solid fa-plus-circle"></i>&nbsp; Nueva
+                    <i class="fas fa-plus-circle"></i>&nbsp; Nueva
                 </a>
                 @endcan
             </div>
@@ -42,7 +42,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR DIRECCIONES')
                                         <a href="{{ route('customers_shipping_address.edit', $row->id)}}">
-                                            <i class="fa-solid fa-edit btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -52,7 +52,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fa-solid fa-trash items-center"></i>
+                                                <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>
                                         @endcan

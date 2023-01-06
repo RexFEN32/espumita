@@ -3,7 +3,7 @@
 @section('title', 'PERFIL DE COMPAÑÍA')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fa-solid fa-industry"></i>&nbsp; COMPAÑÍA</h1>
+    <h1 class="font-bold"><i class="fas fa-industry"></i>&nbsp; COMPAÑÍA</h1>
 @stop
 
 @section('content')
@@ -13,11 +13,11 @@
                 @can('CREAR EMPRESAS')
                 @if ($CompanyProfiles)
                     <a class="btn btn-disabled">
-                        <i class="fa-solid fa-plus-circle"></i>&nbsp; Agregar
+                        <i class="fas fa-plus-circle"></i>&nbsp; Agregar
                     </a>
                 @else
                     <a href="{{ route('company_profiles.create')}}" class="btn btn-green">
-                        <i class="fa-solid fa-plus-circle"></i>&nbsp; Agregar
+                        <i class="fas fa-plus-circle"></i>&nbsp; Agregar
                     </a>
                 @endif
                 @endcan
@@ -70,7 +70,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR EMPRESAS')
                                         <a href="{{ route('company_profiles.edit', $row->id)}}">
-                                            <i class="fa-solid fa-edit btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -80,7 +80,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fa-solid fa-trash items-center"></i>
+                                                <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>
                                         @endcan
