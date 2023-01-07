@@ -7,11 +7,11 @@ import sys
 import mysql.connector
 ncomp=str(sys.argv[1])
 # initialize list of lists
-cnx = mysql.connector.connect(user='tyrsa',
-                              password='1234',
+cnx = mysql.connector.connect(user='root',
+                              password='mynewpassword',
                               host='localhost',
                               port='3306',
-                              database='u458219132_tyrsawesadmin',
+                              database='intord',
                               use_pure=False)
 
 query = ('SELECT p.date, p.banco, p.nfactura, i.invoice, c.customer, coins.code, p.tipo_cambio, p.amount, p.ncomp, p.capturista FROM customers as c inner join internal_orders as i on i.customer_id = c.id inner join payments as p on p.order_id=i.id inner join coins on coins.id = i.coin_id WHERE p.ncomp = '+str(ncomp)+" and p.status= 'pagado';")
