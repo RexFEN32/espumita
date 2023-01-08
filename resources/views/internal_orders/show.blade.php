@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'PEDIDO INTERNO')
+@section('title', 'PEDIDOS INTERNOS')
 
 @section('content_header')
     <h1 class="font-bold"> <i class="fas fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
