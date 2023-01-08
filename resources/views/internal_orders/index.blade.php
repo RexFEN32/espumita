@@ -45,7 +45,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $row->id)}}">
-                                            <i class="fa-solid fa-eye btn btn-blue  "></i></span>
+                                            <i class="fas fa-eye btn btn-blue  "></i></span>
                                         </a>
                                         @endcan
                                     </div>

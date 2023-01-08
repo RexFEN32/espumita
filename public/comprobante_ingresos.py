@@ -143,13 +143,13 @@ worksheet.conditional_format(xlsxwriter.utility.xl_range(7, 2, 6+len(pagos), 14)
 
 workbook.close()
 
-import excel2img
+#""" import excel2img"""  """
 
-excel2img.export_img('storage/report/comprobante_ingresos'+str(ncomp)+'.xlsx','storage/report/comprobante_ingresos'+str(ncomp)+'.png')
-from PIL import Image
-image_1 = Image.open('storage/report/comprobante_ingresos'+str(ncomp)+'.png',)
-im_1 = image_1.convert('RGB')
-im_1.save('storage/report/comprobante_ingresos'+str(ncomp)+'.pdf')
+#excel2img.export_img('storage/report/comprobante_ingresos'+str(ncomp)+'.xlsx','storage/report/comprobante_ingresos'+str(ncomp)+'.png')
+#from PIL import Image
+#image_1 = Image.open('storage/report/comprobante_ingresos'+str(ncomp)+'.png',)
+#im_1 = image_1.convert('RGB')
+#im_1.save('storage/report/comprobante_ingresos'+str(ncomp)+'.pdf')
 
-
+ #"""
 

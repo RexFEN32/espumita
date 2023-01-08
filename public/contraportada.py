@@ -3,11 +3,11 @@ import sys
 import mysql.connector
 id=str(sys.argv[1])
 # initialize list of lists
-cnx = mysql.connector.connect(user='tyrsa',
-                              password='1234',
+cnx = mysql.connector.connect(user='root',
+                              password='mynewpassword',
                               host='localhost',
                               port='3306',
-                              database='u458219132_tyrsawesadmin',
+                              database='intord',
                               use_pure=False)
 
 query = ('SELECT * from payments')
