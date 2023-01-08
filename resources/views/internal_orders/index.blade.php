@@ -44,7 +44,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $row->id)}}">
-                                            <i class="fas fa-eye btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fa-solid fa-eye btn btn-blue  "></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -55,7 +55,7 @@
                                         <form class="DeleteReg" action="{{ route('internal_orders.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
+                                            <button type="submit" class="btn btn-red ">
                                                 <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>
@@ -67,7 +67,7 @@
                                         <form action="{{ route('internal_orders.pagos', $row->id) }}" method="POST">
                                             @csrf
                                             <x-jet-input type="hidden" name="order_id" value="{{ $row->id}}"/>
-                                            <button type="submit" class="btn btn-green h-9 w-9">
+                                            <button type="submit" class="btn btn-green">
                                                 <i class="fas fa-percent items-center"></i>
                                             </button>
                                         </form>

@@ -335,7 +335,7 @@ return [
         ],
         [
             'text' => 'CUENTAS POR COBRAR',
-            'icon' => 'fas fa-money-check fa-fw',
+            'icon' => 'fas fa-money-check',
             'url' => 'cuentas_cobrar',
             'route'  => 'cuentas_cobrar',
             'can' => 'VER CUENTAS X COBRAR',
