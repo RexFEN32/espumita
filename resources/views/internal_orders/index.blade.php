@@ -18,7 +18,7 @@
                 @endcan
             </div>
             <div class="w-100">&nbsp;</div>
-            <div class="col-sm-12 table-responsive">
+            <div class="col-6 col-sm-12 table-responsive">
                 <table class="table tableinternalorders table-striped text-xs font-medium">
                     <thead>
                         <tr class="text-center">
