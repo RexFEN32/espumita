@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1 class="font-bold"><i class="fas fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
-    {{ HTML::style('fonts/font-awesome.min.css') }}
+    <link href="{{ asset('css/font-awesome.css')}}" rel="stylesheet">
 @stop
 
 @section('content')
