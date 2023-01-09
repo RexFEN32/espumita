@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1 class="font-bold"><i class="fas fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
-    <link href="{{ asset('css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{ asset('fontawesome-free/css/font-awesome.css')}}" rel="stylesheet">
 @stop
 
 @section('content')
