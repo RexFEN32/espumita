@@ -13,31 +13,40 @@
                 <i class="fas fa-plus-circle"></i>&nbsp; Editar Pedido Interno:
             </h5>
         
-        <form action="{{ route('internal_orders.shipment')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('internal_orders.redefine_order')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <x-jet-input type="hidden" name="internal_order_id" value=""/>
+        <x-jet-input type="hidden" name="internal_order_id" value="{{$InternalOrders->id}}"/>
         <div class="col-12 text-right p-2 gap-2">
+        <div class="form-group">
+                                        <x-jet-label value="* Cliente" />
+                                        <select class="form-capture  w-full text-xs uppercase" name="customer_id">
+                                            @foreach ($Customers as $row)
+                                                <option value="{{$row->id}}" @if ($row->id == $InternalOrders->customer_id) selected @endif >{{$row->customer}}</option>
+                                            @endforeach
+                                        </select>
+                                        <x-jet-input-error for='customer_id' />
+                                    </div>
             <div class="row">
                             
                                      
                             <div class="col-sm-3 col-xs-12">   
                             <div class="form-group">
                                <x-jet-label value="* Fecha de Emisión " />
-                               <x-jet-input type="date" name="reg_date" required class="w-full text-xs" value="{{ $hoy->format('Y-m-d') }}"/>
+                               <x-jet-input type="date" name="reg_date" required class="w-full text-xs" value="{{ $InternalOrders->reg_date }}"/>
                                
                            </div>
                            </div>
                        <div class="col-sm-3 col-xs-12">
                            <div class="form-group">
                                <x-jet-label value="* Entrega de Equipo" />
-                               <x-jet-input type="date" name="date_delivery" required class="w-full text-xs" value="{{ old('date_delivery') }}"/>
+                               <x-jet-input type="date" name="date_delivery" required class="w-full text-xs" value="{{  $InternalOrders->date_delivery }}"/>
                                <x-jet-input-error for='date_delivery' />
                            </div>
                        </div>
                        <div class="col-sm-3 col-xs-12">
                            <div class="form-group">
                                <x-jet-label value="* Entrega de la Instalación" />
-                               <x-jet-input type="date" name="instalation_date" required class="w-full text-xs" value="{{ old('instalation_date') }}"/>
+                               <x-jet-input type="date" name="instalation_date" required class="w-full text-xs" value="{{  $InternalOrders->instalation_date}}"/>
                                <x-jet-input-error for='instalation_date' />
                            </div>
                        </div>
@@ -47,7 +56,7 @@
                                <x-jet-label value="* Tipo de Moneda" />
                                <select class="form-capture  w-full text-xs uppercase" required name="coin_id">
                                    @foreach ($Coins as $row)
-                                       <option value="{{$row->id}}" @if ($row->id == old('coin_id')) selected @endif >{{$row->coin}}</option>
+                                       <option value="{{$row->id}}" @if ($row->id == $InternalOrders->coin_id) selected @endif >{{$row->coin}}</option>
                                    @endforeach
                                </select>
                                <x-jet-input-error for='coin_id' />
@@ -104,14 +113,14 @@
                                <x-jet-label value="* Vendedor" />
                                <select class="form-capture  w-full text-xs uppercase" name="seller_id">
                                    @foreach ($Sellers as $row)
-                                       <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
+                                       <option value="{{$row->id}}" @if ($row->id == $InternalOrders->seller_id) selected @endif >{{$row->seller_name}}</option>
                                    @endforeach
                                </select>
                                <x-jet-input-error for='seller_id' />
                            </div>
                            <div class="form-group">
                                <x-jet-label value="* Comision del Vendedor" />
-                               <input type="number" name="comision" style='width: 10%;'> %
+                               <input type="number" name="comision" style='width: 10%;' value="{{$InternalOrders->comision}}"> %
                                <x-jet-input-error for='seller_id' />
                            </div>
                            <div class="form-group">

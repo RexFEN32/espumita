@@ -672,4 +672,46 @@ class InternalOrderController extends Controller
     {
         //
     }
+    public function redefine(Request $request)
+    {
+        $id=$request->internal_order_id;
+        $InternalOrders = InternalOrder::find($id);
+        $pagos=payments::where('order_id',$id)->delete();
+        $signatures=signatures::where('order_id',$id)->delete();
+        //reasignarle Todo
+        $InternalOrders->customer_id=$request->customer_id;
+        $InternalOrders->coin_id=$request->coin_id;
+        $InternalOrders->seller_id=$request->seller_id;
+        $InternalOrders->reg_date=$request->reg_date;
+        $InternalOrders->date_delivery=$request->date_delivery;
+        $InternalOrders->instalation_date=$request->instalation_date;
+        $InternalOrders->payment_conditions=$request->payment_conditions;
+        $InternalOrders->save();
+        $Signature=new signatures();
+            $Signature->order_id = $InternalOrders->id;
+            $Signature->auth_id = 2;
+            $Signature->save();
+            if($InternalOrders->subtotal >= 500000){
+                    $Signature=new signatures();
+                    //$Signature->order_id = $InternalOrders->id;
+                    //$Signature->auth_id = 5;
+                    //$Signature->save(); 
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 3;
+                    $Signature->save(); 
+                    $Signature=new signatures();
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 4;
+                    $Signature->save(); 
+                 }
+            if($InternalOrders->subtotal >= 5000000){
+                    $Signature=new signatures();
+                    $Signature->order_id = $InternalOrders->id;
+                    $Signature->auth_id = 6;
+                    $Signature->save(); 
+                 }
+        return $this->payment($id);
+    }
 }
+
+
