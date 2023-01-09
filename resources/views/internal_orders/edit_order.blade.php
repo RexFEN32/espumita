@@ -12,11 +12,11 @@
             <h5 class="card-title p-2">
                 <i class="fas fa-plus-circle"></i>&nbsp; Editar Pedido Interno:
             </h5>
-        </div>
+        
         <form action="{{ route('internal_orders.shipment')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-jet-input type="hidden" name="internal_order_id" value=""/>
-            <div class="col-12 text-right p-2 gap-2">
+        <div class="col-12 text-right p-2 gap-2">
             <div class="row">
                             
                                      
@@ -126,8 +126,54 @@
                            </div>
                        </div>
                   
-                <button type="submit" class="btn btn-green mb-2">
-                    <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Siguiente
+               
+        <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12 text-right p-3">
+                                        <a href="{{ route('tempitems.create_item', $InternalOrders->id) }} " class="btn btn-green">
+                                            <i class="fas fa-plus-circle"></i>&nbsp; Agregar Partida
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-12 table-responsive">
+                                        <table class="table tableitems table-striped text-xs font-medium">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>Pda</th>
+                                                    <th>Cant</th>
+                                                    <th>Unidad</th>
+                                                    <th>Familia</th>
+                                                    <th>Clave</th>
+                                                    <th>Descripción</th>
+                                                    <th>P. U.</th>
+                                                    <th>Importe</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($Items as $row)
+                                                <tr class="text-center">
+                                                    <td>{{ $row->item }}</td>
+                                                    <td>{{ $row->amount }}</td>
+                                                    <td>{{ $row->unit }}</td>
+                                                    <td>{{ $row->family }}</td>
+                                                    <td>{{ $row->code }}</td>
+                                                    <td>{{ $row->description }}</td>
+                                                    <td class="text-right">$ {{ number_format($row->unit_price, 2) }}</td>
+                                                    <td class="text-right">$ {{ number_format($row->import, 2) }}</td>
+                                                    <td><a href="{{ route('tempitems.edit_item', $row->id) }} " class="btn btn-green">
+                                                        <button type = "button" class="btn btn-green "> <i class="fas fa-edit"></i> </button>
+                                                   </a></td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        {{--  <x-jet-input type="hidden" name="item" class="w-flex text-xs" value="{{ $ITEM }}"/>
+                                        <x-jet-input-error for='item' />  --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-green mb-2">
+                    <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Guardar Cambios
                 </button>
                 <a href="{{ route('internal_orders.index')}}" class="btn btn-red mb-2">
                     <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
