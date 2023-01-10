@@ -686,6 +686,7 @@ class InternalOrderController extends Controller
         $InternalOrders->date_delivery=$request->date_delivery;
         $InternalOrders->instalation_date=$request->instalation_date;
         $InternalOrders->payment_conditions=$request->payment_conditions;
+        $InternalOrders->status="CAPTURADO";
         $InternalOrders->save();
         $Signature=new signatures();
             $Signature->order_id = $InternalOrders->id;
