@@ -3,7 +3,7 @@
 @section('title', 'PEDIDO INTERNO')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
+    <h1 class="font-bold"><i class="fa-solidfa-clipboard-check"></i>&nbsp; PEDIDO INTERNO</h1>
     <link href="{{ asset('vendor/fontawesome-free/css/fontawesome.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
@@ -49,7 +49,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('VER PEDIDOS')
                                         <a href="{{ route('internal_orders.show', $row->id)}}">
-                                            <i class="fas fa-eye btn btn-blue  "></i></span>
+                                            <i class="fa-solidfa-eye btn btn-blue  "></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -61,7 +61,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red ">
-                                                <i class="fas fa-trash items-center"></i>
+                                                <i class="fa-solidfa-trash items-center"></i>
                                             </button>
                                         </form>
                                         @endcan
@@ -73,7 +73,7 @@
                                             @csrf
                                             <x-jet-input type="hidden" name="order_id" value="{{ $row->id}}"/>
                                             <button type="submit" class="btn btn-green">
-                                                <i class="fas fa-percent items-center"></i>
+                                                <i class="fa-solidfa-percent items-center"></i>
                                             </button>
                                         </form>
                                        
