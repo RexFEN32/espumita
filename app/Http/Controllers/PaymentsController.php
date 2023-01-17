@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\InternalOrder;
 use App\Models\payments;
 use App\Models\Customer;
+use App\Models\CompanyProfile;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 use Illuminate\Http\Request;
@@ -449,6 +450,32 @@ class PaymentsController extends Controller
         $pay->nfactura=NULL;
         $pay->save();
         return $this->index();
+    }
+
+    public function cuentas_customer($id)
+    {
+        $Customers=customer::find($id);
+        $CompanyProfiles = CompanyProfile::first();
+        $pagos=DB::table('payments')->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->where('payments.status','pagado')
+        ->where('customers.id',$Customers->id)
+        ->select('payments.*','customers.id')->get();
+        $noPagados=DB::table('payments')
+        ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->where('payments.status','por cobrar')
+        ->where('customers.id',$Customers->id)
+        ->select('payments.*','customers.id');
+        $saldoDeudor=$noPagados->sum('amount');
+        return view('accounting.customer', compact(
+            'Customers',
+            'CompanyProfiles',
+            'pagos',
+            'noPagados',
+            'saldoDeudor',
+            
+        ));
     }
     /**
      * Show the form for creating a new resource.
