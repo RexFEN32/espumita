@@ -5,13 +5,21 @@ import xlsxwriter
 import pandas as pd
 import sys
 import mysql.connector
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+DB_USERNAME = os.getenv('DB_USERNAME')
+DB_DATABASE = os.getenv('DB_DATABASE')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_PORT = os.getenv('DB_PORT')
 ncomp=str(sys.argv[1])
 # initialize list of lists
-cnx = mysql.connector.connect(user='root',
-                              password='mynewpassword',
+cnx = mysql.connector.connect(user=DB_USERNAME,
+                              password=DB_PASSWORD,
                               host='localhost',
-                              port='3306',
-                              database='intord',
+                              port=DB_PORT,
+                              database=DB_DATABASE,
                               use_pure=False)
 
 query = ('SELECT p.date, p.banco, p.nfactura, i.invoice, c.customer, coins.code, p.tipo_cambio, p.amount, p.ncomp, p.capturista FROM customers as c inner join internal_orders as i on i.customer_id = c.id inner join payments as p on p.order_id=i.id inner join coins on coins.id = i.coin_id WHERE p.ncomp = '+str(ncomp)+" and p.status= 'pagado';")

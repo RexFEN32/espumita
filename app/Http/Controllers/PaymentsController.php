@@ -76,7 +76,7 @@ class PaymentsController extends Controller
     public function reporte($id,$report,$pdf)
     {
         $caminoalpoder=public_path();
-        $process = new Process(['python3',$caminoalpoder.'/'.$report.'.py',$id]);
+        $process = new Process(['python',$caminoalpoder.'/'.$report.'.py',$id]);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
@@ -189,8 +189,13 @@ class PaymentsController extends Controller
     }
     public function pay_actualize($id)
     {
-        $lastComp = DB::table('payments')->whereNotNull('ncomp')
-        ->orderBy('ncomp','DESC')->first()->ncomp;
+        if(DB::table('payments')->whereNotNull('ncomp')->count()>0){
+            $lastComp = DB::table('payments')->whereNotNull('ncomp')
+            ->orderBy('ncomp','DESC')->first()->ncomp;  
+        }
+        else {
+            $lastComp = 100;
+        }
     
         //$accounts = payments::where('status', 'por cobrar')->get();
         $pay = payments::find($id);
@@ -215,10 +220,13 @@ class PaymentsController extends Controller
     }
     public function multi_pay_actualize(Request $request)
     {
-        $lastComp = DB::table('payments')->whereNotNull('ncomp')
-        ->orderBy('ncomp','DESC')->first()->ncomp;
-    
-        //$accounts = payments::where('status', 'por cobrar')->get();
+        if(DB::table('payments')->whereNotNull('ncomp')->count()>0){
+            $lastComp = DB::table('payments')->whereNotNull('ncomp')
+            ->orderBy('ncomp','DESC')->first()->ncomp;  
+        }
+        else {
+            $lastComp = 100;
+        }
         $pay = payments::find($request -> pago[0]);
         $pays=payments::find($request->pago);
         $npagos=count($request->pago);
@@ -298,8 +306,13 @@ class PaymentsController extends Controller
        // $pay->porcentaje_acumulado=$request->porcentaje_acumulado;
         //$pay->importe_acumulado=$request->importe_acumulado;
         $pay->capturista=Auth::user()->name;
-        $lastComp = DB::table('payments')->whereNotNull('ncomp')
-        ->orderBy('ncomp','DESC')->first()->ncomp;
+        if(DB::table('payments')->whereNotNull('ncomp')->count()>0){
+            $lastComp = DB::table('payments')->whereNotNull('ncomp')
+            ->orderBy('ncomp','DESC')->first()->ncomp;  
+        }
+        else {
+            $lastComp = 100;
+        }
     
         $pay->ncomp = $lastComp + 1;
         $pay->save();
@@ -327,9 +340,13 @@ class PaymentsController extends Controller
     public function multi_pay_apply(Request $request)
     {   
         
-        $lastComp = DB::table('payments')->whereNotNull('ncomp')
-        ->orderBy('ncomp','DESC')->first()->ncomp;
-    
+        if(DB::table('payments')->whereNotNull('ncomp')->count()>0){
+            $lastComp = DB::table('payments')->whereNotNull('ncomp')
+            ->orderBy('ncomp','DESC')->first()->ncomp;  
+        }
+        else {
+            $lastComp = 100;
+        }
         for($i=0; $i < count($request->pagos); $i++){
         $id=$request->pagos[$i];
         $comp = $request->comprobante;
