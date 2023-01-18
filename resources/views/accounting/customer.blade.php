@@ -52,153 +52,142 @@
                 <div class="col-sm-3 col-xs-12 font-bold text-sm">
                     <table>
                         <tr>
-                            <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">
-                                <span style="color: darkblue">Saldo Deudor:<br><br>
-                                {{$saldoDeudor}}</span> 
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+            
             <div class="row p-4">
                 <div class="col-sm-12 font-bold text-sm">
-                    <table>
-                        <tr>
-                            <td>Vendedor: </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Fecha de Entrega del Equipo: <br>
-                            </td>
-                            <td>
-                                Fecha de Entrega Instalación: <br> 
-                            </td>
-                            <td>
-                                Condiciones de Pago: <br> 
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="row p-4">
-                <div class="col-sm-12 font-bold text-sm">
-                    <table class="table table-striped text-xs font-medium">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Pda</th>
-                                <th>Cant</th>
-                                <th>Unidad</th>
-                                <th>Familia</th>
-                                <th>Clave</th>
-                                <th>Descripción</th>
-                                <th>P. U.</th>
-                                <th>Importe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pagos as $row)
-                            <tr class="text-center">
-                                <td></td>
-                                <td>{{ $row->amount }}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right">${{number_format($row->amount, 2) }}</td>
-                                <td class="text-right">${{number_format($row->amount, 2) }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row p-4">
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                        <span class="text-right font-bold text-md">Subtotal: $ </span>
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">Descuento: $ 0.0</span>  
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">Desc. Fin: $ 0.0</span>  
-                    </div>
-                </div>
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">I.E.P.S: $ 0.0</span>  
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">RET ISR: $ 0.0</span>  
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">RET IVA: $ 0.0</span>  
-                    </div>
-                </div>
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-semibold text-sm">IVA: $ </span>  
-                    </div>
-                </div>
-                
-                
-                <div class="col-sm-12 text-right">
-                    <div class="form-group">
-                      <span class="text-right font-bold text-xl">Total: $ </span>  
-                    </div>
-                </div>
-            </div>
-            <div class="row p-4">
-                <div class="col-sm-4 col-xs-12 text-center text-xs font-bold">
-                    <table>
-                        <tr>
-                            <td>
-                              
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <br>
-                                <hr><br><br>
+                        
 
-                                Elaboró
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-sm-3 col-xs-12 text-center text-xs font-bold">
-                    &nbsp;
-                </div>
-                <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
-                     
-                    <br>
-                    <hr><br>
-                    Autorizaciones
-                </div>
-            </div>
+                <table >
+        <tbody>
+          <tr>
+            <td>
+            Total de Pedidos &nbsp;
+            </td>
+            <td>
+            Abonos pagados&nbsp;
+            </td>
+            <td>
+            Porcentaje completado&nbsp;
+            </td>
+            <td>
+            Saldo deudor&nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td>
+             {{$pagos->count()}}
+            </td>
+            <td>
+            {{$pagados->count() }} / {{ $pagos->count()}}
+            </td>
+            <td>
+              {{round(  100*($pagados->sum('amount'))/($pagos->sum('amount'))    )}} %
+            </td>
+            <td style="color : red ">
+             {{$noPagados->first()->symbol}} {{number_format($noPagados->sum('amount'))}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+<br><br><br>
+
+<form action="{{route('payments.multi_pay_actualize')}}" method="POST" enctype="multipart/form-data" id="form1">
+@csrf
+        <table class="table-striped text-xs font-medium" >
+            <thead class="thead">
+               <tr style = "font-size : 14px ; padding : 15px">
+               <th > Pedido</th>
+               <th scope="col">concepto <br></th>
+               <th scope="col">Cantidad</th>
+               <th scope="col">Fechade pago</th>
+               <th scope="col">Notas</th>
+               <th scope="col">Estado</th>
+               <th scope="col">Seleccionar</th>
+               
+               </tr>
+               
+            </thead>
+
+            <tbody >
+    @foreach ($pagos as $pago)
+                <tr style = "font-size : 14px; margin : 15px" >
+
+                   <td>
+                   {{$pago->invoice}}
+                   <br>
+                    </td>
+                    <td>
+                   {{$pago->concept}}
+                    </td>
+                    <td>
+                    {{$pago->symbol}}{{number_format($pago->amount)}}
+                    </td>
+                    <td>
+                   {{$pago->date}}
+                    </td>
+                    <td>
+                   {{$pago->nota}}
+                    </td>
+                    <td>
+                    @php {{
+                      $fecha = new DateTime($pago->date);
+                    }}@endphp
+
+                    @if($pago->status == 'pagado')
+                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                        <button class="button" type="button"> <span class="badge badge-success">Pagado</span> </button>
+                        </a> 
+                      
+                      @else
+                      @if( now() > $fecha)
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button" type="button"> <span class="badge badge-danger">atrasado</span> </button>
+                      </a>  
+                    @else
+                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
+                      <button class="button" type="button"> <span class="badge badge-info">por cobrar</span> </button>
+                      </a>
+                      @endif     
+                    @endif           
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    
+                       &nbsp; 
+                      @if($pago->status == 'por cobrar')
+                    <input class="form-check-input" type="checkbox" value="{{$pago->id}}" id="flexCheckDefault" name="pago[]">
+                    
+                    @endif
+                    
+                    </td>
+
+                    
+                </tr>
+
+
+
+                
+      @endforeach
+      
+            </tbody>
+        </table>
+        <br><br>
+
+        <br>
+        <button type="submit" class="btn btn-blue">PAGAR SELECCIONADOS</button>
+        
+    </div>
+    </form>
+  </div>
+  <br>
+  
             <br> <br> 
             
                 </div>
@@ -224,5 +213,5 @@
 @stop
 
 @section('js')
-
+<script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablecatalogocustomers.js') }}"></script>
 @stop

@@ -33,6 +33,7 @@ class PaymentsController extends Controller
             ->get();
         $multipagos = payments::whereNull('order_id')->get();
         $Customers = Customer::all();
+    
         $Orders = DB::table('internal_orders')
         ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
         ->join('coins', 'internal_orders.coin_id','=','coins.id')
@@ -456,7 +457,13 @@ class PaymentsController extends Controller
     {
         $Customers=customer::find($id);
         $CompanyProfiles = CompanyProfile::first();
-        $pagos=DB::table('payments')->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        $pagos=DB::table('payments')
+        ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->join('coins','internal_orders.coin_id','=','coins.id')
+        ->where('internal_orders.customer_id',$Customers->id)
+        ->select('payments.*','internal_orders.customer_id','coins.symbol','internal_orders.invoice')->get();
+        $pagados=DB::table('payments')->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
         ->join('customers', 'internal_orders.customer_id','=','customers.id')
         ->where('payments.status','pagado')
         ->where('customers.id',$Customers->id)
@@ -464,14 +471,16 @@ class PaymentsController extends Controller
         $noPagados=DB::table('payments')
         ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
         ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->join('coins','internal_orders.coin_id','=','coins.id')
         ->where('payments.status','por cobrar')
         ->where('customers.id',$Customers->id)
-        ->select('payments.*','customers.id');
+        ->select('payments.*','customers.id','coins.symbol','internal_orders.invoice')->get();
         $saldoDeudor=$noPagados->sum('amount');
         return view('accounting.customer', compact(
             'Customers',
             'CompanyProfiles',
             'pagos',
+            'pagados',
             'noPagados',
             'saldoDeudor',
             

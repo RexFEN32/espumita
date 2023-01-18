@@ -25,159 +25,55 @@
 <br> <br>
 <div id = "ClientView">  
 <div class ="justify-content-rigth"> </div>
-@foreach ($Customers as $row)
-
-@php
-{{
-  $pagos = $accounts->where('customer_id',$row->id);
-  $pendientes = $pagos->where('status','por cobrar');
-  $estosmulti=$multipagos->where('customer_id',$row->id);
-  $multi_pendientes=$estosmulti->where('status','por cobrar');
-  $pagados = $pagos ->where('status','pagado');
-  $multi_pagados = $estosmulti->where('status','pagado');
-  $total_pedidos=$Orders->where('customer_id',$row->id)->count();
-}}
-@endphp
-
-@if($pagos->count() > 0 )
-<br>
-<span class="float-left">
-<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fas fa-user fa-2x" ></i></span>
-             &nbsp; &nbsp;
-    <p>{{$row->customer}}</p></button></td>
-
-    <div class="collapse" id="collapseExample{{$row->id}}">
-      <table >
-        <tbody>
-          <tr>
-            <td>
-            Total de Pedidos &nbsp;
-            </td>
-            <td>
-            Abonos pagados&nbsp;
-            </td>
-            <td>
-            Porcentaje completado&nbsp;
-            </td>
-            <td>
-            Saldo deudor&nbsp;
-            </td>
-          </tr>
-          <tr>
-            <td>
-             {{$total_pedidos}}
-            </td>
-            <td>
-            {{$pagados->count() }} / {{ $pagos->count()}}
-            </td>
-            <td>
-              {{round(  100*($multi_pagados->sum('amount')+$pagados->sum('amount'))/($pagos->sum('amount')+$estosmulti->sum('amount'))    )}} %
-            </td>
-            <td style="color : red ">
-            $ {{$row->symbol}} {{number_format($pendientes ->sum('amount')+$multi_pendientes->sum('amount'))}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-    <div class="column">
-      <br>
-        
-<form action="{{route('payments.multi_pay_actualize')}}" method="POST" enctype="multipart/form-data" id="form1">
-@csrf
-        <table class="table-striped text-xs font-medium" >
-            <thead class="thead">
-               <tr style = "font-size : 14px ; padding : 15px">
-               <th > Pedido</th>
-               <th scope="col">concepto <br></th>
-               <th scope="col">Cantidad</th>
-               <th scope="col">Fechade pago</th>
-               <th scope="col">Notas</th>
-               <th scope="col">Estado</th>
-               <th scope="col">Seleccionar</th>
-               
-               </tr>
-               
-            </thead>
-
-            <tbody >
-    @foreach ($accounts as $pago)
-        @if($pago->customer_id == $row->id)
-                <tr style = "font-size : 14px; margin : 15px" >
-
-                   <td>
-                   {{$pago->invoice}}
-                   <br>
-                    </td>
-                    <td>
-                   {{$pago->concept}}
-                    </td>
-                    <td>
-                    {{$row->symbol}}{{number_format($pago->amount)}}
-                    </td>
-                    <td>
-                   {{$pago->date}}
-                    </td>
-                    <td>
-                   {{$pago->nota}}
-                    </td>
-                    <td>
-                    @php {{
-                      $fecha = new DateTime($pago->date);
-                    }}@endphp
-
-                    @if($pago->status == 'pagado')
-                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button" type="button"> <span class="badge badge-success">Pagado</span> </button>
-                        </a> 
-                      
-                      @else
-                      @if( now() > $fecha)
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button" type="button"> <span class="badge badge-danger">atrasado</span> </button>
-                      </a>  
-                    @else
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button" type="button"> <span class="badge badge-info">por cobrar</span> </button>
-                      </a>
-                      @endif     
-                    @endif           
-                    </td>
-
-                    <td>
-                      @if($pago->status == 'por cobrar')
-                    <input class="form-check-input" type="checkbox" value="{{$pago->id}}" id="flexCheckDefault" name="pago[]">
-                    
-                    @endif
-                    <br>
-                    </td>
-                    
-                </tr>
 
 
-@if($fecha >= now())
-en tiempo
-@endif
 
-                @endif
-
+<div class="col-sm-12 table-responsive">
                 
-      @endforeach
-      
-            </tbody>
-        </table>
-        <br><br>
+                <table class="table  table-striped text-xs font-medium">
+                        <thead>
+                            <tr>
+                                
+                                <th>Clave</th>
+                                <th>Razón Social</th>
+                                <th>RFC</th>
+                                
+                                <th>Municipio</th>
+                                
+                                <th>-&nbsp;&nbsp;&nbsp; </th>
+                                <th> Ver cuentas por Cobrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($Customers as $row)
+       
+                            <tr>
+                                <td>{{$row->id}}</td>
+                                <td>{{$row->customer}}</td>
+                                <td>{{$row->customer_rfc}}</td>
+                                
+                                <td>{{$row->customer_city}}</td>
+                                <td></td>
+                                <td class="w-5">
+                                    <div class="row">
+                                      @if( )
+                                        <div class="col-6 text-center w-10">
+                                            
+                                            <a href="{{ route('accounting.cuentas_customer', $row->id)}}">
+                                                <i class="fas fa-usd btn btn-blue w-6 h-6"></i></span>
+                                            </a>
+                                            
+                                        </div>
+                                       @endif 
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-        <br>
-        <button type="submit" class="btn btn-blue">PAGAR SELECCIONADOS</button>
-        
-    </div>
-    </form>
-  </div>
-  <br>
-  @endif
-@endforeach
 
 </div>
 
@@ -312,7 +208,7 @@ en tiempo
   <br>
         <div class="col-sm-12 table-responsive">
                   
-                <table class="table tablepayments table-striped text-xs font-medium">
+<table class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
     <tr>
       <th scope="col">Cliente</th>
@@ -387,6 +283,9 @@ en tiempo
 @section('js')
 
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablecatalogopayments.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablecatalogocustomers.js') }}"></script>
+
 <script>
   document.getElementById("DateView").hidden="hidden";
   document.getElementById("OrderView").hidden="hidden";
@@ -409,4 +308,6 @@ en tiempo
     document.getElementById("OrderView").hidden="hidden";
   }
 </script>
+
+
 @stop

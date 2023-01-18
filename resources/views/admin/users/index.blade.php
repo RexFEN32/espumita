@@ -24,7 +24,8 @@
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Rol</th>
-                            <th></th>
+                            <th>-</th>
+                            <th>.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,10 +45,12 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR USUARIOS')
                                             <a href="{{ route('users.edit', $row->id)}}">
-                                                <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                                <i class="fas fa-edit btn btn-blue w-9 h-9"></i>
                                             </a>
                                         @endcan
                                     </div>
+                                    </td>
+                                    <td>
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR USUARIOS')
                                         {!! Form::open(['method'=>'DELETE','route'=>['users.destroy', $row->id], 'class'=>'DeleteReg' ]) !!}
@@ -57,6 +60,7 @@
                                     </div>
                                 </div>
                             </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>

@@ -43,15 +43,18 @@
                             <td>{{$row->customer_city}}</td>
                             <td>{{$row->customer_email}}</td>
                             <td>{{$row->customer_telephone}}</td>
-                            <td class="w-5">
+                            <td class="w-15">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR CLIENTES')
                                         <a href="{{ route('customers.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                        <button type="submit" class="btn btn-blue h-9 w-9">
+                                                <i class="fas fa-edit items-center"></i>
+                                            </button>
                                         </a>
                                         @endcan
                                     </div>
+                                    
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR CLIENTES')
                                         <form class="DeleteReg" action="{{ route('customers.destroy', $row->id) }}" method="POST">
