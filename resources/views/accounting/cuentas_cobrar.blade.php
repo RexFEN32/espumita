@@ -56,7 +56,7 @@
                                 <td></td>
                                 <td class="w-5">
                                     <div class="row">
-                                      @if( )
+                                      
                                         <div class="col-6 text-center w-10">
                                             
                                             <a href="{{ route('accounting.cuentas_customer', $row->id)}}">
@@ -64,7 +64,7 @@
                                             </a>
                                             
                                         </div>
-                                       @endif 
+                                       
                                         
                                     </div>
                                 </td>
