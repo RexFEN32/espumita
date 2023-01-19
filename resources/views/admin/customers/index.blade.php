@@ -19,7 +19,7 @@
             <div class="w-100">&nbsp;</div>
             <div class="col-sm-12 table-responsive">
                 
-            <table class="table  table-striped text-xs font-medium">
+            <table id="example" class="display" style="width:100%">
                     <thead>
                         <tr>
                             
@@ -36,7 +36,7 @@
                     <tbody>
                         @foreach ($Customers as $row)
                         <tr>
-                            <td>{{$row->id}}</td>
+                            <td>{{$row->clave}}</td>
                             <td>{{$row->customer}}</td>
                             <td>{{$row->customer_rfc}}</td>
                             <td>{{$row->customer_state}}</td>
@@ -82,6 +82,13 @@
 @stop
 
 @section('js')
+<script>
+
+$(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablecatalogocustomers.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/alert_delete_reg.js') }}"></script>

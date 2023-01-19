@@ -30,7 +30,7 @@
                             <th>Estado</th>
                             <th>Municipio</th>
                            
-                            <th></th>
+                            <th style="width : 20%;">-</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,9 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR VENDEDORES')
                                         <a href="{{ route('sellers.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                        <button  class="btn btn-blue h-9 w-9">
+                                                <i class="fas fa-edit items-center"></i>
+                                            </button>
                                         </a>
                                         @endcan
                                     </div>

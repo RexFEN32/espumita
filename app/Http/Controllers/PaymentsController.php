@@ -76,7 +76,7 @@ class PaymentsController extends Controller
     public function reporte($id,$report,$pdf)
     {
         $caminoalpoder=public_path();
-        $process = new Process(['python',$caminoalpoder.'/'.$report.'.py',$id]);
+        $process = new Process(['python3',$caminoalpoder.'/'.$report.'.py',$id]);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);

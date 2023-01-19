@@ -30,8 +30,8 @@
 
 <div class="col-sm-12 table-responsive">
                 
-                <table class="table  table-striped text-xs font-medium">
-                        <thead>
+<table id="example" class="display" style="width:100%">
+                  <thead>
                             <tr>
                                 
                                 <th>Clave</th>
@@ -48,7 +48,7 @@
                             @foreach ($Customers as $row)
        
                             <tr>
-                                <td>{{$row->id}}</td>
+                                <td>{{$row->clave}}</td>
                                 <td>{{$row->customer}}</td>
                                 <td>{{$row->customer_rfc}}</td>
                                 
@@ -64,7 +64,6 @@
                                             </a>
                                             
                                         </div>
-                                       
                                         
                                     </div>
                                 </td>
@@ -308,6 +307,11 @@
     document.getElementById("OrderView").hidden="hidden";
   }
 </script>
+<script>
 
+$(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
 
 @stop

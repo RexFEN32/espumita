@@ -1,14 +1,30 @@
+import sys
+import mysql.connector
+import xlsxwriter
 import pandas as pd
 import sys
 import mysql.connector
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 id=str(sys.argv[1])
+
+DB_USERNAME = os.getenv('DB_USERNAME')
+DB_DATABASE = os.getenv('DB_DATABASE')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_PORT = os.getenv('DB_PORT')
+
 # initialize list of lists
-cnx = mysql.connector.connect(user='root',
-                              password='mynewpassword',
+cnx = mysql.connector.connect(user=DB_USERNAME,
+                              password=DB_PASSWORD,
                               host='localhost',
-                              port='3306',
-                              database='intord',
+                              port=DB_PORT,
+                              database=DB_DATABASE,
                               use_pure=False)
+
+query = ('SELECT * from customers where id =1')
+like_customer=pd.read_sql(query,cnx)
 
 query = ('SELECT * from payments')
 pagos=pd.read_sql(query,cnx)
