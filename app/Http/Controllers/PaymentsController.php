@@ -47,7 +47,6 @@ class PaymentsController extends Controller
                 //when you are done, delete the unwanted columns
         $clientes->forget('customer_id');
         
-        $clientes2 =  $Customers->merge($clientes);
         
 
         $Orders = DB::table('internal_orders')
@@ -63,7 +62,7 @@ class PaymentsController extends Controller
             'Orders',
             'multipagos',
             'clientes',
-            'clientes2',
+            
         ));
     }
      
