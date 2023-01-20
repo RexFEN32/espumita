@@ -21,7 +21,7 @@
                                         <x-jet-label value="* Cliente" />
                                         <select class="form-capture  w-full text-xs uppercase" name="customer_id">
                                             @foreach ($Customers as $row)
-                                                <option value="{{$row->id}}" @if ($row->id == $InternalOrders->customer_id) selected @endif >{{$row->customer}}</option>
+                                                <option value="{{$row->id}}" @if ($row->id == $InternalOrders->customer_id) selected @endif >{{$row->clave}}</option>
                                             @endforeach
                                         </select>
                                         <x-jet-input-error for='customer_id' />
