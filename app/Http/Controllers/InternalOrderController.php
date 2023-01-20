@@ -28,7 +28,7 @@ class InternalOrderController extends Controller
         $InternalOrders = DB::table('customers')
             ->join('internal_orders', 'internal_orders.customer_id', '=', 'customers.id')
             ->join('sellers', 'internal_orders.seller_id','=','sellers.id')
-            ->select('internal_orders.*','customers.customer', 'sellers.seller_name')
+            ->select('internal_orders.*','customers.customer','customers.clave', 'sellers.seller_name')
             ->orderBy('internal_orders.invoice', 'DESC')
             ->get();
         return view('internal_orders.index', compact('InternalOrders'));
@@ -670,7 +670,17 @@ class InternalOrderController extends Controller
 
     public function destroy($id)
     {
-        //
+     $partidas=Item::where('internal_order_id',$id);
+     $partidas->delete();
+     
+     $pagos=payments::where('order_id',$id);
+     $pagos->delete();
+     
+     $firmas=signatures::where('order_id',$id);
+     $firmas->delete();
+     $orden=InternalOrder::find($id);
+     $orden->delete();
+     return $this->index();
     }
     public function redefine(Request $request)
     {

@@ -28,6 +28,7 @@
                             <th>Folio</th>
                             <th>Fecha</th>
                             <th>Cliente</th>
+                            <th>Clave</th>
                             <th>Vendedor</th>
                             <th>Estatus</th>
                             <th></th>
@@ -40,6 +41,7 @@
                             <td>{{$row->invoice}}</td>
                             <td>{{ date('d-m-Y', strtotime($row->date)) }}</td>
                             <td>{{$row->customer}}</td>
+                            <td>{{$row->clave}}</td>
                             <td>{{$row->seller_name}}</td>
                             <td>{{$row->status}}</td>
                             <td class="w-15">

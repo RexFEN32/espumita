@@ -33,7 +33,23 @@ class PaymentsController extends Controller
             ->get();
         $multipagos = payments::whereNull('order_id')->get();
         $Customers = Customer::all();
-    
+        
+        $clientes=DB::table('internal_orders')
+                 ->where('status','autorizado')
+                 ->select('customer_id', DB::raw('count(*) as total'))
+                 
+                 ->groupBy('customer_id')
+                 ->get();
+        $clientes = $clientes->each(function($item, $key){
+                    $item->id = $item->customer_id;
+                });
+                
+                //when you are done, delete the unwanted columns
+        $clientes->forget('customer_id');
+        
+        $clientes2 =  $Customers->merge($clientes);
+        
+
         $Orders = DB::table('internal_orders')
         ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
         ->join('coins', 'internal_orders.coin_id','=','coins.id')
@@ -46,6 +62,8 @@ class PaymentsController extends Controller
             'Customers',
             'Orders',
             'multipagos',
+            'clientes',
+            'clientes2',
         ));
     }
      

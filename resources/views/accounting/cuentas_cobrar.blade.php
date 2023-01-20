@@ -29,7 +29,7 @@
 
 
 <div class="col-sm-12 table-responsive">
-                
+{{$clientes}}              
 <table id="example" class="display" style="width:100%">
                   <thead>
                             <tr>
