@@ -10,14 +10,14 @@
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fas fa-plus-circle"></i>&nbsp; Editando Partida :
+                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Nueva Partida:
             </h5>
         </div>
-        <form action="{{ route('items.redefine')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('items.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
+
         <x-jet-input type="hidden" name="internal_order_id" value="{{ $InternalOrders }}"/>
-        <x-jet-input type="hidden" name="item" value="{{ $Item ->item}}"/>
-        <x-jet-input type="hidden" name="item_id" value="{{ $Item ->id}}"/>
+        <x-jet-input type="hidden" name="item" value="{{ $Item }}"/>
         <div class="row rounded-b-lg rounded-t-none mb-4 shadow-xl bg-gray-300">
             <div class="row p-4">
                 <div class="col-sm-12 col-xs-12 shadow rounded-xl p4">
@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <x-jet-label value="* Cantidad" />
-                                <x-jet-input type="number" name="amount" class="w-full text-xs" value="{{$Item->amount}}"/>
+                                <x-jet-input type="number" name="amount" class="w-full text-xs" value="{{old('amount')}}"/>
                                 <x-jet-input-error for='amount' />
                             </div>
                             <div class="form-group">
@@ -33,7 +33,7 @@
                                 {{--  <x-jet-input type="text" name="unit" class="w-full text-xs" value="{{old('unit')}}"/>  --}}
                                 <select class="form-capture  w-full text-xs uppercase" name="unit">
                                     @foreach ($Units as $row)
-                                        <option value="{{$row->unit}}" @if ($row->id == $Item->unit) selected @endif >{{$row->unit}}</option>
+                                        <option value="{{$row->unit}}" @if ($row->id == old('unit')) selected @endif >{{$row->unit}}</option>
                                     @endforeach
                                 </select>
                                 <x-jet-input-error for='unit' />
@@ -43,25 +43,24 @@
                                 {{--  <x-jet-input type="text" name="family" class="w-full text-xs" value="{{old('family')}}"/>  --}}
                                 <select class="form-capture  w-full text-xs uppercase" name="family">
                                     @foreach ($Families as $row)
-                                        <option value="{{$row->family}}" @if ($row->id == $Item->family) selected @endif >{{$row->family}}</option>
+                                        <option value="{{$row->family}}" @if ($row->id == old('family')) selected @endif >{{$row->family}}</option>
                                     @endforeach
                                 </select>
                                 <x-jet-input-error for='family' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Clave" />
-                                <x-jet-input type="text" name="code" class="w-full text-xs" value="{{$Item->code}}"/>
-                                <x-jet-input-error for='code'/>
+                                <x-jet-input type="text" name="code" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='code' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Descripción" />
-                                <textarea rows="4" name="description" class="w-full text-xs inputjet" >{{$Item->description}}</textarea>
+                                <textarea rows="4" name="description" class="w-full text-xs inputjet" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
                                 <x-jet-input-error for='description' />
-                                
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Precio Unitario" />
-                                <x-jet-input type="number" step="0.01" name="unit_price" id="input-price" class="form-control just-number price-format-input" class="w-full text-xs" value="{{$Item->unit_price}}"/>
+                                <x-jet-input type="number" step="0.01" name="unit_price" id="input-price" class="form-control just-number price-format-input" class="w-full text-xs" value="{{old('unit_price')}}"/>
                                 <x-jet-input-error for='unit_price' />
                             </div>
                         </div>

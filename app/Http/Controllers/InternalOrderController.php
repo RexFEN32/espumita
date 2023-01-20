@@ -697,6 +697,18 @@ class InternalOrderController extends Controller
         $InternalOrders->instalation_date=$request->instalation_date;
         $InternalOrders->payment_conditions=$request->payment_conditions;
         $InternalOrders->status="CAPTURADO";
+        $Items = Item::where('internal_order_id', $InternalOrders->id)->get();
+            if(count($Items) > 0){
+                    $Subtotal = Item::where('internal_order_id', $InternalOrders->id)->sum('import');
+                }else{
+                    $Subtotal = '0';
+                }
+        
+                $Iva = $Subtotal * 0.16;
+                $Total = $Subtotal + $Iva;
+        $InternalOrders->subtotal = $Subtotal;
+        $InternalOrders->iva = $Iva;
+        $InternalOrders->total = $Total;
         $InternalOrders->save();
         $Signature=new signatures();
             $Signature->order_id = $InternalOrders->id;
@@ -721,6 +733,8 @@ class InternalOrderController extends Controller
                     $Signature->auth_id = 6;
                     $Signature->save(); 
                  }
+             
+                   
         return $this->payment($id);
     }
 }

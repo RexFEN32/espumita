@@ -139,7 +139,7 @@
         <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-sm-12 text-right p-3">
-                                        <a href="{{ route('tempitems.create_item', $InternalOrders->id) }} " class="btn btn-green">
+                                        <a href="{{ route('items.create', $InternalOrders->id) }} " class="btn btn-green">
                                             <i class="fas fa-plus-circle"></i>&nbsp; Agregar Partida
                                         </a>
                                     </div>

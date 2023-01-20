@@ -18,9 +18,26 @@ class ItemController extends Controller
         //
     }
 
-    public function create()
+    public function create($id)
     {
-        //
+        $InternalOrders = $id;
+        $Items = Item::where('internal_order_id', $id)->OrderBy('id', 'DESC')->first();
+
+        if($Items){
+            $Item = $Items->item + 1;
+        }else{
+            $Item = 1;
+        }
+
+        $Units = Unit::all();
+        $Families = Family::all();
+
+        return view('admin.items.add_item', compact(
+            'InternalOrders',
+            'Item',
+            'Units',
+            'Families',
+        ));
     }
 
     
@@ -66,7 +83,7 @@ class ItemController extends Controller
 
         
         
-            $Items = new Item();
+            $Items = Item::find($request->item_id);
             $Items->internal_order_id = $request->internal_order_id;
             $Items->item = $request->item;
             $Items->amount = $request->amount;
@@ -104,7 +121,62 @@ class ItemController extends Controller
     {
         //
     }
+    
+    public function store(Request $request)
+    {
+         
+        $rules = [
+            'amount' => 'required',
+            'unit' => 'required',
+            'family' => 'required',
+            'code' => 'required',
+            'description' => 'required',
+            'unit_price' => 'required',
+        ];
 
+        $messages = [
+            'amount.required' => 'La Cantidad es requerida',
+            'unit.required' => 'La unidad es requerida',
+            'family.required' => 'La familia es requerida',
+            'code.required' => 'La clave es requerida',
+            'description.required' => 'La descripción es requerida',
+            'unit_price.required' => 'El precio unitario es requerido',
+        ];
+
+        $request->validate($rules, $messages);
+
+        $Import = $request->amount * $request->unit_price;
+        
+        
+        
+            $Items = new Item();
+            $Items->internal_order_id = $request->internal_order_id;
+            $Items->item = $request->item;
+            $Items->amount = $request->amount;
+            $Items->unit = $request->unit;
+            $Items->family = $request->family;
+            $Items->code = $request->code;
+            $Items->description = $request->description;
+            $Items->unit_price =(float) $request->unit_price;
+            $Items->import = $Import;
+            $Items->save();
+        
+        
+        $InternalOrders = InternalOrder::where('id', $request->internal_order_id)->first();
+        $Customers = Customer::where('id', $InternalOrders->customer_id)->first();
+        $Items = Item::where('internal_order_id', $InternalOrders->id)->get();
+
+        if(count($Items) > 0){
+            $Subtotal = Item::where('internal_order_id', $InternalOrders->id)->sum('import');
+        }else{
+            $Subtotal = '0';
+        }
+
+        $Iva = $Subtotal * 0.16;
+        $Total = $Subtotal + $Iva;
+
+        return (new InternalOrderController)->edit_order($InternalOrders->id);
+    }
     public function update(Request $request, $id)
     {
         //

@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function()
 {
     Route::resource('internal_orders', InternalOrderController::class);
     Route::resource('temp_items', TempItemController::class);
-    Route::resource('items', TempItemController::class);
+    Route::resource('items', ItemController::class);
     Route::resource('cuentas_cobrar', PaymentsController::class);
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
     Route::get('reportes/contraportada', [PaymentsController::class, 'reportes'])->name('reportes.contraportada');
@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('reportes/consecutivo_comprobante', [PaymentsController::class, 'consecutivo_comprobante'])->name('reportes.consecutivo_comprobante');
     Route::get('reportes/cuentas_cobrar', [PaymentsController::class, 'rep_cuentas_cobrar'])->name('reportes.cuentas_cobrar');
 
+    Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');

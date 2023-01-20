@@ -29,8 +29,8 @@
 
 
 <div class="col-sm-12 table-responsive">
-{{$clientes}}              
-<table id="example" class="display" style="width:100%">
+            
+<table id="example" class=" table-striped text-xs font-small" >
                   <thead>
                             <tr>
                                 
@@ -40,34 +40,35 @@
                                 
                                 <th>Municipio</th>
                                 
-                                <th>-&nbsp;&nbsp;&nbsp; </th>
-                                <th> Ver cuentas por Cobrar</th>
+                                
+                                <th style="width:13%"> Ver cuentas por Cobrar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($Customers as $row)
-       
+                             @if($clientes->contains('id',$row->id))
                             <tr>
                                 <td>{{$row->clave}}</td>
                                 <td>{{$row->customer}}</td>
                                 <td>{{$row->customer_rfc}}</td>
                                 
                                 <td>{{$row->customer_city}}</td>
-                                <td></td>
+                                
                                 <td class="w-5">
                                     <div class="row">
-                                      
-                                        <div class="col-6 text-center w-10">
-                                            
+                                    <div class="col"></div>
+                                        <div class="col-6 text-center w-10" >
+                                        
                                             <a href="{{ route('accounting.cuentas_customer', $row->id)}}">
-                                                <i class="fas fa-usd btn btn-blue w-6 h-6"></i></span>
+                                                <i class="fas fa-usd btn btn-blue w-3 h-3"></i>
                                             </a>
                                             
                                         </div>
-                                        
+                                        <div class="col"></div> 
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

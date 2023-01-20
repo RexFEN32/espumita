@@ -86,10 +86,12 @@
             {{$pagados->count() }} / {{ $pagos->count()}}
             </td>
             <td>
-              {{round(  100*($pagados->sum('amount'))/($pagos->sum('amount'))    )}} %
+              {{round(  100*($pagados->sum('amount'))/($pagos->sum('amount'))  )}} %
             </td>
             <td style="color : red ">
-             {{$noPagados->first()->symbol}} {{number_format($noPagados->sum('amount'))}}
+            
+             {{$pagos->first()->symbol}} {{number_format($noPagados->sum('amount'))}}
+            
             </td>
           </tr>
         </tbody>
