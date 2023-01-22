@@ -218,4 +218,14 @@ class CustomerController extends Controller
         $CustomersContact->save();
         return redirect()->route('customers.edit',$request->customer_id);
     }
+
+    public function autocomplete(Request $request)
+    {
+        $data = Customer::select("customer")
+                    ->where('customer', 'LIKE', '%'. $request->get('query'). '%')
+                    ->get();
+        return response()->json($data);
+    }
+
+
 }

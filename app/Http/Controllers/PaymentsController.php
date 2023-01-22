@@ -226,7 +226,7 @@ class PaymentsController extends Controller
             ->first();
         
         $url =  "'/".$pay->id.".pdf'";
-  
+        
         return view('accounting.pay_actualize', compact(
             'pay',
             'order',
@@ -332,6 +332,10 @@ class PaymentsController extends Controller
         }
     
         $pay->ncomp = $lastComp + 1;
+        if($request->ncomp>0){
+
+            $pay->ncomp=$request->ncomp;
+        }
         $pay->save();
        
 
@@ -376,6 +380,10 @@ class PaymentsController extends Controller
         $pay->tipo_cambio=$request->tipo_cambio;
         $pay->capturista=Auth::user()->name;
         $pay->ncomp = $lastComp + 1;
+        if($request->ncomp>0){
+
+            $pay->ncomp=$request->ncomp;
+        }
         if($request->otra ==1){
             
             $original=$pay->amount;

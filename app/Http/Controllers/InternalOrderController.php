@@ -36,7 +36,7 @@ class InternalOrderController extends Controller
 
     public function create()
     {
-        $Customers = Customer::all();
+        $Customers = Customer::all()->sortBy('clave');
         
         return view('internal_orders.create', compact(
             'Customers',
@@ -56,6 +56,7 @@ class InternalOrderController extends Controller
             $TempInternalOrder = new TempInternalOrder();
             $TempInternalOrder->date = $Fecha;
             $TempInternalOrder->customer_id = $request->customer_id;
+            $TempInternalOrder->invoice = $request->invoice;
             $TempInternalOrder->save();
             $TempInternalOrders = TempInternalOrder::orderBy('id', 'DESC')->first();
         }
@@ -198,6 +199,9 @@ class InternalOrderController extends Controller
             $InternalOrders = new InternalOrder();
             $InternalOrders->id = $TempInternalOrders->id;
             $InternalOrders->invoice = $Invoice;
+            if($TempInternalOrders->invoice != 0){
+                $InternalOrders->invoice = $TempInternalOrders->invoice;
+            }
             $InternalOrders->date = $TempInternalOrders->date;
             $InternalOrders->customer_id = $TempInternalOrders->customer_id;
             $InternalOrders->seller_id = $TempInternalOrders->seller_id;

@@ -42,7 +42,7 @@
                     <table>
                         <tr>
                             <td>
-                                Cliente: {{$Customers->id.' '. $Customers->customer}}<br>
+                                Cliente: {{$Customers->clave.' '. $Customers->customer}}<br>
                                 Dirección Fiscal: {{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
                                 R.F.C: {{$Customers->customer_rfc}} &nbsp; Tel: 01-52 {{$Customers->customer_telephone}} &nbsp; E-mail: {{$Customers->customer_email}} &nbsp; Web: {{$Customers->customer_website}}
                             </td>

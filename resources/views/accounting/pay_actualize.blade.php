@@ -17,7 +17,9 @@
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                             </td>
                             <td>
-                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. {{$lastComp +1}}
+                                <h1 style="font-size : 30px;">COMPROBANTE DE INGRESOS  NO. @if($pay->status=='por cobrar')
+                                                                                            {{$lastComp +1}}
+                                                                                            @else {{$pay->ncomp}} @endif
                  </h1>
                             </td>
                         </tr>
@@ -68,7 +70,11 @@
                             <x-jet-label value="* Numero de Factura" />
                             <x-jet-input type="text" name="nfactura"  value="{{old('nfactura')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
+                        <div class="form-group">
+                        <x-jet-label value="Numero de comprobante " />
                         
+                        <x-jet-input type="number" name="ncomp"  value="0" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                    </div>
                         <div class="form-group">
                             <x-jet-label value="tipo_cambio" />
                             <x-jet-input type="number" min="0" name="tipo_cambio" value=1  /> 

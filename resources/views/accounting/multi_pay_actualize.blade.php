@@ -54,6 +54,11 @@
                     <div class="col ">
                     
                     <x-jet-input type="hidden" name="otra" id="otra" value="0"/>
+                    <div class="form-group">
+                        <x-jet-label value="Numero de comprobante " />
+                        
+                        <x-jet-input type="number" name="ncomp"  value="0" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
+                    </div>
                     @foreach($pays as $pago)
                     
            <div class ="row">  
@@ -89,6 +94,7 @@
                         <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
                         <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                     </div>
+                    
                     <div class="divCant"> 
                  <div class="form-group" >
                       <x-jet-label value="Cantidad a pagar" />
