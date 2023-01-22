@@ -680,6 +680,10 @@ class InternalOrderController extends Controller
      $pagos=payments::where('order_id',$id);
      $pagos->delete();
      
+     $hpagos=historical_payments::where('order_id',$id);
+     $hpagos->delete();
+     
+
      $firmas=signatures::where('order_id',$id);
      $firmas->delete();
      $orden=InternalOrder::find($id);
