@@ -19,7 +19,7 @@
             <div class="w-100">&nbsp;</div>
             <div class="col-sm-12 table-responsive">
                 
-            <table id="example" class="display" >
+            <table id="example"  class="table table-striped text-xs font-medium" >
                     <thead>
                         <tr>
                             
@@ -30,7 +30,7 @@
                             <th>Municipio</th>
                             <th>Email</th>
                             <th>Teléfono</th>
-                            <th style="width : 40%;">-&nbsp;&nbsp;&nbsp;--- </th>
+                            <th style="width : 10%;">&nbsp;&nbsp; </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -165,7 +165,6 @@ class ItemController extends Controller
         $InternalOrders = InternalOrder::where('id', $request->internal_order_id)->first();
         $Customers = Customer::where('id', $InternalOrders->customer_id)->first();
         $Items = Item::where('internal_order_id', $InternalOrders->id)->get();
-
         if(count($Items) > 0){
             $Subtotal = Item::where('internal_order_id', $InternalOrders->id)->sum('import');
         }else{

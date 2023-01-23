@@ -24,7 +24,7 @@ class PaymentsController extends Controller
     public function index()
     {
         //$accounts = payments::where('status', 'por cobrar')->get();
-        $total = payments::where('status', 'por cobrar')->get()->sum('amount');
+       
         $url = " ";
         $accounts = DB::table('payments')
             ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
@@ -46,7 +46,7 @@ class PaymentsController extends Controller
                 
                 //when you are done, delete the unwanted columns
         $clientes->forget('customer_id');
-        
+        $total = $accounts->where('status', 'por cobrar')->sum('amount');
         
 
         $Orders = DB::table('internal_orders')
@@ -504,6 +504,7 @@ class PaymentsController extends Controller
         ->join('customers', 'internal_orders.customer_id','=','customers.id')
         ->join('coins','internal_orders.coin_id','=','coins.id')
         ->where('internal_orders.customer_id',$Customers->id)
+        ->where('internal_orders.status','autorizado')
         ->select('payments.*','internal_orders.customer_id','coins.symbol','internal_orders.invoice')->get();
         $pagados=DB::table('payments')->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
         ->join('customers', 'internal_orders.customer_id','=','customers.id')

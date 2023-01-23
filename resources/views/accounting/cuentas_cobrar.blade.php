@@ -14,7 +14,7 @@
                 <div class="col-sm-12 text-center font-bold text-sm">
                 
   
-                <div class="float-left"><h1><span class="badge badge-danger"> $ {{$total}} <br> por cobrar <br> </span></h1></div>
+                <div class="float-left"><h1><span class="badge badge-danger" style="font-size : 20px"> $ {{number_format($total)}} <br> por cobrar <br> </span></h1></div>
                 <br><br>
                 <div class="container" style ="padding: 15px">
                 <div class="btn-group" role="group"  aria-label="Basic example">
@@ -30,7 +30,7 @@
 
 <div class="col-sm-12 table-responsive">
             
-<table id="example" class=" table-striped text-xs font-small" >
+<table id="example" class="table table-striped text-xs font-small" >
                   <thead>
                             <tr>
                                 

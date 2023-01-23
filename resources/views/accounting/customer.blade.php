@@ -79,6 +79,7 @@
             </td>
           </tr>
           <tr>
+          @if($pagos->sum('amount') > 0)
             <td>
              {{$pagos->count()}}
             </td>
@@ -86,13 +87,16 @@
             {{$pagados->count() }} / {{ $pagos->count()}}
             </td>
             <td>
+                
               {{round(  100*($pagados->sum('amount'))/($pagos->sum('amount'))  )}} %
+             
             </td>
             <td style="color : red ">
             
              {{$pagos->first()->symbol}} {{number_format($noPagados->sum('amount'))}}
             
             </td>
+            @endif
           </tr>
         </tbody>
       </table>
