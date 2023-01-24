@@ -283,6 +283,9 @@ class InternalOrderController extends Controller
             $InternalOrders = new InternalOrder();
             $InternalOrders->id = $TempInternalOrders->id;
             $InternalOrders->invoice = '100';
+            if($TempInternalOrders->invoice != 0){
+                $InternalOrders->invoice = $TempInternalOrders->invoice;
+            }
             $InternalOrders->date = $TempInternalOrders->date;
             $InternalOrders->customer_id = $TempInternalOrders->customer_id;
             $InternalOrders->seller_id = $TempInternalOrders->seller_id;

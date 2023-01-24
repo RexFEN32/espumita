@@ -59,7 +59,7 @@
 <form action="{{ route('internal_orders.pay_redefine')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="pe"  id="pe" value="{{$pe}}"/>
-<x-jet-input type="hidden" name="rowcount"  id="rowcount" value="{{$npagos-$npagados}}"/>
+<x-jet-input type="hidden" name="rowcount"  id="rowcount" value="{{$npagos+1}}"/>
 <x-jet-input type="hidden" name="customerID"   value="{{$InternalOrders->customer_id}}" />
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
@@ -111,17 +111,20 @@ $aux_count=$aux_count+1;
 @endphp
 
      @endforeach
-     <tr >
+     
+    </tbody>
+</table>
+    
+<table>
+<tr >
     <th scope="row">TOTAL: </th>
       
       <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}} <br> (subtotal)</td>
       <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}} <br> (iva)</td>
       <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}<br> (total)</td>
     </tr>
-    </tbody>
 </table>
-     
-
+<br>
       <td> <span><button type="button" onclick="myFunction()"  class="btn btn-blue mb-2"> </span>
       <i class="fa fa-plus" ></i>
       &nbsp; &nbsp;
@@ -185,7 +188,7 @@ $aux_count=$aux_count+1;
 
 <script>
 function myFunction() {
-  var count= parseInt(document.getElementById("rowcount").value)+1;
+  var count= parseInt(document.getElementById("rowcount").value);
   console.log(count);
   var table = document.getElementById("tabla1");
   var row = table.insertRow(count);
