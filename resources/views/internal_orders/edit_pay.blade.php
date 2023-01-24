@@ -100,7 +100,7 @@
      <tr>
         <td>PAGO {{$aux_count}}</td>
         <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}">%</td>
-        <td>{{$Coins -> symbol}} <span id="{{'R'.$aux_count}}" ></span> </td>
+        <td>{{$Coins -> symbol}} <input type='number' id="{{'R'.$aux_count}}" ></td>
         <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}" value = "{{$row->date}}" id="{{'D'.$aux_count}}"></td>
         
         <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
@@ -171,11 +171,14 @@ $aux_count=$aux_count+1;
 </script>
 
 <script>
-  P1.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R1.innerHTML =parseInt( parseInt(P1.value)*total*0.01+1).toLocaleString('en-US');
-  };
+  document.getElementById("R1").addEventListener("input", function(){
+    document.getElementById("P1").value = (this.value/total)*100;
+});
+
+document.getElementById("P1").addEventListener("input", function(){
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
+    document.getElementById("R1").value = this.value*total*0.01;
+});
 </script>
 
 <script>
@@ -200,14 +203,30 @@ function myFunction() {
   var cell6 = row.insertCell(5);
   cell5.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
   cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value="+count+" style='width: 70%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
-  cell3.innerHTML = "<span  id='R"+count+"'></span>";
+  cell3.innerHTML = "<input type='number' min='0' id='R"+count+"'>";
   cell4.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
-  cell1.innerHTML = "<input type='text' style='width: 50%;' value='PAGO "+count+"'>";
+  cell1.innerHTML = "<span  style='width: 50%;' >PAGO "+count+"<span/>";
   cell6.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
+  
+  for (var i = 1; i <= count; i++) {
+  
+    document.getElementById(String("R"+i)).addEventListener("input", function(){
+    document.getElementById(String("P"+i)).value = (this.value/total)*100;
+    });
+
+document.getElementById(String("P"+i)).addEventListener("input", function(){
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
+    document.getElementById(String("R"+i)).value = this.value*total*0.01;
+    });
+    console.log(String("R"+i));
+  }
   count ++;
   document.getElementById("rowcount").value = count;
   console.log(count);
 }
+
+
+
 $("table").on("click", "#deleteRow", function (event) {
         $(this).closest("tr").remove();
         console.log(count);
