@@ -90,6 +90,12 @@
             <div class ="col"></div>
            </div>
                    <div class="form-group">
+                            <x-jet-label value="Fecha" />
+                            <x-jet-input type="date" name="fecha_factura" value="{{old('customer_street')}}"/>         
+                        
+                         </div>
+
+                   <div class="form-group">
                         <x-jet-label value="* Numero de Factura " />
                         <x-jet-input type="hidden" name="pagos[]" value="{{$pago->id}}"/>
                         <x-jet-input type="text" name="nfactura[]"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
@@ -97,7 +103,7 @@
                     
                     <div class="divCant"> 
                  <div class="form-group" >
-                      <x-jet-label value="Cantidad a pagar" />
+                      <x-jet-label value="Cantidad a cobrar" />
                     $ <x-jet-input type="number" min="0" name="amount[]" /> 
                          </div></div>
                     

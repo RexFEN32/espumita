@@ -77,6 +77,9 @@
                         </tr>
                         <tr>
                             <td>
+                                Fecha de Emision <br> del Pedido: <br>{{ date('d-m-Y', strtotime($InternalOrders->reg_date))}}
+                            </td>
+                            <td>
                                 Fecha de Entrega del Equipo: <br>{{ date('d-m-Y', strtotime($InternalOrders->date_delivery))}}
                             </td>
                             <td>

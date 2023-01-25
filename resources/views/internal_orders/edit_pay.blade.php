@@ -162,32 +162,8 @@ $aux_count=$aux_count+1;
 @if ($actualized == 'NO')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_incorrect.js') }}"></script>
 @endif
-<script>
-  P0.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R0.innerHTML =parseInt( parseInt(P0.value)*total*0.01+1).toLocaleString('en-US');
-  };
-</script>
 
-<script>
-  document.getElementById("R1").addEventListener("input", function(){
-    document.getElementById("P1").value = (this.value/total)*100;
-});
 
-document.getElementById("P1").addEventListener("input", function(){
-  total = parseInt(document.getElementById('subtotal').value)*1.16;
-    document.getElementById("R1").value = this.value*total*0.01;
-});
-</script>
-
-<script>
-  P2.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R2.innerHTML =parseInt( parseInt(P2.value)*total*0.01+1).toLocaleString('en-US');
-  };
-</script>
 
 <script>
 function myFunction() {
@@ -210,15 +186,15 @@ function myFunction() {
   
   for (var i = 1; i <= count; i++) {
   
-    document.getElementById(String("R"+i)).addEventListener("input", function(){
-    document.getElementById(String("P"+i)).value = (this.value/total)*100;
+    document.getElementById("R"+String(i)).addEventListener("input", function(){
+    document.getElementById("P"+String(i)).value = (this.value/total)*100;
     });
 
-document.getElementById(String("P"+i)).addEventListener("input", function(){
-  total = parseInt(document.getElementById('subtotal').value)*1.16;
-    document.getElementById(String("R"+i)).value = this.value*total*0.01;
+     document.getElementById("P"+String(i)).addEventListener("input", function(){
+      total = parseInt(document.getElementById('subtotal').value)*1.16;
+      document.getElementById("R"+String(i)).value = this.value*total*0.01;
     });
-    console.log(String("R"+i));
+    console.log("R"+String(i));
   }
   count ++;
   document.getElementById("rowcount").value = count;

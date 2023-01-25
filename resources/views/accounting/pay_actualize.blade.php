@@ -83,12 +83,13 @@
                             <x-jet-label value="* BANCO" />
                             <x-jet-input type="text" name="banco"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
                         </div>
-                        <!-- </div>
+                        
                          <div class="form-group">
                             <x-jet-label value="Fecha" />
                             <x-jet-input type="date" name="fecha_factura" value="{{old('customer_street')}}"/>         
                         
-                         </div><div class="form-group">
+                         </div>
+                         <!-- </div><div class="form-group">
                             <x-jet-label value="* Importe total (IVA incluido)" />
                             <x-jet-input type="text" name="importe_total" value="{{old('customer_street')}}"/>         
                         

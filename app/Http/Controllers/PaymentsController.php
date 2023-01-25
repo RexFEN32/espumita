@@ -314,8 +314,8 @@ class PaymentsController extends Controller
         //$pay->ncomp=$request->ncomp;
         
         $pay->banco=$request->banco;
-        $pay->fecha_factura = now()->format('Y-m-d');
-        //$pay->fecha_factura=$request->fecha_factura;
+        //$pay->fecha_factura = now()->format('Y-m-d');
+        $pay->fecha_factura=$request->fecha_factura;
         //$pay->importe_total=$request->importe_total;
         //$pay->moneda=$request->moneda;
         $pay->tipo_cambio=$request->tipo_cambio;
@@ -376,7 +376,9 @@ class PaymentsController extends Controller
         $pay->status ="pagado";
         $pay->nfactura=$request->nfactura[$i];
         $pay->banco=$request->banco;
-        $pay->fecha_factura = now()->format('Y-m-d');
+        $pay->fecha_factura=$request->fecha_factura;
+        
+        //$pay->fecha_factura = now()->format('Y-m-d');
         $pay->tipo_cambio=$request->tipo_cambio;
         $pay->capturista=Auth::user()->name;
         $pay->ncomp = $lastComp + 1;
