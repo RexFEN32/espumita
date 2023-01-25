@@ -166,8 +166,25 @@ $aux_count=$aux_count+1;
 
 
 <script>
+
+  for (var i = 1; i <= parseInt( '{{$no_pagados->count()}}'); i++) {
+    var j = i;
+document.getElementById("R"+String(j)).addEventListener("input", function(){
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
+    document.getElementById("P"+String(j)).value = (this.value/total)*100;
+    });
+
+     document.getElementById("P"+String(j)).addEventListener("input", function(){
+      total = parseInt(document.getElementById('subtotal').value)*1.16;
+      document.getElementById("R"+String(j)).value = this.value*total*0.01;
+    });
+    console.log("R"+String(i));}
+  
+  
 function myFunction() {
+  index=1
   var count= parseInt(document.getElementById("rowcount").value);
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
   console.log(count);
   var table = document.getElementById("tabla1");
   var row = table.insertRow(count);
@@ -184,20 +201,21 @@ function myFunction() {
   cell1.innerHTML = "<span  style='width: 50%;' >PAGO "+count+"<span/>";
   cell6.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   
-  for (var i = 1; i <= count; i++) {
+  // for (var i = index; i <= count; i++) {
   
-    document.getElementById("R"+String(i)).addEventListener("input", function(){
-    document.getElementById("P"+String(i)).value = (this.value/total)*100;
-    });
+  //   document.getElementById("R"+String(i)).addEventListener("input", function(){
+  //   document.getElementById("P"+String(i)).value = (this.value/total)*100;
+  //   });
 
-     document.getElementById("P"+String(i)).addEventListener("input", function(){
-      total = parseInt(document.getElementById('subtotal').value)*1.16;
-      document.getElementById("R"+String(i)).value = this.value*total*0.01;
-    });
-    console.log("R"+String(i));
-  }
-  count ++;
+  //    document.getElementById("P"+String(i)).addEventListener("input", function(){
+      
+  //     document.getElementById("R"+String(i)).value = this.value*total*0.01;
+  //   });
+  //   console.log("R"+String(i));
+  // }
+  count =count +1;
   document.getElementById("rowcount").value = count;
+  index=count;
   console.log(count);
 }
 
