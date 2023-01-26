@@ -147,8 +147,7 @@
                     <th>Importe <br>(IVA incluido)</th>
                     <th>% del Pago <br> Parcial</th>
                     <th>Tipo de <br> Cambio</th>
-                    <th>Importe <br> acumulado</th>
-                    <th>% de Pago Acumulado</th>
+                    
 
                 </tr>
                 <tbody>
@@ -160,8 +159,7 @@
                         <td>{{$order->symbol }} {{number_format($pay->amount)}}</td>
                         <td>{{$pay->percentage}}</td>
                         <td>{{$pay->tipo_cambio}}</td>
-                        <td></td>
-                        <td>{{$pay->porcentaje_acumulado}}</td>
+                        
                     </tr>
                 </tbody>
               </table>
