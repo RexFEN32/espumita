@@ -152,6 +152,36 @@ $aux_count=$aux_count+1;
 @stop
 
 @section('js')
+@for ($i = $pagados->count()+1; $i <= $npagos; $i++)
+<script>
+  document.getElementById("{{'R'.$i}}").addEventListener("input", function(){
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
+    document.getElementById("{{'P'.$i}}").value = (this.value/total)*100;
+    }); 
+    
+     document.getElementById("{{'P'.$i}}").addEventListener("input", function(){
+      total = parseInt(document.getElementById('subtotal').value)*1.16;
+      document.getElementById("{{'R'.$i}}").value = this.value*total*0.01;
+    });
+</script>
+@endfor
+<!-- <script>
+  for (var i = parseInt('{{$pagados->count()+1}}'); i <= parseInt( '{{$npagos}}'); i++) {
+    console.log(i);
+    cant = document.getElementById("R"+String(i));
+    per = document.getElementById("P"+String(i));
+    console.log(per.value);
+    cant.addEventListener("input", function(){
+  total = parseInt(document.getElementById('subtotal').value)*1.16;
+    document.getElementById("P"+String(i-1)).value = (this.value/total)*100;
+    }); 
+    console.log(i);
+     document.getElementById("P"+String(i)).addEventListener("input", function(){
+      total = parseInt(document.getElementById('subtotal').value)*1.16;
+      document.getElementById("R"+String(i-1)).value = this.value*total*0.01;
+    });
+    console.log(String(i-1));}
+</script> -->
 
 @if ($actualized == 'SI')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_actualized.js') }}"></script>
@@ -164,24 +194,6 @@ $aux_count=$aux_count+1;
 
 
 <script>
-
-
-  for (var i = parseInt('{{$pagados->count()+1}}'); i <= parseInt( '{{$npagos}}'); i++) {
-    console.log(i);
-    cant = document.getElementById("R"+String(i));
-    per = document.getElementById("P"+String(i));
-    console.log(per.value);
-    cant.addEventListener("input", function(){
-  total = parseInt(document.getElementById('subtotal').value)*1.16;
-    document.getElementById("P"+String(1)).value = (this.value/total)*100;
-    });
-    console.log(i);
-     document.getElementById("P"+String(i)).addEventListener("input", function(){
-      total = parseInt(document.getElementById('subtotal').value)*1.16;
-      document.getElementById("R"+String(i)).value = this.value*total*0.01;
-    });
-    console.log(String(i-1));}
-
   
 function myFunction() {
   index=1
