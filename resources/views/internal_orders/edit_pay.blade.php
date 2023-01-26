@@ -66,6 +66,7 @@
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
 <x-jet-input type="hidden" name="subtotal" id="subtotal" value="{{$InternalOrders->subtotal}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
+<x-jet-input type="hidden" name="pagados" value="{{$pagados->count()+1}}"/>
 
 
 <table class="table table-striped" name="tabla1" id="tabla1">
@@ -79,15 +80,14 @@
     </tr>
   </thead>
   <tbody>
-  @php
-      $aux_count=$npagados+1;
-      @endphp
+  
   @foreach($pagados as $row)
      <tr>
         <td> PAGO {{$aux_count}}</td>
-        <td> % {{$row->percentage}}</td>
+        <td>  {{$row->percentage}}%</td>
+        <td> {{ number_format($row->amount)}}</td>
         <td> {{$row->date}}</td>
-        <td> {{$row->nota}}</td>
+        <td> {{$row->concept}}</td>
      </tr>
      @php
       $aux_count=$aux_count+1;
@@ -99,8 +99,8 @@
      @foreach($no_pagados as $row)
      <tr>
         <td>PAGO {{$aux_count}}</td>
-        <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}">%</td>
-        <td>{{$Coins -> symbol}} <input type='number' id="{{'R'.$aux_count}}" ></td>
+        <td> <input type='number' min='0' max='100' step='5'  style='width: 80%;' name="{{'porcentaje['.$aux_count.']'}}" value = "{{$row->percentage}}" id="{{'P'.$aux_count}}">%</td>
+        <td>{{$Coins -> symbol}} <input type='number' min='0' max='{{$Total}}' id="{{'R'.$aux_count}}" style='width: 70%;'></td>
         <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}" value = "{{$row->date}}" id="{{'D'.$aux_count}}"></td>
         
         <td> <input type='text' name="{{'CONCEPTO['.$aux_count.']'}}" value = "{{$row->concept}}" id ="{{'C'.$aux_count}}"></td>
@@ -141,9 +141,7 @@ $aux_count=$aux_count+1;
  
 
                 </div>
-                </form>
-                <span id="result" ></span>
-                <input type="text" id="input"> 
+                </form> 
 
 </div>
 
@@ -167,24 +165,27 @@ $aux_count=$aux_count+1;
 
 <script>
 
-  for (var i = 1; i <= parseInt( '{{$no_pagados->count()}}'); i++) {
-    var j = i;
-document.getElementById("R"+String(j)).addEventListener("input", function(){
+  for (var i = '{{$pagados->count()+1}}'; i <= parseInt( '{{$npagos}}'); i++) {
+    console.log(i);
+    cant = document.getElementById("R"+String(i));
+    per = document.getElementById("P"+String(i));
+    console.log(per.value);
+    cant.addEventListener("input", function(){
   total = parseInt(document.getElementById('subtotal').value)*1.16;
-    document.getElementById("P"+String(j)).value = (this.value/total)*100;
+    document.getElementById("P"+String(i-1)).value = (this.value/total)*100;
     });
-
-     document.getElementById("P"+String(j)).addEventListener("input", function(){
+    console.log(i);
+     document.getElementById("P"+String(i)).addEventListener("input", function(){
       total = parseInt(document.getElementById('subtotal').value)*1.16;
-      document.getElementById("R"+String(j)).value = this.value*total*0.01;
+      document.getElementById("R"+String(i-1)).value = this.value*total*0.01;
     });
-    console.log("R"+String(i));}
+    console.log(i);}
   
   
 function myFunction() {
   index=1
   var count= parseInt(document.getElementById("rowcount").value);
-  total = parseInt(document.getElementById('subtotal').value)*1.16;
+  total = parseFloat(document.getElementById('subtotal').value)*1.16;
   console.log(count);
   var table = document.getElementById("tabla1");
   var row = table.insertRow(count);
@@ -195,14 +196,21 @@ function myFunction() {
   var cell5 = row.insertCell(4);
   var cell6 = row.insertCell(5);
   cell5.innerHTML = "<input type='text' name='CONCEPTO["+count+"]'  id='C"+count+"'>";
-  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value="+count+" style='width: 70%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
-  cell3.innerHTML = "<input type='number' min='0' id='R"+count+"'>";
+  cell2.innerHTML = "<input type='number' min='0' max='100' step='5'  value="+count+" style='width: 80%;' name='porcentaje["+count+"]' id='P"+count+"'> %";
+  cell3.innerHTML = "$ <input type='number' min='0' id='R"+count+"' style='width: 70%;'>";
   cell4.innerHTML = "<input type='date'  required class='w-full text-xs' name='date["+count+"]' id='D"+count+"'>";
   cell1.innerHTML = "<span  style='width: 50%;' >PAGO "+count+"<span/>";
   cell6.innerHTML = '<button type="button" class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button>' ;
   
+  document.getElementById("R"+String(count)).addEventListener("input", function(){
+     document.getElementById("P"+String(count-1)).value = (this.value/total)*100;
+    });
+  document.getElementById("P"+String(count)).addEventListener("input", function(){
+    
+     total = parseFloat(document.getElementById('subtotal').value)*1.16;
+     document.getElementById("R"+String(count-1)).value = this.value*total*0.01;
+    });
   // for (var i = index; i <= count; i++) {
-  
   //   document.getElementById("R"+String(i)).addEventListener("input", function(){
   //   document.getElementById("P"+String(i)).value = (this.value/total)*100;
   //   });
@@ -236,12 +244,11 @@ $("table").on("click", "#deleteRow", function (event) {
       var total=parseInt(0);
       
       var count= document.getElementById("rowcount").value;
-      var myForm = document.forms.form1;
-      var myControls = myForm.elements['porcentaje'];
+      
       console.log(count);
       var pe=document.getElementById("pe").value;
       console.log(pe);
-      for (var i = 1; i < count; i++) {
+      for (var i = parseInt('{{$pagados->count()+1}}'); i < count; i++) {
         console.log(i);
       var p=document.getElementById("P"+i).value;
       console.log(p);

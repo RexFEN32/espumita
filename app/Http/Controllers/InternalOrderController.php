@@ -495,9 +495,9 @@ class InternalOrderController extends Controller
         $Items = Item::where('internal_order_id', $id)->get();
         $numpagos=(int)$InternalOrders->payment_conditions;
         $Subtotal = $InternalOrders->subtotal;
-        
+        $Total = $InternalOrders->total;
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
-        $aux_count=0;
+        $aux_count=1;
         $actualized = " ";
         return view('internal_orders.edit_pay', compact(
             'CompanyProfiles',
@@ -509,6 +509,7 @@ class InternalOrderController extends Controller
             'Items',
             'Authorizations',
             'Subtotal',
+            'Total',
             'id',
             'actualized',
             'payments',
@@ -586,7 +587,7 @@ class InternalOrderController extends Controller
         $old_payments = payments::where('order_id', $request->order_id)
         ->where('status','por cobrar')
         ->delete();
-        for($i=1; $i < $nRows; $i++) {
+        for($i=$request->pagados; $i < $nRows; $i++) {
              
             $this_payment= new payments(); 
             $this_payment->order_id = $request->order_id;
