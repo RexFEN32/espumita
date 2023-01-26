@@ -220,9 +220,10 @@ class PaymentsController extends Controller
         $cliente = Customer::find($orden->customer_id);
         $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->join('coins', 'internal_orders.coin_id', '=', 'coins.id')
             ->where('internal_orders.id','=',$pay->order_id)
             ->where('internal_orders.status','=','autorizado')
-            ->select('internal_orders.*','customers.customer')
+            ->select('internal_orders.*','customers.customer','coins.symbol','coins.coin')
             ->first();
         
         $url =  "'/".$pay->id.".pdf'";
@@ -370,7 +371,7 @@ class PaymentsController extends Controller
         }
         for($i=0; $i < count($request->pagos); $i++){
         $id=$request->pagos[$i];
-        $comp = $request->comprobante;
+        $comp = $request->comprobante[$i];
         $pay = payments::find($id);
         $orden= InternalOrder::find($pay->order_id);
         $pay->status ="pagado";
@@ -412,12 +413,11 @@ class PaymentsController extends Controller
             ->where('internal_orders.id','=',$pay->order_id)
             ->select('internal_orders.*','customers.customer')
             ->first();
-        #$nombre = strval($pay->id) . "comp";
-        #$info = new SplFileInfo('foo.txt');
+       
         $nombre = $comp->getClientOriginalName();
         $nombre_con_id= strval($pay->id).substr($nombre,-4);
         \Storage::disk('public')->put($nombre_con_id,  \File::get($comp));}
-        $url = "'/".$nombre_con_id."'";
+       
         
         return $this->index();
     }

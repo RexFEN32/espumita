@@ -153,11 +153,11 @@
                 </tr>
                 <tbody>
                     <tr>
-                        <td> {{$pay->nfactura}}</td>
+                        <td>{{$pay->nfactura}}</td>
                         <td>{{$pay->ncomp}}</td>
-                        <td>{{$pay->moneda}}</td>
+                        <td>{{$order->coin}}</td>
                         <td>{{$pay->date}}</td>
-                        <td>{{number_format($pay->amount)}}</td>
+                        <td>{{$order->symbol }} {{number_format($pay->amount)}}</td>
                         <td>{{$pay->percentage}}</td>
                         <td>{{$pay->tipo_cambio}}</td>
                         <td></td>

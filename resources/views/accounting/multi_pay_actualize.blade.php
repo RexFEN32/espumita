@@ -106,6 +106,10 @@
                       <x-jet-label value="Cantidad a cobrar" />
                     $ <x-jet-input type="number" min="0" name="amount[]" /> 
                          </div></div>
+
+                         <br>
+                <input type="file" name="comprobante[]" id="comp" onchange="mostrar()">
+                <br>
                     
     @endforeach
              
@@ -123,10 +127,8 @@
                          <br>
                 <br>
 
-                Ingresa su comprobante
+                
                 <br>
-                <input type="file" name="comprobante" id="comp" onchange="mostrar()">
-                <br><br>
                 <div class="form-group" id="pass"  style="display: none">
                             
                             <x-jet-label value="* Firma de quien captura:  " />

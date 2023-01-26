@@ -165,22 +165,23 @@ $aux_count=$aux_count+1;
 
 <script>
 
-  for (var i = '{{$pagados->count()+1}}'; i <= parseInt( '{{$npagos}}'); i++) {
+
+  for (var i = parseInt('{{$pagados->count()+1}}'); i <= parseInt( '{{$npagos}}'); i++) {
     console.log(i);
     cant = document.getElementById("R"+String(i));
     per = document.getElementById("P"+String(i));
     console.log(per.value);
     cant.addEventListener("input", function(){
   total = parseInt(document.getElementById('subtotal').value)*1.16;
-    document.getElementById("P"+String(i-1)).value = (this.value/total)*100;
+    document.getElementById("P"+String(1)).value = (this.value/total)*100;
     });
     console.log(i);
      document.getElementById("P"+String(i)).addEventListener("input", function(){
       total = parseInt(document.getElementById('subtotal').value)*1.16;
-      document.getElementById("R"+String(i-1)).value = this.value*total*0.01;
+      document.getElementById("R"+String(i)).value = this.value*total*0.01;
     });
-    console.log(i);}
-  
+    console.log(String(i-1));}
+
   
 function myFunction() {
   index=1
@@ -210,17 +211,6 @@ function myFunction() {
      total = parseFloat(document.getElementById('subtotal').value)*1.16;
      document.getElementById("R"+String(count-1)).value = this.value*total*0.01;
     });
-  // for (var i = index; i <= count; i++) {
-  //   document.getElementById("R"+String(i)).addEventListener("input", function(){
-  //   document.getElementById("P"+String(i)).value = (this.value/total)*100;
-  //   });
-
-  //    document.getElementById("P"+String(i)).addEventListener("input", function(){
-      
-  //     document.getElementById("R"+String(i)).value = this.value*total*0.01;
-  //   });
-  //   console.log("R"+String(i));
-  // }
   count =count +1;
   document.getElementById("rowcount").value = count;
   index=count;
@@ -257,7 +247,7 @@ $("table").on("click", "#deleteRow", function (event) {
       var d=document.getElementById("D"+i);
       console.log(d)
       var campo = $('#id_del_input').val();
-      total=total+parseInt(p);
+      total=total+parseFloat(p);
       if (c=="") {
         console.log("concepto vacio")
         alert("Concepto sin nombre");
@@ -272,7 +262,7 @@ $("table").on("click", "#deleteRow", function (event) {
       console.log(total);
       console.log(total);
       if (total != pe) {
-      alert("Los porcentajes no suman 100%");
+      alert("Los porcentajes no suman 100%, sino "+ String((100-pe)+total));
       
          }else
       document.getElementById("form1").submit();
