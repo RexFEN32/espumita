@@ -57,7 +57,7 @@ for i in df.itertuples():
     else:
         mac=mac+i[5]
     df.iloc[i[0],7]=mac
-    df.iloc[i[0],2]=str(moneda["code"].values[0])
+    df.iloc[i[0],2]=str(moneda["coin"].values[0])
 
 
 
@@ -318,7 +318,8 @@ b4s = workbook.add_format({
 #dataframes
 
 df.to_excel(writer, sheet_name='Sheet1', startrow=9,startcol=6, header=False, index=False)
-prog=thisAllPays[["moneda","fecha_factura","amount","percentage"]]
+
+prog=thisAllPays[["moneda","date","amount","percentage"]]
 prog.to_excel(writer, sheet_name='Sheet1', startrow=9,startcol=2, header=False, index=False)
 worksheet = writer.sheets['Sheet1']
 worksheet.set_column(2,19,15)
@@ -345,9 +346,11 @@ worksheet.write(8,14 ,"PORCENTAJE DEL PAGO ACUMULADO",header_format)
 
 for j in range(1,len(prog)+1):
     worksheet.write(8+j, 1, 'Pago'+str(j), negro_b)
+    worksheet.write(8+j, 2, moneda["coin"].values[0], negro_s)
+    worksheet.write(8+j, 5, str(prog["percentage"].values[j-1])+'%', negro_s)
 
 for j in range(1,len(df)+1):
-    worksheet.write(8+j, 15, 'Nombre del capturista', negro_s)
+    worksheet.write(8+j, 15,thisPays["capturista"][j-1] , negro_s)
 
 for j in range(1,len(df)+1):
     worksheet.write(8+j, 16, 'Nombre del gerente', negro_s)

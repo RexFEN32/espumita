@@ -51,8 +51,10 @@ class PaymentsController extends Controller
 
         $Orders = DB::table('internal_orders')
         ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        ->join('sellers', 'internal_orders.seller_id','=','sellers.id')
         ->join('coins', 'internal_orders.coin_id','=','coins.id')
-        ->select('internal_orders.*','customers.customer','coins.symbol')
+        ->where('internal_orders.status','autorizado')
+        ->select('internal_orders.*','customers.customer','coins.symbol','customers.clave','sellers.seller_name')
         ->get();
         return view('accounting.cuentas_cobrar', compact(
             'accounts',
@@ -342,8 +344,10 @@ class PaymentsController extends Controller
 
         $order = DB::table('internal_orders')
             ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+            ->join('coins', 'internal_orders.coin_id', '=', 'coins.id')
             ->where('internal_orders.id','=',$pay->order_id)
-            ->select('internal_orders.*','customers.customer')
+            ->where('internal_orders.status','=','autorizado')
+            ->select('internal_orders.*','customers.customer','coins.symbol','coins.coin')
             ->first();
         #$nombre = strval($pay->id) . "comp";
         #$info = new SplFileInfo('foo.txt');
@@ -522,6 +526,42 @@ class PaymentsController extends Controller
         ->select('payments.*','customers.id','coins.symbol','internal_orders.invoice')->get();
         $saldoDeudor=$noPagados->sum('amount');
         return view('accounting.customer', compact(
+            'Customers',
+            'CompanyProfiles',
+            'pagos',
+            'pagados',
+            'noPagados',
+            'saldoDeudor',
+            
+        ));
+    }
+    public function cuentas_order($id)
+    {
+        $Order=InternalOrder::find($id);
+        $Customers=customer::find($Order->customer_id);
+        $CompanyProfiles = CompanyProfile::first();
+        $pagos=DB::table('payments')
+        ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->join('coins','internal_orders.coin_id','=','coins.id')
+        ->where('internal_orders.id',$id)
+        ->where('internal_orders.status','autorizado')
+        ->select('payments.*','internal_orders.customer_id','coins.symbol','internal_orders.invoice')->get();
+        $pagados=DB::table('payments')->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->where('payments.status','pagado')
+        ->where('internal_orders.id',$id)
+        ->select('payments.*','customers.id')->get();
+        $noPagados=DB::table('payments')
+        ->join('internal_orders', 'internal_orders.id', '=', 'payments.order_id')
+        ->join('customers', 'internal_orders.customer_id','=','customers.id')
+        ->join('coins','internal_orders.coin_id','=','coins.id')
+        ->where('payments.status','por cobrar')
+        ->where('internal_orders.id',$id)
+        ->select('payments.*','customers.id','coins.symbol','internal_orders.invoice')->get();
+        $saldoDeudor=$noPagados->sum('amount');
+        return view('accounting.order', compact(
+            'Order',
             'Customers',
             'CompanyProfiles',
             'pagos',

@@ -39,7 +39,7 @@
                         <tr class="text-center">
                             <td>{{$row->id}}</td>
                             <td>{{$row->invoice}}</td>
-                            <td>{{ date('d-m-Y', strtotime($row->date)) }}</td>
+                            <td>{{date('d-m-Y', strtotime($row->date)) }}</td>
                             <td>{{$row->customer}}</td>
                             <td>{{$row->clave}}</td>
                             <td>{{$row->seller_name}}</td>

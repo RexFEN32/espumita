@@ -3,7 +3,7 @@
 @section('title', 'Reportes')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-file"></i>&nbsp; REPORTES</h1>
+    <h1 class="font-bold"><i class="fas fa-file"></i>&nbsp;CONTRAPORTADA</h1>
 @stop
 
 @section('content')
@@ -12,15 +12,11 @@
             <div class="row p-4">
                 <div class="col-sm-12 text-center font-bold text-lg">
                 
-                <div class="btn-group" role="group"  aria-label="Basic example">
-  <button type="button" class="btn btn-blue mb-2" onclick="Clientes()">Clientes</button>
-  <button type="button" class="btn btn-blue mb-2" onclick="Ordenes()">Pedido</button>
-  <button type="button"class="btn btn-blue mb-2"  onclick="Fechas()">Fecha</button>
-</div>
+            
                
                 <div class="col-sm-12 table-responsive">
 
-                <table class="table tablepayments table-striped text-xs font-medium">
+                <table id="tableContraportada" class="table tablepayments table-striped text-xs font-medium">
   <thead class="thead">
     <tr>
       <th scope="col">Cliente</th>
@@ -72,6 +68,12 @@
 @stop
 
 @section('js')
+<script>
+
+$(document).ready(function () {
+    $('#tableContraportada').DataTable();
+});
+</script>
 
 
 @stop

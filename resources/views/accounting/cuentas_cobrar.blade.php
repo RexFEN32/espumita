@@ -30,7 +30,7 @@
 
 <div class="col-sm-12 table-responsive">
             
-<table id="example" class="table table-striped text-xs font-small" >
+<table id="tableCustomers" class="table table-striped text-xs font-small" >
                   <thead>
                             <tr>
                                 
@@ -79,124 +79,50 @@
 
 </div>
 <div id = "OrderView">  
-@foreach ($Orders as $row)
-<br>
-<button class="btn btn-blue" data-toggle="collapse" data-target="#collapseExample{{$row->id}}" aria-expanded="false" aria-controls="collapseExample">
-    <i class="fas fa-file fa-2x" ></i>
-             &nbsp; &nbsp;
-    <p>{{$row->invoice}}</p></button></td>
-    <div class="collapse" id="collapseExample{{$row->id}}">
-
-@php
-{{
-  $pagos = $accounts->where('order_id',$row->id);
-  $pendientes = $pagos->where('status','por cobrar');
-  $pagados = $pagos ->where('status','pagado');
-}}
-@endphp
-
-    <table>
-        <tbody>
-          <tr>
-            <td>
-              Monto total del pedido
-            </td>
-            <td>
-              Abonos pagados
-            </td>
-            <td>
-              Porcentaje completado
-            </td>
-            <td>
-              Saldo deudor
-            </td>
-          </tr>
-          <tr>
-            <td>
-             {{$row->symbol}} {{number_format($row->subtotal*1.16)}}
-            </td>
-            <td>
-            {{$pagados->count() }} / {{ $pagos->count()}}
-            </td>
-            <td>
-              {{$pagados->sum('percentage')}} %
-            </td>
-            <td style="color : red ">
-            {{$row->symbol}} {{number_format($pendientes ->sum('amount'))}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    <div class="column">
-      <br>
-        <table>
-        <table class="table-striped text-xs font-medium">
-            <thead class="thead">
-               <tr style = "font-size : 14px; margin : 15px">
-               <th > Cliente</th>
-               <th scope="col">concepto</th>
-               <th scope="col">Cantidad</th>
-               <th scope="col">Fechade pago</th>
-               <th scope="col">Notas</th>
-               <th scope="col">Estado</th>
-               </tr>
-            </thead>
-
-            <tbody>
-    @foreach ($accounts as $pago)
-        @if($pago->order_id == $row->id)
-                <tr  style = "font-size : 14px; margin : 15px">
-
-                   <td>
-                   {{$row->customer}}
-                    </td>
-                    <td>
-                   {{$pago->concept}}
-                    </td>
-                    <td>
-                   {{$row->symbol}}{{number_format($pago->amount)}}
-                    </td>
-                    <td>
-                   {{$pago->date}}
-                    </td>
-                    <td>
-                   {{$pago->nota}}
-                    </td>
-                    <td>
-                    @php {{
-                      $fecha = new DateTime($pago->date);
-                    }}@endphp
-
-                    @if($pago->status == 'pagado')
-                    <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                        <button class="button"> <span class="badge badge-success">Pagado</span> </button>
-                        </a> 
-                      
-                      @else
-                      @if( now() > $fecha)
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button"> <span class="badge badge-danger">atrasado</span> </button>
-                      </a>  
-                    @else
-                      <a href="{{route('payments.pay_actualize',$pago->id)}}">
-                      <button class="button"> <span class="badge badge-info">por cobrar</span> </button>
-                      </a>
-                      @endif     
-                    @endif          
+<table id="tableOrders" class="table table-striped text-xs font-small" >
+                  <thead>
+                            <tr>
                                 
-                    </td>
-                </tr>
-
-                @endif
-      @endforeach
-            </tbody>
-        </table>
-        
-    </div>
-  </div>
-  <br>
-@endforeach
-
+                                <th>Folio</th>
+                                <th>Fecha</th>
+                                <th>Cliente</th>
+                                <th>Clave</th>
+                                
+                                <th>Vendedor</th>
+                                
+                                
+                                <th style="width:13%"> Ver cuentas por Cobrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($Orders as $row)
+                            <tr>
+                              
+                               <td>{{$row->invoice}}</td>
+                               <td>{{$row->reg_date}}</td>
+                                <td>{{$row->customer}}</td>
+                                <td>{{$row->clave}}</td>
+                                <td>{{$row->seller_name}}</td>
+                                
+                                
+                                
+                                <td class="w-5">
+                                    <div class="row">
+                                    <div class="col"></div>
+                                        <div class="col-6 text-center w-10" >
+                                        
+                                            <a href="{{ route('accounting.cuentas_order', $row->id)}}">
+                                                <i class="fas fa-usd btn btn-blue w-3 h-3"></i>
+                                            </a>
+                                            
+                                        </div>
+                                        <div class="col"></div> 
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 </div>
 
 <br><br><br><br>
@@ -311,8 +237,13 @@
 <script>
 
 $(document).ready(function () {
-    $('#example').DataTable();
+    $('#tableOrders').DataTable();
 });
 </script>
+<script>
 
+$(document).ready(function () {
+    $('#tableCustomers').DataTable();
+});
+</script>
 @stop
