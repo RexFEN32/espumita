@@ -36,7 +36,8 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('reportes/consecutivo_comprobante', [PaymentsController::class, 'consecutivo_comprobante'])->name('reportes.consecutivo_comprobante');
     Route::get('reportes/cuentas_cobrar', [PaymentsController::class, 'rep_cuentas_cobrar'])->name('reportes.cuentas_cobrar');
     Route::get('customers/autocompletar', [CustomerController::class, 'autocomplete'])->name('autocomplete');
-    
+
+    Route::get('alternativa', [InternalOrderController::class, 'alternativa'])->name('alternativa');
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
@@ -66,6 +67,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('pay_amount/{id}', [PaymentsController::class, 'pay_amount_actualize'])->name('payments.pay_amount_actualize');
     Route::post('multi_pay', [PaymentsController::class, 'multi_pay_actualize'])->name('payments.multi_pay_actualize');
     //metodos para reportes... 8 reportes son, bueno 7, tecnicamente son 11
+    //ah pero ya nomas uso uno, soy la reata TODO: limpiar esta madre 
     Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
     Route::get('contraportadaPDF/{id}', [PaymentsController::class, 'contraportadaPDF'])->name('payments.contraportadaPDF');
     Route::get('factura_resumida/{id}', [PaymentsController::class, 'factura_resumida'])->name('payments.factura_resumida');
