@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function()
-{
+{Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
     Route::resource('internal_orders', InternalOrderController::class);
     Route::resource('temp_items', TempItemController::class);
     Route::resource('items', ItemController::class);
@@ -37,14 +37,13 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('reportes/cuentas_cobrar', [PaymentsController::class, 'rep_cuentas_cobrar'])->name('reportes.cuentas_cobrar');
     Route::get('customers/autocompletar', [CustomerController::class, 'autocomplete'])->name('autocomplete');
 
-    Route::get('alternativa', [InternalOrderController::class, 'alternativa'])->name('alternativa');
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
     Route::get('items/edit/{id}', [ItemController::class, 'edit_item'])->name('items.edit_item');
     Route::get('internal_orders/edit/{id}', [InternalOrderController::class, 'edit_order'])->name('internal_orders.edit_order');
-    Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
+    
     Route::post('internal_orders/firmar', [InternalOrderController::class, 'firmar'])->name('internal_orders.firmar');
     Route::post('internal_orders/redefine', [InternalOrderController::class, 'redefine'])->name('internal_orders.redefine_order');
     Route::post('internal_orders/shipments', [InternalOrderController::class, 'shipment'])->name('internal_orders.shipment');
