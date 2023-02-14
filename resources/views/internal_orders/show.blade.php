@@ -29,7 +29,7 @@
                                 <span style="color: darkblue">Numero PI:<br>
                                 {{$InternalOrders->invoice}}</span>
                                 <br> <br>
-                                NOAH: {{$InternalOrders->invoice}} 
+                                NOHA: {{$InternalOrders->noha}} 
                             </td>
                         </tr>
 
@@ -68,9 +68,9 @@
                         <td>{{$Customers->customer_rfc}}</td>
                         
                         <td>OC:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
+                        <td>{{$InternalOrders->oc}}</td>
                         <td>Contrato No.:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
+                        <td>{{$InternalOrders->ncontrato}}</td>
                          </tr>
                   </table>
                     <table>
@@ -79,11 +79,11 @@
                             <td>{{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
                                  &nbsp; E-mail: {{$Customers->customer_email}} &nbsp; Web: {{$Customers->customer_website}}
                             </td>
-                            <td>  "   " </td>
+                            <td>  &nbsp; </td>
                         </tr>
                         <tr>
                             <td>
-                                "     "
+                            &nbsp;
                             </td>
                             <td>Telefono:</td>
                             <td> {{$Customers->customer_telephone}}</td>
@@ -91,9 +91,7 @@
                         </tr>
                     </table>
                 </div>
-                    
-                
-
+                <br> &nbsp;  
                 <table>
                     <tr>
                         <th> Contacto</th>
@@ -104,10 +102,36 @@
                     </tr>
                     
                     <tbody>
-
+                    @foreach($Contacts as $row)
+                    <tr>
+                        <td>{{$row->id}}</td>
+                        <td>{{$row->customer_contact_name}}</td>
+                        <td>{{$row->customer_contact_office_phone}}</td>
+                        <td>{{$row->customer_contact_mobile}}</td>
+                        <td>{{$row->customer_contact_email}}</td>
+                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
-            </div>
+            <br> &nbsp;
+            <table>
+                <tr>
+                    <th>Vendedor</th>
+                    <th>Comisión</th>
+                    <th>Cotización Numero</th>
+                    <th>Moneda</th>
+                    <th>Cat Equipo</th>
+                    <th>Descripcion Global <br>Proyecto</th>
+                    <th>Ubicación <br> Sucursal <br> Tienda</th>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td> {{$Sellers->seller_name}}</td>
+                        <td>{{$InternalOrders->comision}}</td>
+                        <td>{{$InternalOrders->ncotizacion}}</td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="row p-4">
                 <div class="col-sm-12 font-bold text-sm">
                     <table>
@@ -172,6 +196,7 @@
                     </table>
                 </div>
             </div>
+            </div>
             <div class="row p-4">
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
@@ -181,24 +206,24 @@
                 
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                      <span class="text-right font-semibold text-sm">Descuento: $ 0.0</span>  
+                      <span class="text-right font-semibold text-sm">Descuento:  {{$InternalOrders->descuento}} %</span>  
                     </div>
                 </div>
                 
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                      <span class="text-right font-semibold text-sm">Desc. Fin: $ 0.0</span>  
+                      <span class="text-right font-semibold text-sm">Desc. Fin: $ {{number_format($InternalOrders->descuento * $InternalOrders->subtotal)}}</span>  
                     </div>
                 </div>
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                      <span class="text-right font-semibold text-sm">I.E.P.S: $ 0.0</span>  
+                      <span class="text-right font-semibold text-sm">I.E.P.S: $ {{number_format($InternalOrders->ieps * $InternalOrders->subtotal)}}</span>  
                     </div>
                 </div>
                 
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                      <span class="text-right font-semibold text-sm">RET ISR: $ 0.0</span>  
+                      <span class="text-right font-semibold text-sm">RET ISR: $ {{number_format($InternalOrders->isr * $InternalOrders->subtotal)}}</span>  
                     </div>
                 </div>
                 
@@ -219,6 +244,28 @@
                       <span class="text-right font-bold text-xl">Total: $ {{number_format($InternalOrders->total,2)}}</span>  
                     </div>
                 </div>
+
+                <br>&nbsp;
+                <div class="col-sm-3 font-bold text-sm">
+                <table class="table table-striped text-xs font-medium" >
+                   <tr>
+                    <td>Numero de Pagos:</td>
+                    <td>{{$payments->count()}}</td>
+                   </tr>
+                   <tr> 
+                    <td>Condiciones de Pago:</td>
+                    <td> @foreach($payments as $pay)
+                        {{$pay->percentage}}% &nbsp; {{$pay->concept}},<br>
+                        @endforeach
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>Promesas de Pago:</td>
+                    <td></td>
+                   </tr>
+                </table>
+                </div>
+                
             </div>
             <div class="row p-4">
                 <div class="col-sm-4 col-xs-12 text-center text-xs font-bold">
