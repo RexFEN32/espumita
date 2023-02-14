@@ -130,6 +130,19 @@
                                         <x-jet-input-error for='seller_id' />
                                     </div>
                                 </div>
+                                 <h1> Otros Datos</h1>
+
+                                 <div class="form-group">
+                                        <x-jet-label value="Numero de Contrato (opcional)" />
+                                        <input type="text" name="ncont" style='width: 10%;'> %
+                                        <x-jet-input-error for='seller_id' />
+                                    </div>
+                                    <div class="form-group">
+                                        <x-jet-label value="Orden de Compra" />
+                                        <input type="text" name="ncont" style='width: 10%;'> %
+                                        <x-jet-input-error for='seller_id' />
+                                    </div>  
+
                             </div>
                             <div class="w-100"></div>
                         </div>

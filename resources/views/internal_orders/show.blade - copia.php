@@ -13,100 +13,52 @@
                 <div class="col-sm-12 text-center font-bold text-sm">
                     <table>
                         <tr>
-                            
-                        <td class="text-lg" style="color: red">{{ $CompanyProfiles->company}}
-                        <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA"></td>
-                        <td>
-                        <br>
-                                Domicilio Fiscal:<br>
-                                {{$CompanyProfiles->street.' '.$CompanyProfiles->outdoor.' '}}
-                                {{$CompanyProfiles->intdoor.' '.$CompanyProfiles->suburb}}
-                                <br>{{$CompanyProfiles->city.' '.$CompanyProfiles->state.' '.$CompanyProfiles->zip_code}}<br>
-                                R.F.C: {{$CompanyProfiles->rfc}} &nbsp; Tels: 01-52 {{$CompanyProfiles->telephone.', '.$CompanyProfiles->telephone2}} <br> E-mail: {{$CompanyProfiles->email}} &nbsp; Web: {{$CompanyProfiles->website}}
-                            
-                        </td>
-                        <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">
-                                <span style="color: darkblue">Numero PI:<br>
-                                {{$InternalOrders->invoice}}</span>
-                                <br> <br>
-                                NOAH: {{$InternalOrders->invoice}} 
+                            <td rowspan="4">
+                               <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
+                               
+                        
                             </td>
                         </tr>
-
+                        <tr>
+                            <td class="text-lg" style="color: red">{{ $CompanyProfiles->company}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ $CompanyProfiles->motto}}</td>
+                        </tr>
+                        <tr class="text-xs">
+                            <td>
+                                <br>
+                                Domicilio Fiscal:<br>
+                                {{$CompanyProfiles->street.' '.$CompanyProfiles->outdoor.' '.$CompanyProfiles->intdoor.' '.$CompanyProfiles->suburb.' '.$CompanyProfiles->city.' '.$CompanyProfiles->state.' '.$CompanyProfiles->zip_code}}<br>
+                                R.F.C: {{$CompanyProfiles->rfc}} &nbsp; Tels: 01-52 {{$CompanyProfiles->telephone.', '.$CompanyProfiles->telephone2}} &nbsp; E-mail: {{$CompanyProfiles->email}} &nbsp; Web: {{$CompanyProfiles->website}}
+                            </td>
+                        </tr>
                     </table>
-
-
                 </div>
             </div>
-            <table>
-                        <th>Datos del Cliente</th>
-                    </table>
+            
             <div class="row p-4">
                 <div class="col-sm-9 col-xs-12 font-bold text-sm">
-                  <table> 
-                    <tr>
-                        <td>Numero de cliente:</td>
-                        <td>{{$Customers->clave}}</td>
-                        
-                        <td>Nombre corto:</td>
-                        <td>{{$Customers->alias}}</td>
-                        
-                        <td>CP:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
-                    
-                    </tr>
-                  </table>
-                  <table>
-                    <tr>
-                        <td>Razon Social:</td>
-                        <td>{{$Customers->legal_name}}</td>
-                    </tr>
-                  </table>
-                  <table>
-                    <tr>
-                  <td>RFC:</td>
-                        <td>{{$Customers->customer_rfc}}</td>
-                        
-                        <td>OC:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
-                        <td>Contrato No.:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
-                         </tr>
-                  </table>
                     <table>
                         <tr>
-                            <td>Domicilio Fiscal: </td>
-                            <td>{{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
-                                 &nbsp; E-mail: {{$Customers->customer_email}} &nbsp; Web: {{$Customers->customer_website}}
-                            </td>
-                            <td>  "   " </td>
-                        </tr>
-                        <tr>
                             <td>
-                                "     "
+                                Cliente: {{$Customers->clave.' '. $Customers->customer}}<br>
+                                Dirección Fiscal: {{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
+                                R.F.C: {{$Customers->customer_rfc}} &nbsp; Tel: 01-52 {{$Customers->customer_telephone}} &nbsp; E-mail: {{$Customers->customer_email}} &nbsp; Web: {{$Customers->customer_website}}
                             </td>
-                            <td>Telefono:</td>
-                            <td> {{$Customers->customer_telephone}}</td>
-
                         </tr>
                     </table>
                 </div>
-                    
-                
-
-                <table>
-                    <tr>
-                        <th> contacto</th>
-                        <th> Nombre</th>
-                        <th> Tel fijo</th>
-                        <th> Tel movil</th>
-                        <th> Email</th>
-                    </tr>
-                    
-                    <tbody>
-
-                    </tbody>
-                </table>
+                <div class="col-sm-3 col-xs-12 font-bold text-sm">
+                    <table>
+                        <tr>
+                            <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">
+                                <span style="color: darkblue">PEDIDO No.:<br><br>
+                                {{$InternalOrders->invoice}}</span> 
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="row p-4">
                 <div class="col-sm-12 font-bold text-sm">
