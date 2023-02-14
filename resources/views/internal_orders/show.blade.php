@@ -46,13 +46,13 @@
                   <table> 
                     <tr>
                         <td>Numero de cliente:</td>
-                        <td>{{$Customers->clave}}</td>
+                        <td style="LINE-HEIGHT:50px" class="card-body bg-white rounded-xl shadow-md text-center text-sm">{{$Customers->clave}}</td>
                         
                         <td>Nombre corto:</td>
-                        <td>{{$Customers->alias}}</td>
+                        <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">{{$Customers->alias}}</td>
                         
                         <td>CP:</td>
-                        <td>{{$Customers->customer_zip_code}}</td>
+                        <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">{{$Customers->customer_zip_code}}</td>
                     
                     </tr>
                   </table>
@@ -96,7 +96,7 @@
 
                 <table>
                     <tr>
-                        <th> contacto</th>
+                        <th> Contacto</th>
                         <th> Nombre</th>
                         <th> Tel fijo</th>
                         <th> Tel movil</th>
