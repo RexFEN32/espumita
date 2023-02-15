@@ -46,6 +46,7 @@ class InternalOrderController extends Controller
 
     public function capture(Request $request)
     {
+        
         $Fecha = date('Y-m-d');
         $TempInternalOrders = TempInternalOrder::where('customer_id', $request->customer_id)->where('date', $Fecha)->get();
         if(count($TempInternalOrders)>0)

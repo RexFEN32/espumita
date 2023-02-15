@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('reportes/cuentas_cobrar', [PaymentsController::class, 'rep_cuentas_cobrar'])->name('reportes.cuentas_cobrar');
     Route::get('customers/autocompletar', [CustomerController::class, 'autocomplete'])->name('autocomplete');
 
-    Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
+    Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.creation');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
     Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
