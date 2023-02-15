@@ -266,6 +266,58 @@
                 </table>
                 </div>
                 
+               <br><br>
+               <table class="table table-striped text-xs font-medium">
+               <tr> <th colspan="8" style="text-align: center;">Tabla de Promesas de Pago</th></tr>
+               
+                <tr>
+                    <th rowspan="2"> Pago No.</th>
+                    <th rowspan="2">Fecha <br> Promesa </th>
+                    <th rowspan="2"> Dia </th>
+                    <th rowspan="2">Semana </th>
+                    <th colspan="3">Importe por cobrar</th>
+                    <th rowspan="2">% del Total</th>
+                </tr>
+                <tr>
+                    <th>Subtotal</th>
+                    <th>Iva</th>
+                    <th>Total con Iva</th>
+                </tr>
+                <tbody>
+                    @php
+                    $p=1;
+                    @endphp
+                    @foreach($payments as $pay)
+                    <tr>
+                        <td>{{$p}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    @php
+                    $p=$p+1;
+                    @endphp
+                    @endforeach
+                </tbody>
+               </table>
+                
+               <br>&nbsp;
+               <table class="table table-striped text-xs font-medium" style="text-align: center;">
+                <tr>
+                    <th>Observaciones</th>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td>{{$InternalOrders->observations}}</td>
+                    </tr>
+                </tbody>
+               </table>
+
+
             </div>
             <div class="row p-4">
                 <div class="col-sm-4 col-xs-12 text-center text-xs font-bold">
