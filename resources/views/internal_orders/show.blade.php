@@ -43,8 +43,8 @@
                     </table>
             <div class="row p-4">
                 <div class="col-sm-9 col-xs-12 font-bold text-sm">
-                  <table> 
-                    <tr>
+                  <table class="table table-striped text-xs font-medium"> 
+                    <tr class="text-center">
                         <td>Numero de cliente:</td>
                         <td style="LINE-HEIGHT:50px" class="card-body bg-white rounded-xl shadow-md text-center text-sm">{{$Customers->clave}}</td>
                         
@@ -55,15 +55,13 @@
                         <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">{{$Customers->customer_zip_code}}</td>
                     
                     </tr>
-                  </table>
-                  <table>
-                    <tr>
+                    <tr class="text-center">
                         <td>Razon Social:</td>
-                        <td>{{$Customers->legal_name}}</td>
+                        <td colspan="5" >{{$Customers->legal_name}}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                  </table>
-                  <table>
-                    <tr>
+                    <tr class="text-center">
                   <td>RFC:</td>
                         <td>{{$Customers->customer_rfc}}</td>
                         
@@ -71,26 +69,73 @@
                         <td>{{$InternalOrders->oc}}</td>
                         <td>Contrato No.:</td>
                         <td>{{$InternalOrders->ncontrato}}</td>
+                        <td></td>
+                        <td></td>
                          </tr>
-                  </table>
-                    <table>
-                        <tr>
-                            <td>Domicilio Fiscal: </td>
-                            <td>{{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
+                    <tr class="text-center">
+                    <td rowspan="3">Domicilio Fiscal: </td>
+                    <td colspan="6">{{$Customers->customer_street.' '.$Customers->customer_outdoor.' '.$Customers->customer_intdoor.' '.$Customers->customer_suburb.' '.$Customers->customer_city.' '.$Customers->customer_state.' '.$Customers->customer_zip_code}}<br>
                                  &nbsp; E-mail: {{$Customers->customer_email}} &nbsp; Web: {{$Customers->customer_website}}
                             </td>
-                            <td>  &nbsp; </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            &nbsp;
-                            </td>
-                            <td>Telefono:</td>
-                            <td> {{$Customers->customer_telephone}}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan = "3">Fechas</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td></td>
+                        <td>Tel:</td>
+                        <td> {{$Customers->customer_telephone}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Semanas</td>
+                        <td>Evento</td>
+                        <td>DD-MM-AA</td>
+                    </tr >
+                    <tr class="text-center">
+                        <td rowspan="3">Embarque:</td>
+                        <td rowspan="3">Si</td>
+                        <td>Domicilio Embarque:</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Emision PI</td>
+                        <td>{{$InternalOrders->reg_date}}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td>{{$CustomerShippingAddresses->customer_shipping_city.' '.$CustomerShippingAddresses->customer_shipping_city.' '.$CustomerShippingAddresses->customer_shipping_suburb.' '.$CustomerShippingAddresses->customer_shipping_street.' '.$CustomerShippingAddresses->customer_shipping_indoor}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Entrega Equipo</td>
+                        <td>{{$InternalOrders->date_delivery}}</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td>CP:</td>
+                        <td>{{$CustomerShippingAddresses->customer_shipping_zip_code}}</td>
+                        <td></td>
+                        <td></td>
+                        <td>Instalacion</td>
+                        <td>{{$InternalOrders->instalation_date}}</td>
+                    </tr>
+                  </table>
 
-                        </tr>
-                    </table>
-                </div>
+
+                  
+               
+                
                 <br> &nbsp;  
                 <table>
                     <tr>
@@ -127,8 +172,13 @@
                 <tbody>
                     <tr>
                         <td> {{$Sellers->seller_name}}</td>
-                        <td>{{$InternalOrders->comision}}</td>
+                        <td>{{$InternalOrders->comision * 100}} %</td>
                         <td>{{$InternalOrders->ncotizacion}}</td>
+                        <td> {{$Coins->coin}}</td>
+                        <td> </td>
+                        <td> </td>
+                        <td>{{$Customers->customer_city.' '.$Customers->customer_suburb.' '.$Customers->customer_street.' '.$Customers->customer_outdoor.' '  }} </td>
+
                     </tr>
                 </tbody>
             </table>
@@ -321,6 +371,59 @@
                     </tr>
                 </tbody>
                </table>
+               <div class="col-sm-9 font-bold text-sm">
+               <table>
+                <tr class="text-center"><th colspan="2">Correos Personales</th></tr>
+                <tr class="text-center">
+                    <th>Contacto</th>
+                    <th>Email Personal</th>
+                 </tr>
+                 <tbody>
+                 @foreach($Contacts as $row)
+                    <tr>
+                        <td>{{$row->id}}</td>
+                        <td>{{$row->customer_contact_email}}</td>
+                    </tr>
+                    @endforeach
+                 </tbody>
+
+               </table>
+               </div>
+<br>&nbsp;
+               <div class="col-sm-9 font-bold text-sm">
+               <table>
+                <tr class="text-center"><th colspan="4">Otras Comisiones</th></tr>
+                <tr class="text-center">
+                    <th>Vendedor</th>
+                    <th>Inicia</th>
+                    <th>Descripcion</th>
+                    <th>%</th>
+                 </tr>
+                 <tbody>
+                 
+                    <tr>
+                        <td>{{$Sellers->seller_name}}</td>
+                        <td>Comision</td>
+                        <td> -</td>
+                        <td> {{$InternalOrders->comision *100}} %</td>
+                    </tr>
+                    <tr>
+                        <td>{{$Sellers->seller_name}}</td>
+                        <td>dgi</td>
+                        <td> -</td>
+                        <td> {{$InternalOrders->dgi *100}} %</td>
+                    </tr>
+                    <tr>
+                        <td>{{$Sellers->seller_name}}</td>
+                        <td>otra</td>
+                        <td> -</td>
+                        <td> {{$InternalOrders->otra *100}} %</td>
+                    </tr>
+                   
+                 </tbody>
+
+               </table>
+               </div>
 
 
             </div>
@@ -409,7 +512,7 @@
                     <div>FALTAN AUTORIZACIONES</div>
                     @endif
                     <br><br><br>
-                </div>
+                </div></div>
                     <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();"> 
                     <a href="{{ route('internal_orders.edit_order', $InternalOrders->id) }} " class="btn btn-green btn-sm">
                      <button type = "button" class="btn btn-green "> <i class="fas fa-edit"> &nbsp; Editar</i> </button>
