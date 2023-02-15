@@ -285,22 +285,27 @@
                 </tr>
                 <tbody>
                     @php
-                    $p=1;
+                    $p=0;
                     @endphp
                     @foreach($payments as $pay)
+                    @php
+                    {{$datetime1 = new DateTime($row->date);
+                    $datetime2 = new DateTime("2023-1-1");
+                    $dias = $datetime1->diff($datetime2)->format('%a');
+                    $p=$p+1;}}
+                    @endphp
                     <tr>
                         <td>{{$p}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$pay->date}}</td>
+                        <td>{{$dias}}</td>
+                        <td>{{(int)($dias / 7)}}</td>
+                        <td>{{$pay->amount-$pay->amount*0.16}}</td>
+                        <td>{{$pay->amount*0.16}}</td>
+                        <td>{{$pay->amount}}</td>
+                        <td>{{$pay->percentage}} %</td>
+                        
                     </tr>
-                    @php
-                    $p=$p+1;
-                    @endphp
+                    
                     @endforeach
                 </tbody>
                </table>
