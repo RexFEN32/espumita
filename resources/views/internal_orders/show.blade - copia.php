@@ -13,7 +13,7 @@
                 <div class="col-sm-12 text-center font-bold text-sm">
                     <table>
                         <tr>
-                            <td rowspan="4">
+                            <td rowspan="4" >
                                <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
                                
                         
