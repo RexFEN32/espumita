@@ -532,7 +532,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
   font-size: small;
   font-weight: 600;
   /* padding: 3px 6px; */
-  border:2px solid transparent;
+  border:3px solid transparent;
   /* min-width: 10px; */
   /* line-height: 1; */
   color: #fff;
@@ -570,7 +570,8 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
 }
 
 .badge.badge-danger {
-  background-color: #ef1c1c
+  background-color: #9b9b9b;
+  border-color: #9b9b9b;
 }
 
 .badge.badge-outlined {
@@ -583,13 +584,18 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
 }
 
 .badge.badge-outlined.badge-primary {
-  border-color: #2B416D;
+  
+  border-color: #9b9b9b;
   color: #000000
 }
-
+.badge.badge-outlined.badge-danger {
+border-color: #2B416D;
+background-color: #2B416D;
+  color: #ffffff;
+}
 .badge.badge-outlined.badge-secondary {
   border-color: #323a45;
-  color: #323a45
+  color: #323a45;
 }
 
 .badge.badge-outlined.badge-success {
@@ -607,10 +613,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
   color: #29B6F6
 }
 
-.badge.badge-outlined.badge-danger {
-  border-color: #ef1c1c;
-  color: #ef1c1c
-}
+
 </style>
 @stop
 
