@@ -66,7 +66,7 @@ writer = pd.ExcelWriter('storage/report/contraportada'+str(order_id)+'.xlsx', en
 
 import xlsxwriter
 workbook = writer.book
-##FORMATOS PARA EL TITULO---------------------------------------
+##FORMATOS PARA EL TITULO------------------------------------------------------------------------------
 rojo_g = workbook.add_format({
     'bold': 0,
     'border': 0,
@@ -441,5 +441,6 @@ worksheet.merge_range(trow+2,16,trow+2,17, '$'+str((orden["total"].values[0]-df[
 
 worksheet.write(trow+4, 5, 'OBSERVACIONES',negro_b)
 worksheet.merge_range(trow+5,1,trow+8,18, str(orden["observations"].values[0]), observaciones_format)
-
+worksheet.write(trow+9,8,str(df["amount"].sum()),negro_b)
+worksheet.write(trow+9,9,mac,negro_b)
 workbook.close()
