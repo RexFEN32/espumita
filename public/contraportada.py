@@ -44,20 +44,20 @@ nordenes=len(pd.read_sql(query,cnx))
 pac=0#porcentaje acumulado
 mac=0#monto acumulado
 thisPays=thisPays.reset_index(drop=True)
-df=thisPays[["nfactura","ncomp","moneda","fecha_factura","amount","percentage","tipo_cambio","importe_acumulado","porcentaje_acumulado"]]
+df=thisPays[["nfactura","amount","ncomp","moneda","fecha_factura","amount","amount","tipo_cambio","percentage","importe_acumulado","porcentaje_acumulado"]]
 df=df.reset_index(drop=True)
 cambio_actual=0
 for i in df.itertuples():
-    pac=pac+i[6]
-    df.iloc[i[0],8]=pac
+    pac=pac+i[9]
+    df.iloc[i[0],10]=pac
     
-    if(i[7]>0):
-        cambio_actual=i[7]
-        mac=mac+(i[5]*i[7])
+    if(i[8]>0):
+        cambio_actual=i[8]
+        mac=mac+(i[6]*i[8])
     else:
-        mac=mac+i[5]
-    df.iloc[i[0],7]=mac
-    df.iloc[i[0],2]=str(moneda["coin"].values[0])
+        mac=mac+i[6]
+    df.iloc[i[0],8]=mac
+    df.iloc[i[0],3]=str(moneda["coin"].values[0])
 
 
 
@@ -329,19 +329,22 @@ worksheet.conditional_format(xlsxwriter.utility.xl_range(9, 1, 9+len(prog), 2+le
 
 # Write the column headers with the defined format.
 worksheet.merge_range(7,6,8,6, "FACTURA NUMERO",header_format)
-worksheet.merge_range(7,7,8,7, "COMPROBANTE DE INGRESOS NUMERO",header_format)
+worksheet.merge_range(7,7,8,7, "IMPORTE FACTURA",header_format)
+worksheet.merge_range(7,8,8,8, "COMPROBANTE DE INGRESOS NUMERO",header_format)
 
-worksheet.merge_range('I8:L8', 'REAL', header_format)
-worksheet.write(8, 8, "MONEDA", header_format)
-worksheet.write(8, 9, "FECHA DD-MM-AA", header_format)
-worksheet.write(8, 10, "IMPORTE $ IVA INCLUIDO", header_format)
-worksheet.write(8, 11, "% DEL PAGO PARCIAL", header_format)
+worksheet.merge_range('J8:M8', 'REAL', header_format)
+worksheet.write(8, 9, "MONEDA", header_format)
+worksheet.write(8, 10, "FECHA DD-MM-AA", header_format)
+worksheet.write(8, 11, "IMPORTE $ IVA INCLUIDO", header_format)
+worksheet.write(8, 12, "DIFERENCIA", header_format)
 
-worksheet.merge_range(7,12,8,12, "TIPO DE CAMBIO",header_format)
 
-worksheet.merge_range(7,13,7,14, "EQUIVALENTE EN M.N.",header_format)
-worksheet.write(8,13 ,"IMPORTE ACUMULADO",header_format)
-worksheet.write(8,14 ,"PORCENTAJE DEL PAGO ACUMULADO",header_format)
+worksheet.merge_range(7,13,8,13, "TIPO DE CAMBIO",header_format)
+
+worksheet.merge_range(7,14,7,16, "EQUIVALENTE EN M.N.",header_format)
+worksheet.write(8, 14, "% DEL PAGO PARCIAL", header_format)
+worksheet.write(8,15 ,"IMPORTE ACUMULADO",header_format)
+worksheet.write(8,16 ,"PORCENTAJE DEL PAGO ACUMULADO",header_format)
 
 
 for j in range(1,len(prog)+1):
@@ -350,18 +353,18 @@ for j in range(1,len(prog)+1):
     worksheet.write(8+j, 5, str(prog["percentage"].values[j-1])+'%', negro_s)
 
 for j in range(1,len(df)+1):
-    worksheet.write(8+j, 15,thisPays["capturista"][j-1] , negro_s)
+    worksheet.write(8+j, 17,thisPays["capturista"][j-1] , negro_s)
 
 for j in range(1,len(df)+1):
-    worksheet.write(8+j, 16, 'Nombre del gerente', negro_s)
+    worksheet.write(8+j, 18, 'Nombre del gerente', negro_s)
 
 for j in range(1,len(df)+1):
-    worksheet.write(8+j, 17, 'Nombre del administrador', negro_s)
+    worksheet.write(8+j, 19, 'Nombre del administrador', negro_s)
 
-worksheet.merge_range(7,15,7,17, "VERIFICACION DEL COBRO",header_format)
-worksheet.write(8, 15, 'captura', header_format)
-worksheet.write(8, 16, 'GA', header_format)
-worksheet.write(8, 17, 'DA', header_format)
+worksheet.merge_range(7,17,7,19, "VERIFICACION DEL COBRO",header_format)
+worksheet.write(8, 17, 'captura', header_format)
+worksheet.write(8, 18, 'GA', header_format)
+worksheet.write(8, 19, 'DA', header_format)
 
 #cabeceras
 worksheet.merge_range('B8:B9', 'PAGO  (COBRO)', blue_header_format)
