@@ -166,8 +166,9 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                     <tr>
                         <td><div class="badge badge-danger badge-outlined"> Contacto </div>  </td>
                         <td><div class="badge badge-danger badge-outlined"> Nombre</div></td>
-                        <td> <div class="badge badge-danger badge-outlined">Tel fijo</div></td>
                         <td> <div class="badge badge-danger badge-outlined">Tel movil</div></td>
+                        <td> <div class="badge badge-danger badge-outlined">Tel fijo</div></td>
+                        <td><div class="badge badge-danger badge-outlined"> Ext.</div></td>
                         <td><div class="badge badge-danger badge-outlined"> Email</div></td>
                     </tr>
                     
@@ -176,8 +177,9 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                     <tr>
                         <td><div class="badge badge-primary badge-outlined">{{$row->id}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_name}}</div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_office_phone}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_mobile}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_office_phone}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_office_phone_ext}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">{{$row->customer_contact_email}}</div></td>
                     </tr>
                     @endforeach
