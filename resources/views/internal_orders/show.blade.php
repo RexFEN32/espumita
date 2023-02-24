@@ -320,10 +320,11 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                     $p=0;
                     @endphp
                     @foreach($payments as $pay)
+                    
                     @php
-                    {{$datetime1 = new DateTime($row->date);
+                    {{$datetime1 = new DateTime($pay->date);
                     $datetime2 = new DateTime("2023-1-1");
-                    $dias = $datetime1->diff($datetime2)->format('%a');
+                    $dias = $datetime2->diff($datetime1)->format('%a');
                     $p=$p+1;}}
                     @endphp
                     <tr>
