@@ -24,14 +24,17 @@ class CoinController extends Controller
     {
         $rules = [
             'coin' => 'required|unique:coins,coin',
-            'exchange_rate' => 'required|numeric',
+            'exchange_buy' => 'required|numeric',
+            'exchange_sell' => 'required|numeric',
         ];
 
         $messages = [
             'coin.required' => 'Capture el nombre de la Moneda',
             'coin.unique' => '¡La moneda ya ha sido capturada!',
-            'exchange_rate.required' => 'Capture el tipo de cambio actual',
-            'exchange_rate.numeric' => 'El tipo de cambio debe ser numérico',
+            'exchange_buy.required' => 'Capture el tipo de cambio actual',
+            'exchange_sell.numeric' => 'El tipo de cambio debe ser numérico',
+            'exchange_sell.required' => 'Capture el tipo de cambio actual',
+            'exchange_buy.numeric' => 'El tipo de cambio debe ser numérico',
         ];
 
         $request->validate($rules, $messages);
@@ -42,7 +45,8 @@ class CoinController extends Controller
         $Coins->coin = $request->coin;
         $Coins->symbol = $request->symbol;
         $Coins->code = $request->code;
-        $Coins->exchange_rate = $request->exchange_rate;
+        $Coins->exchange_buy = $request->exchange_buy;
+        $Coins->exchange_sell = $request->exchange_sell;
         $Coins->date_application = $date_application;
         $Coins->save();
 
@@ -65,13 +69,17 @@ class CoinController extends Controller
     {
         $rules = [
             'coin' => 'required',
-            'exchange_rate' => 'required|numeric',
+            'exchange_buy' => 'required|numeric',
+            'exchange_sell' => 'required|numeric',
         ];
 
         $messages = [
             'coin.required' => 'Capture el nombre de la Moneda',
-            'exchange_rate.required' => 'Capture el tipo de cambio actual',
-            'exchange_rate.numeric' => 'El tipo de cambio debe ser numérico',
+            'coin.unique' => '¡La moneda ya ha sido capturada!',
+            'exchange_buy.required' => 'Capture el tipo de cambio actual',
+            'exchange_sell.numeric' => 'El tipo de cambio debe ser numérico',
+            'exchange_sell.required' => 'Capture el tipo de cambio actual',
+            'exchange_buy.numeric' => 'El tipo de cambio debe ser numérico',
         ];
 
         $request->validate($rules, $messages);
@@ -82,7 +90,8 @@ class CoinController extends Controller
         $Coins->coin = $request->coin;
         $Coins->symbol = $request->symbol;
         $Coins->code = $request->code;
-        $Coins->exchange_rate = $request->exchange_rate;
+        $Coins->exchange_buy = $request->exchange_buy;
+        $Coins->exchange_sell = $request->exchange_sell;
         $Coins->date_application = $date_application;
         $Coins->save();
 

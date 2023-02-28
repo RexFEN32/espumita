@@ -38,7 +38,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR AUTORIZACIONES')
                                         <a href="{{ route('authorizations.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-edit btn btn-blue "></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -47,8 +47,8 @@
                                         <form class="DeleteReg" action="{{ route('authorizations.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fas fa-trash btn btn-blue w-9 h-9"></i>
+                                            <button type="submit" class="btn btn-red ">
+                                                <i class="fas fa-trash btn btn-blue "></i>
                                             </button>
                                         </form>
                                         @endcan

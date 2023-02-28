@@ -25,7 +25,8 @@
                             <th>Moneda</th>
                             <th>Símbolo</th>
                             <th>Código</th>
-                            <th>Tipo de cambio</th>
+                            <th>Tipo de cambio <br> Compra</th>
+                            <th>Tipo de cambio <br> Venta</th>
                             <th>Día de aplicación</th>
                             <th></th>
                         </tr>
@@ -37,23 +38,24 @@
                             <td>{{$row->coin}}</td>
                             <td>{{$row->symbol}}</td>
                             <td>{{$row->code}}</td>
-                            <td>{{$row->exchange_rate}}</td>
+                            <td>{{$row->exchange_sell}}</td>
+                            <td>{{$row->exchange_buy}}</td>
                             <td>{{ date('d/m/Y', strtotime($row->date_application)) }}</td>
                             <td class="w-15">
                                 <div class="row">
-                                    <div class="col-6 text-center w-10">
+                                    <div class="col-6 text-center">
                                         @can('EDITAR MONEDAS')
                                         <a href="{{ route('coins.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-edit btn btn-blue "></i></span>
                                         </a>
                                         @endcan
                                     </div>
-                                    <div class="col-6 text-center w-10">
+                                    <div class="col-6 text-center">
                                         @can('BORRAR MONEDAS')
                                         <form class="DeleteReg" action="{{ route('coins.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
+                                            <button type="submit" class="btn btn-red ">
                                                 <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>

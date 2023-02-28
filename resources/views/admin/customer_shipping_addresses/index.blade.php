@@ -42,7 +42,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR DIRECCIONES')
                                         <a href="{{ route('customers_shipping_address.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                            <i class="fas fa-edit btn btn-blue "></i></span>
                                         </a>
                                         @endcan
                                     </div>
@@ -51,7 +51,7 @@
                                         <form class="DeleteReg" action="{{ route('customers_shipping_address.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
+                                            <button type="submit" class="btn btn-red ">
                                                 <i class="fas fa-trash items-center"></i>
                                             </button>
                                         </form>

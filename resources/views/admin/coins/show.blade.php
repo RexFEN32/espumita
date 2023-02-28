@@ -38,9 +38,14 @@
                                 <x-jet-input-error for='code' />
                             </div>
                             <div class="form-group">
-                                <x-jet-label value="* Tipo de Cambio" />
-                                <x-jet-input type="number" step="0.01" name="exchange_rate" class="w-full text-xs " value="{{$Coins->exchange_rate}}"/>
-                                <x-jet-input-error for='exchange_rate' />
+                                <x-jet-label value="* Tipo de Cambio Compra" />
+                                <x-jet-input type="number" step="0.01" name="exchange_buy" class="w-full text-xs " value="{{old('exchange_rate')}}"/>
+                                <x-jet-input-error for='exchange_buy' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="* Tipo de Cambio Venta" />
+                                <x-jet-input type="number" step="0.01" name="exchange_sell" class="w-full text-xs " value="{{old('exchange_rate')}}"/>
+                                <x-jet-input-error for='exchange_sell' />
                             </div>
                         </div>
                     </div>
