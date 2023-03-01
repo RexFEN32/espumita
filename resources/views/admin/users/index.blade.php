@@ -45,7 +45,9 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR USUARIOS')
                                             <a href="{{ route('users.edit', $row->id)}}">
-                                                <i class="fas fa-edit btn btn-blue w-9 h-9"></i>
+                                            <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
                                             </a>
                                         @endcan
                                     </div>
@@ -54,7 +56,7 @@
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR USUARIOS')
                                         {!! Form::open(['method'=>'DELETE','route'=>['users.destroy', $row->id], 'class'=>'DeleteReg' ]) !!}
-                                            {!! Form::button('<i class="fa fa-trash items-center"></i>', ['class' => 'btn btn-red h-9 w-9', 'type' => 'submit']) !!}
+                                            {!! Form::button('<i class="fa fa-trash items-center fa-xl"></i>', ['class' => 'btn btn-red ', 'type' => 'submit']) !!}
                                         {!! Form::close() !!}
                                         @endcan
                                     </div>

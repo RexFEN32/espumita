@@ -36,17 +36,20 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR FAMILIAS')
                                         <a href="{{ route('families.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
                                         </a>
                                         @endcan
                                     </div>
+                                    &nbsp; &nbsp;
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR FAMILIAS')
                                         <form class="DeleteReg" action="{{ route('families.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fas fa-trash items-center"></i>
+                                            <button type="submit" class="btn btn-red ">
+                                                <i class="fas fa-trash items-center fa-xl"></i>
                                             </button>
                                         </form>
                                         @endcan

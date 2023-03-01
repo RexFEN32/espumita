@@ -29,19 +29,24 @@
                         @foreach ($roles as $row)
                         <tr>
                             <td>{{$row->name}}</td>
-                            <td class="w-20">
+                            <td class="w-14 text-right" >
                                 <div class="row">
+                                &nbsp; &nbsp; 
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR ROL')
                                             <a href="{{ route('roles.edit', $row->id)}}">
-                                                <i class="fas fa-edit btn btn-blue w-9 h-9"></i></span>
+                                                <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
+                                                
                                             </a>
                                         @endcan
                                     </div>
+                                    &nbsp; &nbsp; 
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR ROL')
                                         {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy', $row->id], 'class'=>'DeleteReg' ]) !!}
-                                            {!! Form::button('<i class="fa fa-trash items-center"></i>', ['class' => 'btn btn-red h-9 w-9', 'type' => 'submit']) !!}
+                                            {!! Form::button('<i class="fas fa-trash items-center fa-xl"></i>', ['class' => 'btn btn-red ', 'type' => 'submit']) !!}
                                         {!! Form::close() !!}
                                         @endcan
                                     </div>

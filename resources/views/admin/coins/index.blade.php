@@ -46,7 +46,9 @@
                                     <div class="col-6 text-center">
                                         @can('EDITAR MONEDAS')
                                         <a href="{{ route('coins.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue "></i></span>
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
                                         </a>
                                         @endcan
                                     </div>
@@ -56,7 +58,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red ">
-                                                <i class="fas fa-trash items-center"></i>
+                                                <i class="fas fa-trash items-center fa-xl"></i>
                                             </button>
                                         </form>
                                         @endcan

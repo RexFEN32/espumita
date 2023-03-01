@@ -47,19 +47,20 @@
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR VENDEDORES')
                                         <a href="{{ route('sellers.edit', $row->id)}}">
-                                        <button  class="btn btn-blue h-9 w-9">
-                                                <i class="fas fa-edit items-center"></i>
+                                        <button  class="btn btn-blue ">
+                                                <i class="fas fa-edit items-center fa-xl"></i>
                                             </button>
                                         </a>
                                         @endcan
                                     </div>
+                                    &nbsp; &nbsp;
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR VENDEDORES')
                                         <form class="DeleteReg" action="{{ route('sellers.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-red h-9 w-9">
-                                                <i class="fas fa-trash items-center"></i>
+                                            <button type="submit" class="btn btn-red ">
+                                                <i class="fas fa-trash items-center fa-xl"></i>
                                             </button>
                                         </form>
                                         @endcan

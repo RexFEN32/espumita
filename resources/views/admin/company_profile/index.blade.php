@@ -65,22 +65,25 @@
                             <td>{{$row->telephone2}}</td>
                             <td>{{$row->website}}</td>
                             <td>{{$row->logo}}</td>
-                            <td class="w-5">
+                            <td class="w-10">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR EMPRESAS')
                                         <a href="{{ route('company_profiles.edit', $row->id)}}">
-                                            <i class="fas fa-edit btn btn-blue "></i></span>
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
                                         </a>
                                         @endcan
                                     </div>
+                                    &nbsp;&nbsp;&nbsp;
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR EMPRESAS')
                                         <form class="DeleteReg" action="{{ route('company_profiles.destroy', $row->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red ">
-                                                <i class="fas fa-trash items-center"></i>
+                                                <i class="fas fa-trash items-center fa-xl"></i>
                                             </button>
                                         </form>
                                         @endcan
