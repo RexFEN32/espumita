@@ -59,6 +59,7 @@ class InternalOrderController extends Controller
             $TempInternalOrder->date = $Fecha;
             $TempInternalOrder->customer_id = $request->customer_id;
             $TempInternalOrder->invoice = $request->invoice;
+            $TempInternalOrder->noha = $request->noha;
             $TempInternalOrder->save();
             $TempInternalOrders = TempInternalOrder::orderBy('id', 'DESC')->first();
         }
@@ -112,12 +113,12 @@ class InternalOrderController extends Controller
         $TempInternalOrders->reg_date = $request->reg_date;        
         $TempInternalOrders->coin_id = $request->coin_id;
         $TempInternalOrders->payment_conditions = $request->payment_conditions;
-        $TempInternalOrders->comision=$request->comision;
-        $TempInternalOrders->dgi=$request->dgi;
-        $TempInternalOrders->otra=$request->otra;
-        $TempInternalOrders->ieps=$request->ieps;
-        $TempInternalOrders->isr=$request->isr;
-        $TempInternalOrders->descuento=$request->descuento;
+        $TempInternalOrders->comision=$request->comision * 0.01;
+        $TempInternalOrders->dgi=$request->dgi * 0.01;
+        $TempInternalOrders->otra=$request->otra * 0.01;
+        $TempInternalOrders->ieps=$request->ieps * 0.01;
+        $TempInternalOrders->isr=$request->isr * 0.01;
+        $TempInternalOrders->descuento=$request->descuento * 0.01;
         $TempInternalOrders->oc=$request->oc;
         $TempInternalOrders->ncotizacion=$request->ncotizacion;
         $TempInternalOrders->ncontrato=$request->ncontrato;
@@ -200,7 +201,10 @@ class InternalOrderController extends Controller
         $TempInternalOrders->total = $total_real ;
         $TempInternalOrders->observations = $request->observations;
         $TempInternalOrders->status = 'CAPTURADO';
-        $TempInternalOrders->noha=$noha;
+        if($TempInternalOrders->noha !=0 ){
+            $TempInternalOrders->noha=$noha;
+        }
+        
         $TempInternalOrders->save();
         $Authorizations = Authorization::where('id', '<>', 1)->orderBy('clearance_level', 'ASC')->get();
         
@@ -287,6 +291,9 @@ class InternalOrderController extends Controller
                 $Items->unit = $row->unit;
                 $Items->family = $row->family;
                 $Items->code = $row->code;
+                $Items->racks = $row->racks;
+                $Items->fab = $row->fabs;
+                $Items->sku = $row->sku;
                 $Items->description = $row->description;
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;

@@ -44,6 +44,20 @@
                             <x-jet-input type="number" min="0" name="invoice" id="invoice" value=0  /> 
                             </div>      
 <br><br>
+
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="btnradio" id="btnradioa" autocomplete="off" checked onclick="automatico2();">
+<label class="btn btn-outline-primary" for="btnradioa">NOHA<br> automatico</label>
+<input type="radio" class="btn-check" name="btnradio" id="btnradiob" autocomplete="off" onclick="manual2();">
+<label class="btn btn-outline-primary" for="btnradiob">Ingresar <br> NOHA </label>
+</div>
+<br> <br>
+<div class="form-group" id="noha-group" style="display:none;">
+                            <x-jet-label value="NOHA" />
+                            <x-jet-input type="number" min="0" name="noha" id="noha" value=0  /> 
+                            </div>      
+<br><br>
+
                                     <div class="form-group">
                                         <x-jet-label value="* Cliente" />
                                         <select class="form-capture  w-full text-xs uppercase" name="customer_id">
@@ -125,6 +139,18 @@
 
 function manual(myRadio) {
     var folio = document.getElementById("folio");
+    folio.style.display="block";
+}
+function automatico2(myRadio) {
+    var group = document.getElementById("noha-group");
+    var noha = document.getElementById("noha");
+    group.style.display="none";
+    noha.value=0;
+}
+
+
+function manual2(myRadio) {
+    var folio = document.getElementById("noha-group");
     folio.style.display="block";
 }
 

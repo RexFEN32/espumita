@@ -25,6 +25,7 @@
                             
                             <th>Clave</th>
                             <th>Razón Social</th>
+                            <th>Nombre Corto</th>
                             <th>RFC</th>
                             <th>Estado</th>
                             <th>Municipio</th>
@@ -38,6 +39,7 @@
                         <tr>
                             <td>{{$row->clave}}</td>
                             <td>{{$row->customer}}</td>
+                            <td>{{$row->alias}}</td>
                             <td>{{$row->customer_rfc}}</td>
                             <td>{{$row->customer_state}}</td>
                             <td>{{$row->customer_city}}</td>

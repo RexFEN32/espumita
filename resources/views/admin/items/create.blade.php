@@ -53,6 +53,21 @@
                                 <x-jet-input-error for='code' />
                             </div>
                             <div class="form-group">
+                                <x-jet-label value="* Fabricación" />
+                                <x-jet-input type="text" name="fab" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='fab' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="* Racks" />
+                                <x-jet-input type="text" name="racks" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='raks' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="* SKU" />
+                                <x-jet-input type="text" name="sku" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='sku' />
+                            </div>
+                            <div class="form-group">
                                 <x-jet-label value="* Descripción" />
                                 <textarea rows="4" name="description" class="w-full text-xs inputjet" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
                                 <x-jet-input-error for='description' />

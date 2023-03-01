@@ -36,6 +36,11 @@
                                 <x-jet-input-error for='customer' />
                             </div>
                             <div class="form-group">
+                                <x-jet-label value="* Nombre Corto" />
+                                <x-jet-input type="text" name="alias" class="w-full text-xs " value="{{$Customers->alias}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='alias' />
+                            </div>
+                            <div class="form-group">
                                 <x-jet-label value="* RFC" />
                                 <x-jet-input type="text" name="customer_rfc" class="w-full text-xs uppercase" value="{{$Customers->customer_rfc}}" />
                                 <x-jet-input-error for='customer_rfc' />

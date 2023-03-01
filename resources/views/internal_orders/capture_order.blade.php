@@ -119,19 +119,14 @@
                                     <div class="col-sm-3 col-xs-12">
                                       <div class="form-group">
                                         <x-jet-label value="* Comision del Vendedor" />
-                                        <input  type="number" name="comision" style='width: 60%;'max=1 min=0 step=0.01 value=0> %
+                                        <input  type="number" name="comision" style='width: 60%;'max=100 min=0 step=0.5 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
-                                    <div class="col-sm-3 col-xs-12">
-                                    <div class="form-group">
-                                        <x-jet-label value=" % Dgi" />
-                                        <input type="number" name="dgi" style='width: 60%;'max=1 min=0 step=0.01 value=0> %
-                                        <x-jet-input-error for='seller_id' />
-                                    </div></div>
+                                    
                                     <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="Otra" />
-                                        <input type="number" name="otra" style='width: 60%;'max=1 min=0 step=0.01 value=0> %
+                                        <input type="number" name="otra" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
                                     <div class="col-sm-3 col-xs-12">
@@ -146,9 +141,19 @@
 
                              <h5> Otros Datos</h5>
 
+
+
 <div class="form-group">
-       <x-jet-label value="Numero de Contrato (opcional)" />
-       <input type="text" name="ncontrato" style='width: 10%;'>
+       <x-jet-label value="Numero de Contrato" />
+       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked onclick="automatico('ncontrato');">
+<label class="btn btn-outline-primary" for="btnradio1">Si</label>
+<input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off" onclick="manual('ncontrato');">
+<label class="btn btn-outline-primary" for="btnradio2">No</label>
+</div>
+<br> <br>
+
+       <input type="text" name="ncontrato" style='width: 10%;' id='ncontrato'>
        <x-jet-input-error for='seller_id' />
    </div>
    <div class="form-group">
@@ -161,19 +166,19 @@
                                     <div class="col-sm-3 col-xs-12">
                                       <div class="form-group">
                                         <x-jet-label value="* IEPS" />
-                                        <input type="number" name="ieps" style='width: 60%;' max=1 min=0 step=0.01 value=0> %
+                                        <input type="number" name="ieps" style='width: 60%;' max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
                                     <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="ISR" />
-                                        <input type="number" name="isr" style='width: 60%;'max=1 min=0 step=0.01 value=0> %
+                                        <input type="number" name="isr" style='width: 60%;' max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
                                     <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="Descuento" />
-                                        <input type="number" name="descuento" style='width: 60%;'max=1 min=0 step=0.01 value=0> %
+                                        <input type="number" name="descuento" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
                                 </div>
@@ -206,6 +211,21 @@
     function unselect() {
         document.querySelectorAll('[name=shipping_address').forEach((x) => x.checked = false);
     }
+</script>
+<script>
+    function automatico(campo) {
+    console.log(campo);
+    
+    var invoice = document.getElementById(campo);
+    folio.style.display="none";
+    invoice.value=0;
+}
+
+
+function manual(campo) {
+    var folio = document.getElementById(campo);
+    folio.style.display="block";
+}
 </script>
 
 {{--  <script>

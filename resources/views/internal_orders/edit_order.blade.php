@@ -120,17 +120,17 @@
                            </div>
                            <div class="form-group">
                                <x-jet-label value="* Comision del Vendedor" />
-                               <input type="number" name="comision" style='width: 10%;' value="{{$InternalOrders->comision}}"> %
+                               <input type="number" name="comision" style='width: 10%;' max=100 min=0 step=0.1 value="{{$InternalOrders->comision}}"> %
                                <x-jet-input-error for='seller_id' />
                            </div>
                            <div class="form-group">
                                <x-jet-label value=" % Dgi" />
-                               <input type="number" name="dgi" style='width: 10%;'> %
+                               <input type="number" name="dgi" style='width: 10%;' max=100 min=0 step=0.1> %
                                <x-jet-input-error for='seller_id' />
                            </div>
                            <div class="form-group">
                                <x-jet-label value="Otro" />
-                               <input type="number" name="otro" style='width: 10%;'> %
+                               <input type="number" name="otro" style='width: 10%;' max=100 min=0 step=0.1> %
                                <x-jet-input-error for='seller_id' />
                            </div>
                        </div>

@@ -66,6 +66,9 @@ class TempItemController extends Controller
             'unit' => 'required',
             'family' => 'required',
             'code' => 'required',
+            'fab' => 'required',
+            'racks' => 'required',
+            'sku' => 'required',
             'description' => 'required',
             'unit_price' => 'required',
         ];
@@ -75,6 +78,9 @@ class TempItemController extends Controller
             'unit.required' => 'La unidad es requerida',
             'family.required' => 'La familia es requerida',
             'code.required' => 'La clave es requerida',
+            'racks.required' => 'Ingrese el tipo de rack',
+            'fab.required' => 'Fabricación requerida',
+            'sku.required' => 'SKU requerido',
             'description.required' => 'La descripción es requerida',
             'unit_price.required' => 'El precio unitario es requerido',
         ];
@@ -95,6 +101,8 @@ class TempItemController extends Controller
             $TempItems->unit = $request->unit;
             $TempItems->family = $request->family;
             $TempItems->code = $request->code;
+            $TempItems->fab = $request->fab;
+            $TempItems->code = $request->racks;
             $TempItems->description = $request->description;
             $TempItems->unit_price =(float) $request->unit_price;
             $TempItems->import = $Import;
