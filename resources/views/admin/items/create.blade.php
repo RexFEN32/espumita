@@ -54,17 +54,17 @@
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Fabricación" />
-                                <x-jet-input type="text" name="fab" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input type="text" name="fab" class="w-full text-xs" value="{{old('fab')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='fab' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Racks" />
-                                <x-jet-input type="text" name="racks" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
-                                <x-jet-input-error for='raks' />
+                                <x-jet-input type="text" name="racks" class="w-full text-xs" value="{{old('racks')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='racks' />
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* SKU" />
-                                <x-jet-input type="text" name="sku" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input type="text" name="sku" class="w-full text-xs" value="{{old('sku')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='sku' />
                             </div>
                             <div class="form-group">

@@ -97,8 +97,40 @@
                             </div>
                             <div class="w-100"><hr></div>
                         </div>
-                    </div>
-                </div>
+                    
+                <br><br><br>
+                <h1 class="h2 text-center font-bold text-xs uppercase">Seleccione los contactos para este pedido</h1>
+                                    <br>
+            
+            <div class="col-sm-12 col-xs-12 table-responsive">
+
+                
+                                        <table class="table tableshippingaddress table-striped text-xs font-medium">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>Nombre</th>
+                                                    <th>Dirección</th>
+                                                    <th>Colonia</th>
+                                                    <th>C.P.</th>
+                                                    <th>Select</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($contactos as $contact)
+                                                <tr>
+                                                <td>{{$contact->customer_contact_name}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td> Seleccionar : &nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="{{$contact->id}}" id="flexCheckDefault" name="contacto[]"> </td>
+                                                  </tr>
+                                        @endforeach
+                                            </tbody>
+                                        </table>
+                                    <!-- Si no hay contactos boton para agregar contactos -->
+
+            </div>
             </div>
             <div class="col-12 text-right p-2 gap-2">
                 {{--  <a href="{{ route('internal_orders.index')}}" class="btn btn-black mb-2">
@@ -110,6 +142,7 @@
             </div>
         </div>
         </form>
+        
     </div>
 @stop
 

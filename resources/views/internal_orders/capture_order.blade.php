@@ -129,26 +129,32 @@
                                         <input type="number" name="otra" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
-                                    <div class="col-sm-3 col-xs-12">
-                                      <div class="form-group">
-                                        <x-jet-label value="* Cotización Numero:" />
-                                        <input type="text" name="ncotizacion" style='width: 60%;'> 
-                                        <x-jet-input-error for='seller_id' />
-                                    </div></div>
-                                </div>
+                                    
                                 
                                  
 
                              <h5> Otros Datos</h5>
 
+                             <div class="form-group">
+       <x-jet-label value="Numero de Cotizacion" />
+       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="btnradio5" id="btnradio5" autocomplete="off" checked onclick="manual('ncotizacion');">
+<label class="btn btn-outline-primary" for="btnradio5">Si</label>
+<input type="radio" class="btn-check" name="btnradio6" id="btnradio6" autocomplete="off" onclick="automatico('ncotizacion');">
+<label class="btn btn-outline-primary" for="btnradio6">No</label>
+</div>
+<br> <br>
 
+       <input type="text" name="ncotizacion" style='width: 10%;' id='ncotizacion'>
+       <x-jet-input-error for='seller_id' />
+   </div>
 
 <div class="form-group">
        <x-jet-label value="Numero de Contrato" />
        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-<input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked onclick="automatico('ncontrato');">
+<input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked onclick="manual('ncontrato');">
 <label class="btn btn-outline-primary" for="btnradio1">Si</label>
-<input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off" onclick="manual('ncontrato');">
+<input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off" onclick="automatico('ncontrato');">
 <label class="btn btn-outline-primary" for="btnradio2">No</label>
 </div>
 <br> <br>
@@ -158,9 +164,19 @@
    </div>
    <div class="form-group">
        <x-jet-label value="Orden de Compra" />
-       <input type="text" name="oc" style='width: 10%;'>
+       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<input type="radio" class="btn-check" name="btnradio3" id="btnradio3" autocomplete="off" checked onclick="manual('oc');">
+<label class="btn btn-outline-primary" for="btnradio3">Si</label>
+<input type="radio" class="btn-check" name="btnradio4" id="btnradio4" autocomplete="off" onclick="automatico('oc');">
+<label class="btn btn-outline-primary" for="btnradio4">No</label>
+</div>
+<br> <br>
+
+       <input type="text" name="oc" style='width: 10%;' id='oc'>
        <x-jet-input-error for='seller_id' />
-   </div> 
+   </div>
+
+   
    <br>
    <div class="row">
                                     <div class="col-sm-3 col-xs-12">
@@ -216,15 +232,17 @@
     function automatico(campo) {
     console.log(campo);
     
-    var invoice = document.getElementById(campo);
-    folio.style.display="none";
-    invoice.value=0;
+    var entrada = document.getElementById(campo);
+    entrada.style.display="none";
+    entrada.value=0;
 }
 
 
 function manual(campo) {
-    var folio = document.getElementById(campo);
-    folio.style.display="block";
+    var entrada = document.getElementById(campo);
+    console.log(campo);
+    
+    entrada.style.display="block";
 }
 </script>
 

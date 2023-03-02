@@ -14,6 +14,7 @@ use App\Models\Seller;
 use App\Models\TempInternalOrder;
 use App\Models\TempItem;
 use App\Models\vinternal_orders;
+use App\Models\order_contacts;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\payments;
@@ -141,16 +142,19 @@ class InternalOrderController extends Controller
 
             $CustomerShippingAddresses = CustomerShippingAddress::where('customer_id', $request->customer_id)->get();
         }
+        $contactos=CustomerContact::where('customer_id',$Customers->id)->get();
 
         return view('internal_orders.capture_order_shippment_addresses', compact(
             'TempInternalOrders',
             'Customers',
             'CustomerShippingAddresses',
+            'contactos'
         ));
     }
 
     public function partida(Request $request)
     {
+        
         if($request->shipment == 'Sí'){
             $CustomerShippingAddresses = CustomerShippingAddress::where('id', $request->shipping_address)->first();
         }else{
@@ -161,6 +165,13 @@ class InternalOrderController extends Controller
         $TempInternalOrders->shipment = $request->shipment;
         $TempInternalOrders->customer_shipping_address_id = $CustomerShippingAddresses->id;
         $TempInternalOrders->save();
+        
+        for($i=0; $i < count($request->contacto); $i++){
+            $registro=new order_contacts();
+            $registro->temp_order_id=$TempInternalOrders->id;
+            $registro->contact_id=$request->contacto[$i];
+            $registro->save();
+        }
 
         $Customers = Customer::where('id', $request->customer_id)->first();
         $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
@@ -492,7 +503,7 @@ class InternalOrderController extends Controller
         
         $CompanyProfiles = CompanyProfile::first();
         $InternalOrders = InternalOrder::find($id);
-
+        $date->$InternalOrders->date_delivery;
         $Customers = Customer::find($InternalOrders->customer_id);
         $Sellers = Seller::find($InternalOrders->seller_id);
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
@@ -518,6 +529,7 @@ class InternalOrderController extends Controller
             'actualized',
             'aux_count',
             'npagos',
+            'date',
         ));
 
     }

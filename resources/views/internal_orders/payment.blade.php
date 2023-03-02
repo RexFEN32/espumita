@@ -76,6 +76,11 @@
     </tr>
   </thead>
   <tbody>
+  @php
+    $emision = new DateTime($InternalOrders->reg_date);
+    $entrega = new DateTime($InternalOrders->date_delivery);
+    @endphp
+    
    
    @for ($i = 1; $i <= $npagos; $i++)
     
@@ -88,13 +93,11 @@
         <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}"  id="{{'P'.$aux_count}}">%</td>
         <td> {{$Coins -> symbol}}<span id="{{'R'.$aux_count}}" ></span> </td>
         @if($i==1)
-        @php
-    $fecha = new DateTime($InternalOrders->reg_date);
-    @endphp
-    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value="{{$fecha->format('Y-m-d');}}"></td>
+        
+    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value="{{$emision->format('Y-m-d');}}"></td>
         
     @else
-    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value=""></td>
+    <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}"  value="{{$entrega->format('Y-m-d');}}"></td>
          @endif
         <td> <input type='text' style='width: 50%;'  name="{{'concepto['.$aux_count.']'}}" id="{{'C'.$aux_count}}"onkeyup="javascript:this.value=this.value.toUpperCase();"></td>
         
