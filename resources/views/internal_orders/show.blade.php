@@ -260,15 +260,15 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET ISR:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ 0.0</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->ieps * $InternalOrders->subtotal)}}</div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET IVA:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ 0.0</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->iva * $InternalOrders->subtotal)}}</div></td>
                         
                         </tr> <tr>
                         <td><div class="badge badge-danger badge-outlined">IVA:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ 0.0</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format(0.16 * $InternalOrders->subtotal)}}</div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">Total</div></td>
@@ -442,6 +442,13 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                     &nbsp;
                 </div>
                 <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
+                    <br>
+                    <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <x-jet-label value="dgi" />
+                                        <input type="number" name="otra" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
+                                        <x-jet-input-error for='seller_id' />
+                                    </div></div>
                      @foreach ($requiredSignatures as $firma)
        
 
