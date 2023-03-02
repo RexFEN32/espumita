@@ -55,7 +55,7 @@ class AuthorizationController extends Controller
     public function edit($id)
     {
         $Authorizations = Authorization::find($id);
-
+//x
         return view('admin.authorizations.show', compact('Authorizations'));
     }
 
