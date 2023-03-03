@@ -165,13 +165,14 @@ class InternalOrderController extends Controller
         $TempInternalOrders->shipment = $request->shipment;
         $TempInternalOrders->customer_shipping_address_id = $CustomerShippingAddresses->id;
         $TempInternalOrders->save();
+        if($request->contacto){
         
         for($i=0; $i < count($request->contacto); $i++){
             $registro=new order_contacts();
             $registro->temp_order_id=$TempInternalOrders->id;
             $registro->contact_id=$request->contacto[$i];
             $registro->save();
-        }
+        }}
 
         $Customers = Customer::where('id', $request->customer_id)->first();
         $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
