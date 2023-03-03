@@ -145,7 +145,7 @@
 </div>
 <br> <br>
 
-       <input type="text" name="ncotizacion" style='width: 10%;' id='ncotizacion'>
+       <input type="text" name="ncotizacion" style='width: 10%;' id='ncotizacion' value="0">
        <x-jet-input-error for='seller_id' />
    </div>
 
@@ -159,7 +159,7 @@
 </div>
 <br> <br>
 
-       <input type="text" name="ncontrato" style='width: 10%;' id='ncontrato'>
+       <input type="text" name="ncontrato" style='width: 10%;' id='ncontrato'  value="0">
        <x-jet-input-error for='seller_id' />
    </div>
    <div class="form-group">
@@ -172,7 +172,7 @@
 </div>
 <br> <br>
 
-       <input type="text" name="oc" style='width: 10%;' id='oc'>
+       <input type="text" name="oc" style='width: 10%;' id='oc'  value="0">
        <x-jet-input-error for='seller_id' />
    </div>
 

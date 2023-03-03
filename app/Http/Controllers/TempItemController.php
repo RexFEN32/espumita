@@ -102,6 +102,7 @@ class TempItemController extends Controller
             $TempItems->family = $request->family;
             $TempItems->code = $request->code;
             $TempItems->fab = $request->fab;
+            $TempItems->sku = $request->sku;
             $TempItems->racks = $request->racks;
             $TempItems->description = $request->description;
             $TempItems->unit_price =(float) $request->unit_price;

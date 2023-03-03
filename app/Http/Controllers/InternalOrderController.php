@@ -261,7 +261,11 @@ class InternalOrderController extends Controller
             $InternalOrders->status = $TempInternalOrders->status;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
-            
+            $contactos=order_contacts::where('temp_order_id',$TempInternalOrders->id)->get();
+            foreach($contactos as $c){
+                $c->order_id=$InternalOrders->id;
+                $c->save();
+            }
             //foreach($Authorizations as $auth){
                 //$c=$auth->clearance_level;
               //  if($c<$request->subtotal)//entonces requiere esa firma
@@ -303,7 +307,7 @@ class InternalOrderController extends Controller
                 $Items->family = $row->family;
                 $Items->code = $row->code;
                 $Items->racks = $row->racks;
-                $Items->fab = $row->fabs;
+                $Items->fab = $row->fab;
                 $Items->sku = $row->sku;
                 $Items->description = $row->description;
                 $Items->unit_price = $row->unit_price;
@@ -357,6 +361,11 @@ class InternalOrderController extends Controller
             $InternalOrders->descuento = $TempInternalOrders->descuento;
             $InternalOrders->authorization_id = 1;
             $InternalOrders->save();
+            $contactos=order_contacts::where('temp_order_id',$TempInternalOrders->id)->get();
+            foreach($contactos as $c){
+                $c->order_id=$InternalOrders->id;
+                $c->save();
+            }
             $Signature=new signatures();
             $Signature->order_id = $InternalOrders->id;
             $Signature->auth_id = 2;
@@ -391,6 +400,9 @@ class InternalOrderController extends Controller
                 $Items->unit = $row->unit;
                 $Items->family = $row->family;
                 $Items->code = $row->code;
+                $Items->racks = $row->racks;
+                $Items->fab = $row->fab;
+                $Items->sku = $row->sku;
                 $Items->description = $row->description;
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
@@ -440,7 +452,11 @@ class InternalOrderController extends Controller
         $comp=$CompanyProfiles->id;
         $InternalOrders = InternalOrder::find($id);
         $Customers = Customer::find($InternalOrders->customer_id);
-        $Contacts = CustomerContact::where('customer_id',$InternalOrders->customer_id)->get();
+        $Contacts =DB::table('order_contacts')
+        ->join('customer_contacts', 'customer_contacts.id', '=', 'order_contacts.contact_id')
+        ->where('order_contacts.order_id', $id)
+        ->select('customer_contacts.*')
+        ->get();
         $Sellers = Seller::find($InternalOrders->seller_id);
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::find($InternalOrders->coin_id);
@@ -468,6 +484,14 @@ class InternalOrderController extends Controller
             'Contacts',
             'payments'
         ));
+    }
+    public function dgi(Request $request){
+    
+    $internal_order = InternalOrder::find($request->order_id);
+    $internal_order ->dgi=$request->dgi *0.01;
+    $internal_order->save();
+    return $this->show($internal_order->id);
+
     }
 
     public function firmar(Request $request){
@@ -503,7 +527,7 @@ class InternalOrderController extends Controller
         
         $CompanyProfiles = CompanyProfile::first();
         $InternalOrders = InternalOrder::find($id);
-        $date->$InternalOrders->date_delivery;
+        $date=$InternalOrders->date_delivery;
         $Customers = Customer::find($InternalOrders->customer_id);
         $Sellers = Seller::find($InternalOrders->seller_id);
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);

@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('internal_orders/edit/{id}', [InternalOrderController::class, 'edit_order'])->name('internal_orders.edit_order');
     Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
     Route::post('internal_orders/firmar', [InternalOrderController::class, 'firmar'])->name('internal_orders.firmar');
+    Route::post('internal_orders/dgi', [InternalOrderController::class, 'dgi'])->name('internal_orders.dgi');
     Route::post('internal_orders/redefine', [InternalOrderController::class, 'redefine'])->name('internal_orders.redefine_order');
     Route::post('internal_orders/shipments', [InternalOrderController::class, 'shipment'])->name('internal_orders.shipment');
     Route::post('internal_orders/pay_conditions', [InternalOrderController::class, 'pay_conditions'])->name('internal_orders.pay_conditions');

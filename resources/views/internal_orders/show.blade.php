@@ -441,14 +441,32 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                 <div class="col-sm-3 col-xs-12 text-center text-xs font-bold">
                     &nbsp;
                 </div>
+                @if($InternalOrders->dgi==0)
                 <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
                     <br>
-                    <div class="col-sm-3 col-xs-12">
+                    <form action="{{ route('internal_orders.dgi') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    
+                    <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
+                           
+                    
                                     <div class="form-group">
+                                    <div class="row">
+                                      <div class=col>
                                         <x-jet-label value="dgi" />
-                                        <input type="number" name="otra" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
+                                        <input type="number" name="dgi" style='width: 50%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
-                                    </div></div>
+                                    </div>
+                                    <div class="col">
+                                            <button class="btn btn-blue">definir dgi</button>
+                                        </div></div>
+                                    </div>
+                                    
+                    
+                      </form>
+                      
+                            
+                      @endif
                      @foreach ($requiredSignatures as $firma)
        
 

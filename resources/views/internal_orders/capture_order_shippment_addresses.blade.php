@@ -109,9 +109,9 @@
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>Nombre</th>
-                                                    <th>Dirección</th>
-                                                    <th>Colonia</th>
-                                                    <th>C.P.</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
                                                     <th>Select</th>
                                                     <th></th>
                                                 </tr>
@@ -120,9 +120,9 @@
                                                 @foreach($contactos as $contact)
                                                 <tr>
                                                 <td>{{$contact->customer_contact_name}}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{$contact->customer_contact_city}}</td>
+                                                <td>{{$contact->customer_contact_office_phone}}</td>
+                                                <td>{{$contact->customer_contact_email}}</td>
                                                 <td> Seleccionar : &nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="{{$contact->id}}" id="flexCheckDefault" name="contacto[]"> </td>
                                                   </tr>
                                         @endforeach
