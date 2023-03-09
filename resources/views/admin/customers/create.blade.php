@@ -29,8 +29,29 @@
                                 <x-jet-input-error for='customer' />
                             </div>
                             <div class="form-group">
-                                <x-jet-label value="* Nombre Júridico" />
-                                <x-jet-input type="text" name="legal_name" class="w-full text-xs " value="{{old('customer')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-label value="* Regimen de Capital" />
+                                <select class="form-capture  w-full text-xs uppercase" id="legal_name" name="legal_name">
+                                
+                                    <option value="FISICA CAEYP" > PERSONA FISICA CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES </option>
+                                    <option value="S.A." >SOCIEDAD ANONIMA </option>
+                                    <option value="S.A. DE C.V." > SOCIEDAD ANONIMA DE CAPITAL VARIABLE </option>
+                                    <option value="S DE R.L DE C.V." >SOCIEDAD DE RESPONSABILIDAD LIMITADA DE CAPITAL VARIABLE </option>
+                                    <option value="SAPI" >SOCIEDAD ANONIMA PROMOTORA DE INVERSION </option>
+                                    <option value="SAPI DE C.V." > SOCIEDAD ANONIMA PROMOTORA DE INVERSION DE CAPITAL VARIABLE</option>
+                                    <option value="SAS" > SOCIEDAD POR ACCIONES SIMPLIFICADA</option>
+                                    <option value="S.C" >SOCIEDAD COOPERATIVA </option>
+                                    <option value="S en N. C" > SOCIEDAD EN NOMBRE COLECTIVO</option>
+                                    <option value="S en N. C DE C.V." > SOCIEDAD EN NOMBRE COLECTIVO DE CAPITAL VARIABLE S en N. C DE C.V</option>
+                                    <option value="S en C" >SOCIEDAD EN COMANDITA SIMPLE </option>
+                                    <option value="S.C.A" >SOCIEDAD EN COMANDITA POR ACCIONES </option>
+                                    <option value="otra" >OTRA </option>
+                                    <option value="" > </option>
+                                    
+                                    
+                                </select>
+                                <br>
+                                <x-jet-input type="text" name="otra" id='otra' class="w-full text-xs " style='display: none;' onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                
                                 <x-jet-input-error for='legal_name' />
                             </div>
                             <div class="form-group">
@@ -119,5 +140,18 @@
 @stop
 
 @section('js')
+<script>
+    $(document).ready(function () {     
+$('#legal_name').change(function(){
+var seleccionado = $(this).val();
+if(seleccionado=='otra'){
+document.getElementById('otra').style.display="block";
+}
+else{
+    document.getElementById('otra').style.display="none"; 
+}
 
+})
+});
+</script>
 @stop

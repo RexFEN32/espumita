@@ -65,7 +65,11 @@ class CustomerController extends Controller
 
         $Customers = new Customer();
         $Customers->customer = $request->customer;
-        $Customers->legal_name = $request->legal_name;
+        if($request->legal_name == 'otra'){
+            $Customers->legal_name = $request->otra;
+        }
+        else{
+        $Customers->legal_name = $request->legal_name;}
         $Customers->alias = $request->alias;
         $Customers->customer_rfc = $request->customer_rfc;
         $Customers->customer_state = $request->customer_state;
@@ -137,6 +141,11 @@ class CustomerController extends Controller
 
         $Customers = Customer::where('id', $id)->first();
         $Customers->customer = $request->customer;
+        if($request->legal_name == 'otra'){
+            $Customers->legal_name = $request->otra;
+        }
+        else{
+        $Customers->legal_name = $request->legal_name;}
         $Customers->alias = $request->alias;
         $Customers->customer_rfc = $request->customer_rfc;
         $Customers->customer_state = $request->customer_state;

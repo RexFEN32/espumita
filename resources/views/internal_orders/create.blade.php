@@ -60,7 +60,7 @@
 
                                     <div class="form-group">
                                         <x-jet-label value="* Cliente" />
-                                        <select class="form-capture  w-full text-xs uppercase" name="customer_id">
+                                        <select class="form-capture  w-full text-xs uppercase" name="customer_id" id='customer'>
                                             @foreach ($Customers as $row)
                                                 <option value="{{$row->id}}" @if ($row->id == old('customer_id')) selected @endif > {{$row->clave}} {{$row->customer}}</option>
                                             @endforeach
@@ -69,6 +69,38 @@
                                     </div>
                                 </div>
                             </div>
+                            <h1 class="h2 text-center font-bold text-xs uppercase">Seleccione los contactos para este pedido</h1>
+                                    <br>
+            
+            <div class="col-sm-12 col-xs-12 table-responsive">
+
+                
+                                        <table class="table tableshippingaddress table-striped text-xs font-medium" id='ctable'>
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>Nombre</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
+                                                    <th>Select</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($contactos as $contact)
+                                                <tr class='{{$contact->customer_id}}'>
+                                                <td>{{$contact->customer_contact_name}}</td>
+                                                <td>{{$contact->customer_contact_city}}</td>
+                                                <td>{{$contact->customer_contact_office_phone}}</td>
+                                                <td>{{$contact->customer_contact_email}}</td>
+                                                <td> Seleccionar : &nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="{{$contact->id}}" id="flexCheckDefault" name="contacto[]"> </td>
+                                                  </tr>
+                                        @endforeach
+                                            </tbody>
+                                        </table>
+                                    <!-- Si no hay contactos boton para agregar contactos -->
+
+            </div>
                         </div>
                     </div>
                 </div>
@@ -159,5 +191,33 @@ $(document).ready(function () {
           sortField: 'text'
       });
   });
+</script>
+<script>
+    $(document).ready(function () {     
+$('#customer').change(function(){
+var seleccionado = $(this).val();
+console.log('entrando a la funcion');
+console.log(seleccionado)
+var boxes = document.getElementsByClassName("form-check-input");
+for (var i = 0; i < boxes.length; i++) {
+    console.log(boxes.item(i).checked);
+   boxes.item(i).checked=false;
+}
+var table = document.getElementById("ctable");
+for (var i = 0, row; row = table.rows[i]; i++) {
+     
+       table.style.display='';
+        
+        if (row.className==String(seleccionado)) {
+            row.style.display='';
+            
+        }else{
+            row.style.display='none';
+            
+        }
+    }
+
+})
+});
 </script>
 @stop
