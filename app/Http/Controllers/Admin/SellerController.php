@@ -66,6 +66,7 @@ class SellerController extends Controller
         $Sellers->seller_state = $request->seller_state;
         $Sellers->seller_zip_code = $request->seller_zip_code;
         $Sellers->gv = $request->gv;
+        //njcaskncjisjcnjxomentario
         $Sellers->gc = $request->gc;
         $Sellers->ga = $request->ga;
         $Sellers->firma= $request->seller_sign;
