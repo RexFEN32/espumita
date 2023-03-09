@@ -3,7 +3,7 @@
 @section('title', 'Reportes')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-file"></i>&nbsp;CONTRAPORTADA</h1>
+    <h1 class="font-bold"><i class="fas fa-file"></i>&nbsp;CONTRAPORTADA </h1>
 @stop
 
 @section('content')

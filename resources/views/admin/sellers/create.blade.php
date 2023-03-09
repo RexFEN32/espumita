@@ -10,7 +10,7 @@
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Vendedor:
+                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Vendedor :
             </h5>
         </div>
         <form action="{{ route('sellers.store')}}" method="POST" enctype="multipart/form-data">
@@ -116,6 +116,11 @@
                                 <x-jet-label value="C.P." />
                                 <x-jet-input type="text" name="seller_zip_code" class="w-full text-xs " value="{{old('seller_zip_code')}}"/>
                                 <x-jet-input-error for='seller_zip_code' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="Firma" />
+                                <x-jet-input type="text" name="seller_sign" class="w-full text-xs " value="{{old('seller_sign')}}"/>
+                                <x-jet-input-error for='seller_sign' />
                             </div>
                         </div>
                     </div>

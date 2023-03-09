@@ -68,6 +68,7 @@ class SellerController extends Controller
         $Sellers->gv = $request->gv;
         $Sellers->gc = $request->gc;
         $Sellers->ga = $request->ga;
+        $Sellers->firma= $request->seller_sign;
         $Sellers->save();
 
         return redirect()->route('sellers.index')->with('create_reg', 'ok');

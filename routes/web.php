@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('cuentas_cobrar', PaymentsController::class);
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
     Route::get('reportes/contraportada', [PaymentsController::class, 'reportes'])->name('reportes.contraportada');
+    
+    Route::get('reportes/contraportada_axel', [PaymentsController::class, 'reportes_axel'])->name('reportes.contraportada_axel');
     Route::get('reportes/factura_resumida', [PaymentsController::class, 'factura_resumida'])->name('reportes.factura_resumida');
     
     Route::get('reportes/consecutivo_factura', [PaymentsController::class, 'consecutivo_factura'])->name('reportes.consecutivo_factura');

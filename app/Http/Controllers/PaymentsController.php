@@ -92,6 +92,19 @@ class PaymentsController extends Controller
 
         ));
     }
+    public function reportes_axel()
+    {
+        $InternalOrders =  DB::table('internal_orders')
+        ->join('customers', 'internal_orders.customer_id', '=', 'customers.id')
+        ->join('coins', 'internal_orders.coin_id','=','coins.id')
+        ->select('internal_orders.*','customers.customer','coins.symbol')
+        ->get();
+        return view('accounting.reportes_axel', compact(
+            'InternalOrders',
+            
+
+        ));
+    }
     public function reporte($id,$report,$pdf)
     {
         $caminoalpoder=public_path();

@@ -3,7 +3,7 @@
 @section('title', 'Cuentas por Cobrar')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; CUENTAS POR COBRAR</h1>
+    <h1 class="font-bold"><i class="fas fa-credit-card"></i>&nbsp; Axel sandbox cajita de arena</h1>
 @stop
 
 @section('content')
