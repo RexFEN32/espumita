@@ -44,7 +44,14 @@
                                         
                                         <option value=" " > </option>
                                         <option value="FAB" >Fabricado por Tyrsa</option>
-                                        <option value="COM" >Comercializado por Tyrsa</option>
+                                        <option value="COM" >Comercializado por Tyrsa</option><option value="COM" >Comercializado por Tyrsa</option>
+                                        <option value="DTOS" >Directos</option>
+                                        <option value="SUBC" >Subcontratados</option>
+                                        <option value="F+D" >Fabricado e instalado por tyrsa</option>
+                                        <option value="F+S" >Fabricado por tyrsa e instalado por Subcontratista</option>
+                                        <option value="C+D" >Comercializado e instalado por tyrsa</option>
+                                        <option value="C+S" >Comercializado por tyrsa e instalado por subcontratista</option>
+                                    
                                     
                                 </select>
                                 <x-jet-input-error for='family' /> 
@@ -161,6 +168,36 @@ if(seleccionado=='FAB'){
     especiales : 'Especiales Otros'
 };}
 if(seleccionado=='COM'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    iracks : ' importado Racks',
+    itransportadores : 'importado Transportadores',
+    iespeciales : 'importado Especiales Otros'
+};}
+if(seleccionado=='FAB'){
+    var example_array = {
+    racks : 'Racks',
+    transportadores : 'Transportadores',
+    especiales : 'Especiales Otros'
+};}
+if(seleccionado=='COM'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    iracks : ' importado Racks',
+    itransportadores : 'importado Transportadores',
+    iespeciales : 'importado Especiales Otros'
+};}
+if(seleccionado=='DTOS'){
+    var example_array = {
+    racks : 'Racks',
+    transportadores : 'Transportadores',
+    especiales : 'Especiales Otros'
+};}
+if(seleccionado=='SUBC'){
     var example_array = {
     nracks : ' Nacional Racks',
     ntransportadores : 'Nacional Transportadores',

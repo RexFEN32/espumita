@@ -27,8 +27,8 @@
                             
                             
                             <th>Email</th>
+                            <th>Iniciales</th>
                             <th>Estado</th>
-                            <th>Municipio</th>
                            
                             <th style="width : 20%;">-</th>
                         </tr>
@@ -40,8 +40,8 @@
                             <td>{{$row->seller_name}}</td>
                             <td>{{$row->seller_mobile}}</td>
                             <td>{{$row->seller_email}}</td>
-                            <td>{{$row->seller_state}}</td>
-                            <td>{{$row->seller_city}}</td>
+                            <td>{{$row->iniciales}}</td>
+                            <td>{{$row->status}}</td>
                             <td class="w-10">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">
