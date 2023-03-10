@@ -506,9 +506,14 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                                     </div>
                                     </form>
                                     @else
-                                    {{$firma->firma}}
-                                     <br>
-                                    <span style="font-size: 17px"> <i style="color : green"  class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$firma->job}} </span>
+                                    <table>
+                                        <tbody>
+                                            <tr style="font-size:16px; font-weight:bold"><td>{{$firma->firma}}</td></tr>
+                                            <tr><td><span style="font-size: 17px"> <i style="color : green"  class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$firma->job}} </span>
+                                    </td></tr>
+                                        </tbody>
+                                    </table>
+                                     
                                     <br><br><br><br>
                                     @endif
                                 </div>

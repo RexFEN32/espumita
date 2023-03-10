@@ -25,6 +25,8 @@
                             
                             <th>Clave</th>
                             <th>Razón Social</th>
+                            
+                            <th>Regimen de Capital</th>
                             <th>Nombre Corto</th>
                             <th>RFC</th>
                             <th>Estado</th>
@@ -39,6 +41,8 @@
                         <tr>
                             <td>{{$row->clave}}</td>
                             <td>{{$row->customer}}</td>
+                            
+                            <td>{{$row->legal_name}}</td>
                             <td>{{$row->alias}}</td>
                             <td>{{$row->customer_rfc}}</td>
                             <td>{{$row->customer_state}}</td>
