@@ -20,7 +20,8 @@ use Illuminate\Http\Request;
 use App\Models\payments;
 use App\Models\historical_payments;
 use App\Models\signatures;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Auth;
 
 class InternalOrderController extends Controller
 {
@@ -62,15 +63,16 @@ class InternalOrderController extends Controller
             $TempInternalOrder->customer_id = $request->customer_id;
             $TempInternalOrder->invoice = $request->invoice;
             $TempInternalOrder->noha = $request->noha;
-            if($request->contacto){
-              //dd($request->contacto);
-                for($i=0; $i < count($request->contacto); $i++){
-                    $registro=new order_contacts();
-                    $registro->temp_order_id=$TempInternalOrder->id;
-                    $registro->contact_id=$request->contacto[$i];
-                    $registro->save();
-                }}
+            
             $TempInternalOrder->save();
+            if($request->contacto){
+                //dd($request->contacto);
+                  for($i=0; $i < count($request->contacto); $i++){
+                      $registro=new order_contacts();
+                      $registro->temp_order_id=$TempInternalOrder->id;
+                      $registro->contact_id=$request->contacto[$i];
+                      $registro->save();
+                  }}
             $TempInternalOrders = TempInternalOrder::orderBy('id', 'DESC')->first();
         }
         
@@ -506,6 +508,7 @@ class InternalOrderController extends Controller
     $isPasswordCorrect = Hash::check($key_code, $stored_key);
     if($isPasswordCorrect){
         $signature->status = 1;
+        $signature->firma=Auth::user()->firma;
         $signature->save();
     }
     $required_signatures = signatures::where('order_id',$internal_order->id)->get();

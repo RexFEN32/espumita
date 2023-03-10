@@ -57,6 +57,11 @@
                     <x-jet-input-error for='confirm-password' />
                 </div>
             </div>
+            <div class="form-group">
+                                <x-jet-label value="Firma" />
+                                <x-jet-input type="text" name="sign" class="w-full text-xs " />
+                                <x-jet-input-error for='seller_sign' />
+                            </div>
             <div class="col-12 text-right p-2 gap-2">
                 <a href="{{ route('users.index')}}" class="btn btn-green mb-2">
                     <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar

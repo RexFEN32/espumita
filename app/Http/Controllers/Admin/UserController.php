@@ -61,7 +61,8 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-
+        $user->firma=$request->sign;
+        $user->save();
         return redirect()->route('users.index')->with('create_reg', 'ok');
     }
 

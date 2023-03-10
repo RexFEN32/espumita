@@ -430,6 +430,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                             <td>
+                            {{$Sellers->firma}}
                                 <br>
                                 <hr><br><br>
 
@@ -493,7 +494,8 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                                     </div>
                                     </form>
                                     @else
-
+                                    {{$firma->firma}}
+                                     <br>
                                     <span style="font-size: 17px"> <i style="color : green"  class="fa fa-check-circle" aria-hidden="true"></i> Autorizado por  {{$firma->job}} </span>
                                     <br><br><br><br>
                                     @endif
