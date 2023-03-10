@@ -40,10 +40,20 @@
                             <div class="form-group">
                                 <x-jet-label value="* Familia" />
                                 {{--  <x-jet-input type="text" name="family" class="w-full text-xs" value="{{old('family')}}"/>  --}}
-                                <select class="form-capture  w-full text-xs uppercase" name="family">
-                                    @foreach ($Families as $row)
-                                        <option value="{{$row->family}}" @if ($row->id == old('family')) selected @endif >{{$row->family}}</option>
-                                    @endforeach
+                                <select class="form-capture  w-full text-xs uppercase" name="family" id='fam'>
+                                        
+                                        <option value=" " > </option>
+                                        <option value="FAB" >Fabricado por Tyrsa</option>
+                                        <option value="COM" >Comercializado por Tyrsa</option>
+                                    
+                                </select>
+                                <x-jet-input-error for='family' /> 
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="* Sub Familia" />
+                                {{--  <x-jet-input type="text" name="subfamily" class="w-full text-xs" value="{{old('family')}}"/>  --}}
+                                <select class="form-capture  w-full text-xs uppercase" name="subfamily" id='subfam'>
+                                    
                                 </select>
                                 <x-jet-input-error for='family' /> 
                             </div>
@@ -127,4 +137,47 @@ $(document).on('keyup', '.price-format-input', function (e) {
 $(document).ready(function(){
   $('#input-price').focus();
 })</script>
+
+<script>
+function removeOptions(selectElement) {
+   var i, L = selectElement.options.length - 1;
+   for(i = L; i >= 0; i--) {
+      selectElement.remove(i);
+   }
+}
+
+// using the function:
+    $(document).ready(function () {     
+$('#fam').change(function(){
+var seleccionado = $(this).val();
+console.log('entrando a la funcion');
+console.log(seleccionado)
+removeOptions(document.getElementById('subfam'));
+var subfam = document.getElementById("subfam");
+if(seleccionado=='FAB'){
+    var example_array = {
+    racks : 'Racks',
+    transportadores : 'Transportadores',
+    especiales : 'Especiales Otros'
+};}
+if(seleccionado=='COM'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    iracks : ' importado Racks',
+    itransportadores : 'importado Transportadores',
+    iespeciales : 'importado Especiales Otros'
+};
+}
+
+
+for(index in example_array) {
+    subfam.options[subfam.options.length] = new Option(example_array[index], index);
+}
+
+
+})
+});
+</script>
 @stop

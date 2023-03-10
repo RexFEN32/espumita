@@ -119,10 +119,21 @@
                             <x-jet-label value="tipo_cambio" />
                             <x-jet-input type="number" min="0" name="tipo_cambio" value=1  /> 
                             </div>        
-                     <div class="form-group">
+                            <div class="form-group">
                             <x-jet-label value="* BANCO" />
-                            <x-jet-input type="text" name="banco"  value="{{old('customer_street')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>         
-                        </div>
+                            <select class="form-capture  w-full text-xs uppercase" name="customer_id" id='customer'>
+                                            
+                                                <option value="BANAMEX MN" >BANAMEX MX</option>
+                                                <option value="BANORTE MN" >BANORTE MX</option>
+                                                <option value="BAJIO MN" >BAJIO MX</option>
+                                                <option value="SANTANDER MN" >SANTANDER MX</option>
+                                                <option value="BANAMEX DL" >BANAMEX DL</option>
+                                                <option value="BANORTE DL" >BANORTE DL</option>
+                                                <option value="BAJIO DL" >BAJIO DL</option>
+                                                <option value="SANTANDER DL" >SANTANDER DL</option>
+                                                
+                                            
+                                        </select> </div>
                     
                          <br>
                 <br>

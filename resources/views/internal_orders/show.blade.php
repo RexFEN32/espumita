@@ -260,11 +260,11 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET ISR:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->ieps * $InternalOrders->subtotal)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->isr * $InternalOrders->subtotal)}}</div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET IVA:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->iva * $InternalOrders->subtotal)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format(0.1066 * $InternalOrders->subtotal)}}</div></td>
                         
                         </tr> <tr>
                         <td><div class="badge badge-danger badge-outlined">IVA:</div></td>
@@ -272,7 +272,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">Total</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->total,2)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->total+(0.16 * $InternalOrders->subtotal),2)}}</div></td>
                         </tr>
                         
                     </table>

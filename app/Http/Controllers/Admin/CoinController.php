@@ -24,17 +24,17 @@ class CoinController extends Controller
     {
         $rules = [
             'coin' => 'required|unique:coins,coin',
-            'exchange_buy' => 'required|numeric',
-            'exchange_sell' => 'required|numeric',
+            // 'exchange_buy' => 'required',
+            // 'exchange_sell' => 'required',
         ];
 
         $messages = [
             'coin.required' => 'Capture el nombre de la Moneda',
             'coin.unique' => '¡La moneda ya ha sido capturada!',
-            'exchange_buy.required' => 'Capture el tipo de cambio actual',
-            'exchange_sell.numeric' => 'El tipo de cambio debe ser numérico',
-            'exchange_sell.required' => 'Capture el tipo de cambio actual',
-            'exchange_buy.numeric' => 'El tipo de cambio debe ser numérico',
+            // 'exchange_buy.required' => 'Capture el tipo de cambio actual',
+            // 'exchange_sell.numeric' => 'El tipo de cambio debe ser numérico',
+            // 'exchange_sell.required' => 'Capture el tipo de cambio actual',
+            // 'exchange_buy.numeric' => 'El tipo de cambio debe ser numérico',
         ];
 
         $request->validate($rules, $messages);
