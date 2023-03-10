@@ -310,6 +310,10 @@ class InternalOrderController extends Controller
                 $Items->amount = $row->amount;
                 $Items->unit = $row->unit;
                 $Items->family = $row->family;
+                
+                $Items->subfamilia = $row->subfamilia;
+                $Items->categoria = $row->categoria;
+                $Items->products = $row->products;
                 $Items->code = $row->code;
                 $Items->racks = $row->racks;
                 $Items->fab = $row->fab;
@@ -404,6 +408,10 @@ class InternalOrderController extends Controller
                 $Items->amount = $row->amount;
                 $Items->unit = $row->unit;
                 $Items->family = $row->family;
+                
+                $Items->subfamilia = $row->subfamilia;
+                $Items->categoria = $row->categoria;
+                $Items->products = $row->products;
                 $Items->code = $row->code;
                 $Items->racks = $row->racks;
                 $Items->fab = $row->fab;
