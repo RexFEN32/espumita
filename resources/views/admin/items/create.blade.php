@@ -38,13 +38,31 @@
                                 <x-jet-input-error for='unit' />
                             </div>
                             <div class="form-group">
+                                <x-jet-label value="* Categoria" />
+                                <select class="form-capture  w-full text-xs uppercase" name="categoria" id='cat'>
+                                        
+                                        <option value=" " > </option>
+                                        <option value="Productos" >Productos</option>
+                                        <option value="Servicios" >Servicios</option>
+                                        <option value="Integracion" >Integracion</option>
+                                       
+                                    
+                                </select>
+                                <x-jet-input-error for='family' /> 
+                            <div class="form-group">
+                                <x-jet-label value="* Descripción" />
+                                <select class="form-capture  w-full text-xs uppercase" name="description" id='desc'>
+                                    
+                                </select><x-jet-input-error for='description' />
+                            </div>
+                            <div class="form-group">
                                 <x-jet-label value="* Familia" />
                                 {{--  <x-jet-input type="text" name="family" class="w-full text-xs" value="{{old('family')}}"/>  --}}
                                 <select class="form-capture  w-full text-xs uppercase" name="family" id='fam'>
                                         
                                         <option value=" " > </option>
                                         <option value="FAB" >Fabricado por Tyrsa</option>
-                                        <option value="COM" >Comercializado por Tyrsa</option><option value="COM" >Comercializado por Tyrsa</option>
+                                        <option value="COM" >Comercializado por Tyrsa</option>
                                         <option value="DTOS" >Directos</option>
                                         <option value="SUBC" >Subcontratados</option>
                                         <option value="F+D" >Fabricado e instalado por tyrsa</option>
@@ -84,11 +102,7 @@
                                 <x-jet-input type="text" name="sku" class="w-full text-xs" value="{{old('sku')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='sku' />
                             </div>
-                            <div class="form-group">
-                                <x-jet-label value="* Descripción" />
-                                <textarea rows="4" name="description" class="w-full text-xs inputjet" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
-                                <x-jet-input-error for='description' />
-                            </div>
+                            
                             <div class="form-group">
                                 <x-jet-label value="* Precio Unitario" />
                                 <x-jet-input type="number" step="0.01" name="unit_price" id="input-price" class="form-control just-number price-format-input" class="w-full text-xs" value="{{old('unit_price')}}"/>
@@ -193,11 +207,50 @@ if(seleccionado=='COM'){
 };}
 if(seleccionado=='DTOS'){
     var example_array = {
-    racks : 'Racks',
-    transportadores : 'Transportadores',
-    especiales : 'Especiales Otros'
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    
 };}
 if(seleccionado=='SUBC'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    iracks : ' importado Racks',
+    itransportadores : 'importado Transportadores',
+    iespeciales : 'importado Especiales Otros'
+};
+}
+
+if(seleccionado=='F+D'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    
+};}
+
+if(seleccionado=='F+S'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    
+};}
+
+if(seleccionado=='C+S'){
+    var example_array = {
+    nracks : ' Nacional Racks',
+    ntransportadores : 'Nacional Transportadores',
+    nespeciales : 'Nacional Especiales Otros',
+    iracks : ' importado Racks',
+    itransportadores : 'importado Transportadores',
+    iespeciales : 'importado Especiales Otros'
+};
+}
+
+if(seleccionado=='C+D'){
     var example_array = {
     nracks : ' Nacional Racks',
     ntransportadores : 'Nacional Transportadores',
@@ -216,5 +269,39 @@ for(index in example_array) {
 
 })
 });
+</script>
+
+<script>
+     $(document).ready(function () {     
+$('#cat').change(function(){
+var seleccionado = $(this).val();
+console.log('entrando a la funcion');
+console.log(seleccionado)
+removeOptions(document.getElementById('desc'));
+var desc = document.getElementById("desc");
+if(seleccionado=='Productos'){
+    var example_array = {
+    fabricacion : 'Fabricacion',
+    comercializacion : 'Comercializacion',
+    
+};}
+if(seleccionado=='Servicios'){
+    var example_array = {
+    tyrsadir : 'Tyrsa Directo',
+    subcon : 'Subcontratistas',
+    
+};}
+if(seleccionado=='Integracion'){
+    var example_array = {
+        tyrsadir : 'Tyrsa Directo',
+    subcon : 'Subcontratistas',
+    
+};}
+
+for(index in example_array) {
+    desc.options[desc.options.length] = new Option(example_array[index], index);
+}
+})
+     });
 </script>
 @stop
