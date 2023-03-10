@@ -65,11 +65,14 @@ class SellerController extends Controller
         $Sellers->seller_city = $request->seller_city;
         $Sellers->seller_state = $request->seller_state;
         $Sellers->seller_zip_code = $request->seller_zip_code;
+        
         $Sellers->gv = $request->gv;
-        //njcaskncjisjcnjxomentario
+    
         $Sellers->gc = $request->gc;
         $Sellers->ga = $request->ga;
         $Sellers->firma= $request->seller_sign;
+        $Sellers->status= $request->seller_status;
+        $Sellers->iniciales= $request->seller_initials;
         $Sellers->save();
 
         return redirect()->route('sellers.index')->with('create_reg', 'ok');
@@ -123,6 +126,7 @@ class SellerController extends Controller
         $Sellers->seller_city = $request->seller_city;
         $Sellers->seller_state = $request->seller_state;
         $Sellers->seller_zip_code = $request->seller_zip_code;
+        $Sellers->firma= $request->seller_sign;
         $Sellers->save();
 
         return redirect()->route('sellers.index')->with('update_reg', 'ok');

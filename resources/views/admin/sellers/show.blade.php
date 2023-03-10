@@ -50,6 +50,11 @@
                                 <x-jet-input type="text" name="seller_office_phone_ext" class="w-full text-xs " value="{{ $Sellers->seller_office_phone_ext }}"/>
                                 <x-jet-input-error for='seller_office_phone_ext' />
                             </div>
+                            <div class="form-group">
+                                <x-jet-label value="Firma" />
+                                <x-jet-input type="text" name="seller_sign" class="w-full text-xs "  value="{{ $Sellers->firma }}"/>
+                                <x-jet-input-error for='seller_sign' />
+                            </div>
                         </div>
                     </div>
                 </div>

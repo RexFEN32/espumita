@@ -72,7 +72,25 @@
                                         @endforeach
                                 </select>
                             </div>
-                            
+                            <div class="form-group">
+                                <x-jet-label value="Firma" />
+                                <x-jet-input type="text" name="seller_sign" class="w-full text-xs " value="{{old('seller_sign')}}"/>
+                                <x-jet-input-error for='seller_sign' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="Iniciales" />
+                                <x-jet-input type="text" name="seller_initials" class="w-full text-xs " value="{{old('seller_initials')}}"/>
+                                <x-jet-input-error for='seller_initials' />
+                            </div>
+                            <div class="form-group">
+                                <x-jet-label value="Status" />
+                                <select class="form-select" aria-label="Default select example" name ="seller_status">                               
+                                        
+                                        <option value="ACTIVO">Activo</option>
+                                        <option value="INACTIVO">Inactivo</option>
+                                    
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,11 +135,7 @@
                                 <x-jet-input type="text" name="seller_zip_code" class="w-full text-xs " value="{{old('seller_zip_code')}}"/>
                                 <x-jet-input-error for='seller_zip_code' />
                             </div>
-                            <div class="form-group">
-                                <x-jet-label value="Firma" />
-                                <x-jet-input type="text" name="seller_sign" class="w-full text-xs " value="{{old('seller_sign')}}"/>
-                                <x-jet-input-error for='seller_sign' />
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
