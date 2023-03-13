@@ -197,6 +197,12 @@
                                         <input type="number" name="descuento" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
+                                    <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <x-jet-label value="Tasa" />
+                                        <input type="number" name="tasa" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
+                                        <x-jet-input-error for='tasa' />
+                                        </div>
                                 </div>
                         </div>
                         

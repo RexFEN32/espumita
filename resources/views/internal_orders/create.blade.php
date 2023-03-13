@@ -75,7 +75,7 @@
             <div class="col-sm-12 col-xs-12 table-responsive">
 
                 
-                                        <table class="table tableshippingaddress table-striped text-xs font-medium" id='ctable'>
+                                        <table class="table tableshippingaddress table-striped text-xs font-medium" >
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>Nombre</th>
@@ -86,6 +86,8 @@
                                                     <th></th>
                                                 </tr>
                                             </thead>
+                                            </table>
+                                            <table class="table tableshippingaddress table-striped text-xs font-medium" id='ctable'>
                                             <tbody>
                                                 @foreach($contactos as $contact)
                                                 <tr class='{{$contact->customer_id}}'>
@@ -93,7 +95,11 @@
                                                 <td>{{$contact->customer_contact_city}}</td>
                                                 <td>{{$contact->customer_contact_office_phone}}</td>
                                                 <td>{{$contact->customer_contact_email}}</td>
-                                                <td> Seleccionar : &nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" value="{{$contact->id}}" id="flexCheckDefault" name="contacto[]"> </td>
+                                                <td><div class="row">     
+                                                    <div class='col'> Seleccionar :</div>
+                                                    <div class='col'><input class="form-check-input" type="checkbox" value="{{$contact->id}}" id="flexCheckDefault" name="contacto[]"></div>
+                                                </div> 
+                                                    &nbsp;&nbsp;&nbsp;  </td>
                                                   </tr>
                                         @endforeach
                                             </tbody>

@@ -54,7 +54,7 @@
                         <tr>
                             <td class="card-body bg-white rounded-xl shadow-md text-center text-sm">
                                 <span style="color: darkblue">PEDIDO No.:<br><br>
-                                {{$InternalOrders->invoice}}</span> 
+                                {{$InternalOrders->invoice}} {{$InternalOrders->total}}</span> 
                             </td>
                         </tr>
                     </table>
@@ -156,7 +156,7 @@
                 
                 <div class="col-sm-12 text-right">
                     <div class="form-group">
-                      <span class="text-right font-semibold text-sm">RET IVA: $ 0.0</span>  
+                      <span class="text-right font-semibold text-sm">RET IVA: $ {{number_format($InternalOrders->ret,2)}}</span>  
                     </div>
                 </div>
                 <div class="col-sm-12 text-right">

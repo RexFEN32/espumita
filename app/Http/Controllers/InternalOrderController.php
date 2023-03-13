@@ -216,6 +216,8 @@ class InternalOrderController extends Controller
         $total_real=$request->total +($TempInternalOrders->ieps)*$request->subtotal+($TempInternalOrders->isr)*$request->subtotal-($TempInternalOrders->descuento)*$request->subtotal;
         $TempInternalOrders->total = $total_real ;
         $TempInternalOrders->observations = $request->observations;
+        //variable para calcular la retencion del iva
+        $ret=0;
         $TempInternalOrders->status = 'CAPTURADO';
         if($TempInternalOrders->noha !=0 ){
             $TempInternalOrders->noha=$noha;
@@ -304,6 +306,7 @@ class InternalOrderController extends Controller
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
 
             foreach($TempItems as $row){
+                
                 $Items = new Item();
                 $Items->internal_order_id = $row->temp_internal_order_id;
                 $Items->item = $row->item;
@@ -322,6 +325,9 @@ class InternalOrderController extends Controller
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
                 $Items->save();
+                if($Items->category=='Servicios'){
+                    $ret=$ret+$Items->amount*0.04;
+                }
                 
             }
             
@@ -420,6 +426,9 @@ class InternalOrderController extends Controller
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
                 $Items->save();
+                if($Items->category=='Servicios'){
+                    $ret=$ret+$Items->amount*0.04;
+                }
             }
             
             $TempItems = TempItem::where('temp_internal_order_id', $TempInternalOrders->id)->get();
@@ -428,6 +437,9 @@ class InternalOrderController extends Controller
             }
             
             TempInternalOrder::destroy($TempInternalOrders->id);
+            $InternalOrders->ret=$ret;
+            $InternalOrders->total=$InternalOrders->total+$ret;
+            $internal_orders->save();
             // return pay_contitions con internal order id
             // $InternalOrders->id
             //return redirect()->route('internal_orders.index')->with('create_reg', 'ok');

@@ -108,9 +108,9 @@
     <tr >
     <th scope="row">TOTAL: </th>
       
-      <td>{{$Coins -> symbol}} {{ number_format($Subtotal)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16)}}</td>
+      <td>{{$Coins -> symbol}} {{ number_format($Subtotal,2)}}</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16,2)}}</td>
+      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16,2)}}</td>
     </tr>
     
     </tbody>

@@ -37,7 +37,7 @@
                             <div class="row">
                                  <div class="col-6 text-center w-60">
                                         @can('EDITAR FAMILIAS')
-                                        <a href="{{ route('families.edit', $row->id)}}">
+                                        <a href="{{ route('subfam_show', $row->id)}}">
                                         <button class="btn btn-blue">
                                                 <i class="fas fa-eye"></i>&nbsp; &nbsp;
                                                 ver subfamilias

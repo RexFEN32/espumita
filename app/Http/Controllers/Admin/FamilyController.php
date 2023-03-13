@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Family;
+use App\Models\subfamilies;
 use Illuminate\Http\Request;
 
 class FamilyController extends Controller
@@ -75,5 +76,12 @@ class FamilyController extends Controller
         Family::destroy($id);
 
         return redirect()->route('families.index')->with('eliminar', 'ok');
+    }
+    //subfamilias
+    public function subfam_show($id)
+    {
+        $subfams = subfamilies::where('family_id',$id)->get();
+        $Familia = Family::find($id);
+        return view('admin.families.subfam', compact('subfams','Familia'));
     }
 }
