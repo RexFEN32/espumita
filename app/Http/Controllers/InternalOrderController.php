@@ -219,7 +219,7 @@ class InternalOrderController extends Controller
         //variable para calcular la retencion del iva
         $ret=0;
         $TempInternalOrders->status = 'CAPTURADO';
-        if($TempInternalOrders->noha !=0 ){
+        if($TempInternalOrders->noha ==0 ){
             $TempInternalOrders->noha=$noha;
         }
         
@@ -346,7 +346,7 @@ class InternalOrderController extends Controller
             $InternalOrders = new InternalOrder();
             $InternalOrders->id = $TempInternalOrders->id;
             $InternalOrders->invoice = '100';
-            if($TempInternalOrders->invoice != 0){
+            if($TempInternalOrders->invoice = 0){
                 $InternalOrders->invoice = $TempInternalOrders->invoice;
             }
             $InternalOrders->date = $TempInternalOrders->date;
