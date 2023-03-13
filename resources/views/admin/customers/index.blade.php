@@ -29,9 +29,8 @@
                             <th>Regimen de Capital</th>
                             <th>Nombre Corto</th>
                             <th>RFC</th>
-                            <th>Estado</th>
                             <th>Municipio</th>
-                            <th>Email</th>
+                            
                             <th>Teléfono</th>
                             <th style="width : 10%;">&nbsp;&nbsp; </th>
                         </tr>
@@ -45,9 +44,9 @@
                             <td>{{$row->legal_name}}</td>
                             <td>{{$row->alias}}</td>
                             <td>{{$row->customer_rfc}}</td>
-                            <td>{{$row->customer_state}}</td>
+                            <!-- <td>{{$row->customer_state}}</td> -->
                             <td>{{$row->customer_city}}</td>
-                            <td>{{$row->customer_email}}</td>
+                            <!-- <td>{{$row->customer_email}}</td> -->
                             <td>{{$row->customer_telephone}}</td>
                             <td class="w-15">
                                 <div class="row">

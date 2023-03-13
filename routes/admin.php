@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdministradorController;
 use App\Http\Controllers\Admin\AuthorizationController;
 use App\Http\Controllers\Admin\FamilyController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\BankController;
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -25,8 +26,11 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('company_profiles', CompanyProfileController::class);
     Route::resource('settings', SettingController::class);
     Route::resource('coins', CoinController::class);
+    Route::resource('banks', BankController::class);
     Route::resource('units', UnitController::class);
     Route::resource('families', FamilyController::class);
+    Route::get('families/subfamilies/{id}', [ FamilyController::class, 'subfam_show'])->name('subfam_show');
+    
     Route::resource('authorizations', AuthorizationController::class);    
     Route::resource('customers', CustomerController::class);
     Route::resource('customers_shipping_address', CustomerShippingAddressController::class);

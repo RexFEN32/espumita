@@ -269,7 +269,7 @@ return [
                     'can'  => 'VER CONFIGURACIONES',
                 ],
                 [
-                    'text' => ' MONEDAS',
+                    'text' => ' ',
                     'icon' => 'fas fa-money-bill-1 fa-fw',
                     'route'  => 'coins.index',
                     'can'  => 'VER MONEDAS',
