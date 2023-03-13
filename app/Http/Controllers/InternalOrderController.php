@@ -325,7 +325,7 @@ class InternalOrderController extends Controller
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
                 $Items->save();
-                if($Items->category=='Servicios'){
+                if($Items->categoria=='Servicios'){
                     $ret=$ret+$Items->amount*0.04;
                 }
                 
@@ -426,7 +426,7 @@ class InternalOrderController extends Controller
                 $Items->unit_price = $row->unit_price;
                 $Items->import = $row->import;
                 $Items->save();
-                if($Items->category=='Servicios'){
+                if($Items->categoria=='Servicios'){
                     $ret=$ret+$Items->amount*0.04;
                 }
             }
