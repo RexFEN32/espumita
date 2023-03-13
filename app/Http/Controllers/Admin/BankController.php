@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\bank;
@@ -10,7 +10,7 @@ class BankController extends Controller
 {
     public function index()
     {
-        $baks = bank::all();
+        $banks = bank::all();
 
         return view('admin.banks.index', compact('banks'));
     }

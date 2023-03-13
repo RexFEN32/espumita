@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'MONEDAS')
+@section('title', 'BANCOS')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-money-bill-1"></i>&nbsp; MONEDAS</h1>
+    <h1 class="font-bold"><i class="fas fa-money-bill-1"></i>&nbsp; BANCOS</h1>
 @stop
 
 @section('content')
@@ -25,22 +25,22 @@
                             <th>Banco</th>
                             <th>Moneda</th>
                             <th>Código</th>
-                            <th></th>
+                            <th>  </th>
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($banks as $row)
                         <tr class="text-center">
-                            <td>{{$row->id}}</td>
+                            <td>{{$row->bank_id}}</td>
                             <td>{{$row->bank_description}}</td>
                             <td>{{$row->coin}}</td>
-                            <td>{{$row->code}}</td>
                             <td>{{$row->bank_clue}}</td>
                             <td class="w-15">
                                 <div class="row">
                                     <div class="col-6 text-center">
                                         @can('EDITAR MONEDAS')
-                                        <a href="{{ route('coins.edit', $row->id)}}">
+                                        <a >
                                         <button class="btn btn-blue">
                                                 <i class="fas fa-xl fa-edit   "></i>
                                                 </button>
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="col-6 text-center">
                                         @can('BORRAR MONEDAS')
-                                        <form class="DeleteReg" action="{{ route('coins.destroy', $row->id) }}" method="POST">
+                                        <form class="DeleteReg" action="" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red ">

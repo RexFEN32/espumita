@@ -269,7 +269,13 @@ return [
                     'can'  => 'VER CONFIGURACIONES',
                 ],
                 [
-                    'text' => ' ',
+                    'text' => ' BANCOS',
+                    'icon' => 'fas fa-bank fa-fw',
+                    'route'  => 'banks.index',
+                    'can'  => 'VER MONEDAS',
+                ],
+                [
+                    'text' => ' MONEDAS',
                     'icon' => 'fas fa-money-bill-1 fa-fw',
                     'route'  => 'coins.index',
                     'can'  => 'VER MONEDAS',

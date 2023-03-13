@@ -23,7 +23,8 @@
                         <tr class="text-center">
                             <th>ID</th>
                             <th>Familia</th>
-                            <th></th>
+                            <th> </th>
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,22 @@
                         <tr class="text-center">
                             <td>{{$row->id}}</td>
                             <td>{{$row->family}}</td>
+                            <td class="w-20">    
+                                
+                            <div class="row">
+                                 <div class="col-6 text-center w-60">
+                                        @can('EDITAR FAMILIAS')
+                                        <a href="{{ route('families.edit', $row->id)}}">
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-eye"></i>&nbsp; &nbsp;
+                                                ver subfamilias
+                                                </button>
+                                                
+                                    
+                                        </a>
+                                        @endcan
+                                    </div></div>&nbsp; &nbsp;&nbsp; &nbsp;
+                               </td>
                             <td class="w-20">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">
