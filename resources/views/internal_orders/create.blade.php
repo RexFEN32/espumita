@@ -199,6 +199,16 @@ $(document).ready(function () {
   });
 </script>
 <script>
+var mytable = document.getElementById("ctable");
+for (var i = 0, row; row = mytable.rows[i]; i++) {
+     
+       mytable.style.display='';
+        
+        
+            row.style.display='none';
+            
+        
+    }
     $(document).ready(function () {     
 $('#customer').change(function(){
 var seleccionado = $(this).val();
