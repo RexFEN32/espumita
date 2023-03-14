@@ -343,7 +343,7 @@ class InternalOrderController extends Controller
             
             $factor_aumento= +$TempInternalOrders->ieps+$TempInternalOrders->isr+$TempInternalOrders->tasa+0.16;
             $InternalOrders->total=$t*($factor_aumento-$InternalOrders->descuento)+$ret +$t;
-            dd($t,$factor_aumento);
+            //dd($t,$factor_aumento);
             
             $InternalOrders->save();
             //return redirect()->route('internal_orders.index')->with('create_reg', 'ok');
@@ -449,7 +449,7 @@ class InternalOrderController extends Controller
             $InternalOrders->ret=$ret;
             
             $factor_aumento= +$TempInternalOrders->ieps+$TempInternalOrders->isr+$TempInternalOrders->tasa+0.16;
-            $InternalOrders->total=$request->total*($factor_aumento-$InternalOrders->descuento)+$ret;
+            $InternalOrders->total=$t*($factor_aumento-$InternalOrders->descuento)+$ret +$t;
             
             
             $InternalOrders->save();
