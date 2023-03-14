@@ -264,7 +264,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">Descuento: </div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{$InternalOrders->descuento}} %</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{number_format($InternalOrders->descuento * $InternalOrders->subtotal)}} </div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">I.E.P.S:</div></td>
@@ -276,7 +276,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET IVA:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->ret)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->ret*$InternalOrders->subtotal,2)}}</div></td>
                         
                         </tr> <tr>
                         <td><div class="badge badge-danger badge-outlined">IVA:</div></td>

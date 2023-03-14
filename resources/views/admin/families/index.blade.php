@@ -3,6 +3,7 @@
 @section('title', 'FAMILIAS')
 
 @section('content_header')
+
     <h1 class="font-bold"><i class="fas fa-people-roof"></i>&nbsp; FAMILIAS</h1>
 @stop
 

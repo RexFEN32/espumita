@@ -81,7 +81,8 @@
                             </div>        
                      <div class="form-group">
                             <x-jet-label value="* BANCO" />
-                            <select class="form-capture  w-full text-xs uppercase" name="customer_id" id='customer'>
+                <center>
+                            <select class="form-capture " name="customer_id" id='customer' >
                                             
                                                 <option value="BANAMEX MN" >BANAMEX MX</option>
                                                 <option value="BANORTE MN" >BANORTE MX</option>
@@ -93,7 +94,7 @@
                                                 <option value="SANTANDER DL" >SANTANDER DL</option>
                                                 
                                             
-                                        </select> </div>
+                                        </select></center> </div>
                         
                          <div class="form-group">
                             <x-jet-label value="Fecha" />
