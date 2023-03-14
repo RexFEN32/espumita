@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('units', UnitController::class);
     Route::resource('families', FamilyController::class);
     Route::get('families/subfamilies/{id}', [ FamilyController::class, 'subfam_show'])->name('subfam_show');
+    Route::get('categories', [ FamilyController::class, 'categories'])->name('categories');
+    Route::get('categories/products/{id}', [ FamilyController::class, 'products_show'])->name('products_show');
     
     Route::resource('authorizations', AuthorizationController::class);    
     Route::resource('customers', CustomerController::class);

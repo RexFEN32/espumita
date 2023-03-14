@@ -78,9 +78,11 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         <td><div class="badge badge-primary badge-outlined"> {{$Customers->customer_rfc}} <div></div> </td>
                         
                         <td><div class="badge badge-danger badge-outlined"> OC: </div></td>
-                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->oc}} </div></td>
+                        <td><div class="badge badge-primary badge-outlined"> @if($InternalOrders->oc==0) - @else
+                                                                              {{$InternalOrders->oc}} @endif</div></td>
                         <td> <div class="badge badge-danger badge-outlined">Contrato No.: </div></td>
-                        <td colspan="2"> <div class="badge badge-primary badge-outlined" >{{$InternalOrders->ncontrato}} </div></td>
+                        <td colspan="2"> <div class="badge badge-primary badge-outlined" >@if($InternalOrders->ncontrato==0) - @else
+                                                                              {{$InternalOrders->ncontrato}} @endif </div></td>
                         <!-- 6 columas -->
                          </tr>
                          
@@ -201,7 +203,8 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                     <tr>
                         <td><div class="badge badge-primary badge-outlined"> {{$Sellers->seller_name}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">{{$InternalOrders->comision * 100}} %</div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{$InternalOrders->ncotizacion}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">@if($InternalOrders->ncotizacion==0) - @else
+                                                                              {{$InternalOrders->ncotizacion}} @endif</div></td>
                         <td><div class="badge badge-primary badge-outlined"> {{$Coins->code}}</div></td>
                         <td><div class="badge badge-primary badge-outlined"> </div></td>
                         <td><div class="badge badge-primary badge-outlined"> </div></td>
@@ -264,7 +267,7 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">Descuento: </div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{number_format($InternalOrders->descuento * $InternalOrders->subtotal)}} </div></td>
+                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->descuento * $InternalOrders->subtotal)}} </div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">I.E.P.S:</div></td>

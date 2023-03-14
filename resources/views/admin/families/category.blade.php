@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'SUBFAMILIAS')
+@section('title', 'CATEGORIAS')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-people-roof"></i>&nbsp; SUBFAMILIAS {{$Familia->family}}</h1>
+
+    <h1 class="font-bold"><i class="fas fa-people-roof"></i>&nbsp; CATEGORIAS</h1>
 @stop
 
 @section('content')
@@ -22,49 +23,22 @@
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>
-                            <th>Familia</th>
+                            <th>Categoria</th>
                             <th> </th>
                             <th> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($subfams as $row)
+                       
                         <tr class="text-center">
-                            <td>{{$row->id}}</td>
-                            <td>{{$row->description}}</td>
-                              
-                            <td class="w-20">    
-                                
-                            <div class="row">
-                                 <div class="col-6 text-center w-60">
-                                        @can('EDITAR FAMILIAS')
-                                        @if($row->id > 15)
-                                        <a href="{{ route('products_show', 15)}}">
-                                        <button class="btn btn-blue">
-                                                <i class="fas fa-eye"></i>&nbsp; &nbsp;
-                                                ver productos
-                                                </button>
-                                                
-                                        </a>
-                                        @else
-                                        
-                                        <a href="{{ route('products_show', $row->id)}}">
-                                        <button class="btn btn-blue">
-                                                <i class="fas fa-eye"></i>&nbsp; &nbsp;
-                                                ver productos
-                                                </button>
-                                                
-                                        </a>
-                                        @endif
-                                        @endcan
-                                    </div></div>&nbsp; &nbsp;&nbsp; &nbsp;
-                               </td>    
-                           
+                            <td>1</td>
+                            <td>PRODUCTOS</td>
+                            
                             <td class="w-20">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">
                                         @can('EDITAR FAMILIAS')
-                                        <a href="{{ route('subfam_show', $row->id)}}">
+                                        <a href="">
                                         <button class="btn btn-blue">
                                                 <i class="fas fa-xl fa-edit   "></i>
                                                 </button>
@@ -74,7 +48,7 @@
                                     &nbsp; &nbsp;
                                     <div class="col-6 text-center w-10">
                                         @can('BORRAR FAMILIAS')
-                                        <form class="DeleteReg" action="{{ route('families.destroy', $row->id) }}" method="POST">
+                                        <form class="DeleteReg" action="" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-red ">
@@ -86,7 +60,65 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        <tr class="text-center">
+                            <td>2</td>
+                            <td>SERVICOS</td>
+                            
+                            <td class="w-20">
+                                <div class="row">
+                                    <div class="col-6 text-center w-10">
+                                        @can('EDITAR FAMILIAS')
+                                        <a href="">
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
+                                        </a>
+                                        @endcan
+                                    </div>
+                                    &nbsp; &nbsp;
+                                    <div class="col-6 text-center w-10">
+                                        @can('BORRAR FAMILIAS')
+                                        <form class="DeleteReg" action="" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-red ">
+                                                <i class="fas fa-trash items-center fa-xl"></i>
+                                            </button>
+                                        </form>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </td>
+                        </tr><tr class="text-center">
+                            <td>3</td>
+                            <td>INTEGRACION</td>
+                            
+                            <td class="w-20">
+                                <div class="row">
+                                    <div class="col-6 text-center w-10">
+                                        @can('EDITAR FAMILIAS')
+                                        <a href="">
+                                        <button class="btn btn-blue">
+                                                <i class="fas fa-xl fa-edit   "></i>
+                                                </button>
+                                        </a>
+                                        @endcan
+                                    </div>
+                                    &nbsp; &nbsp;
+                                    <div class="col-6 text-center w-10">
+                                        @can('BORRAR FAMILIAS')
+                                        <form class="DeleteReg" action="" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-red ">
+                                                <i class="fas fa-trash items-center fa-xl"></i>
+                                            </button>
+                                        </form>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

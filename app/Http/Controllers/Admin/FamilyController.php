@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Family;
 use App\Models\subfamilies;
+use App\Models\products;
 use Illuminate\Http\Request;
 
 class FamilyController extends Controller
@@ -83,5 +84,17 @@ class FamilyController extends Controller
         $subfams = subfamilies::where('family_id',$id)->get();
         $Familia = Family::find($id);
         return view('admin.families.subfam', compact('subfams','Familia'));
+    }
+    public function categories()
+    {
+        $var=0;
+        return view('admin.families.category', compact('var'));
+    }
+    public function products_show($id)
+    {
+        $products = products::where('subfamily_id',$id)->get();
+        $subfam = subfamilies::find($id);
+        $Familia = Family::find($subfam->family_id);
+        return view('admin.families.products', compact('products','subfam','Familia'));
     }
 }
