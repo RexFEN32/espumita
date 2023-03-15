@@ -174,7 +174,101 @@ function removeOptions(selectElement) {
       selectElement.remove(i);
    }
 }
+//actualziar productos funcion
+function actualizarProductos(){
+var seleccionado = document.getElementById("subfam").value;
+console.log('entrando a la funcion');
+console.log(seleccionado)
+removeOptions(document.getElementById('prod'));
+var prod = document.getElementById("prod");
+var example_array = {
+    INS_MECANICA : 'Ins. Mecanica',
+    INS_ELECTRICA : 'Ins. Mecanica',
+    ING_MECANICA : 'Ing. Mecanica',
+    ING_ELECTRICA : 'Ing. Electrica',
+    ING_INDUSTRIAL : 'Ing. Industrial',
+    CONSULTORIA : 'consultoria',
+    FLETES : 'fletes',
+    OTROS_SERVICIOS : 'Otros Servicios',};
+if(seleccionado=='RACK'){
+    var example_array = {
+    Estanteria : 'Estanteria',
+    Mini_rack : 'Mini Rack',
+    Selectivo: 'Selectivo',
+    Drive_In: 'Drive In /Drive thru ',
+    Push_back: 'Push Back ',
+    Dinamico: 'Dinamico ',
+    Carton_flow: 'Carton Flow ',
+    Pasarelas: 'Pasarelas ',
+    Entrepisos: 'Entrepisos',
+    Convertidores: 'Convertidores',
+    Otros : 'Otros'
+    
+};}
+if(seleccionado=='RACKS'){
+    var example_array = {
+    subcontratistas : 'Subcontratistas',
+    ins_mecanica : 'Ins. Mecanica',
+    ins_electrica : 'Ins. Mecanica',
+    ing_mecanica : 'Ing. Mecanica',
+    ing_electrica : 'Ing. Electrica',
+    ing_industrial : 'Ing. Industrial',
+    consultoria : 'consultoria',
+    fletes : 'fletes',
+    otros_servicios : 'Otros Servicios',
+    
+};}
+if(seleccionado=='TRANSPORTADORES'){
+    var example_array = {
+    GR : 'GR',
+    GW : 'GW',
+    SB_BOR: 'SB/BOR ',
+    LBRD: 'LRBD',
+    
+};}
+if(seleccionado=='ESPECIALES'){
+    var example_array = {
+    
+    XTYRSA : 'Xtyrsa',
+    XCLIENTE : 'Xcliente',
+    
+};}
 
+if(seleccionado=='NACIONAL_RACKS_'){
+    var example_array = {
+    POR_DEFINIR : 'POR DEFINIR',
+};}
+if(seleccionado=='NACIONAL_TRANSPORTADORES_'){
+    var example_array = {
+    POR_DEFINIR : 'POR DEFINIR',
+};}
+if(seleccionado=='NACIONAL_ESPECIALES_'){
+    var example_array = {
+    LINEA_MERIK : 'LINEA MERIK',
+};}
+if(seleccionado=='IMPORTADO_RACKS_'){
+    var example_array = {
+    POR_DEFINIR : 'POR DEFINIR',
+};}
+if(seleccionado=='IMPORTADO_TRANSPORTADORES_'){
+    var example_array = {
+    LINEA_ASCI : 'LINEA ASCI',
+    LINEA_DAIFUKU : 'LINEA DAIFUKU',
+    LINEA_WASP : 'LINEA WASP',
+    LINEA_NESTAFLEX : 'LINEA NESTAFLEX',
+    LINEA_RYSON : 'LINEA RYSON',
+    LINEA_OTROS : 'LINEA OTROS'
+
+};}
+if(seleccionado=='IMPORTADO_ESPECIALES_'){
+    var example_array = {
+    LINEA_MERIK : 'LINEA MERIK',
+};}
+
+for(index in example_array) {
+    prod.options[prod.options.length] = new Option(example_array[index], index);
+}
+}
 // using the function:
     $(document).ready(function () {     
 $('#fam').change(function(){
@@ -268,93 +362,7 @@ if(seleccionado=='C+D'){
 for(index in example_array) {
     subfam.options[subfam.options.length] = new Option(example_array[index], index);
 }
-var seleccionado = $(this).val();
-console.log('entrando a la funcion');
-console.log(seleccionado)
-removeOptions(document.getElementById('prod'));
-var prod = document.getElementById("prod");
-var example_array = {
-    INS_MECANICA : 'Ins. Mecanica',
-    INS_ELECTRICA : 'Ins. Mecanica',
-    ING_MECANICA : 'Ing. Mecanica',
-    ING_ELECTRICA : 'Ing. Electrica',
-    ING_INDUSTRIAL : 'Ing. Industrial',
-    CONSULTORIA : 'consultoria',
-    FLETES : 'fletes',
-    OTROS_SERVICIOS : 'Otros Servicios',};
-if(seleccionado=='RACK'){
-    var example_array = {
-    estanteria : 'Estanteria',
-    mini_rack : 'Mini Rack',
-    drive: 'Drive ',
-    push_back: 'Push Back ',
-    dinamico: 'Dinamico ',
-    
-};}
-if(seleccionado=='RACKS'){
-    var example_array = {
-    subcontratistas : 'Subcontratistas',
-    ins_mecanica : 'Ins. Mecanica',
-    ins_electrica : 'Ins. Mecanica',
-    ing_mecanica : 'Ing. Mecanica',
-    ing_electrica : 'Ing. Electrica',
-    ing_industrial : 'Ing. Industrial',
-    consultoria : 'consultoria',
-    fletes : 'fletes',
-    otros_servicios : 'Otros Servicios',
-    
-};}
-if(seleccionado=='TRANSPORTADORES'){
-    var example_array = {
-    GR : 'GR',
-    GW : 'GW',
-    SB_BOR: 'SB/BOR ',
-    LBRD: 'LRBD',
-    
-};}
-if(seleccionado=='ESPECIALES'){
-    var example_array = {
-    
-    XTYRSA : 'Xtyrsa',
-    XCLIENTE : 'Xcliente',
-    
-};}
-
-if(seleccionado=='NACIONAL_RACKS_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='NACIONAL_TRANSPORTADORES_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='NACIONAL_ESPECIALES_'){
-    var example_array = {
-    LINEA_MERIK : 'LINEA MERIK',
-};}
-if(seleccionado=='IMPORTADO_RACKS_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='IMPORTADO_TRANSPORTADORES_'){
-    var example_array = {
-    LINEA_ASCI : 'LINEA ASCI',
-    LINEA_DAIFUKU : 'LINEA DAIFUKU',
-    LINEA_WASP : 'LINEA WASP',
-    LINEA_NESTAFLEX : 'LINEA NESTAFLEX',
-    LINEA_RYSON : 'LINEA RYSON',
-    LINEA_OTROS : 'LINEA OTROS'
-
-};}
-if(seleccionado=='IMPORTADO_ESPECIALES_'){
-    var example_array = {
-    LINEA_MERIK : 'LINEA MERIK',
-};}
-
-for(index in example_array) {
-    prod.options[prod.options.length] = new Option(example_array[index], index);
-}
-
+actualizarProductos();
 })
 });
 </script>
@@ -396,94 +404,7 @@ for(index in example_array) {
 
 <script>
      $(document).ready(function () {     
-$('#subfam').change(function(){
-var seleccionado = $(this).val();
-console.log('entrando a la funcion');
-console.log(seleccionado)
-removeOptions(document.getElementById('prod'));
-var prod = document.getElementById("prod");
-var example_array = {
-    INS_MECANICA : 'Ins. Mecanica',
-    INS_ELECTRICA : 'Ins. Mecanica',
-    ING_MECANICA : 'Ing. Mecanica',
-    ING_ELECTRICA : 'Ing. Electrica',
-    ING_INDUSTRIAL : 'Ing. Industrial',
-    CONSULTORIA : 'consultoria',
-    FLETES : 'fletes',
-    OTROS_SERVICIOS : 'Otros Servicios',};
-if(seleccionado=='RACK'){
-    var example_array = {
-    estanteria : 'Estanteria',
-    mini_rack : 'Mini Rack',
-    drive: 'Drive ',
-    push_back: 'Push Back ',
-    dinamico: 'Dinamico ',
-    
-};}
-if(seleccionado=='RACKS'){
-    var example_array = {
-    subcontratistas : 'Subcontratistas',
-    ins_mecanica : 'Ins. Mecanica',
-    ins_electrica : 'Ins. Mecanica',
-    ing_mecanica : 'Ing. Mecanica',
-    ing_electrica : 'Ing. Electrica',
-    ing_industrial : 'Ing. Industrial',
-    consultoria : 'consultoria',
-    fletes : 'fletes',
-    otros_servicios : 'Otros Servicios',
-    
-};}
-if(seleccionado=='TRANSPORTADORES'){
-    var example_array = {
-    GR : 'GR',
-    GW : 'GW',
-    SB_BOR: 'SB/BOR ',
-    LBRD: 'LRBD',
-    
-};}
-if(seleccionado=='ESPECIALES'){
-    var example_array = {
-    
-    XTYRSA : 'Xtyrsa',
-    XCLIENTE : 'Xcliente',
-    
-};}
-
-if(seleccionado=='NACIONAL_RACKS_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='NACIONAL_TRANSPORTADORES_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='NACIONAL_ESPECIALES_'){
-    var example_array = {
-    LINEA_MERIK : 'LINEA MERIK',
-};}
-if(seleccionado=='IMPORTADO_RACKS_'){
-    var example_array = {
-    POR_DEFINIR : 'POR DEFINIR',
-};}
-if(seleccionado=='IMPORTADO_TRANSPORTADORES_'){
-    var example_array = {
-    LINEA_ASCI : 'LINEA ASCI',
-    LINEA_DAIFUKU : 'LINEA DAIFUKU',
-    LINEA_WASP : 'LINEA WASP',
-    LINEA_NESTAFLEX : 'LINEA NESTAFLEX',
-    LINEA_RYSON : 'LINEA RYSON',
-    LINEA_OTROS : 'LINEA OTROS'
-
-};}
-if(seleccionado=='IMPORTADO_ESPECIALES_'){
-    var example_array = {
-    LINEA_MERIK : 'LINEA MERIK',
-};}
-
-for(index in example_array) {
-    prod.options[prod.options.length] = new Option(example_array[index], index);
-}
-})
+$('#subfam').change(function () { actualizarProductos();})
      });
 </script>
 @stop
