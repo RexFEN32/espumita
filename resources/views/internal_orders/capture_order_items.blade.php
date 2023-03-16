@@ -20,10 +20,34 @@
             <div class="row p-4">
                 <div class="col-sm-12 col-xs-12 shadow rounded-xl p4">
                     <div class="card">
+                    
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
+                                    
+                    <div class="form-group">
+                                <x-jet-label value="* Categoria" />
+                                <select class="form-capture  w-full text-xs uppercase" name="category" id='cat'>
+                                        
+                                        <option value=" " > </option>
+                                        <option value="Productos" >Productos</option>
+                                        <option value="Servicios" >Servicios</option>
+                                        <option value="Integracion" >Integracion</option>
+                                       
+                                    
+                                </select>
+                                <x-jet-input-error for='family' /> 
+                            <div class="form-group">
+                                <x-jet-label value="* Descripción del Proyecto" />
+                                <select class="form-capture  w-full text-xs uppercase" name="description" id='desc'>
+                                <option value="Producto Fabricacion" >Producto fabricacion PF</option>
+                                        <option value="Servicios" >Servicios</option>
+                                        <option value="Integracion" >Integracion</option>
+                                       
+                                </select><x-jet-input-error for='description' />
+                            </div>
                                     <div class="col-sm-12 text-right p-3">
+                                        
                                         <a href="{{ route('tempitems.create_item', $TempInternalOrders->id) }} " class="btn btn-green">
                                             <i class="fas fa-plus-circle"></i>&nbsp; Agregar Partida
                                         </a>
