@@ -65,7 +65,7 @@
                                                     <th>Cant</th>
                                                     <th>Unidad</th>
                                                     <th>Familia</th>
-                                                    <th>Clave</th>
+                                                    <th>SKU</th>
                                                     <th>Descripción</th>
                                                     <th>P. U.</th>
                                                     <th>Importe</th>
