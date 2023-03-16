@@ -253,7 +253,8 @@ class InternalOrderController extends Controller
             $InternalOrders->total = $TempInternalOrders->total;
             $InternalOrders->payment_conditions = $TempInternalOrders->payment_conditions;
             $InternalOrders->observations = $TempInternalOrders->observations;
-
+            $InternalOrders->category = $request->category;
+            $InternalOrders->description = $request->description;
             $InternalOrders->tasa = $TempInternalOrders->tasa;
             $InternalOrders->oc = $TempInternalOrders->oc;
             $InternalOrders->ncontrato = $TempInternalOrders->ncontrato;
@@ -384,6 +385,8 @@ class InternalOrderController extends Controller
             $InternalOrders->noha = $TempInternalOrders->noha;
             $InternalOrders->descuento = $TempInternalOrders->descuento;
             $InternalOrders->authorization_id = 1;
+            $InternalOrders->category = $request->category;
+            $InternalOrders->description = $request->description;
             $InternalOrders->save();
             $contactos=order_contacts::where('temp_order_id',$TempInternalOrders->id)->get();
             foreach($contactos as $c){

@@ -41,8 +41,13 @@
                                 <x-jet-label value="* Descripción del Proyecto" />
                                 <select class="form-capture  w-full text-xs uppercase" name="description" id='desc'>
                                 <option value="Producto Fabricacion" >Producto fabricacion PF</option>
-                                        <option value="Servicios" >Servicios</option>
-                                        <option value="Integracion" >Integracion</option>
+                                        <option value="Producto Comercializacion" >Producto Comercializacion  PC</option>
+                                        <option value="Servicio directo SD" >Servicio directo SD</option>
+                                        <option value="Servicio indirecto SI" >Servicio indirecto SI</option>
+                                        <option value="PF+SD" >PF+SD</option>
+                                        <option value="PF+SI" >PF+SI</option>
+                                        <option value="PC+SD" >PC+SD</option>
+                                        <option value="PC+SI" >PC+SI</option>
                                        
                                 </select><x-jet-input-error for='description' />
                             </div>
@@ -74,7 +79,7 @@
                                                     <td>{{ $row->amount }}</td>
                                                     <td>{{ $row->unit }}</td>
                                                     <td>{{ $row->family }}</td>
-                                                    <td>{{ $row->code }}</td>
+                                                    <td>{{ $row->sku }}</td>
                                                     <td>{{ $row->description }}</td>
                                                     <td class="text-right">$ {{ number_format($row->unit_price, 2) }}</td>
                                                     <td class="text-right">$ {{ number_format($row->import, 2) }}</td>

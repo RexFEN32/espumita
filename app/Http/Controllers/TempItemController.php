@@ -65,7 +65,7 @@ class TempItemController extends Controller
             'amount' => 'required',
             'unit' => 'required',
             'family' => 'required',
-            'code' => 'required',
+            
             
             'sku' => 'required',
             'description' => 'required',
@@ -76,7 +76,7 @@ class TempItemController extends Controller
             'amount.required' => 'La Cantidad es requerida',
             'unit.required' => 'La unidad es requerida',
             'family.required' => 'La familia es requerida',
-            'code.required' => 'La clave es requerida',
+            
             
             'sku.required' => 'SKU requerido',
             'description.required' => 'La descripción es requerida',
@@ -97,11 +97,15 @@ class TempItemController extends Controller
             $TempItems->item = $request->item;
             $TempItems->amount = $request->amount;
             $TempItems->unit = $request->unit;
-            $TempItems->family = $request->family;
-            $TempItems->subfamilia = $request->subfamily;
+            if($request->family=='OTRO'){
+                $TempItems->family = $request->otro;
+            }
+            else{
+            $TempItems->family = $request->family;}
+            //$TempItems->subfamilia = $request->subfamily;
             $TempItems->categoria = $request->category;
-            $TempItems->products = $request->products;
-            $TempItems->code = $request->code;
+            //$TempItems->products = $request->products;
+            //$TempItems->code = $request->code;
            
             $TempItems->sku = $request->sku;
             
