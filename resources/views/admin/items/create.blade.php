@@ -50,7 +50,7 @@
                                 </select>
                                 <x-jet-input-error for='family' /> 
                             <div class="form-group">
-                                <x-jet-label value="* Descripción" />
+                                <x-jet-label value="* Descripción de Equipo" />
                                 <select class="form-capture  w-full text-xs uppercase" name="description" id='desc'>
                                     
                                 </select><x-jet-input-error for='description' />
@@ -95,11 +95,11 @@
                                 <x-jet-input type="text" name="code" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='code' />
                             </div>
-                            <!-- <div class="form-group">
-                                <x-jet-label value="* Fabricación" />
+<div class="form-group">
+                                <x-jet-label value="* Descripcion" />
                                 <x-jet-input type="text" name="fab" class="w-full text-xs" value="{{old('fab')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='fab' />
-                            </div>
+                            </div>                            <!-- 
                             <div class="form-group">
                                 <x-jet-label value="* Racks" />
                                 <x-jet-input type="text" name="racks" class="w-full text-xs" value="{{old('racks')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
