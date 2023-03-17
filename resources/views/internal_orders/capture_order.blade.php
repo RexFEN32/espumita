@@ -187,7 +187,7 @@
                                     </div></div>
                                     <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
-                                        <x-jet-label value="ISR" />
+                                        <x-jet-label value=" Retención ISR" />
                                         <input type="number" name="isr" style='width: 60%;' max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                     </div></div>
@@ -199,7 +199,7 @@
                                     </div></div>
                                     <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
-                                        <x-jet-label value="Tasa" />
+                                        <x-jet-label value="Retención Iva" />
                                         <input type="number" name="tasa" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='tasa' />
                                         </div>

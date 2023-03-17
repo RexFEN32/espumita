@@ -206,8 +206,8 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         <td><div class="badge badge-primary badge-outlined">@if($InternalOrders->ncotizacion==0) - @else
                                                                               {{$InternalOrders->ncotizacion}} @endif</div></td>
                         <td><div class="badge badge-primary badge-outlined"> {{$Coins->code}}</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> </div></td>
-                        <td><div class="badge badge-primary badge-outlined"> </div></td>
+                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->category}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->description}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">{{$Customers->customer_city}}</div> </td>
 
                     </tr>
@@ -223,13 +223,10 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                                 <td><div class="badge badge-danger badge-outlined">Unidad</div></td>
                                 <td><div class="badge badge-danger badge-outlined">Familia</div></td>
                                 
-                                <td><div class="badge badge-danger badge-outlined">Subfamilia</div></td>
-                                <td><div class="badge badge-danger badge-outlined">Clave</div></td>
+                                <td><div class="badge badge-danger badge-outlined">SKU</div></td>
                                 
-                                <td><div class="badge badge-danger badge-outlined">Categoria</div></td>
                                 <td><div class="badge badge-danger badge-outlined">Descripción</div></td>
                                 
-                                <td><div class="badge badge-danger badge-outlined">Producto</div></td>
                                 <td><div class="badge badge-danger badge-outlined">P. U.</div></td>
                                 <td><div class="badge badge-danger badge-outlined">Importe</div></td>
                             </tr>
@@ -242,13 +239,10 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                                 <td><div class="badge badge-primary badge-outlined">{{ $row->unit }}</div></td>
                                 <td><div class="badge badge-primary badge-outlined">{{ $row->family }}</div></td>
                                 
-                                <td><div class="badge badge-primary badge-outlined">{{ $row->subfamilia }}</div></td>
-                                <td><div class="badge badge-primary badge-outlined">{{ $row->code }}</div></td>
+                                <td><div class="badge badge-primary badge-outlined">{{ $row->sku}}</div></td>
                                 
-                                <td><div class="badge badge-primary badge-outlined">{{ $row->categoria }}</div></td>
                                 <td><div class="badge badge-primary badge-outlined">{{ $row->description }}</div></td>
                                 
-                                <td><div class="badge badge-primary badge-outlined">{{ $row->products }}</div></td>
                                 <td class="text-right"><div class="badge badge-primary badge-outlined">${{number_format($row->unit_price, 2) }}</div></td>
                                 <td class="text-right"><div class="badge badge-primary badge-outlined">${{number_format($row->import, 2) }}</div></td>
                             </tr>
@@ -267,19 +261,19 @@ TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">Descuento: </div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->descuento * $InternalOrders->subtotal)}} </div></td>
+                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->descuento * $InternalOrders->subtotal,2)}} </div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">I.E.P.S:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->ieps * $InternalOrders->subtotal)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$ {{number_format($InternalOrders->ieps * $InternalOrders->subtotal,2)}}</div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET ISR:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->isr * $InternalOrders->subtotal)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->isr * $InternalOrders->subtotal,2)}}</div></td>
                         </tr>
                         <tr>
                         <td><div class="badge badge-danger badge-outlined">RET IVA:</div></td>
-                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->ret*$InternalOrders->subtotal,2)}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">$  {{number_format($InternalOrders->tasa*$InternalOrders->subtotal,2)}}</div></td>
                         
                         </tr> <tr>
                         <td><div class="badge badge-danger badge-outlined">IVA:</div></td>
