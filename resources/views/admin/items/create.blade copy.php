@@ -7,8 +7,6 @@
 @stop
 
 @section('content')
-<!-- 
-comentando cosas jeje xd commit sw pruwba -->
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
@@ -39,7 +37,7 @@ comentando cosas jeje xd commit sw pruwba -->
                                 </select>
                                 <x-jet-input-error for='unit' />
                             </div>
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <x-jet-label value="* Categoria" />
                                 <select class="form-capture  w-full text-xs uppercase" name="category" id='cat'>
                                         
@@ -52,26 +50,29 @@ comentando cosas jeje xd commit sw pruwba -->
                                 </select>
                                 <x-jet-input-error for='family' /> 
                             <div class="form-group">
-                                <x-jet-label value="* Descripción del Proyecto" />
+                                <x-jet-label value="* Descripción de Equipo" />
                                 <select class="form-capture  w-full text-xs uppercase" name="description" id='desc'>
                                     
                                 </select><x-jet-input-error for='description' />
-                            </div> -->
+                            </div>
                             <div class="form-group">
                                 <x-jet-label value="* Familia" />
                                 {{--  <x-jet-input type="text" name="family" class="w-full text-xs" value="{{old('family')}}"/>  --}}
                                 <select class="form-capture  w-full text-xs uppercase" name="family" id='fam'>
                                         
                                         <option value=" " > </option>
-                                        <option value="RACKS" >RACKS</option>
-                                        <option value="TRANSPORTADORES" >TRANSPORTADORES</option>
-                                        <option value="EQUIPO AUXILIAR" >EQUIPO AUXILIAR</option>
-                                        <option value="SOFTWARE" >SOFTWARE</option>
-                                        <option value="OTRO" >OTRO</option>
+                                        <option value="FAB" >Fabricado por Tyrsa</option>
+                                        <option value="COM" >Comercializado por Tyrsa</option>
+                                        <option value="DTOS" >Directos</option>
+                                        <option value="SUBC" >Subcontratados</option>
+                                        <option value="F+D" >Fabricado e instalado por tyrsa</option>
+                                        <option value="F+S" >Fabricado por tyrsa e instalado por Subcontratista</option>
+                                        <option value="C+D" >Comercializado e instalado por tyrsa</option>
+                                        <option value="C+S" >Comercializado por tyrsa e instalado por subcontratista</option>
+                                    
+                                    
                                 </select>
-                                
-                                <x-jet-input-error for='family' />
-                                <x-jet-input type="text" name="otro" id='otro' hidden='hidden' class="w-full text-xs" /> 
+                                <x-jet-input-error for='family' /> 
                             </div>
                             <!-- <div class="form-group">
                                 <x-jet-label value="* Sub Familia" />
@@ -89,14 +90,14 @@ comentando cosas jeje xd commit sw pruwba -->
                                 </select>
                                 
                             </div> -->
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <x-jet-label value="* Clave" />
                                 <x-jet-input type="text" name="code" class="w-full text-xs" value="{{old('code')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='code' />
-                            </div> -->
-                            <div class="form-group">
+                            </div>
+<div class="form-group">
                                 <x-jet-label value="* Descripcion" />
-                                <x-jet-input type="text" name="description" class="w-full text-xs" value="{{old('fab')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input type="text" name="fab" class="w-full text-xs" value="{{old('fab')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='fab' />
                             </div>                            <!-- 
                             <div class="form-group">
@@ -106,9 +107,7 @@ comentando cosas jeje xd commit sw pruwba -->
                             </div> -->
                             <div class="form-group">
                                 <x-jet-label value="* SKU" />
-                                <select  name="sku" class="form-capture  w-full text-xs uppercase"  value="{{old('sku')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
-                            <option value="VT">VT</option>    
-                            </select>
+                                <x-jet-input type="text" name="sku" class="w-full text-xs" value="{{old('sku')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='sku' />
                             </div>
                             
@@ -276,16 +275,94 @@ $('#fam').change(function(){
 var seleccionado = $(this).val();
 console.log('entrando a la funcion');
 console.log(seleccionado)
+removeOptions(document.getElementById('subfam'));
+var subfam = document.getElementById("subfam");
+if(seleccionado=='FAB'){
+    var example_array = {
+    RACK : 'Racks',
+    TRANSPORTADORES : 'Transportadores',
+    ESPECIALES : 'Especiales Otros'
+};}
+if(seleccionado=='COM'){
+    var example_array = {
+    NACIONAL_RACK : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES : 'Nacional Especiales Otros',
+    IMPORTADO_RACKS : ' importado Racks',
+    IMPORTADO_TRANSPOTADORES : 'importado Transportadores',
+    IMPORTADO_ESPECIALES : 'importado Especiales Otros'
+};}
 
-var otro=document.getElementById('otro');
-if(seleccionado=='OTRO'){
-  
-  otro.hidden=''  
+if(seleccionado=='COM'){
+    var example_array = {
+    NACIONAL_RACKS_ : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES_ : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES_ : 'Nacional Especiales Otros',
+    IMPORTADI_RACKS_ : ' importado Racks',
+    IMPORTADO_TRANSPORTADORES_ : 'importado Transportadores',
+    IMPORTADO_ESPECIALES_ : 'importado Especiales Otros'
+};}
+if(seleccionado=='DTOS'){
+    var example_array = {
+    RACKS : 'Racks',
+    TRANSPORTADORES_ : 'Transportadores',
+    ESPECIALES_ : 'Especiales Otros'
+    
+};}
+if(seleccionado=='SUBC'){
+    var example_array = {
+    NACIONAL_RACKS : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES : 'Nacional Especiales Otros',
+    IMPORTADI_RACKS : ' importado Racks',
+    IMPORTADO_TRANSPORTADORES : 'importado Transportadores',
+    IMPORTADO_ESPECIALES : 'importado Especiales Otros'
+};
+}
 
+if(seleccionado=='F+D'){
+    var example_array = {
+    RACKS : 'Racks',
+    TRANSPORTADORES_ : 'Transportadores',
+    ESPECIALES_ : 'Especiales Otros'
+    
+};}
+
+if(seleccionado=='F+S'){
+    var example_array = {
+    NACIONAL_RACKS : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES : 'Nacional Especiales Otros',
+    
+};}
+
+if(seleccionado=='C+S'){
+    var example_array = {
+    NACIONAL_RACKS : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES : 'Nacional Especiales Otros',
+    IMPORTADI_RACKS : ' importado Racks',
+    IMPORTADO_TRANSPORTADORES : 'importado Transportadores',
+    IMPORTADO_ESPECIALES : 'importado Especiales Otros'
+};
 }
-else{
-    otro.hidden='hidden' 
+
+if(seleccionado=='C+D'){
+    var example_array = {
+        NACIONAL_RACKS : ' Nacional Racks',
+    NACIONAL_TRANSPORTADORES : 'Nacional Transportadores',
+    NACIONAL_ESPECIALES : 'Nacional Especiales Otros',
+    IMPORTADI_RACKS : ' importado Racks',
+    IMPORTADO_TRANSPORTADORES : 'importado Transportadores',
+    IMPORTADO_ESPECIALES : 'importado Especiales Otros'
+};
 }
+
+
+for(index in example_array) {
+    subfam.options[subfam.options.length] = new Option(example_array[index], index);
+}
+actualizarProductos();
 })
 });
 </script>
