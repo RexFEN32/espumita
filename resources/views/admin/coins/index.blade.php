@@ -3,7 +3,7 @@
 @section('title', 'MONEDAS')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-money-bill-1"></i>&nbsp; MONEDAS normal</h1>
+    <h1 class="font-bold"><i class="fas fa-money-bill-1"></i>&nbsp; MONEDAS</h1>
 @stop
 
 @section('content')
