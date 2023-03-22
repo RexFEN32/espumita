@@ -10,7 +10,7 @@
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
-                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Moneda je:
+                <i class="fas fa-plus-circle"></i>&nbsp; Agregar Moneda:
             </h5>
         </div>
         <form action="{{ route('coins.store')}}" method="POST" enctype="multipart/form-data">
