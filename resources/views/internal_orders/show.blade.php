@@ -20,9 +20,9 @@
                                  
                             <td rowspan="2">
                         <br>
-                        Calle Cuernavaca S/N, Col. Ejido del Quemado,<br>
-C.P. 54,963, Tultepec, Edo. México, R.F.C. <br>
-TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
+            Calle Cuernavaca S/N, Col. Ejido del Quemado,<br>
+            C.P. 54,963, Tultepec, Edo. México, R.F.C. <br>
+            TCO990507S91 Tels: (55) 26472033 / 26473330 <br>
  <div style="text-transform: lowercase;"> info@tyrsa.com.mx www.tyrsa.com.mx</div>     <br>
                         <!-- Domicilio Fiscal:
                                 {{$CompanyProfiles->street.' '.$CompanyProfiles->outdoor.' '}}
