@@ -104,7 +104,7 @@
                             </div>
                             <div class="w-100">&nbsp;</div>
                             <div class="row">
-                                <div class="col-sm-5">
+                                <div class="col-sm-10">
                                 
                                     <div class="form-group">
                                         <x-jet-label value="* Vendedor" />
@@ -117,10 +117,10 @@
                                     
                                     </div>
                                     
-                                    <div class="col-sm-3 col-xs-5">
+                                    <div class="col-sm-3 col-xs-10">
                                       <div class="form-group">
                                         <x-jet-label value="* Comision del Vendedor" />
-                                        <input  type="number" name="comision" style='width: 40%;' max=100 min=0 step=0.5 value=0> %
+                                        <input  type="number"   name="comision" style='width: 40%;' max=100 min=0 step=0.5 value=0> %
                                         <x-jet-input-error for='seller_id' />
                                        </div>
                                     </div>

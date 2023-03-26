@@ -137,7 +137,7 @@
                         <td></td>
                         <td><div class="badge badge-primary badge-outlined">{{$semanasreg}}  </div></td>
                         <td> <div class="badge badge-primary badge-outlined">Emision PI </div></td>
-                        <td> <div class="badge badge-primary badge-outlined">{{$InternalOrders->reg_date}} </div></td>
+                        <td> <div class="badge badge-primary badge-outlined">{{date('d-M-y', strtotime($InternalOrders->reg_date))}} </div></td>
                     </tr>
            
                     
@@ -147,7 +147,7 @@
                         <td><div class="badge badge-primary badge-outlined">{{$semanasdel}} <br> &nbsp; </div></td>
                         
                         <td><div class="badge badge-primary badge-outlined">Entrega <br> Equipo </div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{$InternalOrders->date_delivery}}   <br> &nbsp;</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{date('d-M-y', strtotime($InternalOrders->date_delivery))}}   <br> &nbsp;</div></td>
                     </tr>
                     
                     <tr class="text-center">
@@ -157,7 +157,7 @@
                     
                         <td><div class="badge badge-primary badge-outlined">{{$semanasinst}} </div></td>
                         <td><div class="badge badge-primary badge-outlined">Instalacion </div></td>
-                        <td><div class="badge badge-primary badge-outlined">{{$InternalOrders->instalation_date}} </div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{date('d-M-y', strtotime($InternalOrders->instalation_date))}} </div></td>
                     </tr>
                     </table>
 

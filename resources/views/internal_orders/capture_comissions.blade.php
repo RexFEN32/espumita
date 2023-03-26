@@ -59,11 +59,13 @@
                                         <x-jet-input-error for='desc' />
                                        </div>
                                     
-                                    <button type="submit" class="btn btn-green">
-                                            <i class="fas fa-plus-circle"></i>&nbsp; Agregar Comision</button>
+                                    <button type="submit" class="btn btn-green mb-2">
+                                            <i class="fas fa-plus-circle fa-2x"></i>&nbsp; Agregar Comision</button>
                                     </div>
                                     </form>
-                                    <br><br> <br><br>
+                                    
+                                    &nbsp;
+                                    <br><br> 
                                     <div class="col-sm-12 table-responsive">
                                     <table class="table table-striped text-md font-medium" >
                                             <thead>
