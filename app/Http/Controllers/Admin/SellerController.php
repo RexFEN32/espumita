@@ -11,7 +11,7 @@ class SellerController extends Controller
 {
     public function index()
     {
-        $Sellers = Seller::all();
+        $Sellers = Seller::all()->orderby();
 
         return view('admin.sellers.index', compact('Sellers'));
     }

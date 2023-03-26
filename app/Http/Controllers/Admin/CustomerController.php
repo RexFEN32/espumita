@@ -20,7 +20,22 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view('admin.customers.create');
+        return view('admin.customers.rfc');
+    }
+    public function rfc(Request $request)
+    {
+        $rules = ['customer_rfc' => 'required|max:13'];
+        $messages = ['customer_rfc.required' => 'Capture el RFC del Cliente'];
+        $request->validate($rules, $messages);
+        
+        $haycliente=Customer::where('customer_rfc',$request->customer_rfc)->first();
+        //dd($haycliente);
+        if($haycliente){
+            return redirect('admin/customers/'.$haycliente->id.'/edit')->with('message', 'ok');;
+        }else{
+            $rfc=$request->customer_rfc;
+            return view('admin.customers.create',compact(
+            'rfc',));}
     }
 
     public function store(Request $request)

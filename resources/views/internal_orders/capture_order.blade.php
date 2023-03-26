@@ -13,7 +13,7 @@
                 <i class="fas fa-plus-circle"></i>&nbsp; Agregar Pedido Interno:
             </h5>
         </div>
-        <form action="{{ route('internal_orders.shipment')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('internal_orders.comissions')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-jet-input type="hidden" name="customer_id" value="{{ $Customers->id }}"/>
         <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
@@ -104,31 +104,40 @@
                             </div>
                             <div class="w-100">&nbsp;</div>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-5">
+                                
                                     <div class="form-group">
                                         <x-jet-label value="* Vendedor" />
-                                        <select class="form-capture  w-full text-xs uppercase" name="seller_id">
+                                        <select class="form-capture  w-full text-xs uppercase" name="seller_id" style='width: 50%;'>
                                             @foreach ($Sellers as $row)
                                                 <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
                                             @endforeach
                                         </select>
                                         <x-jet-input-error for='seller_id' />
+                                    
                                     </div>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-sm-3 col-xs-12">
+                                    
+                                    <div class="col-sm-3 col-xs-5">
                                       <div class="form-group">
                                         <x-jet-label value="* Comision del Vendedor" />
-                                        <input  type="number" name="comision" style='width: 60%;'max=100 min=0 step=0.5 value=0> %
+                                        <input  type="number" name="comision" style='width: 40%;' max=100 min=0 step=0.5 value=0> %
                                         <x-jet-input-error for='seller_id' />
-                                    </div></div>
+                                       </div>
+                                    </div>
+                                    </div>
                                     
-                                    <div class="col-sm-3 col-xs-12">
-                                    <div class="form-group">
+                            <div class="w-100">&nbsp;</div>
+
+                                    <!-- <div class="col-sm-3 col-xs-12">
+                                    <h5> Otras Comisiones</h5>
+                                    
+                                   
+                                     <div class="form-group">
                                         <x-jet-label value="Otra" />
                                         <input type="number" name="otra" style='width: 60%;'max=100 min=0 step=0.1 value=0> %
                                         <x-jet-input-error for='seller_id' />
-                                    </div></div>
+                                    </div> 
+                                </div> -->
                                     
                                 
                                  

@@ -109,7 +109,7 @@
                         
                         <td><div class="badge badge-danger badge-outlined">Semanas </div></td>
                         <td><div class="badge badge-danger badge-outlined">Evento </div> </td>
-                        <td><div class="badge badge-danger badge-outlined">DD-MM-AA </div></td>
+                        <td><div class="badge badge-danger badge-outlined">DD-MM-AAAA </div></td>
                     </tr >
                     <tr class="text-center">
                         <td rowspan="3"><div class="badge badge-danger badge-outlined" ><br><br> <br> Embarque: <br><br> <br> &nbsp;</div> </td>
@@ -395,25 +395,15 @@
                     <td><div class="badge badge-danger badge-outlined">% </div></td>
                  </tr>
                  <tbody>
-                 
+                 @foreach($Comisiones as $c)
                     <tr>
-                        <td><div class="badge badge-primary badge-outlined">{{$Sellers->seller_name}}</div></td>
-                        <td><div class="badge badge-primary badge-outlined">Comision</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{$c->seller_name}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">{{$c->description}}</div></td>
                         <td><div class="badge badge-primary badge-outlined"> -</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->comision *100}} %</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> {{$c->percentage * 100}} %</div></td>
                     </tr>
-                    <tr>
-                        <td><div class="badge badge-primary badge-outlined">{{$Sellers->seller_name}}</div></td>
-                        <td><div class="badge badge-primary badge-outlined">dgi</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> -</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->dgi *100}} %</div></td>
-                    </tr>
-                    <tr>
-                        <td><div class="badge badge-primary badge-outlined">{{$Sellers->seller_name}}</div></td>
-                        <td><div class="badge badge-primary badge-outlined">otra</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> -</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->otra *100}} %  </div></td>
-                    </tr>
+                    @endforeach
+                    
                    
                  </tbody>
 
@@ -459,6 +449,11 @@
                                     
                     <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
                            
+                                     <select class="form-capture  w-full text-md uppercase" name="seller_id" style='width: 50%;'>
+                                            @foreach ($ASellers as $row)
+                                                <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
+                                            @endforeach
+                                        </select>
                     
                                     <div class="form-group">
                                     <div class="row">

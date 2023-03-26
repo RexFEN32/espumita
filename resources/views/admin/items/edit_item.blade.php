@@ -41,24 +41,39 @@
                             <div class="form-group">
                                 <x-jet-label value="* Familia" />
                                 {{--  <x-jet-input type="text" name="family" class="w-full text-xs" value="{{old('family')}}"/>  --}}
-                                <select class="form-capture  w-full text-xs uppercase" name="family">
-                                    @foreach ($Families as $row)
-                                        <option value="{{$row->family}}" @if ($row->id == $Item->family) selected @endif >{{$row->family}}</option>
-                                    @endforeach
+                                <select class="form-capture  w-full text-xs uppercase" name="family" id='fam'>
+                                        
+                                        <option value=" " > </option>
+                                        <option value="RACKS" >RACKS</option>
+                                        <option value="TRANSPORTADORES" >TRANSPORTADORES</option>
+                                        <option value="EQUIPO AUXILIAR" >EQUIPO AUXILIAR</option>
+                                        <option value="SOFTWARE" >SOFTWARE</option>
+                                        <option value="OTRO" >OTRO</option>
                                 </select>
-                                <x-jet-input-error for='family' />
-                            </div>
-                            <div class="form-group">
-                                <x-jet-label value="* Clave" />
-                                <x-jet-input type="text" name="code" class="w-full text-xs" value="{{$Item->code}}"/>
-                                <x-jet-input-error for='code'/>
-                            </div>
-                            <div class="form-group">
-                                <x-jet-label value="* Descripción" />
-                                <textarea rows="4" name="description" class="w-full text-xs inputjet" >{{$Item->description}}</textarea>
-                                <x-jet-input-error for='description' />
                                 
+                                <x-jet-input-error for='family' />
+                                <br><br><br>
+                                <x-jet-label value="* Especifique" />
+                                <x-jet-input type="text" name="otro" id='otro' hidden='hidden' class="w-full text-xs" /> 
                             </div>
+                            <div class="form-group">
+                                <x-jet-label value="* Descripcion" />
+                                <x-jet-input type="text" name="description" class="w-full text-xs" value="{{old('fab')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='fab' />
+                            </div>                            <!-- 
+                            <div class="form-group">
+                                <x-jet-label value="* Racks" />
+                                <x-jet-input type="text" name="racks" class="w-full text-xs" value="{{old('racks')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                                <x-jet-input-error for='racks' /> 
+                            </div> -->
+                            <div class="form-group">
+                                <x-jet-label value="* SKU" />
+                                <select  name="sku" class="form-capture  w-full text-xs uppercase"  value="{{old('sku')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+                            <option value="VT">VT</option>    
+                            </select>
+                                <x-jet-input-error for='sku' />
+                            </div>
+                            
                             <div class="form-group">
                                 <x-jet-label value="* Precio Unitario" />
                                 <x-jet-input type="number" step="0.01" name="unit_price" id="input-price" class="form-control just-number price-format-input" class="w-full text-xs" value="{{$Item->unit_price}}"/>

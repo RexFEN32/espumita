@@ -18,7 +18,7 @@
             </div>
             <div class="w-100">&nbsp;</div>
             <div class="col-sm-12 table-responsive">
-                <table class="table  table-striped text-xs font-medium">
+                <table class="table  datatable table-striped text-xs font-medium">
                     <thead>
                         <tr class="text-center">
                             <th>ID</th>

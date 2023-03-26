@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function()
     
     Route::resource('authorizations', AuthorizationController::class);    
     Route::resource('customers', CustomerController::class);
+    Route::post('customers/register', [ CustomerController::class, 'rfc'])->name('customers.rfc');
+    
     Route::resource('customers_shipping_address', CustomerShippingAddressController::class);
     Route::resource('customer_contacts', CustomerContactController::class);
     Route::resource('sellers', SellerController::class);

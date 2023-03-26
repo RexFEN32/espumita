@@ -7,8 +7,6 @@
 @stop
 
 @section('content')
-<!-- 
-comentando cosas jeje xd commit sw pruwba -->
     <div class="container bg-gray-300 shadow-lg rounded-lg">
         <div class="row rounded-b-none rounded-t-lg shadow-xl bg-white">
             <h5 class="card-title p-2">
@@ -71,6 +69,9 @@ comentando cosas jeje xd commit sw pruwba -->
                                 </select>
                                 
                                 <x-jet-input-error for='family' />
+                                
+                                <br>
+                                <x-jet-label hidden='hidden' id='esp' value="* Especifique" />
                                 <x-jet-input type="text" name="otro" id='otro' hidden='hidden' class="w-full text-xs" /> 
                             </div>
                             <!-- <div class="form-group">
@@ -276,15 +277,18 @@ $('#fam').change(function(){
 var seleccionado = $(this).val();
 console.log('entrando a la funcion');
 console.log(seleccionado)
-
+var esp=document.getElementById('esp');
 var otro=document.getElementById('otro');
 if(seleccionado=='OTRO'){
   
   otro.hidden=''  
+  esp.hidden=''  
 
 }
 else{
-    otro.hidden='hidden' 
+    otro.hidden='hidden'  
+    esp.hidden='hidden'  
+    
 }
 })
 });

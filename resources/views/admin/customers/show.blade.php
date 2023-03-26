@@ -202,6 +202,10 @@
 @stop
 
 @section('js')
+
+@if (session('message') == 'ok')
+<script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/rfc_exists.js') }}"></script>
+@endif
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tablemembers.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/refresh_image.js') }}"></script>
 <script>
