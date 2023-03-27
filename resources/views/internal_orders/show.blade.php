@@ -109,7 +109,7 @@
                         
                         <td><div class="badge badge-danger badge-outlined">Semanas </div></td>
                         <td><div class="badge badge-danger badge-outlined">Evento </div> </td>
-                        <td><div class="badge badge-danger badge-outlined">DD-MM-AAAA </div></td>
+                        <td><div class="badge badge-danger badge-outlined">DD-MM-AA </div></td>
                     </tr >
                     <tr class="text-center">
                         <td rowspan="3"><div class="badge badge-danger badge-outlined" ><br><br> <br> Embarque: <br><br> <br> &nbsp;</div> </td>
@@ -441,7 +441,7 @@
                 <div class="col-sm-3 col-xs-12 text-center text-xs font-bold">
                     &nbsp;
                 </div>
-                @if($InternalOrders->dgi==0)
+                
                 <div class="col-sm-5 col-xs-12 text-center text-xs font-bold">
                     <br>
                     <form action="{{ route('internal_orders.dgi') }}" method="POST" enctype="multipart/form-data">
@@ -463,7 +463,7 @@
                                         <x-jet-input-error for='seller_id' />
                                     </div>
                                     <div class="col">
-                                            <button class="btn btn-blue">definir dgi</button>
+                                            <button class="btn btn-blue">Agregar Comision DGI</button>
                                         </div></div>
                                     </div>
                                     
@@ -471,7 +471,7 @@
                       </form>
                       
                             
-                      @endif
+                      
                      @foreach ($requiredSignatures as $firma)
        
 

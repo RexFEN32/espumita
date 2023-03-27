@@ -102,8 +102,8 @@ class InternalOrderController extends Controller
         'instalation_date' => 'required',
         'coin_id' => 'required',
         'payment_conditions'=> 'required',
-        'seller_id' => 'required',
-        'comision' => 'required',
+        // 'seller_id' => 'required',
+        // 'comision' => 'required',
     ];
 
     $messages = [
@@ -113,19 +113,19 @@ class InternalOrderController extends Controller
         'instalation_date.required' => 'La fecha de Instalación es necesaria',
         'coin_id.required' => 'El tipo de Moneda es necesario',
         'payment_conditions.required' => 'Las condiciones de pago son necesarios',
-        'seller_id.required' => 'Elija un vendedor',
-        'comision.required' => 'Determine una comision para el vendedor',
+        // 'seller_id.required' => 'Elija un vendedor',
+        // 'comision.required' => 'Determine una comision para el vendedor',
     ];
 
     $request->validate($rules, $messages);
     $TempInternalOrders = TempInternalOrder::where('id', $request->temp_internal_order_id)->first();
-    $TempInternalOrders->seller_id = $request->seller_id;
+
     $TempInternalOrders->date_delivery = $request->date_delivery;
     $TempInternalOrders->instalation_date = $request->instalation_date;
     $TempInternalOrders->reg_date = $request->reg_date;        
     $TempInternalOrders->coin_id = $request->coin_id;
     $TempInternalOrders->payment_conditions = $request->payment_conditions;
-    $TempInternalOrders->comision=$request->comision * 0.01;
+    
     $TempInternalOrders->dgi=$request->dgi * 0.01;
     $TempInternalOrders->otra=$request->otra * 0.01;
     $TempInternalOrders->ieps=$request->ieps * 0.01;
@@ -155,6 +155,9 @@ class InternalOrderController extends Controller
     public function guardar_comissions(Request $request)
     {  
      $TempInternalOrders = TempInternalOrder::where('id', $request->temp_internal_order_id)->first();
+     $TempInternalOrders->seller_id = $request->seller_id;
+     $TempInternalOrders->comision=$request->comision * 0.01;
+     $TempInternalOrders->save();
      $comision = new temp_comissions();
      $comision->seller_id=$request->seller_id;
      $comision->percentage=$request->comision*0.01;
@@ -182,6 +185,9 @@ class InternalOrderController extends Controller
         $TempInternalOrders = TempInternalOrder::where('id', $request->temp_internal_order_id)->first();
         $Customers = Customer::where('id', $TempInternalOrders->customer_id)->first();
         $CustomerShippingAddresses = CustomerShippingAddress::where('customer_id', $TempInternalOrders->customer_id)->get();
+        $TempInternalOrders->seller_id = $request->seller_id;
+        $TempInternalOrders->comision=$request->comision * 0.01;
+        $TempInternalOrders->save();
         if(count($CustomerShippingAddresses) == 0){
             $CustomerShippingAddresses = new CustomerShippingAddress();
             $CustomerShippingAddresses->customer_id = $Customers->id;

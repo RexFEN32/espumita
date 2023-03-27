@@ -14,10 +14,7 @@
             </h5>
         </div>
         
-        <form action="{{ route('guardar_comissions') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
-
+        
         <div class="row rounded-b-lg rounded-t-none mb-4 shadow-xl bg-gray-300">
             <div class="row p-4">
                 <div class="col-sm-12 col-xs-12 shadow rounded-xl p4">
@@ -25,13 +22,44 @@
                     
                         <div class="card-body">
                             <div class="row">
+                            <h3> Datos del vendedor principal</h3> 
                                 <div class="col-sm-12">
-                                    
-                                    
-                                        
-                                        
+            <form action="{{ route('internal_orders.shipment') }}" id ="form-id" method="POST" enctype="multipart/form-data">
+            @csrf
+        <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
 
+                                   
+                               
+        <div class="form-group">
+                                        <x-jet-label value="* Vendedor" />
+                                        <select class="form-capture  w-full text-md uppercase" name="seller_id" style='width: 50%;'>
+                                            @foreach ($Sellers as $row)
+                                                <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <x-jet-input-error for='seller_id' />
                                     
+                                    </div>
+                                    
+                                    <div class="col-sm-3 col-xs-5">
+                                      <div class="form-group">
+                                        <x-jet-label value="* Comision del Vendedor" />
+                                        <div class="row">&nbsp;&nbsp;
+                                        <input class="form-capture   text-md"  type="number" name="comision" style='width: 40%;' max=100 min=0.01 step=0.5 value=0.01> &nbsp; %</div>
+                                        <x-jet-input-error for='seller_id' />
+                                       </div>
+                                       
+                                    </div>
+                                   
+                                </form>
+                                        
+<br><br><br>
+
+<h3> Agregar otras Comisiones: </h3>
+<form action="{{ route('guardar_comissions') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
+
                                     <div class="form-group">
                                         <x-jet-label value="* Vendedor" />
                                         <select class="form-capture  w-full text-md uppercase" name="seller_id" style='width: 50%;'>
@@ -47,7 +75,7 @@
                                       <div class="form-group">
                                         <x-jet-label value="* Comision del Vendedor" />
                                         <div class="row">&nbsp;&nbsp;
-                                        <input class="form-capture   text-md"  type="number" name="comision" style='width: 20%;' max=100 min=0.01 step=0.5 value=0.01> &nbsp; %</div>
+                                        <input class="form-capture   text-md"  type="number" name="comision" style='width: 40%;' max=100 min=0.01 step=0.5 value=0.01> &nbsp; %</div>
                                         <x-jet-input-error for='seller_id' />
                                        </div>
                                        
@@ -82,7 +110,7 @@
                                                 @foreach($Comisiones as $c)
                                                 <tr class="text-center">
                                                     
-                                                    <td>{{$c->seller_id}}</td>
+                                                    <td>{{$c->iniciales}}</td>
                                                     <td>{{$c->seller_name}}</td>
                                                     <td>{{$c->percentage * 100}} %  </td>
                                                     
@@ -95,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="w-100"><hr></div>
-                            
+                           
                             </div>
                         </div>
                     </div>
@@ -105,16 +133,13 @@
                 {{--  <a href="{{ route('internal_orders.index')}}" class="btn btn-black mb-2">
                     <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
                 </a>  --}}
-        <form action="{{ route('internal_orders.shipment') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-        <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
-
-                <button type="submit" class="btn btn-green mb-2">
+        
+                <button type="button" id='your-id' class="btn btn-green mb-2">
                     <i class="fas fa-save fa-2x"></i>&nbsp; &nbsp; Guardar
                 </button>
             </div>
         </div>
-        </form>
+       
     </div>
 @stop
 
@@ -125,4 +150,11 @@
 @section('js')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tableitems.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/tableshipping_addresses.js') }}"></script>
+<script>
+var form = document.getElementById("form-id");
+
+document.getElementById("your-id").addEventListener("click", function () {
+  form.submit();
+});
+</script>
 @stop

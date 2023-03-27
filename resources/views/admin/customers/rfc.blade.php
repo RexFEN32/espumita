@@ -26,7 +26,7 @@
                             
                             <div class="form-group">
                                 <x-jet-label value="* RFC" />
-                                <x-jet-input type="text" name="customer_rfc" class="w-full text-lg " value="{{old('customer_rfc')}}"/>
+                                <x-jet-input type="text" name="customer_rfc" class="w-full text-lg " value="{{old('customer_rfc')}}" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
                                 <x-jet-input-error for='customer_rfc' />
                             </div>
                             

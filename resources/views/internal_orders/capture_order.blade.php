@@ -13,7 +13,7 @@
                 <i class="fas fa-plus-circle"></i>&nbsp; Agregar Pedido Interno:
             </h5>
         </div>
-        <form action="{{ route('internal_orders.comissions')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('captura.comissions')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-jet-input type="hidden" name="customer_id" value="{{ $Customers->id }}"/>
         <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders->id }}"/>
@@ -35,14 +35,14 @@
                                 <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="* Entrega de Equipo" />
-                                        <x-jet-input type="date" name="date_delivery" required class="w-full text-xs" value="{{ old('date_delivery') }}"/>
+                                        <x-jet-input type="date" name="date_delivery" required class="w-full text-xs" value="{{ $hoy->format('Y-m-d') }}"/>
                                         <x-jet-input-error for='date_delivery' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         <x-jet-label value="* Entrega de la Instalación" />
-                                        <x-jet-input type="date" name="instalation_date" required class="w-full text-xs" value="{{ old('instalation_date') }}"/>
+                                        <x-jet-input type="date" name="instalation_date" required class="w-full text-xs" value="{{ $hoy->format('Y-m-d') }}"/>
                                         <x-jet-input-error for='instalation_date' />
                                     </div>
                                 </div>
@@ -103,28 +103,7 @@
                                 </div>
                             </div>
                             <div class="w-100">&nbsp;</div>
-                            <div class="row">
-                                <div class="col-sm-10">
-                                
-                                    <div class="form-group">
-                                        <x-jet-label value="* Vendedor" />
-                                        <select class="form-capture  w-full text-xs uppercase" name="seller_id" style='width: 50%;'>
-                                            @foreach ($Sellers as $row)
-                                                <option value="{{$row->id}}" @if ($row->id == old('seller_id')) selected @endif >{{$row->seller_name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-jet-input-error for='seller_id' />
-                                    
-                                    </div>
-                                    
-                                    <div class="col-sm-3 col-xs-10">
-                                      <div class="form-group">
-                                        <x-jet-label value="* Comision del Vendedor" />
-                                        <input  type="number"   name="comision" style='width: 40%;' max=100 min=0 step=0.5 value=0> %
-                                        <x-jet-input-error for='seller_id' />
-                                       </div>
-                                    </div>
-                                    </div>
+                           
                                     
                             <div class="w-100">&nbsp;</div>
 
