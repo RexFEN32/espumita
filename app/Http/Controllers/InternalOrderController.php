@@ -142,7 +142,7 @@ class InternalOrderController extends Controller
     $Comisiones=DB::table('temp_comissions')
      ->join('sellers', 'sellers.id', '=', 'temp_comissions.seller_id')
      ->where('temp_order_id',$TempInternalOrders->id)
-     ->select('temp_comissions.*','sellers.seller_name')
+     ->select('temp_comissions.*','sellers.seller_name','sellers.iniciales')
      ->get();
     return view('internal_orders.capture_comissions', compact(
         'TempInternalOrders','Sellers','Comisiones'
@@ -168,7 +168,7 @@ class InternalOrderController extends Controller
      $Comisiones=DB::table('temp_comissions')
      ->join('sellers', 'sellers.id', '=', 'temp_comissions.seller_id')
      ->where('temp_order_id',$TempInternalOrders->id)
-     ->select('temp_comissions.*','sellers.seller_name')
+     ->select('temp_comissions.*','sellers.seller_name','sellers.iniciales')
      ->get();
     return view('internal_orders.capture_comissions', compact(
         'TempInternalOrders','Sellers','Comisiones'
