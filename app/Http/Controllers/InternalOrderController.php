@@ -155,9 +155,7 @@ class InternalOrderController extends Controller
     public function guardar_comissions(Request $request)
     {  
      $TempInternalOrders = TempInternalOrder::where('id', $request->temp_internal_order_id)->first();
-     $TempInternalOrders->seller_id = $request->seller_id;
-     $TempInternalOrders->comision=$request->comision * 0.01;
-     $TempInternalOrders->save();
+     
      $comision = new temp_comissions();
      $comision->seller_id=$request->seller_id;
      $comision->percentage=$request->comision*0.01;
@@ -186,8 +184,9 @@ class InternalOrderController extends Controller
         $Customers = Customer::where('id', $TempInternalOrders->customer_id)->first();
         $CustomerShippingAddresses = CustomerShippingAddress::where('customer_id', $TempInternalOrders->customer_id)->get();
         $TempInternalOrders->seller_id = $request->seller_id;
-        $TempInternalOrders->comision=$request->comision * 0.01;
+        $TempInternalOrders->comision=$request->comision2 * 0.01;
         $TempInternalOrders->save();
+        //dd($request->comision2,$TempInternalOrders->comision);
         if(count($CustomerShippingAddresses) == 0){
             $CustomerShippingAddresses = new CustomerShippingAddress();
             $CustomerShippingAddresses->customer_id = $Customers->id;
