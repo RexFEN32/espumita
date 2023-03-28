@@ -203,7 +203,7 @@ class InternalOrderController extends Controller
             $CustomerShippingAddresses = CustomerShippingAddress::where('customer_id', $request->customer_id)->get();
         }
         $contactos=CustomerContact::where('customer_id',$Customers->id)->get();
-
+        TempItem::truncate();
         return view('internal_orders.capture_order_shippment_addresses', compact(
             'TempInternalOrders',
             'Customers',
@@ -548,7 +548,41 @@ class InternalOrderController extends Controller
         $Sellers = Seller::all();
         $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
         $Coins = Coin::all();
+        TempItem::truncate();
+        $TempOrder=TempInternalOrder::find($InternalOrders->id);
+        if($TempOrder){
+        TempInternalOrder::destroy($InternalOrders->id) ;}
+        $TempOrder= new TempInternalOrder();
+        $TempOrder->id=$InternalOrders->id;
+        $TempOrder->date=$InternalOrders->date;
+        $TempOrder->customer_id=$InternalOrders->customer_id;
+        // $TempOrder->date=$InternalOrders->date;
+        // $TempOrder->date=$InternalOrders->date;
+        
+        $TempOrder->save();
         $Items = Item::where('internal_order_id', $id)->get();
+        foreach($Items as $row){
+            $t=new TempItem();
+            $t->temp_internal_order_id = $row->internal_order_id;
+            $t->item = $row->item;
+            $t->amount = $row->amount;
+            $t->unit = $row->unit;
+            $t->family = $row->family;
+            $t->subfamilia = $row->subfamilia;
+            $t->categoria = $row->categoria;
+            $t->products = $row->products;
+            $t->code = $row->code;
+            $t->racks = $row->racks;
+            $t->fab = $row->fab;
+            $t->sku = $row->sku;
+            $t->description = $row->description;
+            $t->unit_price = $row->unit_price;
+            $t->import = $row->import;
+            $t->save();
+
+        }
+        $TempItems = TempItem::where('temp_internal_order_id', $id)->get();
+        
         $hoy=now();
         return view('internal_orders.edit_order', compact(
                 'CompanyProfiles',
@@ -557,7 +591,7 @@ class InternalOrderController extends Controller
                 'Sellers',
                 'CustomerShippingAddresses',
                 'Coins',
-                'Items',
+                'TempItems',
                 'hoy',
         ));
 }

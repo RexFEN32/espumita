@@ -13,7 +13,7 @@
                 <i class="fas fa-plus-circle"></i>&nbsp; Editar Partida:
             </h5>
         </div>
-        <form action="{{ route('temp_items.redefine',$Id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('temp_items.redefine',[$Id,$Captured])}}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-jet-input type="hidden" name="temp_internal_order_id" value="{{ $TempInternalOrders }}"/>
         <x-jet-input type="hidden" name="item" value="{{ $Item ->item}}"/>

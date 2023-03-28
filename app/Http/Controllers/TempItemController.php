@@ -43,9 +43,10 @@ class TempItemController extends Controller
         ));
     }
 
-    public function edit_item($id)
+    public function edit_item($id,$captured)
     {
         $Id=$id;
+        $Captured=$captured;
         $Item = TempItem::find($id);
         $Units = Unit::all();
         $Families = Family::all();
@@ -55,7 +56,8 @@ class TempItemController extends Controller
             'Item',
             'Units',
             'Families',
-            'Id'
+            'Id',
+            'Captured'
         ));
     }
 
@@ -149,7 +151,7 @@ class TempItemController extends Controller
         //
     }
 
-    public function redefine(Request $request, $id)
+    public function redefine(Request $request, $id,$captured)
     {        $rules = [
         'amount' => 'required',
         'unit' => 'required',
@@ -212,6 +214,8 @@ class TempItemController extends Controller
 
     $Iva = $Subtotal * 0.16;
     $Total = $Subtotal + $Iva;
+    
+    if($captured==0){
     return view('internal_orders.capture_order_items', compact(
         'TempInternalOrders',
         'Customers',
@@ -219,7 +223,11 @@ class TempItemController extends Controller
         'Subtotal',
         'Iva',
         'Total',
-    ));
+    ));}
+    else{
+        
+        return (new InternalOrderController)->edit_order($TempInternalOrders->id);
+    }
         
     }
 

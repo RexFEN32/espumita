@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.creation');
     Route::get('accounting/pay_cancel/{id}', [PaymentsController::class, 'pay_cancel'])->name('pay_cancel');
     Route::get('tempitems/{id}', [TempItemController::class, 'create_item'])->name('tempitems.create_item');
-    Route::get('tempitems/edit/{id}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
+    Route::get('tempitems/edit/{id}/{captured}', [TempItemController::class, 'edit_item'])->name('tempitems.edit_item');
     Route::get('items/edit/{id}', [ItemController::class, 'edit_item'])->name('items.edit_item');
     Route::get('internal_orders/edit/{id}', [InternalOrderController::class, 'edit_order'])->name('internal_orders.edit_order');
     Route::post('internal_orders/capture', [InternalOrderController::class, 'capture'])->name('internal_orders.capture');
@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('accounting/order/{id}', [PaymentsController::class, 'cuentas_order'])->name('accounting.cuentas_order');
     Route::get('accounting/customer/{id}', [PaymentsController::class, 'cuentas_customer'])->name('accounting.cuentas_customer');
     Route::post('Items/redefine', [ItemController::class, 'redefine'])->name('items.redefine');
-    Route::post('tempItems/redefine/{id}', [TempItemController::class, 'redefine'])->name('temp_items.redefine');
+    Route::post('tempItems/redefine/{id}/{captured}', [TempItemController::class, 'redefine'])->name('temp_items.redefine');
     Route::post('internal_orders/pagos', [InternalOrderController::class, 'pagos'])->name('internal_orders.pagos');
     Route::post('accounting/pay_apply', [PaymentsController::class, 'pay_apply'])->name('accounting.pay_apply');
     Route::post('accounting/pay_amount_aply', [PaymentsController::class, 'pay_amount_apply'])->name('accounting.pay_amount_apply');
