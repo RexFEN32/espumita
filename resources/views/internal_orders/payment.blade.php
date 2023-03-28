@@ -203,6 +203,7 @@
       for (var i = 1; i <= count; i++) {
       console.log(i);
       var p=document.getElementById("P"+i).value;
+      var error=0;
       console.log("todo bien");
       var c=document.getElementById("C"+i).value;
       var d=document.getElementById("D"+i);
@@ -212,20 +213,25 @@
       if (c=="") {
         console.log("concepto vacio")
         alert("Concepto sin nombre");
-        console.log("concepto vacio")
+        console.log("concepto vacio");
+        error=1;
       }
       console.log(d)
       if (!d.value) {
         console.log("Fecha vacia");
         alert("Fecha Vacía");
+        error=1;
       }
       }
       console.log(total);
       if (total != 100) {
       alert("Los porcentajes no suman 100%");
+      error=1;
       
-         }else
-      document.getElementById("form1").submit();
+         }
+      if(error==0){  
+
+      document.getElementById("form1").submit();}
 
 
     }

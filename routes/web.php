@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function()
     
 
 
+    Route::get('contraportada_pdf/{id}', [ReportController::class, 'contraportada_pdf'])->name('report.contraportada_pdf');
 
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
