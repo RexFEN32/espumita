@@ -401,7 +401,7 @@
                         <td><div class="badge badge-primary badge-outlined">-</div></td>
                         <td><div class="badge badge-primary badge-outlined">Comision principal</div></td>
                         <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->comision * 100}} %</div></td>
-                        <td><div class="badge badge-primary badge-outlined"> {{number_format($InternalOrders->comision * $InternalOrders->total,2)}} %</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> ${{number_format($InternalOrders->comision * $InternalOrders->total,2)}} </div></td>
                     </tr>
                  @foreach($Comisiones as $c)
                     <tr>
