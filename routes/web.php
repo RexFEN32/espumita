@@ -5,6 +5,7 @@ use App\Http\Controllers\InternalOrderController;
 use App\Http\Controllers\TempItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ReportsController;
 use App\Models\TempItem;
 use App\Http\Controllers\Admin\CustomerContactController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -74,15 +75,11 @@ Route::group(['middleware' => ['auth']], function()
     //metodos para reportes... 8 reportes son, bueno 7, tecnicamente son 11
     //ah pero ya nomas uso uno, soy la reata TODO: limpiar esta madre 
     Route::get('contraportada/{id}', [PaymentsController::class, 'contraportada'])->name('payments.contraportada');
-    Route::get('contraportadaPDF/{id}', [PaymentsController::class, 'contraportadaPDF'])->name('payments.contraportadaPDF');
+    Route::get('contraportadaPDF/{id}', [ReportsController::class, 'contraportada_pdf'])->name('payments.contraportada_pdf');
     Route::get('factura_resumida/{id}', [PaymentsController::class, 'factura_resumida'])->name('payments.factura_resumida');
     Route::get('consecutivo_pedido', [PaymentsController::class, 'consecutivo_pedido'])->name('payments.consecutivo_pedido');
     Route::get('reporte/{id}/{report}/{pdf}', [PaymentsController::class, 'reporte'])->name('payments.reporte');
     
-
-
-    Route::get('contraportada_pdf/{id}', [ReportController::class, 'contraportada_pdf'])->name('report.contraportada_pdf');
-
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');
