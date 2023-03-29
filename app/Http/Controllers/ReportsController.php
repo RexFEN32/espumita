@@ -49,4 +49,32 @@ class ReportsController extends Controller
     // ));
 
    }
+   public function pedido_pdf($id){
+
+    
+      $CompanyProfiles = CompanyProfile::first();
+      $comp=$CompanyProfiles->id;
+      $InternalOrders = InternalOrder::find($id);
+      $Customers = Customer::find($InternalOrders->customer_id);
+      $Sellers = Seller::find($InternalOrders->seller_id);
+      $CustomerShippingAddresses = CustomerShippingAddress::find($InternalOrders->customer_shipping_address_id);
+      $title='chales';
+      
+      $pdf = PDF::loadView('reportes.test', compact(
+             'title',
+             'CompanyProfiles',
+             'InternalOrders',
+             'Customers',
+             'Sellers',
+             'CustomerShippingAddresses'));    
+      return $pdf->download('Pedido_interno'.$InternalOrders->invoice.'.pdf');   
+      // return view('reportes.contraportada_pdf', compact(
+      //     'CompanyProfiles',
+      //     'InternalOrders',
+      //     'Customers',
+      //     'Sellers',
+      //     'CustomerShippingAddresses', 
+      // ));
+  
+     }
 }

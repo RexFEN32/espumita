@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth']], function()
     //rutas para agregar comisiones
     Route::post('captura/comissions', [InternalOrderController::class, 'comissions'])->name('captura.comissions');
     Route::post('guardar_comission', [InternalOrderController::class, 'guardar_comissions'])->name('guardar_comissions');
+    Route::get('comision/edit/{id}', [InternalOrderController::class, 'edit_temp_comissions'])->name('edit_temp_comissions');
+    Route::post('comision/update/{id}', [InternalOrderController::class, 'update_temp_comissions'])->name('update_temp_comissions');
     
     Route::get('accounting/order/{id}', [PaymentsController::class, 'cuentas_order'])->name('accounting.cuentas_order');
     Route::get('accounting/customer/{id}', [PaymentsController::class, 'cuentas_customer'])->name('accounting.cuentas_customer');
@@ -80,6 +82,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('consecutivo_pedido', [PaymentsController::class, 'consecutivo_pedido'])->name('payments.consecutivo_pedido');
     Route::get('reporte/{id}/{report}/{pdf}', [PaymentsController::class, 'reporte'])->name('payments.reporte');
     
+    Route::get('pedidoPDF/{id}', [ReportsController::class, 'pedido_pdf'])->name('pedido_pdf');
     Route::get('cuentas', [PaymentsController::class, 'cuentas_reporte'])->name('payments.cuentas_reporte');
     Route::post('internal_orders/partida', [InternalOrderController::class, 'partida'])->name('internal_orders.partida');
     Route::post('customer/crear_contacto', [CustomerController::class, 'contacto'])->name('customers.contacto');

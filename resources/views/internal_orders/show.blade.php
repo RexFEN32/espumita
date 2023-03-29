@@ -387,20 +387,29 @@
 <br>&nbsp;
                <div class="col-sm-9 font-bold text-sm">
                <table>
-                <tr class="text-center"><th colspan="4">Otras Comisiones</th></tr>
+                <tr class="text-center"><th colspan="4">Comisiones</th></tr>
                 <tr class="text-center">
                     <td><div class="badge badge-danger badge-outlined">Vendedor</div></td>
                     <td><div class="badge badge-danger badge-outlined">Inicia</div></td>
                     <td><div class="badge badge-danger badge-outlined">Descripcion</div></td>
                     <td><div class="badge badge-danger badge-outlined">% </div></td>
+                    <td><div class="badge badge-danger badge-outlined">Monto con IVA </div></td>
                  </tr>
                  <tbody>
+                 <tr>
+                        <td><div class="badge badge-primary badge-outlined">{{$Sellers->seller_name}}</div></td>
+                        <td><div class="badge badge-primary badge-outlined">-</div></td>
+                        <td><div class="badge badge-primary badge-outlined">Comision principal</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> {{$InternalOrders->comision * 100}} %</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> {{number_format($InternalOrders->comision * $InternalOrders->total,2)}} %</div></td>
+                    </tr>
                  @foreach($Comisiones as $c)
                     <tr>
                         <td><div class="badge badge-primary badge-outlined">{{$c->seller_name}}</div></td>
                         <td><div class="badge badge-primary badge-outlined">-</div></td>
                         <td><div class="badge badge-primary badge-outlined"> {{$c->description}}</div></td>
                         <td><div class="badge badge-primary badge-outlined"> {{$c->percentage * 100}} %</div></td>
+                        <td><div class="badge badge-primary badge-outlined"> ${{number_format($c->percentage * $InternalOrders->total,2)}} </div></td>
                     </tr>
                     @endforeach
                     
@@ -535,7 +544,10 @@
                     @endif
                     <br><br><br>
                 </div></div>
-                    <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();"> 
+                    <!-- <input  class="btn btn-green" type="button" name="imprimir" value="Imprimir" id="printPageButton" onclick="window.print();">  -->
+                    <a href="{{ route('pedido_pdf', $InternalOrders->id) }} " class="btn btn-red btn-sm">
+                     <button type = "button" class="btn btn-red "> <i class="fas fa-file-pdf"> &nbsp; PDF </i> </button>
+                                    </a></td>
                     <a href="{{ route('internal_orders.edit_order', $InternalOrders->id) }} " class="btn btn-green btn-sm">
                      <button type = "button" class="btn btn-green "> <i class="fas fa-edit"> &nbsp; Editar</i> </button>
                                     </a></td>

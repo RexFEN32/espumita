@@ -103,6 +103,7 @@
                                                     <th>Comision</th>
                                                     
                                                     <th>Descripcion</th>
+                                                    <th></th>
                                                     
                                                 </tr>
                                             </thead>
@@ -115,6 +116,9 @@
                                                     <td>{{$c->percentage * 100}} %  </td>
                                                     
                                                     <td>{{$c->description}}  </td>
+                                                    <td><a href="{{ route('edit_temp_comissions', $c->id) }} " class="btn btn-green">
+                                                        <button type = "button" class="btn btn-green "> <i class="fas fa-edit"></i> </button>
+                                                   </a></td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

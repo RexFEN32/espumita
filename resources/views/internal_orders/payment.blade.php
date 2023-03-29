@@ -52,9 +52,11 @@
   </tbody>
   
 </table>
+
                     <br><br>
-<p style ="font-size:250%;">Ingrese los porcentajes de avance</p>
+<p style ="font-size:250%;">Tabla promesa de Cobros</p>
 <br><br>
+<h5>* todos los pagos incluyen IVA</h5>
 <form action="{{ route('internal_orders.pay_conditions')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="rowcount"  id="rowcount" value={{$npagos}}/>
@@ -62,7 +64,7 @@
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
-<x-jet-input type="hidden" name="subtotal" id="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="total" id="total" value="{{$InternalOrders->total}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
 <x-jet-input type="hidden" name="" value=0/>
 <table class="table table-striped" name="tabla1" id="tabla1">
@@ -90,8 +92,8 @@
     
     <tr>
         <td>{{'PAGO '.$aux_count}}</td>
-        <td> <input type='number' min='0' max='100' step='5'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}"  id="{{'P'.$aux_count}}">%</td>
-        <td> {{$Coins -> symbol}}<span id="{{'R'.$aux_count}}" ></span> </td>
+        <td> <input type='number' min='0' max='100' step='1'  style='width: 70%;' name="{{'porcentaje['.$aux_count.']'}}"  id="{{'P'.$aux_count}}">%</td>
+        <td>{{$Coins -> symbol}} <input type='number' min='0' step='any' max='{{number_format( $InternalOrders->total,2)}}' id="{{'R'.$aux_count}}" style='width: 70%;'></td>
         @if($i==1)
         
     <td> <input type='date'  required class='w-full text-xs' name="{{'date['.$aux_count.']'}}"  id="{{'D'.$aux_count}}" value="{{$emision->format('Y-m-d');}}"></td>
@@ -108,9 +110,9 @@
     <tr >
     <th scope="row">TOTAL: </th>
       
-      <td>{{$Coins -> symbol}} {{ number_format($Subtotal,2)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*0.16,2)}}</td>
-      <td> {{$Coins -> symbol}} {{number_format( $Subtotal*1.16,2)}}</td>
+      <td> Subtotal: {{$Coins -> symbol}} {{ number_format($Subtotal,2)}}</td>
+      <td> Iva: {{$Coins -> symbol}} {{number_format( $Subtotal*0.16,2)}}</td>
+      <td> Total: {{$Coins -> symbol}} {{number_format( $InternalOrders->total,2)}}</td>
     </tr>
     
     </tbody>
@@ -153,44 +155,19 @@
 @if ($actualized == 'NO')
 <script type="text/javascript" src="{{ asset('vendor/mystylesjs/js/percentage_incorrect.js') }}"></script>
 @endif
-
+@for ($i = 1; $i <= $npagos; $i++)
 <script>
-  P5.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R5.innerHTML =parseInt( parseInt(P5.value)*total*0.01+1).toLocaleString('en-US');
-  };
+ document.getElementById("{{'R'.$i}}").addEventListener("input", function(){
+  total = parseFloat(document.getElementById('total').value);
+    document.getElementById("{{'P'.$i}}").value = (this.value/total)*100;
+    }); 
+    
+     document.getElementById("{{'P'.$i}}").addEventListener("input", function(){
+      total = parseFloat(document.getElementById('total').value);
+      document.getElementById("{{'R'.$i}}").value = parseFloat(this.value*total*0.01).toFixed(2);
+    });
 </script>
-
-<script>
-  P1.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R1.innerHTML =parseInt( parseInt(P1.value)*total*0.01).toLocaleString('en-US');
-  };
-</script>
-
-<script>
-  P3.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R3.innerHTML =parseInt( parseInt(P3.value)*total*0.01+1).toLocaleString('en-US');
-  };
-</script>
-<script>
-  P4.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R4.innerHTML =parseInt( parseInt(P4.value)*total*0.01+1).toLocaleString('en-US');
-  };
-</script>
-<script>
-  P2.oninput = function() {
-    total = parseInt(document.getElementById('subtotal').value)*1.16;
-    console.log(total)
-    R2.innerHTML =parseInt( parseInt(P2.value)*total*0.01+1).toLocaleString('en-US');
-  };
-</script>
+@endfor
 
 <script>
     function guardar() {

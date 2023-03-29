@@ -144,13 +144,25 @@ class InternalOrderController extends Controller
      ->where('temp_order_id',$TempInternalOrders->id)
      ->select('temp_comissions.*','sellers.seller_name','sellers.iniciales')
      ->get();
+    return $this->capture_comissions($TempInternalOrders->id);
+    }
+
+
+    public function capture_comissions($id){
+    $TempInternalOrders = TempInternalOrder::where('id', $id)->first();
+
+    $Sellers = Seller::all();
+    $Comisiones=DB::table('temp_comissions')
+     ->join('sellers', 'sellers.id', '=', 'temp_comissions.seller_id')
+     ->where('temp_order_id',$TempInternalOrders->id)
+     ->select('temp_comissions.*','sellers.seller_name','sellers.iniciales')
+     ->get();
     return view('internal_orders.capture_comissions', compact(
         'TempInternalOrders','Sellers','Comisiones'
         
     ));
-
-
     }
+
 
     public function guardar_comissions(Request $request)
     {  
@@ -162,16 +174,7 @@ class InternalOrderController extends Controller
      $comision->temp_order_id=$TempInternalOrders->id;
      $comision->description=$request->description;
      $comision->save();
-     $Sellers = Seller::all();
-     $Comisiones=DB::table('temp_comissions')
-     ->join('sellers', 'sellers.id', '=', 'temp_comissions.seller_id')
-     ->where('temp_order_id',$TempInternalOrders->id)
-     ->select('temp_comissions.*','sellers.seller_name','sellers.iniciales')
-     ->get();
-    return view('internal_orders.capture_comissions', compact(
-        'TempInternalOrders','Sellers','Comisiones'
-        
-    ));
+     return $this->capture_comissions($TempInternalOrders->id);
 
 
 
@@ -793,7 +796,7 @@ class InternalOrderController extends Controller
             $this_payment->order_id = $request->order_id;
             $this_payment->concept = $request->get('concepto')[$i];
             $this_payment->percentage = $request->get('porcentaje')[$i];
-            $this_payment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
+            $this_payment->amount = (float)$InternalOrders->total*(float)$this_payment->percentage*0.01;
             $this_payment->date = $request->get('date')[$i];
             //$this_payment->nota = $request->get('nota')[$i];
             $this_payment->save();
@@ -801,7 +804,7 @@ class InternalOrderController extends Controller
             $hpayment->order_id = $request->order_id;
             $hpayment->concept = $request->get('concepto')[$i];
             $hpayment->percentage = $request->get('porcentaje')[$i];
-            $hpayment->amount = (float)$Subtotal*(float)$this_payment->percentage*0.0116;
+            $hpayment->amount = (float)$InternalOrders->total*(float)$this_payment->percentage*0.01;
             $hpayment->date = $request->get('date')[$i];
             //$hpayment->nota = $request->get('nota')[$i];
             $hpayment->save();
@@ -996,6 +999,26 @@ class InternalOrderController extends Controller
              
                    
         return $this->payment($id);
+    }
+
+    public function edit_temp_comissions($id){
+        $Comission=temp_comissions::find($id);
+        $TempInternalOrders = TempInternalOrder::find($Comission->temp_order_id);
+        $Sellers = Seller::all();
+        return view('internal_orders.edit_comission', compact(
+            'Comission',
+            'TempInternalOrders',
+            'Sellers',
+        ));
+    }
+    public function update_temp_comissions($id,Request $request){
+        $TempInternalOrders = TempInternalOrder::find($request->temp_order_id);
+        $Comission=temp_comissions::find($id);
+        $Comission->seller_id=$request->seller_id;
+        $Comission->percentage=$request->comision*0.01;
+        $Comission->description=$request->description;
+        $Comission->save();
+        return $this->capture_comissions($TempInternalOrders->id);
     }
 }
 

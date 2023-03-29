@@ -54,8 +54,9 @@
 </table>
                     <br><br>
                     
-<p style ="font-size:250%;">Ingrese los porcentajes de avance</p>
+<p style ="font-size:250%;">Tabla promesas de Cobro</p>
 <br><br>
+<h5>* todos los pagos incluyen IVA</h5>
 <form action="{{ route('internal_orders.pay_redefine')}}" method="POST" enctype="multipart/form-data" id="form1">
 @csrf
 <x-jet-input type="hidden" name="pe"  id="pe" value="{{$pe}}"/>
@@ -64,7 +65,7 @@
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->seller_id}}"/>
 <x-jet-input type="hidden" name="sellerID" value="{{$InternalOrders->customer_shipping_address_id}}"/>
 <x-jet-input type="hidden" name="coinID" value="{{$InternalOrders->coin_id}}"/>
-<x-jet-input type="hidden" name="subtotal" id="subtotal" value="{{$InternalOrders->subtotal}}"/>
+<x-jet-input type="hidden" name="subtotal" id="total" value="{{$InternalOrders->total}}"/>
 <x-jet-input type="hidden" name="order_id" value="{{$InternalOrders->id}}"/>
 <x-jet-input type="hidden" name="pagados" value="{{$pagados->count()+1}}"/>
 
@@ -94,8 +95,6 @@
       @endphp
      @endforeach
      
-
-
      @foreach($no_pagados as $row)
      <tr>
         <td>PAGO {{$aux_count}}</td>
@@ -155,13 +154,13 @@ $aux_count=$aux_count+1;
 @for ($i = $pagados->count()+1; $i <= $npagos; $i++)
 <script>
   document.getElementById("{{'R'.$i}}").addEventListener("input", function(){
-  total = parseInt(document.getElementById('subtotal').value)*1.16;
+  total = parseFloat(document.getElementById('total').value);
     document.getElementById("{{'P'.$i}}").value = (this.value/total)*100;
     }); 
     
      document.getElementById("{{'P'.$i}}").addEventListener("input", function(){
-      total = parseInt(document.getElementById('subtotal').value)*1.16;
-      document.getElementById("{{'R'.$i}}").value = this.value*total*0.01;
+      total = parseFloat(document.getElementById('total').value);
+      document.getElementById("{{'R'.$i}}").value = parseFloat(this.value*total*0.01).toFixed(2);
     });
 </script>
 @endfor
