@@ -37,7 +37,7 @@ class ChangeImagotype extends Component
         $company_profile_id = $this->company_profile_id;
 
         $customFileName = uniqid() . '_' . date('Y-m-d') . '.' . $this->logo->extension();
-        $ruta = $_SERVER['DOCUMENT_ROOT'].('/img/logo/');
+        $ruta = $_SERVER['DOCUMENT_ROOT'].('/img/Logo/');
         copy($this->logo->getRealPath(),$ruta.$customFileName);
 
         $logo = CompanyProfile::where('id', $company_profile_id)->first();

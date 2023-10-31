@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'TYRSAWES-ADMIN'),
+    'name' => env('APP_NAME', 'CONTROL-ADMINISTRADOR'),
 
     /*
     |--------------------------------------------------------------------------

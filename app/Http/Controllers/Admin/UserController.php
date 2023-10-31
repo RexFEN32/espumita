@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Zones;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,7 @@ class UserController extends Controller
         ));
     }
 
+
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
@@ -36,40 +38,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'roles' => 'required',
-            'zones' => 'required',
-            'password' => 'required|same:confirm-password',
+            'monitor' => 'required',
             
         ];
 
         $messages = [
-            'name.required' => 'Escriba el nombre del Usuario que desea Generar',
-            'email.required' => 'Escriba un Email',
-            'email.unique' => 'El email capturado ya existe en el sistema',
-            'email.email' => 'Escriba un Email válido',
-            'roles.required' => 'Elija el Rol del Usuario',
-            'zones.required' => 'Elija una Zona válida',
-            'password.required' => 'La contraseña es obligatoria',
-            'password.same' => 'Las Contraseñas no Coinciden',
+            'monitor.required' => 'Escriba el teclado del Usuario que desea Generar',    
         ];
-
         $request->validate($rules, $messages);
-
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-        $user->firma=$request->sign;
+        $user->monitor = $request->monitor;
+        $user->teclado = $request->teclado;
+        $user->mouse = $request->mouse;
         $user->save();
-        return redirect()->route('users.index')->with('create_reg', 'ok');
+        return redirect()->route('inventario.index')->with('create_reg', 'ok');
     }
-
     public function show($id)
     {
         //
     }
+
 
     public function edit($id)
     {

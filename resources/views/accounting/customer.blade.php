@@ -14,7 +14,7 @@
                     <table>
                         <tr>
                             <td rowspan="4">
-                               <img src="{{asset('img/logo/logo.svg')}}" alt="TYRSA">
+                               <img src="{{asset('img/logo.png')}}" alt="TYRSA">
                                
                         
                             </td>

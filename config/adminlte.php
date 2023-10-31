@@ -13,10 +13,10 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-
+/*Aqui pongo el nombre de la pestaña*/
     'title' => '',
     'title_prefix' => '',
-    'title_postfix' => ' | TYRSAWES-ADMIN',
+    'title_postfix' => ' | CONTROL-ADMINISTRADOR',
 
     /*
     |--------------------------------------------------------------------------
@@ -32,6 +32,7 @@ return [
 
     'use_ico_only' => false,
     'use_full_favicon' => false,
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -44,13 +45,15 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-
-    'logo' => '<b>TYRSAWES</b>-ADMIN',
-    'logo_img' => 'vendor/img/logo.svg',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+/*
+Aqui pongo el nombre del menu
+*/
+    'logo' => '<b>ESPUMITA -CONTROL</b>', 
+    'logo_img' => 'vendor/img/logo_letras.png', 
+    'logo_img_class' => 'brand-image img-rectangle elevation-11',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'TYRSA CONSORCIO S.A. DE C.V.',
+    'logo_img_alt' => 'CONTROL ADMINISTRADOR',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,8 +68,8 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-red',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
@@ -83,7 +86,7 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => true,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
@@ -127,10 +130,10 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_topnav' => 'navbar-pink',
+    'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container',
 
     /*
@@ -147,8 +150,8 @@ return [
 
     'sidebar_mini' => 'lg',
     'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse_auto_size' => true,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -233,200 +236,98 @@ return [
         ],
         [
             'type' => 'fullscreen-widget',
-            'topnav_right' => false,
+            'topnav_right' => true,
         ],
 
         [
-            'header' => 'CONFIGURACIÓN',
-            'can' => 'CATALOGOS',
+            'header' => 'CONFIGURACIÓN DE USUARIOS',
+            'can' => 'VENDEDORES',
         ],
+[
+    'text' => 'CLIENTES',
+    'icon' => 'fas fa-list fa-fw',
+    'submenu' => [
+ 
         [
-            'text' => 'CATÁLOGOS',
+            'text' => 'CATALOGO DE CLIENTES',
+            'icon' => 'fas fa-users fa-fw',
+            'route'  => 'clientes.index',
+            'can'  => 'ALTA DE CLIENTES',
+        ],
+    ],
+            'can' => 'CLIENTES',
+],
+        [
+            'header' => '===================',
+        ],
+[
+            'text' => 'VENDEDORES',
             'icon' => 'fas fa-list fa-fw',
             'submenu' => [
                 [
-                    'text' => ' ROLES',
-                    'icon' => 'fas fa-user-lock fa-fw',
-                    'route'  => 'roles.index',
-                    'can'  => 'VER ROLES',
-                ],
-                [
-                    'text' => ' USUARIOS',
+                    'text' => 'CATALOGO DE VENDEDORES',
                     'icon' => 'fas fa-users fa-fw',
-                    'route'  => 'users.index',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' EMPRESA',
-                    'icon' => 'fas fa-industry fa-fw',
-                    'route'  => 'company_profiles.index',
-                    'can'  => 'VER EMPRESAS',
-                ],
-                [
-                    'text' => ' CONFIGURACIÓN',
-                    'icon' => 'fas fa-cogs fa-fw',
-                    'route'  => 'settings.index',
-                    'can'  => 'VER CONFIGURACIONES',
-                ],
-                [
-                    'text' => ' BANCOS',
-                    'icon' => 'fas fa-bank fa-fw',
-                    'route'  => 'banks.index',
-                    'can'  => 'VER MONEDAS',
-                ],
-                [
-                    'text' => ' MONEDAS',
-                    'icon' => 'fas fa-money-bill-1 fa-fw',
-                    'route'  => 'coins.index',
-                    'can'  => 'VER MONEDAS',
-                ],
-                [
-                    'text' => ' CATEGORIAS',
-                    'icon' => 'fas fa-list-alt fa-fw',
-                    'route'  => 'coins.index',
-                    'can'  => 'VER MONEDAS',
-                ],
-                [
-                    'text' => 'PRODUCTOS',
-                    'icon' => 'fas fa-list-alt fa-fw',
-                    'route'  => 'coins.index',
-                    'can'  => 'VER MONEDAS',
-                ],
-                [
-                    'text' => 'CLIENTES',
-                    'icon' => 'fas fa-users-cog fa-fw',
-                    'route'  => 'customers.index',
-                    'can'  => 'VER CLIENTES',
-                ],
-                [
-                    'text' => 'UNIDADES DE MEDIDA',
-                    'icon' => 'fas fa-ruler fa-fw',
-                    'route'  => 'units.index',
-                    'can'  => 'VER UNIDADES',
-                ],
-                [
-                    'text' => 'FAMILIAS',
-                    'icon' => 'fas fa-people-roof fa-fw',
-                    'route'  => 'families.index',
-                    'can'  => 'VER FAMILIAS',
-                ],
-                [
-                    'text' => 'NIVEL AUTORIZACIÓN',
-                    'icon' => 'fas fa-fingerprint fa-fw',
-                    'route'  => 'authorizations.index',
-                    'can'  => 'VER AUTORIZACIONES',
-                ],
-                // [
-                //     'text' => 'CONTACTOS',
-                //     'icon' => 'fas fa-user-tie fa-fw',
-                //     'route'  => 'customer_contacts.index',
-                //     'can'  => 'VER CONTACTOS',
-                // ],
-                [
-                    'text' => 'VENDEDORES',
-                    'icon' => 'fas fa-user-tag fa-fw',
-                    'route'  => 'sellers.index',
-                    'can'  => 'VER VENDEDORES',
-                ],
-            ],
-            'can' => 'CATALOGOS',
-        ],
-        [
-            'header' => '===================',
-        ],
-        [
-            'header' => 'PEDIDOS INTERNOS',
-            'can' => 'PEDIDOS',
-        ],
-        [
-            'text' => 'PEDIDO INTERNO',
-            'icon' => 'fas fa-clipboard-check fa-fw',
-            'route'  => 'internal_orders.index',
-            'can'  => 'VER PEDIDOS',
-        ],
-        [
-            'header' => '===================',
-        ],
-        [
-            'header' => 'CONTABILIDAD',
-            'can' => 'CONTABILIDAD',
-        ],
-        [
-            'text' => 'CUENTAS POR COBRAR',
-            'icon' => 'fas fa-money-check',
-            'url' => 'cuentas_cobrar',
-            'route'  => 'cuentas_cobrar',
-            'can' => 'VER CUENTAS X COBRAR',
-        ],
-        
-        [
-            'text' => 'CUENTAS COBRADAS',
-            'icon' => 'fas fa-money-check fa-fw',
-            
-            'route'  => 'payed_accounts',
-            'can' => 'VER APLICACIONES DE PAGO',
-        ],
-        
-        [
-            'text' => 'INTERFASE ASPEL COI',
-            'icon' => 'fas fa-money-check fa-fw',
-            
-            'route'  => 'payed_accounts',
-            'can' => 'VER APLICACIONES DE PAGO',
-        ],
-        [
-            'header' => '===============',
-            //'can' => 'Reportes',
-        ],
-        [
-            'text' => 'REPORTES',
+                    'route'  => 'usuarios.index',
+                    'can'  => 'ALTA DE VENDEDORES',
+                ],        
+    ],
+],
+[
+    'text' => 'ENCARGADOS',
+    'icon' => 'fas fa-list fa-fw',
+    'submenu' => [
+[
+    'text' => ' ENCARGADOS',
+    'icon' => 'fas fa-stream fa-fw',
+    'route'  => 'encargados.index', 
+    //'can'  => 'VER ROLES',
+],  
+],
+    'can' => 'ENCARGADO',
+],
+[
+            'text' => 'INVENTARIO',
             'icon' => 'fas fa-list fa-fw',
             'submenu' => [
-                [
-                    'text' => ' CONTRAPORTADA',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.contraportada',
-                    //'can'  => 'VER ROLES',
-                ],
-                [
-                    'text' => ' CUENTAS POR CORBRAR',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.cuentas_cobrar',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' CONSECUTIVO DE PEDIDOS INTERNOS',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'payments.consecutivo_pedido',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' FACTURA RESUMIDA',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.factura_resumida',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' CONSECUTIVO DE FACTURAS',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.consecutivo_factura',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' COMPROBANTE DE INGRESOS VENTAS',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.comprobante_ingresos',
-                    'can'  => 'VER USUARIOS',
-                ],
-                [
-                    'text' => ' CONSECUTIVO DE COMPROBANTES DE INGRESOS',
-                    'icon' => 'fas fa-file fa-fw',
-                    'route'  => 'reportes.consecutivo_comprobante',
-                    'can'  => 'VER USUARIOS',
-                ],
-                
+        [
+            'text' => ' INVENTARIO DEL EQUIPO',
+            'icon' => 'fas fa-stream fa-fw',
+            'route'  => 'inventario.index', 
+            //'can'  => 'VER ROLES',
+        ],  
+    ],
+            'can' => 'INVENTARIO',
+],
+        [
+            'header' => '===================',
         ],
-    ],],
+[
+    'text' => 'NOTA DE VENTA',
+    'icon' => 'fas fa-list fa-fw',
+    'submenu' => [
+        [
+            'text' => ' ALTA DE NOTA DE LAVANDERIA',
+            'icon' => 'fas fa-registered fa-fw',
+            'route'  => 'lavanderia.index', 
+            //'can'  => 'VER ROLES',
+        ],
+        [
+            'text' => ' ALTA DE NOTA DE JARCERIA',
+            'icon' => 'fas fa-registered fa-fw',
+            'route'  => 'notaJarceria.index', 
+            //'can'  => 'VER ROLES',
+        ],
+    ],
+    'can' => 'CONFIDENCIAL',
+],
+        [
+            'header' => '===================',
+        ],
+        [
+            'header' => 'CONFIGURACION DE PETICIONES',
+            'can' => 'PETICION',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

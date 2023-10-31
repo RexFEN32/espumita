@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\FamilyController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\BankController;
 
+
 Route::group(['middleware' => ['auth']], function()
 {
     Route::resource('users', UserController::class);

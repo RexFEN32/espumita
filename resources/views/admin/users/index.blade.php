@@ -3,7 +3,7 @@
 @section('title', 'USUARIOS')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-users"></i>&nbsp; Usuarios del Sistema</h1>
+    <h1 class="font-bold"><i class="fas fa-users"></i>&nbsp;Informacion de Usuarios</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="col-sm-12 text-right">
                 @can('CREAR USUARIOS')
                 <a href="{{ route('users.create')}}" class="btn btn-green">
-                    <i class="fas fa-plus-circle"></i>&nbsp; Nuevo
+                    <i class="fas fa-plus-circle"></i>&nbsp; Nuevo usuario 
                 </a>
                 @endcan
             </div>
@@ -21,9 +21,15 @@
                 <table class="table tableusuarios table-striped">
                     <thead>
                         <tr>
+                            <th>Usuario</th>
                             <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Rol</th>
+                            <th>Departamento</th>
+                            <th>Extension</th>
+                            <th>Email corporativo</th>
+                            <th>Email personal</th>
+                            <th>Numero Telefonico</th>
+                            <th>Usuario de Windows</th>
+                            <th>Clave de Windows</th>
                             <th>-</th>
                             <th>.</th>
                         </tr>
@@ -31,8 +37,6 @@
                     <tbody>
                         @foreach ($usuarios as $row)
                         <tr>
-                            <td>{{$row->name}}</td>
-                            <td>{{$row->email}}</td>
                             <td>
                                 @if (!empty($row->getRoleNames()))
                                     @foreach ($row->getRoleNames() as $rolName)
@@ -40,6 +44,15 @@
                                     @endforeach
                                 @endif
                             </td>
+                            <td>{{$row->name}}</td>
+                            <td>Departamento</td>
+                            <td>Extension</td>
+                            <td>{{$row->email}}</td>
+                            <td>Email personal</td>
+                            <td>Numero Telefonico</td>
+                            <td>Usuario de Windows</td>
+                            <td>Clave de Windows</td>
+                            
                             <td class="w-20">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">

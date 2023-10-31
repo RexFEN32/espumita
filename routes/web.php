@@ -1,11 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ConfidencialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InternalOrderController;
+use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\PeticionController;
+use App\Http\Controllers\RespuestaController;
 use App\Http\Controllers\TempItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\clientesController;
+use App\Http\Controllers\encargadosController;
+use App\Http\Controllers\notaJarceriaController;
 use App\Models\TempItem;
 use App\Http\Controllers\Admin\CustomerContactController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -28,6 +37,27 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('temp_items', TempItemController::class);
     Route::resource('items', ItemController::class);
     Route::resource('cuentas_cobrar', PaymentsController::class);
+
+    Route::resource('lavanderia', ConfidencialController::class);
+    Route::resource('peticion', PeticionController::class);
+    Route::resource('usuarios', usuarioController::class);
+    Route::resource('inventario', InventarioController::class);
+    Route::resource('respuesta', RespuestaController::class);
+    Route::resource('clientes', clientesController::class);
+    Route::resource('notaJarceria', notaJarceriaController::class);
+    Route::resource('encargados', encargadosController::class);
+    
+    Route::get('usuarios/informacion', [usuarioController::class, 'ejemplo'])->name('usuarios.show');
+    Route::get('inventario/informacion', [InventarioController::class, 'inventario'])->name('inventario.show');
+    Route::get('confidencial/informacion', [ConfidencialController::class, 'confidencial'])->name('confidencial.show');
+    Route::get('peticion/informacion', [PeticionController::class, 'peticion'])->name('peticion.show');
+    Route::get('usuarios/create', [usuarioController::class, 'create'])->name('usuarios.create');
+
+    //Route::get('clientes/create', [usuarioController::class, 'create'])->name('usuarios.create');
+    
+    Route::get('peticion/respuesta', [PeticionController::class, 'respuesta'])->name('peticion.respuesta');
+    Route::get('peticion/view', [ConfidencialController::class, 'view'])->name('confidencial.view');
+
     Route::get('accounting/payed_accounts', [PaymentsController::class, 'payed_accounts'])->name('payed_accounts');
     Route::get('reportes/contraportada', [PaymentsController::class, 'reportes'])->name('reportes.contraportada');
     
