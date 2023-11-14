@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'USUARIOS')
+@section('title', 'JARCERIA')
 
 @section('content_header')
     <h1 class="font-bold"><i class="fas fa-plus-circle"></i>&nbsp; Crear nota de Jarceria</h1>
@@ -50,14 +50,14 @@
                             <x-jet-label value="* Clasificacion" />
                             <select class="form-capture  w-full text-xs uppercase" name="clasificacion" id='clasificacion'>
                             @foreach ($clasificacion as $id)
-                                        <option value="{{$id->clasificacion}}" @if ($id->vendedor == old('clasificacion')) selected @endif > {{$id->clasificacion}}</option>
+                                        <option value="{{$id->clasificacion}}" @if ($id->vendedor == old('clasificacion')) selected @endif > {{$id->name}}</option>
                             @endforeach
                             </select>
                             <x-jet-input-error for='clasificacion' />
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
-                    <x-jet-label value="* Fecha de entrega" />
+                    <label id="fecha_entrega" class="inputjet w-full text-xs uppercase" >* Fecha de entrega - Fecha actual (<span id="fecha_actual"></span>)</label>                    
                     {!! Form::text('fecha_entrega',old('fecha_entrega'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='fecha_entrega' />
                 </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
-                    <x-jet-label value="* Precio" />
+                    <x-jet-label value="* Precio individual" />
                     {!! Form::text('precio',old('precio'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='precio' />
                 </div>
@@ -115,5 +115,14 @@
 @stop
 
 @section('js')
-    
+<script>
+    // Obtén el elemento label por su ID
+    var fechaEntregaLabel = document.getElementById("fecha_entrega");
+    // Obtén el elemento span por su ID
+    var fechaActualSpan = document.getElementById("fecha_actual");
+    // Obtén la fecha actual en el formato deseado
+    var fechaActual = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    // Establece la fecha actual en el elemento span
+    fechaActualSpan.textContent = fechaActual;
+</script>
 @stop

@@ -28,6 +28,7 @@
                             <th>Numero de Tarjeta</th>
                             <th>Editar Cliente</th>
                             <th>Eliminar Cliente</th> 
+                            <th>Ver Cliente</th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +61,18 @@
                                     </div>
                                 </div>
                             </td>
-                            
+                            <td>
+                                    <div class="col-6 text-center w-10">
+                                        @can('VER CLIENTE')
+                                        <a href="{{ route('clientes.show', $row->id)}}">
+                                                <button class="btn" style="background-color:#FF1493">
+                                                    <i class="fas fa-xl fa-eye"></i>
+                                                </button>
+                                            </a>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

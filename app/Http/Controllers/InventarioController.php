@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\inventario;
+use App\Models\Clientes;
 use App\Models\User;
 use App\Models\Zones;
 use App\Models\Roles;
@@ -54,8 +55,10 @@ class InventarioController extends Controller
 
     public function show($id)
     {  
-        $inventario = inventario::all();
-        return view('inventario.show', compact('inventario'));
+        $inventario = inventario::find($id);
+        $roles = Role::all();
+        $user_id = $id;
+        return view('inventario.show', compact('inventario','user_id','roles'));
     } 
 
     public function edit($id)
@@ -82,10 +85,9 @@ class InventarioController extends Controller
         $input = $request->all();
         $user = Inventario::find($id);
         $user->update($input);
-        $user->unidad = $request->unidad;
         $user->descripcion = $request->descripcion;
         $user->existencia = $request->existencia;
-        $user->unidad = $request->unidad;
+        $user->name = $request->name;
         $user->precio_venta = $request->precio_venta;
         $user->precio_minimo = $request->precio_minimo;
         $user->precio_1 = $request->precio_1;

@@ -51,11 +51,11 @@ class clientesController extends Controller
         return redirect()->route('clientes.index')->with('create_reg', 'ok');
     }
 
-    public function show()
+    public function show($id)
     {  
-        $usuarios = User::all();
+        $clientes = Clientes::find($id);
         $roles = Role::pluck('name', 'name')->all();
-        return view('usuarios.show', compact('usuarios','roles'));
+        return view('clientes.show', compact('clientes','roles'));
     } 
     public function edit($id)
     {  

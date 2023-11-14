@@ -3,7 +3,7 @@
 @section('title', 'USUARIOS')
 
 @section('content_header')
-    <h1 class="font-bold"><i class="fas fa-users"></i>&nbsp;Informacion del Cliente-C</h1>
+    <h1 class="font-bold"><i class="fas fa-users"></i>&nbsp;Informacion del Cliente</h1>
 @stop
 
 @section('content')
@@ -43,7 +43,8 @@
                             </div>
                             <div class="form-group">
                                 <x-jet-label value="* Email" />
-                                {!! Form::text('email',old('email'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                                {!! Form::text('email', strtolower(old('email', '')), ['class' => 'inputjet w-full text-xs uppercase']) !!}
+
                                 <x-jet-input-error for='email' />
                             </div>
                             <div class="form-group">
@@ -69,7 +70,7 @@
                     <i class="fas fa-home fa-2x"></i>&nbsp;&nbsp; Home
                 </a>
                 <button type="submit" class="btn btn-blue mb-2">
-                    <i class="fas fa-arrow-up fa-2x"></i>&nbsp; &nbsp; Cargar informacion
+                    <i class="fas fa-arrow-up fa-2x"></i>&nbsp; &nbsp; Guardar
                 </button>
         </div>
 @stop

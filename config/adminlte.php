@@ -318,8 +318,29 @@ Aqui pongo el nombre del menu
             //'can'  => 'VER ROLES',
         ],
     ],
-    'can' => 'CONFIDENCIAL',
+    'can' => 'NOTA',
 ],
+
+[
+    'text' => 'CONFIGURACION',
+    'icon' => 'fas fa-list fa-fw',
+    'submenu' => [
+        [
+            'text' => ' CLASIFICACION',
+            'icon' => 'fas fa-registered fa-fw',
+            'route'  => 'clasification.index', 
+            //'can'  => 'VER ROLES',
+        ],
+        [
+            'text' => ' OTRA OPCION',
+            'icon' => 'fas fa-registered fa-fw',
+            //'route'  => 'notaJarceria.index', 
+            //'can'  => 'VER ROLES',
+        ],
+    ],
+    'can' => 'NOTA',
+],
+
         [
             'header' => '===================',
         ],

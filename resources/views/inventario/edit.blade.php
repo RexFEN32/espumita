@@ -18,54 +18,55 @@
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Unidad" />
-                    {!! Form::text('unidad',old('unidad'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
-                    <x-jet-input-error for='unidad' />
+                    
+                    {!! Form::text('name', old('unidad', $usuarios->name), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    <x-jet-input-error for='name' />
                 </div>
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Descripcion" />
-                    {!! Form::text('descripcion',old('descripcion'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('descripcion',old('descripcion', $usuarios->descripcion), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='descripcion' />
                 </div>
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Existencia" />
-                    {!! Form::text('existencia',old('existencia'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('existencia',old('existencia', $usuarios->existencia), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='existencia' />
                 </div>
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Precio de Venta" />
-                    {!! Form::text('precio_venta',old('precio_venta'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('precio_venta',old('precio_venta', $usuarios->precio_venta), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='precio_venta' />
                 </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Precio Minimo" />
-                    {!! Form::text('precio_minimo',old('precio_minimo'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('precio_minimo',old('precio_minimo', $usuarios->precio_minimo), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='precio_minimo' />
                 </div>
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Precio 1" />
-                    {!! Form::text('precio_1',old('precio_1'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('precio_1',old('precio_1', $usuarios->precio_1), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='precio_1' />
                 </div>
             </div>
             <div class="col-xs-12 p-2 gap-2">
                 <div class="form-group">
                     <x-jet-label value="* Precio 2" />
-                    {!! Form::text('precio_2',old('precio_2'), ['class'=>'inputjet w-full text-xs uppercase']) !!}
+                    {!! Form::text('precio_2',old('precio_2', $usuarios->precio_2), ['class'=>'inputjet w-full text-xs uppercase']) !!}
                     <x-jet-input-error for='precio_2' />
                 </div>
             </div>
             
             <div class="col-12 text-right p-2 gap-2">
-                <a href="{{ route('admin.index')}}" class="btn btn-red mb-2">
+                <a href="{{ route('inventario.index')}}" class="btn btn-red mb-2">
                     <i class="fas fa-times fa-2x"></i>&nbsp;&nbsp; Cancelar
                 </a>
                 <button type="submit" class="btn btn-green mb-2">

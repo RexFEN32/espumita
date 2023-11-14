@@ -7,7 +7,7 @@ table{
 }
 table th {
     background-color: #f2579f !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
     text-transform: uppercase;
 }
 table>tbody>tr>td {

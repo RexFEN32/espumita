@@ -74,7 +74,7 @@
                     <i class="fas fa-home fa-2x"></i>&nbsp;&nbsp; Home
                 </a>
                 <button type="submit" class="btn btn-blue mb-2">
-                    <i class="fas fa-arrow-up fa-2x"></i>&nbsp; &nbsp; Cargar informacion
+                    <i class="fas fa-arrow-up fa-2x"></i>&nbsp; &nbsp; Guardar
                 </button>
         </div>
 @stop

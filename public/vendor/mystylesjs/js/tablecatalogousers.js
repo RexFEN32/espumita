@@ -5,8 +5,8 @@ if ( $.fn.dataTable.isDataTable( '.tableusuarios' ) ) {
 
         "columnDefs": [
             {
-                "targets": [3],
-                "searchable": false,
+                "targets": [5],
+                "searchable": true,
                 "sortable": false,
                 "visible": true,
             },

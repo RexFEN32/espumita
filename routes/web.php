@@ -15,6 +15,7 @@ use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\clientesController;
 use App\Http\Controllers\encargadosController;
 use App\Http\Controllers\notaJarceriaController;
+use App\Http\Controllers\ClasificationController;
 use App\Models\TempItem;
 use App\Http\Controllers\Admin\CustomerContactController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -46,9 +47,10 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('clientes', clientesController::class);
     Route::resource('notaJarceria', notaJarceriaController::class);
     Route::resource('encargados', encargadosController::class);
+    Route::resource('clasification', ClasificationController::class);
     
     Route::get('usuarios/informacion', [usuarioController::class, 'ejemplo'])->name('usuarios.show');
-    Route::get('inventario/informacion', [InventarioController::class, 'inventario'])->name('inventario.show');
+    //Route::get('inventario/informacion', [InventarioController::class, 'inventario'])->name('inventario.show');
     Route::get('confidencial/informacion', [ConfidencialController::class, 'confidencial'])->name('confidencial.show');
     Route::get('peticion/informacion', [PeticionController::class, 'peticion'])->name('peticion.show');
     Route::get('usuarios/create', [usuarioController::class, 'create'])->name('usuarios.create');

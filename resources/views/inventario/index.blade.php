@@ -24,7 +24,7 @@
                             <th>Clave</th>
                             <th>Unidad</th>
                             <th>Descripcion</th>
-                            <th>Fecha</th>
+                            <th>Existencia</th>
                             <th>Ver Inventario</th>
                             <th>Editar Inventario</th>
                             <th>Eliminar Inventario</th>
@@ -34,9 +34,15 @@
                         @foreach ($usuarios as $row)
                         <tr>
                             <td>{{$row->id}}</td>
-                            <td>{{$row->unidad}}</td>
+                            <td>{{$row->name}}</td>
                             <td>{{$row->descripcion}}</td>
-                            <td>{{$row->created_at}}</td>
+                            <td>
+                                @if($row->existencia > 0)
+                                    Si
+                                    @else
+                                        No
+                                @endif
+                            </td>
                             <td class="w-20">
                                 <div class="row">
                                     <div class="col-6 text-center w-10">

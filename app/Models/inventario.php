@@ -9,10 +9,9 @@ class inventario extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cliente',
-        'teclado',
-        'monitor',
-        'mouse',
+        'id',
+        'name',
+        
         
     ];
 }

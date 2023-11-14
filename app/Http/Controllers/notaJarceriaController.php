@@ -100,13 +100,16 @@ class notaJarceriaController extends Controller
     }
     public function show($id)
     {  
-        $usuarios = Nota::find($id);
+        $nota = Nota::find($id);
         $user_id = $id;
+        //$Clientes = Clientes::find($id);
         $Clientes = Clientes::all();
         $Vendedores = User::find($id);
+        $lavanderia = lavanderia::find($id);
         $zones = Zones::all();
+        //$Clientes= DB::table('clientes')->join('lavanderias','lavanderias.id','=','clientes.id') ->get();
         $clasificacion = Clasificaciones::all();
-        return view('notaJarceria.show', compact('usuarios','user_id','Clientes','Vendedores','zones','clasificacion'));
+        return view('notaJarceria.show', compact('nota','lavanderia','user_id','Clientes','Vendedores','zones','clasificacion'));
     }
 
     public function view(Request $request, $id)
